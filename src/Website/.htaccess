@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+#Remove trailing slash
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+#Avoid recursion
+RewriteCond %{REQUEST_URI} !/public
+#sServe static files
+RewriteCond %{REQUEST_URI} !-f
+RewriteRule ^(.*)$ /public/index.php [L]
+
+</IfModule>

@@ -3,7 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Caveresistance\\Echo\\": "src/"
+            "CaveResistance\\Echo\\": "src/"
         }
     },
     "authors": [
