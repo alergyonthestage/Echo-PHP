@@ -1,0 +1,5 @@
+#apache logs
+logs/
+
+#composer
+/vendor/

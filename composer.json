@@ -1,0 +1,16 @@
+{
+    "name": "caveresistance/echo",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Caveresistance\\Echo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alessandro",
+            "email": "alessandro.antonini6@studio.unibo.it"
+        }
+    ],
+    "require": {}
+}
