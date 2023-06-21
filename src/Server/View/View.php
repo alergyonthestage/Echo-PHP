@@ -3,7 +3,6 @@
 namespace CaveResistance\Echo\Server\View;
 
 use CaveResistance\Echo\Server\Application\Configurations;
-use CaveResistance\Echo\Website\App\Model\Caver;
 
 class View {
 
