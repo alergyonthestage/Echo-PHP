@@ -12,7 +12,14 @@ class UserController implements Controller {
     public function index($username): Response
     {
         $userData = [
-            'username' => $username
+            'username' => $username,
+            'name' => 'Alessandro Antonini',
+            'echoes' => '1120',
+            'posts' => '432',
+            'friends' => '982',
+            'biography' => 'Love Techno music 💿
+            <br>From California 🇺🇸
+            <br>04/21 ❤️'
         ];
         return (new ResponseBuilder())->setContent(View::render('user', $userData))->build();
     }

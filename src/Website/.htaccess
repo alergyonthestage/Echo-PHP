@@ -7,8 +7,9 @@ RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 #Avoid recursion
 RewriteCond %{REQUEST_URI} !/public
-#sServe static files
+#Serve static files
 RewriteCond %{REQUEST_URI} !-f
+RewriteCond %{REQUEST_URI} !-d
 RewriteRule ^(.*)$ /public/index.php [L]
 
 </IfModule>
