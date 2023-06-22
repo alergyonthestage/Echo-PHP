@@ -1,0 +1,37 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #353143;
+}
+
+header {
+    background-color: #2E2A3C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    color: white;
+    letter-spacing: 0.1em;
+    font-size: 2em;
+    padding: 0.4em;
+}
+
+/*Da rivedere*/
+main {
+    color: white;
+}
+
+.secondary-text {
+    font-weight: lighter;
+    font-size: 0.8em;
+}
+
+.important-text {
+    font-weight: bold;
+    font-size: 1.2em;
+}
