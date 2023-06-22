@@ -1,0 +1,25 @@
+.scroll-nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 70px;
+    border: 2px solid #707070;
+    border-width: 2px;
+    background-color: #98969F;
+    color: white;
+    text-decoration: none;
+    margin: 3%;
+    font-size: 1.4rem;
+    padding: 3px;
+    width: 30%;
+}
+
+.active {
+    background-color: #fff;
+    color: #353143;
+}
+
+.scroll-navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
