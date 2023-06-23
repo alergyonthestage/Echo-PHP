@@ -25,11 +25,14 @@
 }
 
 .post{
+    margin: 1em;
+}
+
+.post-header{
     display: flex;
     justify-content: flex-start;;
     align-items: center;
-    gap: 2em;
-    margin: 1em;
+    gap: 1.5em;
 }
 
 .cover-square {
@@ -138,4 +141,14 @@
 
 .active i {
     color: #F8D164;
+}
+
+.post-description{
+    font-size: 0.8rem;
+}
+
+.post-divider{
+    border: none;
+    border-top: 1px solid #817F8A;
+    margin: 10px 0;
 }
