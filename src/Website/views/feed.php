@@ -11,7 +11,8 @@
                     <button class="play-button"><i class="fas fa-play"></i></button>
                 </div>
             </div>
-            <div class="post-info">
+            <div class="post-infos">
+                <a href="/user/alergyonthestage">
                 <div class="post-author-infos">
                     <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
                     <div class="author-infos">
@@ -23,6 +24,7 @@
                         </div>
                     </div> 
                 </div>
+                </a>
                 <div class="post-song-infos">
                     <div class="post-song-title">
                         <p>Into You - Ariana</p>
@@ -57,7 +59,8 @@
                     <button class="play-button"><i class="fas fa-play"></i></button>
                 </div>
             </div>
-            <div class="post-info">
+            <div class="post-infos">
+                <a href="/user/alergyonthestage">
                 <div class="post-author-infos">
                     <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
                     <div class="author-infos">
@@ -69,6 +72,7 @@
                         </div>
                     </div> 
                 </div>
+                </a>
                 <div class="post-song-infos">
                     <div class="post-song-title">
                         <p>Into You - Ariana</p>
@@ -103,7 +107,8 @@
                     <button class="play-button"><i class="fas fa-play"></i></button>
                 </div>
             </div>
-            <div class="post-info">
+            <div class="post-infos">
+                <a href="/user/alergyonthestage">
                 <div class="post-author-infos">
                     <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
                     <div class="author-infos">
@@ -115,6 +120,7 @@
                         </div>
                     </div> 
                 </div>
+                </a>
                 <div class="post-song-infos">
                     <div class="post-song-title">
                         <p>Into You - Ariana</p>

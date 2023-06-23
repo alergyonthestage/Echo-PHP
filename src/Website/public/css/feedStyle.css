@@ -104,12 +104,9 @@
     color: #98969F;
 }
 
-
-.post-infos {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    flex-grow: 1;
+.post-infos a{
+    text-decoration: none;
+    color: #fff;
 }
 
 .profile-picture{
@@ -145,6 +142,7 @@
 
 .post-description{
     font-size: 0.8rem;
+    line-height: 1.4;
 }
 
 .post-divider{
