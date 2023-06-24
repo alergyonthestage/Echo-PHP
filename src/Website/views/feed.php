@@ -3,31 +3,32 @@
    <button class="scroll-nav-button">Explore</button>
 </div>
 <div class="post-container">
-    <div class="post">
+<?php foreach ($data as $post): extract($post) ?>
+<div class="post">
         <div class="post-header">
             <div class="covert-art">
                 <div class="cover-square">
-                    <img class="cover-disc" src="/public/img/cover/1.jpg" alt="Cover-Art"/>
+                    <img class="cover-disc" src="<?=$cover_art?>" alt="Cover-Art"/>
                     <button class="play-button"><i class="fas fa-play"></i></button>
                 </div>
             </div>
             <div class="post-infos">
-                <a href="/user/alergyonthestage">
+                <a href="/user/<?=$username?>">
                 <div class="post-author-infos">
-                    <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
+                    <img class="profile-picture" src="<?=$profile_picture?>" alt="Profile picture">
                     <div class="author-infos">
                         <div class="author-name">
-                            <p>alergyonthestage</p>
+                            <p><?=$username?></p>
                         </div>
                         <div class="time-info">
-                            <p>5 ore fa</p>
+                            <p><?=$time_ago?></p>
                         </div>
                     </div> 
                 </div>
                 </a>
                 <div class="post-song-infos">
                     <div class="post-song-title">
-                        <p>Into You - Ariana</p>
+                        <p><?=$song_title?></p>
                     </div>
                     <div class="song-progress-bar">
                         <div class="song-progress-bar-inner"></div>
@@ -47,105 +48,10 @@
             </div>
         </div>
         <div class="post-description">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
+            <p><?=$description?></p>
         </div>
         <hr class="post-divider">
     </div>
-    <div class="post">
-        <div class="post-header">
-            <div class="covert-art">
-                <div class="cover-square">
-                    <img class="cover-disc" src="/public/img/cover/1.jpg" alt="Cover-Art"/>
-                    <button class="play-button"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <div class="post-infos">
-                <a href="/user/alergyonthestage">
-                <div class="post-author-infos">
-                    <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
-                    <div class="author-infos">
-                        <div class="author-name">
-                            <p>alergyonthestage</p>
-                        </div>
-                        <div class="time-info">
-                            <p>5 ore fa</p>
-                        </div>
-                    </div> 
-                </div>
-                </a>
-                <div class="post-song-infos">
-                    <div class="post-song-title">
-                        <p>Into You - Ariana</p>
-                    </div>
-                    <div class="song-progress-bar">
-                        <div class="song-progress-bar-inner"></div>
-                    </div>
-                </div>
-                    <div class="post-interactive-buttons">
-                    <button class="post-button active">
-                        <i class="fas fa-heart"></i>
-                    </button>
-                    <button class="post-button">
-                        <i class="fas fa-comment"></i>
-                    </button>
-                    <button class="post-button">
-                        <i class="fas fa-user"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="post-description">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
-        </div>
-        <hr class="post-divider">
-    </div>
-    <div class="post">
-        <div class="post-header">
-            <div class="covert-art">
-                <div class="cover-square">
-                    <img class="cover-disc" src="/public/img/cover/1.jpg" alt="Cover-Art"/>
-                    <button class="play-button"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <div class="post-infos">
-                <a href="/user/alergyonthestage">
-                <div class="post-author-infos">
-                    <img class="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
-                    <div class="author-infos">
-                        <div class="author-name">
-                            <p>alergyonthestage</p>
-                        </div>
-                        <div class="time-info">
-                            <p>5 ore fa</p>
-                        </div>
-                    </div> 
-                </div>
-                </a>
-                <div class="post-song-infos">
-                    <div class="post-song-title">
-                        <p>Into You - Ariana</p>
-                    </div>
-                    <div class="song-progress-bar">
-                        <div class="song-progress-bar-inner"></div>
-                    </div>
-                </div>
-                    <div class="post-interactive-buttons">
-                    <button class="post-button active">
-                        <i class="fas fa-heart"></i>
-                    </button>
-                    <button class="post-button">
-                        <i class="fas fa-comment"></i>
-                    </button>
-                    <button class="post-button">
-                        <i class="fas fa-user"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="post-description">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
-        </div>
-        <hr class="post-divider">
-    </div>
+<?php endforeach; ?>
    
 </div>
