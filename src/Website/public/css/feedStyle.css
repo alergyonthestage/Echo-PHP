@@ -1,4 +1,4 @@
-.scroll-nav-button {
+.feed-scroll-nav-button {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 70px;
@@ -13,29 +13,29 @@
     width: 22%;
 }
 
-.active {
+.feed-active {
     background-color: #fff;
     color: #353143;
 }
 
-.scroll-navigation{
+.feed-scroll-navigation{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.post{
+.feed-post{
     margin: 1em;
 }
 
-.post-header{
+.feed-post-header{
     display: flex;
     justify-content: flex-start;;
     align-items: center;
     gap: 1.5em;
 }
 
-.cover-square {
+.feed-cover-square {
     width: 130px;
     height: 130px;
     background-color: #59627C;
@@ -44,7 +44,7 @@
     position: relative;
 }
 
-.cover-disc{
+.feed-cover-disc{
     width: 100%;
     height: 100%;
     background-color: #59627C;
@@ -52,7 +52,7 @@
     filter: opacity(0.65);
 }
 
-.play-button {
+.feed-play-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -69,7 +69,7 @@
     cursor: pointer;
   }
 
-.cover-art{
+.feed-cover-art{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,36 +80,36 @@
     width: 36vw;
 }
 
-.author-name p{
+.feed-author-name p{
     font-size: 0.9rem;
 }
 
-.post-author-infos{
+.feed-post-author-infos{
     display: flex;
     align-items: center;
 }
 
-.author-infos{
+.feed-author-infos{
     display: flex;
     flex-direction: column;
     margin-left: 10px;
 }
 
-.author-infos p{
+.feed-author-infos p{
     margin: -2px;
 }
 
-.time-info p{
+.feed-time-info p{
     font-size: 0.8rem;
     color: #98969F;
 }
 
-.post-infos a{
+.feed-post-infos a{
     text-decoration: none;
     color: #fff;
 }
 
-.profile-picture{
+.feed-profile-picture{
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -117,13 +117,13 @@
     border: 0.1rem white solid;
 }
 
-.post-song-title p{
+.feed-post-song-title p{
     font-size: 1.3rem;
     font-weight: bold;
     margin: 10px 0px;
 }
 
-.post-button{
+.feed-post-button{
     background-color: transparent;
     border: none;
     align-items: center;
@@ -132,26 +132,26 @@
     font-size: 1.2rem;
 }
 
-.post-button i {
+.feed-post-button i {
     color: #fff;
 }
 
-.active i {
+.feed-active i {
     color: #F8D164;
 }
 
-.post-description{
+.feed-post-description{
     font-size: 0.8rem;
     line-height: 1.4;
 }
 
-.post-divider{
+.feed-post-divider{
     border: none;
     border-top: 1px solid #817F8A;
     margin: 10px 0;
 }
 
-.song-progress-bar {
+.feed-song-progress-bar {
     width: 100%;
     height: 3px;
     background-color: lightgray;
@@ -161,7 +161,7 @@
     margin: 10px 0px;
 }
   
-.song-progress-bar-inner {
+.feed-song-progress-bar-inner {
    height: 100%;
    background-color: #F8D164;
    width: 30%;
