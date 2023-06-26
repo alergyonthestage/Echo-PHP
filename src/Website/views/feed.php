@@ -1,5 +1,5 @@
 <view-head>
-    <link rel="stylesheet" href="/public/css/feedStyle.css">
+    <link rel="stylesheet" href="/public/css/views/feedStyle.css">
 </view-head>
 <div class="feed-scroll-navigation">
    <button class="feed-scroll-nav-button feed-active">Feed</button>
