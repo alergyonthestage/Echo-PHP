@@ -13,6 +13,12 @@
     width: 22%;
 }
 
+.feed-profile-picture-frame{
+    min-width: 2rem;
+    width: 2rem;
+    height: 2rem;
+}
+
 .feed-active {
     background-color: #fff;
     color: #353143;

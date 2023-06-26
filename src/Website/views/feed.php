@@ -18,7 +18,9 @@
             <div class="feed-post-infos">
                 <a href="/user/<?=$username?>">
                 <div class="feed-post-author-infos">
-                    <img class="feed-profile-picture" src="<?=$profile_picture?>" alt="Profile picture">
+                    <div class="profile-picture-frame feed-profile-picture-frame">
+                        <img class="profile-picture" src="<?=$profile_picture?>" alt="Profile picture">
+                    </div>
                     <div class="feed-author-infos">
                         <div class="feed-author-name">
                             <p><?=$username?></p>
