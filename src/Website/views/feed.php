@@ -1,3 +1,6 @@
+<view-head>
+    <link rel="stylesheet" href="/public/css/feedStyle.css>
+</view-head>
 <div class="scroll-navigation">
    <button class="scroll-nav-button active">Feed</button>
    <button class="scroll-nav-button">Explore</button>

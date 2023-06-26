@@ -14,6 +14,7 @@ class UserController implements Controller {
         $userData = [
             'username' => $username,
             'name' => 'Alessandro Antonini',
+            'profileURI' => '/public/img/profiles/vertical.jpeg',
             'echoes' => '1120',
             'posts' => '432',
             'friends' => '982',

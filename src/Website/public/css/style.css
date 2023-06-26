@@ -25,13 +25,3 @@ header {
 main {
     color: white;
 }
-
-.secondary-text {
-    font-weight: lighter;
-    font-size: 0.8em;
-}
-
-.important-text {
-    font-weight: bold;
-    font-size: 1.2em;
-}

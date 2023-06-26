@@ -1,14 +1,17 @@
+<view-head>
+    <link rel="stylesheet" href="/public/css/userStyle.css">
+</view-head>
 <div>
-    <div id="profile-header">
-        <div id="profile-picture-container">
-           <img id="profile-picture" src="/public/img/profiles/alergyonthestage.png" alt="Profile picture">
+    <div class="user-profile-header">
+        <div class="profile-picture-frame">
+           <img class="profile-picture" src="<?=$profileURI?>" alt="Profile picture">
         </div>
-        <div id="user-side-infos">
-            <div class="important-text" id="username">
+        <div class="user-profile-infos">
+            <div class="important-text user-profile-username">
                 <?=$username?>
             </div>
-            <div id="user-stats">
-                <div class="stat">
+            <div class="user-profile-stats">
+                <div class="user-profile-stat">
                     <div>
                         <?=$echoes?>
                     </div>
@@ -16,7 +19,7 @@
                         Echoes
                     </div>
                 </div>
-                <div class="stat">
+                <div class="user-profile-stat">
                     <div>
                         <?=$posts?>
                     </div>
@@ -24,7 +27,7 @@
                         Posts
                     </div>
                 </div>
-                <div class="stat">
+                <div class="user-profile-stat">
                     <div>
                         <?=$friends?>
                     </div>
@@ -33,11 +36,11 @@
                     </div>
                 </div>
             </div>
-            <button id="add-friend-button">Add</button>
+            <button class="user-profile-add-friend-button">Add</button>
         </div>
     </div>
-    <div id="bio-section">    
+    <div class="user-profile-biography">
         <div class="important-text"><?=$name?></div>
-        <div id="biography" class="secondary-text"><?=$biography?></div>
+        <div class="secondary-text"><?=$biography?></div>
     </div>
 </div>

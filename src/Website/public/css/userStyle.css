@@ -1,4 +1,4 @@
-#profile-header {
+.user-profile-header {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -6,7 +6,7 @@
     margin: 1em;
 }
 
-#profile-picture-container {
+.profile-picture-frame {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,54 +15,52 @@
     border: 0.1rem white solid;
     min-width: 36vw;
     width: 36vw;
+    height: 36vw;
 }
 
-#profile-picture {
+.profile-picture {
+    object-fit: cover;
     width: 100%;
     height: 100%;
 }
 
-#username {
+.user-profile-username {
     overflow:hidden;
 }
 
-#profile-header > * {
+.profile-header > * {
     min-width: 0;
 }
 
-#user-side-infos {
+.user-profile-infos {
     display: flex;
     flex-direction: column;
     gap: 1em;
     flex-grow: 1;
 }
 
-#user-side-infos > * {
+.user-side-infos > * {
     min-width: 0;
 }
 
-#user-stats {
+.user-profile-stats {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.stat {
+.user-profile-stat {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#add-friend-button {
+.user-profile-add-friend-button {
     border: none;
     border-radius: 0.4em;
     background-color: #F8D164;
 }
 
-#bio-section {
+.user-profile-biography {
     margin: 1em;
-}
-
-#biography {
-    padding-top: 0.4em;
 }
