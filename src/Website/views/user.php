@@ -1,9 +1,9 @@
 <view-head>
-    <link rel="stylesheet" href="/public/css/userStyle.css">
+    <link rel="stylesheet" href="/public/css/views/userStyle.css">
 </view-head>
 <div>
     <div class="user-profile-header">
-        <div class="profile-picture-frame">
+        <div class="profile-picture-frame user-profile-picture-frame">
            <img class="profile-picture" src="<?=$profileURI?>" alt="Profile picture">
         </div>
         <div class="user-profile-infos">

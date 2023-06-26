@@ -6,22 +6,10 @@
     margin: 1em;
 }
 
-.profile-picture-frame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 0.1rem white solid;
+.user-profile-picture-frame {
     min-width: 36vw;
     width: 36vw;
     height: 36vw;
-}
-
-.profile-picture {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
 }
 
 .user-profile-username {
