@@ -9,4 +9,16 @@ return [
         'views' => __DIR__.'/views',
         'layouts' => __DIR__.'/views/layouts'
     ],
+
+    'database' => [
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'dbname' => 'echo' 
+    ],
+
+    'paths' => [
+        'profile' => '/public/img/profiles/',
+        'cover_art' => '/public/img/cover/'
+    ]
 ];

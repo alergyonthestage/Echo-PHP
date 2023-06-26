@@ -6,6 +6,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\View\View;
+use CaveResistance\Echo\Server\Application\Configurations;
 
 class FeedController implements Controller {
 
@@ -14,7 +15,7 @@ class FeedController implements Controller {
         $posts = [
             array(
                 "username" => "alergyonthestage",
-                "profile_picture" => "/public/img/profiles/alergyonthestage.png",
+                "profile_picture" => Configurations::get('paths.profile')."alergyonthestage.png",
                 "time_ago" => "5 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
                 "song_title" => "Into You - Ariana",
