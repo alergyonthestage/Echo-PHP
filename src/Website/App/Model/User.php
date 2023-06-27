@@ -29,12 +29,36 @@ class User {
         $connection->close();       
     }
 
-    public function getName(): string {
-        return $this->user->nome;
+    public function getUserID(): string {
+        return $this->user->id_user;
     }
 
     public function getUsername(): string {
         return $this->user->username;
+    }
+
+    public function getName(): string {
+        return $this->user->name;
+    }
+
+    public function getSurname(): string {
+        return $this->user->surname;
+    }
+    
+   public function getBio(): string {
+        return $this->user->bio;
+    }
+
+    public function getPassword(): string {
+        return $this->user->password;
+    }
+
+    public function getEmail(): string {
+        return $this->user->email;
+    }
+
+    public function getPic(): string {
+        return $this->user->pic;
     }
 
     public function login(string $password): bool 
