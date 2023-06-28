@@ -30,8 +30,7 @@
 /**---FORMS---*/
 
 .centered-form-container {
-    position: fixed;
-    height: 80%;
+    margin-top: 10vh;
     width: 100%;
     display: flex;
     justify-content: center;
