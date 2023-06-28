@@ -17,7 +17,7 @@ Server::createRoute()->accept('GET', '/register')->setHandler([
     'method' => 'register'
 ])->add();
 
-Server::createRoute()->accept(['GET', 'POST'], '/register')->setHandler([
+Server::createRoute()->accept(['GET', 'POST'], '/singup')->setHandler([
     'controller' => UserController::class,
-    'method' => 'register'
+    'method' => 'singup'
 ])->add();

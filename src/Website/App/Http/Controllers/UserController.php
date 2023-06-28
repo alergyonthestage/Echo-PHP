@@ -29,7 +29,7 @@ class UserController implements Controller {
         return (new ResponseBuilder())->setContent(View::render('user', $userData))->build();
     }
 
-    public function register(Request $request): Response
+    public function singup(Request $request): Response
     {
         if($request->getMethod() == 'POST')
         {
