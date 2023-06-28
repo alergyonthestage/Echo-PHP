@@ -27,7 +27,7 @@ class User {
         $encriptedPass = Password::hash(Password::season($password, $salt, $pepperID));
         $connection = Database::connect();
         $stmt = $connection->prepare("INSERT INTO user (username, name, surname, email, password, salt, pepper_id) VALUES (?,?,?,?,?,?,?)");
-        $stmt->bind_param('sssss', $username, $name, $surname, $email, $encriptedPass, $salt, $pepperID);
+        $stmt->bind_param('ssssssi', $username, $name, $surname, $email, $encriptedPass, $salt, $pepperID);
         if(!$stmt->execute()){
             throw new Exception("Cannot register user $username");
         }
