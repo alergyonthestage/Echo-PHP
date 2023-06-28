@@ -6,6 +6,7 @@ use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Http\Session;
 use Exception;
 use stdClass;
+use CaveResistance\Echo\Server\Application\Configurations;
 
 class User {
 
@@ -67,7 +68,7 @@ class User {
 
     public function getPic(): string 
     {
-        return $this->user->pic;
+        return Configurations::get('paths.profile').$this->user->pic;
     }
 
     public function login(string $password): bool 
