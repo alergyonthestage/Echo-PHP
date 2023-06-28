@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `comment`
 --
-
 CREATE TABLE `comment` (
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -184,19 +183,21 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
-  `bio` varchar(255) NOT NULL,
+  `bio` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `pic` varchar(255) NOT NULL
+  `pic` varchar(255) DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `name`, `surname`, `bio`, `password`, `email`, `pic`) VALUES
-(1, 'paul98', 'Paul', 'Smith', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'paul98@gmail.com', 'paul98.png'),
-(2, 'alergyonthestage', 'Alessandro', 'Antonini', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'alergy@gmail.com', 'alergyonthestage.png');
+INSERT INTO `user` (`id_user`, `username`, `name`, `surname`, `bio`, `password`, `email`, `pic`, `verified`) VALUES
+(1, 'paul98', 'Paul', 'Smith', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'paul98@gmail.com', 'paul98.png', 0),
+(2, 'alergyonthestage', 'Alessandro', 'Antonini', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'alergy@gmail.com', 'alergyonthestage.png', 0),
+(3, 'echo', 'ECHO', '', 'Official profile of ECHO team', 'a', 'echo@echo.local', NULL, 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -325,7 +326,7 @@ ALTER TABLE `song`
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Limiti per le tabelle scaricate
