@@ -8,7 +8,7 @@
         </div>
         <div class="user-profile-infos">
             <div class="important-text user-profile-username">
-                <?=$username?> <?=$suffix?>
+                <?=$username?> <?=$badges?>
             </div>
             <div class="user-profile-stats">
                 <div class="user-profile-stat">

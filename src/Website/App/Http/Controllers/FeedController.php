@@ -15,7 +15,7 @@ class FeedController implements Controller {
         $posts = [
             array(
                 "username" => "alergyonthestage",
-                "suffix" => "",
+                "badges" => "",
                 "profile_picture" => Configurations::get('paths.profile')."alergyonthestage.png",
                 "time_ago" => "5 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
@@ -24,7 +24,7 @@ class FeedController implements Controller {
             ),
             array(
                 "username" => "paul98",
-                "suffix" => "",
+                "badges" => "",
                 "profile_picture" => "/public/img/profiles/paul98.png",
                 "time_ago" => "6 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
@@ -33,7 +33,7 @@ class FeedController implements Controller {
             ),
             array(
                 "username" => "echo",
-                "suffix" => "<i class='fas fa-check-circle' title='Profilo verificato'></i>",
+                "badges" => "<i class='fas fa-check-circle' title='Profilo verificato'></i>",
                 "profile_picture" => "/public/img/profiles/default.png",
                 "time_ago" => "7 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",

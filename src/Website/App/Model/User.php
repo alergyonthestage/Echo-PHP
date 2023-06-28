@@ -56,7 +56,7 @@ class User {
         return $this->user->username;
     }
 
-    public function getSuffix(): string 
+    public function getBadges(): string 
     {
         return $this->user->verified === 0 ? "" : Configurations::get('user.verified_suffix');        
     }

@@ -19,7 +19,7 @@ class UserController implements Controller {
 
         $userData = [
             'username' => $user->getUsername(),
-            'suffix' => $user->getSuffix(),
+            'badges' => $user->getBadges(),
             'name' => $user->getName()." ".$user->getSurname(),
             'profileURI' => $user->getPic(),
             'echoes' => '1120',
@@ -45,26 +45,6 @@ class UserController implements Controller {
         } else {
             return (new ResponseBuilder())->setContent(View::render('user.signup'))->build();
         }
-    }
-
-    public function login(Request $request): Response
-    {
-        if($request->getMethod() == 'POST')
-        {
-            if((new User($request->getPostParam('username')))->login($request->getPostParam('password'))){
-                Server::redirectTo("/user/".$request->getPostParam('username'));
-            } else {
-                Server::redirectTo("/login");
-            }
-        } else {
-            return (new ResponseBuilder())->setContent(View::render('user.login'))->build();
-        }
-    }
-
-    public function logout(): void
-    {
-        User::logout();
-        Server::redirectTo('/login');
     }
 
 }
