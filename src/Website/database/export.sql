@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `comment`
 --
+
 CREATE TABLE `comment` (
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -185,19 +186,11 @@ CREATE TABLE `user` (
   `surname` varchar(255) NOT NULL,
   `bio` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `salt` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `pic` varchar(255) DEFAULT NULL,
-  `verified` tinyint(1) NOT NULL DEFAULT '0'
+  `verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `user`
---
-
-INSERT INTO `user` (`id_user`, `username`, `name`, `surname`, `bio`, `password`, `email`, `pic`, `verified`) VALUES
-(1, 'paul98', 'Paul', 'Smith', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'paul98@gmail.com', 'paul98.png', 0),
-(2, 'alergyonthestage', 'Alessandro', 'Antonini', 'Love Techno music 💿\r\nFrom California 🇺🇸\r\n04/21 ❤️', 'a', 'alergy@gmail.com', 'alergyonthestage.png', 0),
-(3, 'echo', 'ECHO', '', 'Official profile of ECHO team', 'a', 'echo@echo.local', NULL, 1);
 
 --
 -- Indici per le tabelle scaricate
