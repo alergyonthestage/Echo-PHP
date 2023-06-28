@@ -10,7 +10,6 @@ use stdClass;
 class Post {
 
     private stdClass $post;
-    
 
     public function __construct($post_id) {
         $this->fetch($post_id);
