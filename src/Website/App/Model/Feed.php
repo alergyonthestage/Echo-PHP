@@ -8,7 +8,6 @@ use Exception;
 use stdClass;
 
 class Feed {
-    private static string $login_sess_var_name;
 
 
     public function __construct() {
