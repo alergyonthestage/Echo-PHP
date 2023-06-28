@@ -1,0 +1,10 @@
+<form action="/signin" method="POST">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+    </div>
+</form>

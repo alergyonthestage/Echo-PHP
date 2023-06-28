@@ -7,6 +7,7 @@ use CaveResistance\Echo\Server\Http\Session;
 use Exception;
 use stdClass;
 use CaveResistance\Echo\Server\Application\Configurations;
+use CaveResistance\Echo\Website\App\Authentication\Password;
 
 class User {
 
@@ -21,9 +22,12 @@ class User {
 
     public static function create(string $username, string $name, string $surname, string $email, string $password)
     {
+        $salt = '';
+        $pepperID = 0;
+        $encriptedPass = Password::hash(Password::season($password, $salt, $pepperID));
         $connection = Database::connect();
-        $stmt = $connection->prepare("INSERT INTO user (username, name, surname, email, password) VALUES (?,?,?,?,?)");
-        $stmt->bind_param('sssss', $username, $name, $surname, $email, $password);
+        $stmt = $connection->prepare("INSERT INTO user (username, name, surname, email, password, salt, pepper_id) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param('ssssssi', $username, $name, $surname, $email, $encriptedPass, $salt, $pepperID);
         if(!$stmt->execute()){
             throw new Exception("Cannot register user $username");
         }
@@ -77,6 +81,16 @@ class User {
         return $this->user->password;
     }
 
+    private function getSalt(): string 
+    {
+        return $this->user->salt;
+    }
+
+    private function getPepperID(): int 
+    {
+        return $this->user->pepper_id;
+    }
+
     public function getEmail(): string 
     {
         return $this->user->email;
@@ -96,7 +110,7 @@ class User {
     {
         if(Session::hasVariable(static::$login_sess_var_name)) {
             throw new Exception('Already Logged');
-        } else if($this->user->password === $this->getPassword()) {
+        } else if(Password::verify($password, $this->getPassword(), $this->getSalt(), $this->getPepperID())) {
             Session::setVariable(static::$login_sess_var_name, $this->getUserID());
             return true;
         }
