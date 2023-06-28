@@ -49,7 +49,12 @@ class User {
 
     public function getUsername(): string 
     {
-        return $this->user->verified === 0 ? $this->user->username : $this->user->username." ".Configurations::get('user.verified_suffix');        
+        return $this->user->username;
+    }
+
+    public function getSuffix(): string 
+    {
+        return $this->user->verified === 0 ? "" : Configurations::get('user.verified_suffix');        
     }
 
     public function getName(): string 

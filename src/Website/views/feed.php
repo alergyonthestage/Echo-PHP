@@ -23,7 +23,7 @@
                     </div>
                     <div class="feed-author-infos">
                         <div class="feed-author-name">
-                            <p><?=$username?></p>
+                            <p><?=$username?> <?=$suffix?></p>
                         </div>
                         <div class="feed-time-info">
                             <p><?=$time_ago?></p>

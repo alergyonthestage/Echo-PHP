@@ -15,6 +15,7 @@ class FeedController implements Controller {
         $posts = [
             array(
                 "username" => "alergyonthestage",
+                "suffix" => "",
                 "profile_picture" => Configurations::get('paths.profile')."alergyonthestage.png",
                 "time_ago" => "5 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
@@ -22,17 +23,19 @@ class FeedController implements Controller {
                 "description" => "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
             ),
             array(
-                "username" => "brtmnl",
-                "profile_picture" => "/public/img/profiles/alergyonthestage.png",
+                "username" => "paul98",
+                "suffix" => "",
+                "profile_picture" => "/public/img/profiles/paul98.png",
                 "time_ago" => "6 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
                 "song_title" => "Into You - Ariana",
                 "description" => "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
             ),
             array(
-                "username" => "alergyonthestage",
-                "profile_picture" => "/public/img/profiles/alergyonthestage.png",
-                "time_ago" => "5 ore fa",
+                "username" => "echo",
+                "suffix" => "<i class='fas fa-check-circle' title='Profilo verificato'></i>",
+                "profile_picture" => "/public/img/profiles/default.png",
+                "time_ago" => "7 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
                 "song_title" => "Into You - Ariana",
                 "description" => "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."

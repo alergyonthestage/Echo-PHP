@@ -19,6 +19,7 @@ class UserController implements Controller {
 
         $userData = [
             'username' => $user->getUsername(),
+            'suffix' => $user->getSuffix(),
             'name' => $user->getName()." ".$user->getSurname(),
             'profileURI' => $user->getPic(),
             'echoes' => '1120',

@@ -13,7 +13,7 @@ return [
     'database' => [
         'hostname' => 'localhost',
         'username' => 'root',
-        'password' => 'aledj3610',
+        'password' => '',
         'dbname' => 'echo'
     ],
 
