@@ -13,12 +13,16 @@ return [
     'database' => [
         'hostname' => 'localhost',
         'username' => 'root',
-        'password' => 'aledj3610',
+        'password' => '',
         'dbname' => 'echo'
     ],
 
     'paths' => [
         'profile' => '/public/img/profiles/',
         'cover_art' => '/public/img/cover/'
+    ],
+
+    'user' => [
+        'verified_suffix' => '<i class="fas fa-check-circle" title="Profilo verificato"></i>'
     ]
 ];
