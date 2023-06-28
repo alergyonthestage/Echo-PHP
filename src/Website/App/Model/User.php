@@ -20,7 +20,7 @@ class User {
 
     private function fetch($username){
         $connection = Database::connect();
-        $stmt = $connection->prepare("SELECT * FROM utente WHERE username = ?");
+        $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
         $stmt->bind_param('s', $username);
         if(!$stmt->execute()){
             throw new Exception("User not found: $username");
