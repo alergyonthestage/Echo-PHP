@@ -3,7 +3,6 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
-use CaveResistance\Echo\Server\Http\Session;
 use Exception;
 use stdClass;
 
@@ -53,6 +52,5 @@ class Post {
     public function getIdSong(): string {
         return $this->post->id_song;
     }
-
 
 }
