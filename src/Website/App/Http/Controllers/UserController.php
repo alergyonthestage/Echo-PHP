@@ -26,10 +26,10 @@ class UserController implements Controller {
             'friends' => '982',
             'biography' => $user->getBio(),
         ];
-        return (new ResponseBuilder())->setContent(View::render('user', $userData))->build();
+        return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
     }
 
-    public function singup(Request $request): Response
+    public function signup(Request $request): Response
     {
         if($request->getMethod() == 'POST')
         {
@@ -42,7 +42,7 @@ class UserController implements Controller {
             );
             Server::redirectTo("/user/".$request->getPostParam('username'));
         } else {
-            return (new ResponseBuilder())->setContent(View::render('register'))->build();
+            return (new ResponseBuilder())->setContent(View::render('user.signup'))->build();
         }
     }
 

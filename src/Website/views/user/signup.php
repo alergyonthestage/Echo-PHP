@@ -1,4 +1,4 @@
-<form action="/register" method="POST">
+<form action="/signup" method="POST">
     <div>
         <label for="username">Username</label>
         <input type="username" name="username" required>
