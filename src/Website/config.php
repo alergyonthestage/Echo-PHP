@@ -13,8 +13,8 @@ return [
     'database' => [
         'hostname' => 'localhost',
         'username' => 'root',
-        'password' => '',
-        'dbname' => 'echo' 
+        'password' => 'aledj3610',
+        'dbname' => 'echo'
     ],
 
     'paths' => [

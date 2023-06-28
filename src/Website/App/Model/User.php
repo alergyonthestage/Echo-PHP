@@ -19,6 +19,17 @@ class User {
         $this->fetch($username);
     }
 
+    public static function create(string $username, string $name, string $surname, string $email, string $password)
+    {
+        $connection = Database::connect();
+        $stmt = $connection->prepare("INSERT INTO user (username, name, surname, email, password) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('sssss', $username, $name, $surname, $email, $password);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot register user $username");
+        }
+        $connection->close();
+    }
+
     private function fetch(string $username)
     {
         $connection = Database::connect();
