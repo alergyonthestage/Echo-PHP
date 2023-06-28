@@ -68,7 +68,12 @@ class User {
 
     public function getPic(): string 
     {
-        return Configurations::get('paths.profile').$this->user->pic;
+        
+        if ($this->user->pic === NULL || $this->user->pic === '') {
+            return Configurations::get('paths.profile')."default.png";
+        } else {
+            return Configurations::get('paths.profile').$this->user->pic;
+        }
     }
 
     public function login(string $password): bool 
