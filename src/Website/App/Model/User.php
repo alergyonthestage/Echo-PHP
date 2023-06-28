@@ -64,7 +64,7 @@ class User {
     
     public function getBio(): string 
     {
-        return $this->user->bio;
+        return $this->user->bio ?? '';
     }
 
     private function getPassword(): string 
