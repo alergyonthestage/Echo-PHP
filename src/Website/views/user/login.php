@@ -1,4 +1,4 @@
-<form action="/signin" method="POST">
+<form action="/login" method="POST">
     <div>
         <label for="username">Username</label>
         <input type="text" name="username">
@@ -7,4 +7,5 @@
         <label for="password">Password</label>
         <input type="password" name="password">
     </div>
+    <input type="submit">
 </form>

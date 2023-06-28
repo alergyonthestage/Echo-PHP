@@ -17,7 +17,12 @@ Server::createRoute()->accept(['GET', 'POST'], '/signup')->setHandler([
     'method' => 'signup'
 ])->add();
 
-Server::createRoute()->accept(['GET', 'POST'], '/signin')->setHandler([
+Server::createRoute()->accept(['GET', 'POST'], '/login')->setHandler([
     'controller' => UserController::class,
-    'method' => 'signin'
+    'method' => 'login'
+])->add();
+
+Server::createRoute()->accept('GET', '/logout')->setHandler([
+    'controller' => UserController::class,
+    'method' => 'logout'
 ])->add();

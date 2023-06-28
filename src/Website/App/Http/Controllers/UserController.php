@@ -47,16 +47,24 @@ class UserController implements Controller {
         }
     }
 
-    public function signin(Request $request): Response
+    public function login(Request $request): Response
     {
         if($request->getMethod() == 'POST')
         {
-            $encrPass = $request->getPostParam('password');
-            (new User($request->getPostParam('username')))->login($encrPass);
-            Server::redirectTo("/user/".$request->getPostParam('username'));
+            if((new User($request->getPostParam('username')))->login($request->getPostParam('password'))){
+                Server::redirectTo("/user/".$request->getPostParam('username'));
+            } else {
+                Server::redirectTo("/login");
+            }
         } else {
-            return (new ResponseBuilder())->setContent(View::render('user.signup'))->build();
+            return (new ResponseBuilder())->setContent(View::render('user.login'))->build();
         }
+    }
+
+    public function logout(): void
+    {
+        User::logout();
+        Server::redirectTo('/login');
     }
 
 }

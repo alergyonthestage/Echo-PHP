@@ -122,7 +122,7 @@ class User {
         return Session::hasVariable(static::$login_sess_var_name) && Session::getVariable(static::$login_sess_var_name) === $this->getUserID();
     }
 
-    public function logout(): void
+    public static function logout(): void
     {
         Session::unsetVariable(static::$login_sess_var_name);
     }
