@@ -17,14 +17,12 @@ class UserController implements Controller {
 
         $userData = [
             'username' => $user->getUsername(),
-            'name' => $user->getName(),
-            'profileURI' => '/public/img/profiles/vertical.jpeg',
+            'name' => $user->getName()." ".$user->getSurname(),
+            'profileURI' => $user->getPic(),
             'echoes' => '1120',
             'posts' => '432',
             'friends' => '982',
-            'biography' => 'Love Techno music 💿
-            <br>From California 🇺🇸
-            <br>04/21 ❤️'
+            'biography' => $user->getBio(),
         ];
         return (new ResponseBuilder())->setContent(View::render('user', $userData))->build();
     }
