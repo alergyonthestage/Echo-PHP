@@ -9,10 +9,10 @@ class Database {
 
     public static function connect() {
         return new mysqli(
-            Configurations::get(DATABASE_ACCESS)['hostname'], 
-            Configurations::get(DATABASE_ACCESS)['username'], 
-            Configurations::get(DATABASE_ACCESS)['password'], 
-            Configurations::get(DATABASE_ACCESS)['dbname']
+            Configurations::get('database')['hostname'], 
+            Configurations::get('database')['username'], 
+            Configurations::get('database')['password'], 
+            Configurations::get('database')['dbname']
         );
     }
 }

@@ -45,7 +45,7 @@ class Server extends ServerApp implements ServerInterface {
 
     public static function redirectTo(string $path, int $responseCode = 302): void
     {
-        $rootPath = Configurations::get(ROOT_URL);
+        $rootPath = Configurations::get('root_url');
         http_response_code($responseCode);
         header('Location: '.$rootPath.$path);
     }

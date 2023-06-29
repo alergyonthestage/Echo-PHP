@@ -7,7 +7,8 @@ return [
     
     'view' => [
         'views' => __DIR__.'/views',
-        'layouts' => __DIR__.'/views/layouts'
+        'layouts' => __DIR__.'/views/layouts',
+        'not_found' => 'errors.notfound'
     ],
 
     'database' => [

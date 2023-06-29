@@ -33,7 +33,7 @@ class View {
         $toPath = static::nameToPath($name);
         extract($data);
         ob_start();
-        require(Configurations::get(VIEWS_PATH)."/$toPath.php");
+        require(Configurations::get('view.views')."/$toPath.php");
         return ob_get_clean();
     }
 
@@ -41,7 +41,7 @@ class View {
     {
         $toPath = static::nameToPath($name);
         ob_start();
-        require(Configurations::get(LAYOUTS_PATH)."/$toPath.php");
+        require(Configurations::get('view.layouts')."/$toPath.php");
         return ob_get_clean();
     }
 

@@ -22,7 +22,7 @@ class App implements AppInterface {
 
     protected function boot(): void 
     {
-        require(Configurations::get(ROUTES_FILE));
+        require(Configurations::get('routes_file'));
     }
 
     protected function getRouter(): Router

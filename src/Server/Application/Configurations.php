@@ -3,20 +3,6 @@
 namespace CaveResistance\Echo\Server\Application;
 use Exception;
 
-define('DATABASE_ACCESS', 'database');
-
-define('ROUTES_FILE', 'routes_file');
-
-define('VIEWS_PATH', 'view.views');
-
-define('LAYOUTS_PATH', 'view.layouts');
-
-define('CAVER_LAYOUT', 'view.caver_layout');
-
-define('GUEST_LAYOUT', 'view.guest_layout');
-
-define('ROOT_URL', 'root_url');
-
 class Configurations {
 
     private static array $configurations;
@@ -28,6 +14,16 @@ class Configurations {
             throw new Exception('Configurations already loaded! Cannot override.');
         }
         static::$configurations = $configurations;
+    }
+
+    public static function isSet(string $configuration): bool 
+    {
+        try {
+            static::get($configuration);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     public static function get(string $configuration) 
