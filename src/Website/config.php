@@ -21,8 +21,10 @@ return [
     ],
 
     'paths' => [
-        'profile' => '/public/img/profiles/',
-        'cover_art' => '/public/img/cover/'
+        'cover_art' => '/public/img/cover/',
+        'profile_pic' => '/public/img/profiles/',
+        'artist_pic' => '/public/img/artist/',
+        'default_pic' => '/public/img/default.png'
     ],
 
     'user' => [
