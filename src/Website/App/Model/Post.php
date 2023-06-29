@@ -44,6 +44,10 @@ class Post {
         //Fetch the song from DB by song_id
         $song = Song::fromID($post->id_song);
         $post->song = $song;
+
+        //Fetch the user author from DB by song_id
+        $user = User::fromID($post->id_user);
+        $post->author = $user;
         
         return $post;  
     }
@@ -77,15 +81,15 @@ class Post {
     }
 
     public function getAuthorUsername(): string {
-        return "TODO";
+        return $this->post->author->getUsername();
     }
 
     public function getAuthorBadges(): string {
-        return "TODO";
+        return $this->post->author->getBadges();
     }
 
     public function getAuthorPicture(): string {
-        return "TODO";
+        return $this->post->author->getPic();
     }
 
     public function getSongID(): string {

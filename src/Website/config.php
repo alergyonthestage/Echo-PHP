@@ -23,12 +23,7 @@ return [
     'paths' => [
         'cover_art' => '/public/img/cover/',
         'profile_pic' => '/public/img/profiles/',
-        'artist_pic' => '/public/img/artist/',
-        'default_pic' => '/public/img/default.png'
-    ],
-
-    'user' => [
-        'verified_suffix' => '<i class="fas fa-check-circle" title="Profilo verificato"></i>'
+        'artist_pic' => '/public/img/artist/'
     ],
 
     'global_middlewares' => [

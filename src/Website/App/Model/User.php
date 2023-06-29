@@ -124,7 +124,7 @@ class User {
     public function getPic(): string 
     {    
         if ($this->user->pic === NULL || $this->user->pic === '') {
-            return Configurations::get('paths.default_pic');
+            return Configurations::get('paths.profile').'default.png';
         } else {
             return Configurations::get('paths.profile').$this->user->pic;
         }

@@ -41,7 +41,7 @@ class Artist {
 
     public function getPic(): string {
         if ($this->artist->pic === NULL || $this->artist->pic === '') {
-            return Configurations::get('paths.default');
+            return Configurations::get('paths.artist_pic').'default.png';
         } else {
             return Configurations::get('paths.artist_pic').$this->artist->pic;
         }
