@@ -37,24 +37,70 @@ body::before {
 }
 
 header {
+    color: white;
     background-color: #2E2A3C;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
 }
 
 #logo {
-    color: white;
+    justify-self: center;
     letter-spacing: 0.1em;
-    font-size: 2em;
     padding: 0.4em;
+    font-size: 2em;
+}
+
+#logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#nav-menu-button {
+    opacity: 25%;
+    justify-self: end;
+    padding: 1rem;
+    font-size: 1.2em;
+}
+
+#nav-menu-button:hover {
+    opacity: 100%;
+}
+
+#nav-back-button {
+    opacity: 25%;
+    justify-self: start; 
+    padding: 1rem;
+    font-size: 1.2em;
+ }
+
+ #nav-back-button:hover {
+    opacity: 100%;
+}
+
+#nav-items {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+#nav-items hr {
+    margin: 0;
+    opacity: 20%;
+    width: 80%;
+}
+
+#nav-items a {
+    padding: 1em;
+    text-decoration: none;
+    color: white;
 }
 
 main {
     color: white;
     flex-grow: 1;
-    /**background-image: url("/public/img/backgrounds/background.png");
-    background-size: cover;**/
 }
 
 .fa-check-circle {
