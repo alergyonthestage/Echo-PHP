@@ -2,9 +2,9 @@
 
 namespace CaveResistance\Echo\Website\App\Http\Controllers;
 
+use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
-use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
@@ -15,7 +15,7 @@ class UserController implements Controller {
     public function index($username): Response
     {
 
-        $user = new User($username);
+        $user = User::fromUsername($username);
 
         $userData = [
             'username' => $user->getUsername(),
@@ -51,7 +51,7 @@ class UserController implements Controller {
     {
         if($request->getMethod() == 'POST')
         {
-            if((new User($request->getPostParam('username')))->login($request->getPostParam('password'))){
+            if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
                 Server::redirectTo("/user/".$request->getPostParam('username'));
             } else {
                 Server::redirectTo("/login");

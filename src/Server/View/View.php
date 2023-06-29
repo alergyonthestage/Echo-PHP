@@ -11,11 +11,21 @@ class View {
     private static string $contentPlaceholderSelector = '/{{content}}/';
     private static string $beforeClosingHeadTagSelector = '/(?=<\/head>)/';
 
-    public static function render(string $view, array $data = [], string $layout = 'default'): string 
+    private static string $layout = 'default';
+
+    public static function render(string $view, array $data = [], string $layout = ''): string 
     {
-        $viewLayout = static::getLayout($layout);
         $viewHead = '';
-        $viewContent = static::extractViewHead(static::getView($view, $data), $viewHead);
+        $viewContent = static::extractViewHead(static::renderView($view, $data), $viewHead);
+        if(empty($layout)) {
+            if(!static::hasLayout()){
+                return $viewContent;
+            } else {
+                $viewLayout = static::renderLayout(static::getLayoutName());
+            }
+        } else {
+            $viewLayout = static::renderLayout($layout);
+        }
         return preg_replace(
         [
             static::$contentPlaceholderSelector,
@@ -28,7 +38,22 @@ class View {
         $viewLayout);
     }
 
-    private static function getView(string $name, array $data): string 
+    public static function setLayout(string $layout) 
+    {
+        static::$layout = $layout;
+    }
+
+    private static function getLayoutName(): string 
+    {
+        return static::$layout;
+    }
+
+    private static function hasLayout(): bool 
+    {
+        return !empty(static::$layout);
+    }
+
+    private static function renderView(string $name, array $data): string 
     {
         $toPath = static::nameToPath($name);
         extract($data);
@@ -37,7 +62,7 @@ class View {
         return ob_get_clean();
     }
 
-    private static function getLayout(string $name): string 
+    private static function renderLayout(string $name): string 
     {
         $toPath = static::nameToPath($name);
         ob_start();

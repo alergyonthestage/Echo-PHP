@@ -12,12 +12,13 @@
 </head>
 <body>
     <header>
-        <div id="nav-back-button" class="fa-solid fa-caret-left" onclick="history.go(-1);"></div>
+        <div id="nav-back-button" class="fa-solid fa-caret-left"></div>
         <div id="logo"><a href="/">ECHO</a></div>
         <div id="nav-menu-button" class="fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
         <nav id="nav-items">
-            <a href="/login">Log In</a><hr>
-            <a href="/signup">Sign Up</a>
+            <a href="/">Search</a><hr>
+            <a href="/">Chat</a><hr>
+            <a href="/">Profile</a>
         </nav>
     </header>
     <main>

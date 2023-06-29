@@ -5,24 +5,23 @@ namespace CaveResistance\Echo\Server\Middlewares;
 use ArrayIterator;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
-use CaveResistance\Echo\Server\Interfaces\Routing\Handler;
+use CaveResistance\Echo\Server\Interfaces\Routing\Router;
 use Exception;
 
-class MiddlewareRunner {
+class GlobalMiddlewareRunner {
 
     private ArrayIterator $middlewares;
-    private Handler $destination;
-    private array $params;
+    private Router $destination;
 
-    public function through(array $middlewares): MiddlewareRunner 
+    public function through(array $middlewares): GlobalMiddlewareRunner 
     {
         $this->middlewares = new ArrayIterator($middlewares);
         return $this;
     }
 
-    public function setDestination(Handler $destination): MiddlewareRunner 
+    public function setDestination(Router $router): GlobalMiddlewareRunner 
     {
-        $this->destination = $destination;
+        $this->destination = $router;
         return $this;
     }  
     
@@ -33,7 +32,7 @@ class MiddlewareRunner {
 
     private function runDestination($request): Response 
     {
-        return $this->destination->run($request, $this->params);
+        return $this->destination->dispatch($request);
     }
 
     private function nextFunctionDispatcher(): callable 
@@ -48,9 +47,8 @@ class MiddlewareRunner {
         };
     }
     
-    public function run(Request $request, array $params): Response 
+    public function run(Request $request): Response 
     {
-        $this->params = $params;
         if($this->middlewares->key() != 0) {
             throw new Exception('MiddlewareRunner already executed!');
         }

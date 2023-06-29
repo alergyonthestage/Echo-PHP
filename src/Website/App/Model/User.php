@@ -11,13 +11,24 @@ use CaveResistance\Echo\Website\App\Authentication\Password;
 
 class User {
 
-    private static string $login_sess_var_name = 'user_id';
+    private static string $session_user_id = 'user_id';
+    private static string $session_username = 'username';
 
     private stdClass $user;
 
-    public function __construct(string $username) 
+    private function __construct(stdClass $user)
     {
-        $this->fetch($username);
+        $this->user = $user;
+    }
+
+    public static function fromUsername(string $username)
+    {
+        return new static(static::fetchFromUsername($username));
+    }
+
+    public static function fromID(int $id)
+    {
+        return new static(static::fetchFromID($id));
     }
 
     public static function create(string $username, string $name, string $surname, string $email, string $password)
@@ -34,7 +45,20 @@ class User {
         $connection->close();
     }
 
-    private function fetch(string $username)
+    private static function fetchFromID(string $id): stdClass 
+    {
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT * FROM user WHERE id_user = ?");
+        $stmt->bind_param('i', $id);
+        if(!$stmt->execute()){
+            throw new Exception("User ID not found: $id");
+        }
+        $user = $stmt->get_result()->fetch_object();
+        $connection->close();
+        return $user;
+    }
+
+    private static function fetchFromUsername(string $username)
     {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
@@ -42,8 +66,9 @@ class User {
         if(!$stmt->execute()){
             throw new Exception("User not found: $username");
         }
-        $this->user = $stmt->get_result()->fetch_object();
+        $user = $stmt->get_result()->fetch_object();
         $connection->close();
+        return $user;
     }
 
     public function getUserID(): string 
@@ -108,23 +133,34 @@ class User {
 
     public function login(string $password): bool 
     {
-        if(Session::hasVariable(static::$login_sess_var_name)) {
+        if(static::isLogged()) {
             throw new Exception('Already Logged');
         } else if(Password::verify($password, $this->getPassword(), $this->getSalt(), $this->getPepperID())) {
-            Session::setVariable(static::$login_sess_var_name, $this->getUserID());
+            Session::setVariable(static::$session_user_id, $this->getUserID());
+            Session::setVariable(static::$session_username, $this->getUsername());
             return true;
         }
         return false;
     }
 
-    public function isLoggedIn(): bool
+    public static function isLogged(): bool
     {
-        return Session::hasVariable(static::$login_sess_var_name) && Session::getVariable(static::$login_sess_var_name) === $this->getUserID();
+        if(Session::hasVariable(static::$session_user_id) && Session::hasVariable(static::$session_username)) {
+            if(Session::getVariable(static::$session_user_id) === User::fromUsername(Session::getVariable(static::$session_username))->getUserID() && 
+            Session::getVariable(static::$session_username) === User::fromID(Session::getVariable(static::$session_user_id))->getUsername()) {
+                return true;
+            } else {
+                static::logout();
+                new Exception('The user_id and the username does not match. User logged out!');
+            }
+        }
+        return false;
     }
 
     public static function logout(): void
     {
-        Session::unsetVariable(static::$login_sess_var_name);
+        Session::unsetVariable(static::$session_user_id);
+        Session::unsetVariable(static::$session_username);
     }
 
 }

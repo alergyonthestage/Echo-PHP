@@ -96,6 +96,11 @@ header {
     padding: 1em;
     text-decoration: none;
     color: white;
+    transition: color .4s;
+}
+
+#nav-items a:hover {
+    color: #F8D164;
 }
 
 main {

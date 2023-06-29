@@ -1,5 +1,7 @@
 <?php
 
+use CaveResistance\Echo\Website\App\Http\Middlewares\LayoutMiddleware;
+
 return [
     'root_url' => 'http://echo.local',
     
@@ -25,5 +27,9 @@ return [
 
     'user' => [
         'verified_suffix' => '<i class="fas fa-check-circle" title="Profilo verificato"></i>'
+    ],
+
+    'global_middlewares' => [
+        LayoutMiddleware::class
     ]
 ];
