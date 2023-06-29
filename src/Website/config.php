@@ -25,10 +25,6 @@ return [
         'cover_art' => '/public/img/cover/'
     ],
 
-    'user' => [
-        'verified_suffix' => '<i class="fas fa-check-circle" title="Profilo verificato"></i>'
-    ],
-
     'global_middlewares' => [
         LayoutMiddleware::class
     ]

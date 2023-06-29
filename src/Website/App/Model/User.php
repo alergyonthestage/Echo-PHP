@@ -81,9 +81,9 @@ class User {
         return $this->user->username;
     }
 
-    public function getBadges(): string 
+    public function isVerified(): bool 
     {
-        return $this->user->verified === 0 ? "" : Configurations::get('user.verified_suffix');        
+        return $this->user->verified;
     }
 
     public function getName(): string 
