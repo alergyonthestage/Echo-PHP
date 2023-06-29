@@ -123,3 +123,25 @@
         margin-right: 1.9em;
     }
 }
+
+/**---floating-add-button---*/
+
+.floating-add-button {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    border: none;
+    background-color: #F8D164;
+    color: #353143;
+    box-shadow: #353143 0 0.1em 0.3em;
+    transition: background-color 0.2s;
+    transition: transform 0.2s ease-in-out;
+}
+
+.floating-add-button:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
