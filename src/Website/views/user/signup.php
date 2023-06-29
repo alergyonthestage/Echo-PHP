@@ -20,6 +20,8 @@
             <label for="password">Password</label>
             <input type="password" name="password" required>
         </div>
-        <input type="submit">
+        <div class="centered-form-submit-button-container">
+            <input type="submit" value="Sign Up" class="button-action-text">
+        </div>
     </form>
 </div>
