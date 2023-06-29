@@ -12,7 +12,7 @@ class Artist {
     private stdClass $artist;
 
     private function __construct(stdClass $artist) {
-        $this->$artist = $artist;
+        $this->artist = $artist;
     }
 
     public static function fromID(int $id) {

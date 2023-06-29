@@ -12,7 +12,7 @@ class Song {
     private stdClass $song;
 
     private function __construct(stdClass $song) {
-        $this->$song = $song;
+        $this->song = $song;
     }
 
     public static function fromID(int $id) {
@@ -30,7 +30,7 @@ class Song {
         $connection->close(); 
 
         //Fetch the artist from DB by artist_id
-        $artist = Artist::fromID($song->getArtistID());
+        $artist = Artist::fromID($song->id_artist);
         $song->artist = $artist;
 
         return $song;  
@@ -45,10 +45,10 @@ class Song {
     }
 
     public function getCover(): string {
-        return $this->song->cover;
+        return Configurations::get('paths.cover_art').$this->song->cover;
     }
 
-    public function getArtist(): string {
+    public function getArtist(): Artist {
         return $this->song->artist;
     }
 

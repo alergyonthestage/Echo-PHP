@@ -11,7 +11,7 @@ class Post {
     private stdClass $post;
 
     private function __construct(stdClass $post) {
-        $this->$post = $post;
+        $this->post = $post;
     }
 
     public static function fromID(int $id) {
@@ -30,19 +30,19 @@ class Post {
         $connection->close();
     }
 
-    private static function fetch($post_id): stdClass{
+    private static function fetch($id_post): stdClass{
         $connection = Database::connect();
 
         //Fetch the post from DB by post_id
-        $stmt = $connection->prepare("SELECT * FROM post WHERE post_id = ?");
-        $stmt->bind_param('i', $post_id);
+        $stmt = $connection->prepare("SELECT * FROM post WHERE id_post = ?");
+        $stmt->bind_param('i', $id_post);
         if(!$stmt->execute()){
-            throw new Exception("Post not found: $post_id");
+            throw new Exception("Post not found: $id_post");
         }
         $post = $stmt->get_result()->fetch_object();
 
         //Fetch the song from DB by song_id
-        $song = Song::fromID($post->id_song);
+        $song = Song::fromID($post->id_post);
         $post->song = $song;
 
         //Fetch the user author from DB by song_id
@@ -84,8 +84,8 @@ class Post {
         return $this->post->author->getUsername();
     }
 
-    public function getAuthorBadges(): string {
-        return $this->post->author->getBadges();
+    public function isAuthorVerified(): string {
+        return $this->post->author->isVerified();
     }
 
     public function getAuthorPicture(): string {

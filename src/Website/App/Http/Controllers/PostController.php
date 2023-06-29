@@ -12,18 +12,18 @@ use CaveResistance\Echo\Website\App\Model\Post;
 
 class PostController implements Controller {
 
-    public function index($post_id): Response
+    public function index($id): Response
     {
-        $post = Post::fromID($post_id);
+        $post = Post::fromID($id);
 
         $postData = [
-            "author_username" => $post.getAuthorUsername(),
-            "author_badges" => $post.getAuthorBadges(),
-            "author_picture" => $post.getAuthorPicture(),
-            "time_ago" => $post.getTimeAgo(),
-            "cover_art" => $post.getCover(),
-            "song_info" => $post.getSongTitle()." - ".$post.getSongArtist(),
-            "description" => $post.getDescription()
+            "author_username" => $post->getAuthorUsername(),
+            "author_verified" => $post->isAuthorVerified(),
+            "author_picture" => $post->getAuthorPicture(),
+            "time_ago" => $post->getTimeAgo(),
+            "cover_art" => $post->getSongCover(),
+            "song_info" => $post->getSongTitle()." - ".$post->getSongArtist(),
+            "description" => $post->getDescription()
         ];
         return (new ResponseBuilder())->setContent(View::render('post.post', $postData))->build();
     }

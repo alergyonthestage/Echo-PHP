@@ -16,7 +16,7 @@ class FeedController implements Controller {
             array(
                 "username" => "alergyonthestage",
                 "badges" => "",
-                "profile_picture" => Configurations::get('paths.profile')."alergyonthestage.png",
+                "profile_picture" => Configurations::get('paths.profile_pic')."alergyonthestage.png",
                 "time_ago" => "5 ore fa",
                 "cover_art" => "/public/img/cover/1.jpg",
                 "song_title" => "Into You - Ariana",

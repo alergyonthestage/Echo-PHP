@@ -4,6 +4,7 @@ use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Website\App\Http\Controllers\HomeController;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
+use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 
 Server::createRoute()->accept('GET', '/home')->setHandler(HomeController::class)->add();
 
@@ -26,3 +27,6 @@ Server::createRoute()->accept('GET', '/logout')->setHandler([
     'controller' => UserController::class,
     'method' => 'logout'
 ])->add();
+
+//----Posts----
+Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();

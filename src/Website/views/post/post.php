@@ -1,13 +1,7 @@
 <view-head>
     <link rel="stylesheet" href="/public/css/views/feedStyle.css">
 </view-head>
-<div class="feed-scroll-navigation">
-   <button class="feed-scroll-nav-button feed-active">Feed</button>
-   <button class="feed-scroll-nav-button">Explore</button>
-</div>
-<div class="feed-post-container">
-<?php foreach ($data as $post): extract($post) ?>
-    <div class="feed-post">
+<div class="feed-post">
         <div class="feed-post-header">
             <div class="feed-covert-art">
                 <div class="feed-cover-square">
@@ -16,14 +10,14 @@
                 </div>
             </div>
             <div class="feed-post-infos">
-                <a href="/user/<?=$username?>">
+                <a href="/user/<?=$author_username?>">
                 <div class="feed-post-author-infos">
                     <div class="profile-picture-frame feed-profile-picture-frame">
-                        <img class="profile-picture" src="<?=$profile_picture?>" alt="Profile picture">
+                        <img class="profile-picture" src="<?=$author_picture?>" alt="Profile picture">
                     </div>
                     <div class="feed-author-infos">
                         <div class="feed-author-name">
-                            <p><?=$username?> <?=$badges?></p>
+                            <p><?=$author_username?> <?php if($author_verified) {echo '<i class="fas fa-check-circle" title="Profilo verificato"></i>';}?></p>
                         </div>
                         <div class="feed-time-info">
                             <p><?=$time_ago?></p>
@@ -33,7 +27,7 @@
                 </a>
                 <div class="feed-post-song-infos">
                     <div class="feed-post-song-title">
-                        <p><?=$song_title?></p>
+                        <p><?=$song_info?></p>
                     </div>
                     <div class="feed-song-progress-bar">
                         <div class="feed-song-progress-bar-inner"></div>
@@ -57,6 +51,3 @@
         </div>
         <hr class="feed-post-divider">
     </div>
-<?php endforeach; ?>
-   
-</div>
