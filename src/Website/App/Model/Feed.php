@@ -26,7 +26,8 @@ class Feed {
     private static function fetch(int $id_user, int $from, int $to) {
         $connection = Database::connect();
 
-       return NULL;
+        
+        
     }
 
 }

@@ -162,4 +162,30 @@ class User {
         Session::unsetVariable(static::$session_username);
     }
 
+    public function getFriends(bool $retrieveUnconfirmed=false): array{
+        $connection = Database::connect();
+
+        if($retrieveUnconfirmed){
+            $query = "SELECT friend FROM (SELECT friend2 AS friend FROM friendship WHERE friend1 = ? UNION ALL SELECT friend1 AS friend FROM friendship WHERE friend2 = ?) AS subquery GROUP BY friend HAVING COUNT(*) = 1;";
+        }else{
+            $query = "SELECT friend FROM (SELECT friend2 AS friend FROM friendship WHERE friend1 = ? UNION ALL SELECT friend1 AS friend FROM friendship WHERE friend2 = ?) AS subquery GROUP BY friend HAVING COUNT(*) > 1;";            
+        }
+
+        $stmt = $connection->prepare($query);
+        $userID = $this->getUserID();
+        $stmt->bind_param('ii', $userID, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Error to find friends of:".$userID);
+        }
+        $friends = $stmt->get_result()->fetch_all();
+        $connection->close();
+
+        return array_map(function($friend){ return User::fromID($friend[0]); }, $friends);
+    }
+
+    public function getFriendsCount(bool $retrieveUnconfirmed=false): int{
+        return count($this->getFriends($retrieveUnconfirmed));
+    }
+    
+
 }

@@ -52,3 +52,8 @@
 .user-profile-biography {
     margin: 1em;
 }
+
+.user-profile-stats a {
+    text-decoration: none;
+    color: #fff;
+}

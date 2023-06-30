@@ -27,6 +27,7 @@
                         Posts
                     </div>
                 </div>
+                <a href="/user/<?=$username?>/friendship">
                 <div class="user-profile-stat">
                     <div>
                         <?=$friends?>
@@ -35,6 +36,7 @@
                         Friends
                     </div>
                 </div>
+                </a>
             </div>
             <button class="user-profile-add-friend-button">Add</button>
         </div>

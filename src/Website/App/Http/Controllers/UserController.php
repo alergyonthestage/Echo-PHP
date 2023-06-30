@@ -24,7 +24,7 @@ class UserController implements Controller {
             'profileURI' => $user->getPic(),
             'echoes' => '1120',
             'posts' => '432',
-            'friends' => '982',
+            'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),
         ];
         return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
