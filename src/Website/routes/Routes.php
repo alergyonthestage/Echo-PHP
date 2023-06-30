@@ -11,7 +11,7 @@ Server::createRoute()->accept('GET', ['/', '/feed'])->setHandler(FeedController:
 //----Users----
 Server::createRoute()->accept('GET', '/user/{username}')->setHandler(UserController::class)->add();
 
-Server::createRoute()->accept('GET', '/user/{username}/friendship')->setHandler(FriendshipController::class)->add();
+Server::createRoute()->accept('GET', '/user/{username}/friends')->setHandler(FriendshipController::class)->add();
 
 Server::createRoute()->accept(['GET', 'POST'], '/signup')->setHandler([
     'controller' => UserController::class,
