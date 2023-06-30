@@ -28,6 +28,5 @@ Server::createRoute()->accept('GET', '/logout')->setHandler([
     'method' => 'logout'
 ])->add();
 
-
 //----Posts----
 Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();
