@@ -1,6 +1,6 @@
 <view-head>
     <link rel="stylesheet" href="/public/css/views/feedStyle.css">
-    <script src="/public/javascript/create.js" defer></script>
+    <script src="/public/javascript/createPost.js" defer></script>
 </view-head>
 <div class="feed-scroll-navigation">
    <button class="feed-scroll-nav-button feed-active">Feed</button>
