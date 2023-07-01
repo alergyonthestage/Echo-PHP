@@ -12,4 +12,3 @@
         </div>
         <div id="current-step">
         </div>
-        <button id="next-button">Next</button>
