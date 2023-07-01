@@ -1,6 +1,8 @@
 <?php
 
+use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Server;
+use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
 use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
@@ -30,3 +32,7 @@ Server::createRoute()->accept('GET', '/logout')->setHandler([
 
 //----Posts----
 Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();
+
+Server::createRoute()->accept('GET', '/create')->setHandler(function() {
+    return (new ResponseBuilder())->setContent(View::render('create'))->build();
+})->add();

@@ -12,13 +12,13 @@
 </head>
 <body>
     <header>
-        <div id="nav-back-button" class="fa-solid fa-caret-left"></div>
-        <div id="logo"><a href="/">ECHO</a></div>
-        <div id="nav-menu-button" class="fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
+        <div id="nav-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></div>
+        <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
+        <div id="nav-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
         <nav id="nav-items">
-            <a href="/">Search</a><hr>
-            <a href="/">Chat</a><hr>
-            <a href="/">Profile</a>
+            <a href="/" class="unselectable">Search</a><hr>
+            <a href="/" class="unselectable">Chat</a><hr>
+            <a href="/" class="unselectable">Profile</a>
         </nav>
     </header>
     <main>

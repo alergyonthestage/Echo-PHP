@@ -1,12 +1,14 @@
-$publishPostButton = document.getElementById('create-post-button');
+import PostCreationForm from './components/PostCreationForm.js';
 
-$publishPostButton.onclick = () => {
-    document.getElementsByTagName('main').item(0).innerHTML = `
-        <h1>Create post</h1>
-        <div>
-            <form>
-                <input type="text" placeholder="Search"></input>
-            </form>
-        </div>
-    `;
+let $currentStepSlot = document.getElementById('current-step');
+let $nextButton = document.getElementById('next-button');
+
+let $postCreationForm = new PostCreationForm();
+
+function renderNextStep() {
+    $currentStepSlot.innerHTML = $postCreationForm.nextStep();
 }
+
+renderNextStep();
+
+$nextButton.onclick = renderNextStep

@@ -12,12 +12,12 @@
 </head>
 <body>
     <header>
-        <div id="nav-back-button" class="fa-solid fa-caret-left" onclick="history.go(-1);"></div>
-        <div id="logo"><a href="/">ECHO</a></div>
-        <div id="nav-menu-button" class="fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
+        <div id="nav-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></div>
+        <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
+        <div id="nav-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
         <nav id="nav-items">
-            <a href="/login">Log In</a><hr>
-            <a href="/signup">Sign Up</a>
+            <a href="/login" class="unselectable">Log In</a><hr>
+            <a href="/signup" class="unselectable">Sign Up</a>
         </nav>
     </header>
     <main>

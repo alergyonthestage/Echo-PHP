@@ -15,6 +15,15 @@
     font-size: 0.9em;
 }
 
+/**---UTILS---*/
+.unselectable {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
 /**---PROFILE-PICTURE---*/
 
 .profile-picture-frame {
@@ -127,11 +136,15 @@
 /**---floating-add-button---*/
 
 .floating-add-button {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     bottom: 1em;
     right: 1em;
-    height: 2em;
-    width: 2em;
+    height: 4em;
+    width: 4em;
     border-radius: 50%;
     border: none;
     background-color: #F8D164;

@@ -1,0 +1,60 @@
+.title {
+    text-align: center;
+}
+
+/**---Progress Bar---*/
+
+.create-post-progress-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.create-post-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+}
+
+.create-post-steps a {
+    justify-self: center;
+    position: relative;
+    text-align: center;
+    width:100%;
+}
+
+.create-post-steps a::after {
+    position: absolute;
+    top: -1.4em;
+    left: 44%;
+    content: "";
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.create-post-steps a::before {
+    z-index: -1;
+    position: absolute;
+    top: -1em;
+    left: -50%;
+    content: "";
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
+
+.create-post-steps a:first-child::before {
+    display: none;
+}
+
+/**---current step---*/
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    margin: 2em;
+}
