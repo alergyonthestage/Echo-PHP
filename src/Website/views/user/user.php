@@ -38,7 +38,11 @@
                 </div>
                 </a>
             </div>
-            <button class="user-profile-add-friend-button">Add</button>
+            <?php if ($username !== $_SESSION['username']) { ?>
+                    <a class="user-profile-add-friend-button"><button class="user-profile-add-friend-button">Add</button></a>
+                <?php } else { ?>
+                    <a href="/user/<?=$username?>/edit" class="user-profile-edit-profile-button"><button class="user-profile-edit-profile-button">Edit profile</button></a>
+                <?php } ?>
         </div>
     </div>
     <div class="user-profile-biography">

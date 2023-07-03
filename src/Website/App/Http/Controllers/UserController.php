@@ -9,12 +9,12 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\User;
+use Exception;
 
 class UserController implements Controller {
 
     public function index($username): Response
     {
-
         $user = User::fromUsername($username);
 
         $userData = [
@@ -67,4 +67,36 @@ class UserController implements Controller {
         Server::redirectTo('/login');
     }
 
+    public function edit(Request $request): Response
+    {
+        if (!User::isLogged()) {
+            Server::redirectTo('/login');
+        }
+
+        $user = User::fromUsername($_SESSION['username']);
+
+        if ($request->getMethod() == 'POST') {
+            // Effettua l'aggiornamento dei dati dell'utente
+            $user->setUsername($request->getPostParam('username'));
+            $user->setName($request->getPostParam('name'));
+            $user->setSurname($request->getPostParam('surname'));
+            $user->setBio($request->getPostParam('biography'));
+            $user->setMail($request->getPostParam('email'));
+            $user->setPassword($request->getPostParam('password'));
+
+            //Server::redirectTo("/user/" . $user->getUsername());
+            
+        } else {
+            $userData = [
+                'username' => $user->getUsername(),
+                'name' => $user->getName(),
+                'surname' => $user->getSurname(),
+                'biography' => $user->getBio(),
+                'profileURI' => $user->getPic(),
+                'email' => $user->getEmail(),
+            ];
+
+            return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
+        }
+    }
 }

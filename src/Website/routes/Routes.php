@@ -30,6 +30,11 @@ Server::createRoute()->accept('GET', '/logout')->setHandler([
     'method' => 'logout'
 ])->add();
 
+Server::createRoute()->accept(['GET', 'POST'], '/user/{username}/edit')->setHandler([
+    'controller' => UserController::class,
+    'method' => 'edit'
+])->add();
+
 //----Posts----
 Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();
 
