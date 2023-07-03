@@ -36,14 +36,12 @@
 
 .feed-post-header{
     display: flex;
-    justify-content: flex-start;;
+    justify-content: space-between;
     align-items: center;
     gap: 1.5em;
 }
 
 .feed-cover-square {
-    width: 130px;
-    height: 130px;
     background-color: #59627C;
     border-radius: 5px;
     padding: 4%;

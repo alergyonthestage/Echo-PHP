@@ -12,7 +12,7 @@ class Feed extends HTMLElement {
     render($initialPostsNumber) {
         this.innerHTML += '<div class="feed-post-container">';
         for(let $i = 0; $i < $initialPostsNumber; $i++) {
-            this.innerHTML += new Post({cover_art: 'public/img/cover/1.png', description: 'Ciaociao'}).render();
+            this.innerHTML += new Post({cover_art: 'public/img/cover/1.png', username: 'brtmnl', profile_picture: 'public/img/profiles/3.png', time_ago: '5 hours ago', description: 'Wow che bella canzone!', song_title: 'Brain in The Jelly - Alergy'}).render();
         }
         this.innerHTML += '</div>';
     }
