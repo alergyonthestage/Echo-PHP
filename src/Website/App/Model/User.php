@@ -50,6 +50,25 @@ class User {
         $connection->close();
     }
 
+    public function update (string $username, string $name, string $surname, string $bio, string $email, string $password)
+    {
+        $userID = $this->getUserID();
+        $salt='';
+        $pepperID=0;
+        $pw = empty($password) ? $this->getPassword() : Password::hash(Password::season($password, $salt, $pepperID));
+        $connection = Database::connect();
+        $stmt = $connection->prepare("UPDATE user SET username = ?, name = ?, surname = ?, bio = ?, email = ?, password = ?, salt=?, pepper_id=? WHERE id_user = ?");
+        $stmt->bind_param('ssssssssi', $username, $name, $surname, $bio, $email, $pw, $salt, $pepperID, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot update user $username");
+        }
+        $this->user = static::fetchFromID($userID);
+        if(Session::getVariable(static::$session_username) !== $this->getUsername()) {
+            Session::setVariable(static::$session_username, $this->getUsername());
+        }
+        $connection->close();
+    }
+
     private static function fetchFromID(string $id): stdClass 
     {
         $connection = Database::connect();
@@ -192,74 +211,4 @@ class User {
         return count($this->getFriends($retrieveUnconfirmed));
     }
 
-    // Methods to edit the user's profile data
-
-    public function setUsername(string $username) : void 
-    {
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET username = ? WHERE id_user = ?");
-        $stmt->bind_param('si', $username, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit username of:".$this->getUserID());
-        }
-        $connection->close();
-    }
-
-    public function setName(string $name): void
-    {
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET name = ? WHERE id_user = ?");
-        $stmt->bind_param('si', $name, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit name of:".$this->getUserID());
-        }
-        $connection->close();
-    }    
-
-    public function setSurname(string $surname): void
-    {
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET surname = ? WHERE id_user = ?");
-        $stmt->bind_param('si', $surname, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit surname of:".$this->getUserID());
-        }
-        $connection->close();
-    }
-
-    public function setBio(string $bio): void
-    {
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET bio = ? WHERE id_user = ?");
-        $stmt->bind_param('si', $bio, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit bio of:".$this->getUserID());
-        }
-        $connection->close();
-    }
-
-    public function setEmail(string $email): void
-    {
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET email = ? WHERE id_user = ?");
-        $stmt->bind_param('si', $email, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit email of:".$this->getUserID());
-        }
-        $connection->close();
-    }
-
-    public function setPassword(string $password): void
-    {
-        $salt = '';
-        $pepperID = 0;
-        $encriptedPass = Password::hash(Password::season($password, $salt, $pepperID));
-        $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET password = ?, salt = ?, pepper_id = ? WHERE id_user = ?");
-        $stmt->bind_param('ssii', $encriptedPass, $salt, $pepperID, $this->getUserID());
-        if(!$stmt->execute()){
-            throw new Exception("Error to edit password of:".$this->getUserID());
-        }
-        $connection->close();
-    }
 }

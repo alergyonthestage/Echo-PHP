@@ -3,6 +3,7 @@
 namespace CaveResistance\Echo\Website\App\Http\Controllers;
 
 use CaveResistance\Echo\Server\Interfaces\Http\Controller;
+use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
@@ -26,6 +27,7 @@ class UserController implements Controller {
             'posts' => '432',
             'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),
+            'selfProfile' => User::isLogged() ? $user->getUserID() === User::getLogged()->getUserID() : false
         ];
         return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
     }
@@ -73,18 +75,18 @@ class UserController implements Controller {
             Server::redirectTo('/login');
         }
 
-        $user = User::fromUsername($_SESSION['username']);
+        $user = User::getLogged();
 
         if ($request->getMethod() == 'POST') {
-            // Effettua l'aggiornamento dei dati dell'utente
-            $user->setUsername($request->getPostParam('username'));
-            $user->setName($request->getPostParam('name'));
-            $user->setSurname($request->getPostParam('surname'));
-            $user->setBio($request->getPostParam('biography'));
-            $user->setMail($request->getPostParam('email'));
-            $user->setPassword($request->getPostParam('password'));
-
-            //Server::redirectTo("/user/" . $user->getUsername());
+            $user->update(
+                $request->getPostParam('username'),
+                $request->getPostParam('name'),
+                $request->getPostParam('surname'),
+                $request->getPostParam('biography'),
+                $request->getPostParam('email'),
+                $request->getPostParam('password')
+            );        
+            Server::redirectTo("/user/" . $user->getUsername());
             
         } else {
             $userData = [
