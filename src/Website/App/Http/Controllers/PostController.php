@@ -9,6 +9,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\Post;
+use CaveResistance\Echo\Website\App\Model\User;
 
 class PostController implements Controller {
 
@@ -30,15 +31,15 @@ class PostController implements Controller {
 
     public function publish(Request $request): Response
     {
-        if($request->getMethod() == 'POST')
+        if($request->getMethod() === 'POST')
         {
-            Post::create(
-                $request->getPostParam('TODO'),
-                $request->getPostParam('TODO'),
-                $request->getPostParam('TODO'),
-                $request->getPostParam('TODO')
+            $post = Post::create(
+                $request->getPostParam('description'),
+                $request->getPostParam('is_public'),
+                User::getLogged()->getUserID(),
+                $request->getPostParam('song_id')
             );
-            Server::redirectTo("/post/".$request->getPostParam('post_id'));
+            Server::redirectTo("/post/".$post->getPostID());
         } else {
             return (new ResponseBuilder())->setContent(View::render('post.publish'))->build();
         }

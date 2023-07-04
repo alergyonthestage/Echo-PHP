@@ -2,7 +2,7 @@ export default class PostCreationForm {
 
     step = 0
     steps = [
-        `<form action="none">
+        `<form>
             <input type="text" placeholder="Search"></input>
             <ul id="song-list">
                 <li>Song 1</li>
@@ -31,6 +31,10 @@ export default class PostCreationForm {
             return this.steps[this.steps.length-1]
         }
         return this.steps[this.step++]
+    }
+
+    getData() {
+
     }
 
 }

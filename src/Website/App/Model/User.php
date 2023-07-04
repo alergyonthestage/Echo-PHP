@@ -21,12 +21,17 @@ class User {
         $this->user = $user;
     }
 
-    public static function fromUsername(string $username)
+    public static function getLogged(): User
+    {
+        return static::fromID(Session::getVariable(static::$session_user_id));
+    }
+
+    public static function fromUsername(string $username): User
     {
         return new static(static::fetchFromUsername($username));
     }
 
-    public static function fromID(int $id)
+    public static function fromID(int $id): User
     {
         return new static(static::fetchFromID($id));
     }

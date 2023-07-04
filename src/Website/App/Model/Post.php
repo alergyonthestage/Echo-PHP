@@ -18,7 +18,7 @@ class Post {
         return new static(static::fetch($id));
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song) {
+    public static function create(string $description, string $public, string $id_user, string $id_song): Post {
         $connection = Database::connect();
         $date = date("Y-m-d");
         $time = date("H:i:s");
@@ -27,7 +27,9 @@ class Post {
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
+        $id = $stmt->insert_id;
         $connection->close();
+        return static::fromID($id);
     }
 
     private static function fetch($id_post): stdClass{

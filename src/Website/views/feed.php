@@ -7,4 +7,4 @@
    <button class="feed-scroll-nav-button">Explore</button>
 </div>
 <echo-feed></echo-feed>
-<a href="/create" class="floating-add-button"><div class="fa-solid fa-plus fa-2xl"></div></a>
+<a href="/publish" class="floating-add-button"><div class="fa-solid fa-plus fa-2xl"></div></a>

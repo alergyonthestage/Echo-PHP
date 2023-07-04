@@ -51,10 +51,14 @@
 }
 
 /**---current step---*/
-form {
-    display: flex;
+.create-form-step {
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 1em;
     margin: 2em;
+}
+
+.create-form-step.active {
+    display: flex;
 }

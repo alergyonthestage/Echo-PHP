@@ -1,20 +1,24 @@
-import PostCreationForm from './components/PostCreationForm.js';
+const multiStepForm = document.querySelector('[multi-step-form]')
+const formSteps = [...document.querySelectorAll('[form-step]')]
 
-let $currentStepSlot = document.getElementById('current-step');
-let $postCreationForm = new PostCreationForm();
+let currentStep = formSteps.findIndex((step) => {
+    return step.classList.contains('active')
+})
 
-function post() {
-    window.location.replace('/feed');
+if(currentStep < 0) {
+    currentStep = 0
+    showCurrentStep()
 }
 
-function renderNextStep() {
-    if($postCreationForm.hasNext()) {
-        $currentStepSlot.innerHTML = $postCreationForm.nextStep();
-        let $nextButton = document.getElementById('next-button');
-        $nextButton.onclick = renderNextStep;
-    } else {
-        post();
+multiStepForm.addEventListener("click", e => {
+    if(e.target.matches("[next-step]")) {
+        currentStep++
+        showCurrentStep()
     }
-}
+})
 
-renderNextStep();
+function showCurrentStep() {
+    formSteps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep)
+    })
+}
