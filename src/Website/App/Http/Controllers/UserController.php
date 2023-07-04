@@ -71,12 +71,7 @@ class UserController implements Controller {
 
     public function edit(Request $request): Response
     {
-        if (!User::isLogged()) {
-            Server::redirectTo('/login');
-        }
-
         $user = User::getLogged();
-
         if ($request->getMethod() == 'POST') {
             $user->update(
                 $request->getPostParam('username'),

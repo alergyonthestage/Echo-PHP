@@ -5,8 +5,11 @@ use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
 use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FriendshipController;
+use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 
-Server::createRoute()->accept('GET', ['/', '/feed'])->setHandler(FeedController::class)->add();
+Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler(FeedController::class)->add();
 
 //----Users----
 Server::createRoute()->accept('GET', '/user/{username}')->setHandler(UserController::class)->add();
@@ -23,12 +26,16 @@ Server::createRoute()->accept(['GET', 'POST'], '/login')->setHandler([
     'method' => 'login'
 ])->add();
 
-Server::createRoute()->accept('GET', '/logout')->setHandler([
+Server::createRoute()->accept('GET', '/logout')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
     'controller' => UserController::class,
     'method' => 'logout'
 ])->add();
 
-Server::createRoute()->accept(['GET', 'POST'], '/user/{username}/edit')->setHandler([
+Server::createRoute()->accept(['GET', 'POST'], '/userinfo/edit')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
     'controller' => UserController::class,
     'method' => 'edit'
 ])->add();
@@ -36,7 +43,9 @@ Server::createRoute()->accept(['GET', 'POST'], '/user/{username}/edit')->setHand
 //----Posts----
 Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();
 
-Server::createRoute()->accept(['GET', 'POST'], '/publish')->setHandler([
+Server::createRoute()->accept(['GET', 'POST'], '/publish')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
     'controller' => PostController::class,
     'method' => 'publish'
 ])->add();

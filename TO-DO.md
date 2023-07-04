@@ -1,0 +1,10 @@
+- [] Collega bottone follow-unfollow al db (Ema)
+- [] Commenti (Ema)
+- [] Crea post (Ale)
+- [] Upload
+- [] Feed-javascript
+- [] Notifiche (Follow-Request, Richiesta follow accettata, Notifiche post di utenti seguiti (attiva campanella al canale))
+- [] CSS desktop
+- [] Rivedere HTML -> usare tag accessibili
+- [] Collegare framework YT + embed video
+- [] Relazione
