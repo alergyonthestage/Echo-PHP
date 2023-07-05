@@ -3,6 +3,7 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
+use CaveResistance\Echo\Website\App\Model\Comment;
 use Exception;
 use stdClass;
 
@@ -52,6 +53,30 @@ class Post {
         $post->author = $user;
         
         return $post;  
+    }
+
+    private function fetchComments(): array{
+        $connection = Database::connect();
+
+        $id_post = $this->post->id_post;
+        //Fetch the comments from DB for this post by post_id
+        $stmt = $connection->prepare("SELECT id_post, id_user, date, time FROM comment WHERE id_post = ?");
+        $stmt->bind_param('i', $id_post);
+        if(!$stmt->execute()){
+            throw new Exception("Comments not found for this post: $id_post");
+        }
+        $results = $stmt->get_result()->fetch_all();
+
+        $comments = [];
+        foreach($results as $result){
+            $comments[] = Comment::fromKeys($result[0], $result[1], $result[2], $result[3]);
+        }
+
+        return $comments;
+    }
+
+    public function getComments(): array{
+        return $this->fetchComments();
     }
 
     public function getPostID(): string {

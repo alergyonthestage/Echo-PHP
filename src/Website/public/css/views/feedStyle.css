@@ -145,7 +145,7 @@
 }
 
 .feed-post-description{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     line-height: 1.4;
 }
 
@@ -171,3 +171,41 @@
    width: 30%;
    transition: width 0.5s ease;
 }
+
+.post-comments-area{
+    margin: 1em;
+}
+
+.comment-profile-picture-frame{
+    min-width: 1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0.2rem 0;
+}
+
+.post-comment-text{
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.post-comment a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.post-comment p{
+    margin: 0;
+}
+
+.post-comment{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 1rem 0;
+}
+.post-comment-time{
+    font-size: 0.8rem;
+    color: #98969F;
+}
+

@@ -24,7 +24,8 @@ class PostController implements Controller {
             "time_ago" => $post->getTimeAgo(),
             "cover_art" => $post->getSongCover(),
             "song_info" => $post->getSongTitle()." - ".$post->getSongArtist(),
-            "description" => $post->getDescription()
+            "description" => $post->getDescription(),
+            "comments" => $post->getComments()
         ];
         return (new ResponseBuilder())->setContent(View::render('post.post', $postData))->build();
     }
