@@ -7,6 +7,8 @@ return [
     
     'routes_file' => __DIR__.'/routes/Routes.php',
     
+    'public' => __DIR__.'/public',
+
     'view' => [
         'views' => __DIR__.'/views',
         'layouts' => __DIR__.'/views/layouts',

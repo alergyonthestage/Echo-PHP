@@ -100,7 +100,7 @@ class UserController implements Controller {
                 mkdir($destinationDir, 0777, true);
             }
             
-            $moved = move_uploaded_file($file['tmp_name'], __DIR__."/../../../public/img/profiles/$fileName");
+            $moved = move_uploaded_file($file['tmp_name'], Configuration::get('public')."/img/profiles/$fileName");
 
             if(!$moved) {
                 return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();

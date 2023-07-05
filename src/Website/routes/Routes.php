@@ -6,6 +6,7 @@ use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FriendshipController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 use CaveResistance\Echo\Website\App\Http\Controllers\SongController;
+use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 
 Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
     AuthMiddleware::class
