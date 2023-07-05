@@ -3,7 +3,7 @@
 use CaveResistance\Echo\Website\App\Http\Middlewares\LayoutMiddleware;
 
 return [
-    'root_url' => 'http://echo.local',
+    'root_url' => 'http://localhost',
     
     'routes_file' => __DIR__.'/routes/Routes.php',
     

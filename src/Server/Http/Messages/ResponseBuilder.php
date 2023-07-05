@@ -8,6 +8,7 @@ class ResponseBuilder implements ResponseBuilderInterface {
 
     private int $statusCode = 200;
     private string $content = '';
+    private array $headers = [];
 
     public function setStatusCode(string $statusCode): ResponseBuilder
     {
@@ -21,8 +22,19 @@ class ResponseBuilder implements ResponseBuilderInterface {
         return $this;
     }
 
+    public function setHeader(string $name, string $value): ResponseBuilder
+    {
+        $this->headers[$name] = $value;
+        return $this;
+    }
+
+    public function setMimeType(string $mimeType): ResponseBuilder
+    {
+        return $this->setHeader('Content-type', $mimeType);
+    }
+
     public function build(): Response
     {
-        return new Response($this->statusCode, $this->content);
+        return new Response($this->statusCode, $this->content, $this->headers);
     }
 }

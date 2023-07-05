@@ -12,7 +12,7 @@
 </div>
 <form action="/publish" method="post" multi-step-form>
     <div class="create-form-step" form-step>
-        <input type="text" placeholder="Search"></input>
+        <input type="text" placeholder="Search" id="song-search-field"></input>
         <ul id="song-list">
             <li>Song 1</li>
             <li>Song 2</li>
