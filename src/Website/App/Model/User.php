@@ -50,7 +50,7 @@ class User {
         $connection->close();
     }
 
-    public function update (string $username, string $name, string $surname, string $bio, string $email, string $password)
+    public function update(string $username, string $name, string $surname, string $bio, string $email, string $password)
     {
         $userID = $this->getUserID();
         $salt='';
@@ -66,6 +66,18 @@ class User {
         if(Session::getVariable(static::$session_username) !== $this->getUsername()) {
             Session::setVariable(static::$session_username, $this->getUsername());
         }
+        $connection->close();
+    }
+
+    public function updateProfileImage(string $pic) {
+        $userID = $this->getUserID();
+        $connection = Database::connect();
+        $stmt = $connection->prepare("UPDATE user SET pic = ? WHERE id_user = ?");
+        $stmt->bind_param('si', $pic, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot update user $userID profile image");
+        }
+        $this->user = static::fetchFromID($userID);
         $connection->close();
     }
 

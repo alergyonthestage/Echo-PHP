@@ -9,6 +9,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\User;
+use CaveResistance\Echo\Server\Application\Configurations;
 
 class UserController implements Controller {
 
@@ -69,27 +70,50 @@ class UserController implements Controller {
 
     public function editProfile(Request $request): Response
     {
-        //controlli sul file
-        //move file from tmp to "/public/img/cover/userid.png"
-        //insert in db path to file (userprofile)
-        return (new ResponseBuilder())->setContent(json_encode($request->getFiles()['file']))->build();
-    }
-
-    public function edit(Request $request): Response
-    {
         $user = User::getLogged();
+    
         if ($request->getMethod() == 'POST') {
-            $user->update(
-                $request->getPostParam('username'),
-                $request->getPostParam('name'),
-                $request->getPostParam('surname'),
-                $request->getPostParam('biography'),
-                $request->getPostParam('email'),
-                $request->getPostParam('password')
-            );        
-            //Server::redirectTo("/user/" . $user->getUsername());
+
+            if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+                // Handle file upload error, e.g., show an error message or redirect to a different page.
+                return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
+            }
             
+            $file = $_FILES['file'];
+            
+            $allowedExtensions = ['jpeg', 'png'];
+            $allowedMimeTypes = ['image/jpeg', 'image/png'];
+            
+            $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            
+            if (!in_array($fileExtension, $allowedExtensions) || !in_array($file['type'], $allowedMimeTypes) || $file['size'] > (5 * 1024 * 1024)) {
+                // Error: Invalid file format or size.
+                return (new ResponseBuilder())->setContent('Error: Invalid file format or size.')->build();
+            }
+    
+            $fileName = $user->getUserID() . "." . $fileExtension;
+            
+            $destinationDir = Configurations::get('paths.profile_pic');
+            $destination = $destinationDir.$fileName;
+
+            if(is_dir($destinationDir) === false) {
+                mkdir($destinationDir, 0777, true);
+            }
+            
+            $moved = move_uploaded_file($file['tmp_name'], __DIR__."/../../../public/img/profiles/$fileName");
+
+            if(!$moved) {
+                return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
+            } else {
+                return (new ResponseBuilder())->setContent('Move successful.')->build();
+            }
+
+            $user->updateProfileImage($fileName);
+    
+            Server::redirectTo("/user/" . $user->getUsername());
+
         } else {
+
             $userData = [
                 'username' => $user->getUsername(),
                 'name' => $user->getName(),
@@ -98,8 +122,40 @@ class UserController implements Controller {
                 'profileURI' => $user->getPic(),
                 'email' => $user->getEmail(),
             ];
-
-            return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
+    
+            return (new ResponseBuilder())->setContent(View::render('user.editprofile', $userData))->build();
         }
     }
+
+    public function edit(Request $request): Response
+{
+    $user = User::getLogged();
+
+    if ($request->getMethod() == 'POST') {
+        $user->update(
+            $request->getPostParam('username'),
+            $request->getPostParam('name'),
+            $request->getPostParam('surname'),
+            $request->getPostParam('biography'),
+            $request->getPostParam('email'),
+            $request->getPostParam('password')
+        );
+        
+        Server::redirectTo("/user/" . $user->getUsername());
+        //return (new ResponseBuilder())->setContent('Update successful.')->build();
+
+    } else {
+        $userData = [
+            'username' => $user->getUsername(),
+            'name' => $user->getName(),
+            'surname' => $user->getSurname(),
+            'biography' => $user->getBio(),
+            'profileURI' => $user->getPic(),
+            'email' => $user->getEmail(),
+        ];
+
+        return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
+    }
+}
+
 }
