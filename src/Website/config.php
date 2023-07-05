@@ -14,10 +14,10 @@ return [
     ],
 
     'database' => [
-        'hostname' => 'sql.freedb.tech',
-        'username' => 'freedb_website_user',
-        'password' => 'k2@r&M8%FEh%%f5',
-        'dbname' => 'freedb_echodb'
+        'hostname' => '88.99.13.116',
+        'username' => 'dbuser1',
+        'password' => 'R4n4N4n4!',
+        'dbname' => 'echo'
     ],
 
     'paths' => [
