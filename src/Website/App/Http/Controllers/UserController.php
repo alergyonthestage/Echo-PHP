@@ -69,7 +69,10 @@ class UserController implements Controller {
 
     public function editProfile(Request $request): Response
     {
-        return (new ResponseBuilder())->setContent(json_encode($request->getFiles()))->build();
+        //controlli sul file
+        //move file from tmp to "/public/img/cover/userid.png"
+        //insert in db path to file (userprofile)
+        return (new ResponseBuilder())->setContent(json_encode($request->getFiles()['file']))->build();
     }
 
     public function edit(Request $request): Response
