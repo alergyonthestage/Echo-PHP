@@ -8,6 +8,8 @@ interface ResponseBuilder {
 
     public function setContent(string $content): ResponseBuilder;
 
+    public function setMimeType(string $mimeType): ResponseBuilder;
+
     public function build(): Response;
 
 }
