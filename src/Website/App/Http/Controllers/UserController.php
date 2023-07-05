@@ -3,14 +3,12 @@
 namespace CaveResistance\Echo\Website\App\Http\Controllers;
 
 use CaveResistance\Echo\Server\Interfaces\Http\Controller;
-use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\User;
-use Exception;
 
 class UserController implements Controller {
 
@@ -69,6 +67,14 @@ class UserController implements Controller {
         Server::redirectTo('/login');
     }
 
+    public function editProfile(Request $request): Response
+    {
+        //controlli sul file
+        //move file from tmp to "/public/img/cover/userid.png"
+        //insert in db path to file (userprofile)
+        return (new ResponseBuilder())->setContent(json_encode($request->getFiles()['file']))->build();
+    }
+
     public function edit(Request $request): Response
     {
         $user = User::getLogged();
@@ -81,7 +87,7 @@ class UserController implements Controller {
                 $request->getPostParam('email'),
                 $request->getPostParam('password')
             );        
-            Server::redirectTo("/user/" . $user->getUsername());
+            //Server::redirectTo("/user/" . $user->getUsername());
             
         } else {
             $userData = [

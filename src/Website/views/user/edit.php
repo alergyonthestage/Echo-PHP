@@ -1,11 +1,15 @@
+<view-head>
+    <script defer src='/public/javascript/profileImageUpload.js'></script>
+</view-head>
 <div class="centered-form-container">
 <link rel="stylesheet" href="/public/css/views/userStyle.css">
-    <form action="/user/<?=$username?>/edit" method="POST" class="centered-form">
     <div class="profile-picture-frame user-profile-picture-frame user-profile-picture-edit">
-           <img class="profile-picture user-profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
-           <button class="user-profile-picture-edit-button"><i class="fas fa-edit"></i>
-           </button>
-        </div>
+        <img class="profile-picture user-profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
+        <button id='edit-profile-picture-button' class="user-profile-picture-edit-button" type="button">
+            <input type="file" id="fileSelector"/>
+        </button>
+    </div>
+    <form action="/userinfo/edit" method="post" class="centered-form" enctype="multipart/form-data">
         <div class="centered-form-field">
             <label for="username">Username</label>
             <input type="username" name="username" value="<?= $username?>">

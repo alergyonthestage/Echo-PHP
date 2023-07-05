@@ -8,12 +8,13 @@ class Request implements RequestInterface {
 
     private function __construct(
         private readonly array $server,
-        private readonly array $post
+        private readonly array $post,
+        private readonly array $files
     ) {}
 
     public static function capture(): static 
     {
-        return new static($_SERVER, $_POST);
+        return new static($_SERVER, $_POST, $_FILES);
     }
 
     public function getMethod(): string 
@@ -29,5 +30,10 @@ class Request implements RequestInterface {
     public function getPostParam(string $paramName): string
     {
         return $this->post[$paramName];
+    }
+
+    public function getFiles(): array 
+    {
+        return $this->files;
     }
 }

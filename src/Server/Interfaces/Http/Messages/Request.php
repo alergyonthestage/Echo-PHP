@@ -12,4 +12,6 @@ interface Request {
 
     public function getPostParam(string $paramName): string;
 
+    public function getFiles(): array;
+
 }
