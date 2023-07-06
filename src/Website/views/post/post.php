@@ -35,6 +35,7 @@
             </a>
                 <div class="feed-post-interactive-buttons">
                 <form method="POST" action="/like"><button class="feed-post-button  <?=($loggedLiked) ? "feed-active" : "";?>">
+                    <input type="hidden" name="id_post" value="<?=$id_post?>">
                     <i class="fas fa-heart"></i>
                 </button></form>
                 <button class="feed-post-button">

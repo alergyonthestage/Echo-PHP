@@ -54,7 +54,7 @@ class PostController implements Controller {
     {   
         if($request->getMethod() === 'POST')
         {
-            $post = Post::fromID($request->getPostParam('id_post'));
+            $post = Post::fromID((int) $request->getPostParam('id_post'));
             $post->addLike();
             Server::redirectTo("/post/".$post->getPostID());
         } else {
@@ -62,7 +62,7 @@ class PostController implements Controller {
         }
     }
 
-    public function comment(Request $request): Response
+    public function publishComment(Request $request): Response
     {
         if($request->getMethod() === 'POST')
         {
