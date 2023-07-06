@@ -1,6 +1,6 @@
 Postare, Commentare, Like, Amici:
 - Collega bottone unfollow al db
-- Crea post (Ale) (update steps and show post preview)
+- Crea post (Ale) (show post preview)
 - sistema i bottoni form -> da javascript
 
 Dopo:
