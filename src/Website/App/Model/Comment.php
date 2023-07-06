@@ -3,7 +3,9 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
+use CaveResistance\Echo\Website\App\Model\Exceptions\CommentNotFound;
 use Exception;
+use mysqli;
 use stdClass;
 
 class Comment {
@@ -43,8 +45,11 @@ class Comment {
         if(!$stmt->execute()){
             throw new Exception("Database Error");
         }
-        $comment = $stmt->get_result()->fetch_object();
-
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new CommentNotFound($id_post, $id_user, $date, $time);
+        }
+        $comment = $result->fetch_object();
         //Fetch the user author from DB by id_user
         $user = User::fromID($comment->id_user);
         $comment->author = $user;
