@@ -159,10 +159,10 @@ class UserController implements Controller {
         }
     }
 
-    public function addFriend(Request $request): Response {
+    public function addFriend(Request $request): void {
         $user = User::getLogged();
-        $friend = $request->getPostParam('friend');
-        $user->addFriend($friend);
+        $friend = User::fromID($request->getPostParam('friend'));
+        $user->addFriend($friend->getUserID());
         Server::redirectTo("/user/" . $friend->getUsername());
     }
 }
