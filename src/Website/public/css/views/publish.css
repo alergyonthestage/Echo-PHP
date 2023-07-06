@@ -63,6 +63,11 @@
     display: flex;
 }
 
+/**---buttons---*/
+.publish-form-step button[next-step], .publish-form-step button[prev-step], .publish-form-step input[type="submit"] {
+    margin: 1em;
+}
+
 /**---song list item---*/
 #publish-song-list {
     list-style: none;

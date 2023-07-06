@@ -100,7 +100,7 @@ class UserController implements Controller {
                 mkdir($destinationDir, 0777, true);
             }
             
-            $moved = move_uploaded_file($file['tmp_name'], Configuration::get('public')."/img/profiles/$fileName");
+            $moved = move_uploaded_file($file['tmp_name'], Configurations::get('public')."/img/profiles/$fileName");
 
             if(!$moved) {
                 return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
@@ -142,7 +142,6 @@ class UserController implements Controller {
         );
         
         Server::redirectTo("/user/" . $user->getUsername());
-        //return (new ResponseBuilder())->setContent('Update successful.')->build();
 
     } else {
         $userData = [
