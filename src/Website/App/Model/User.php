@@ -223,4 +223,27 @@ class User {
         return count($this->getFriends($retrieveUnconfirmed));
     }
 
+    public function addFriend($friendID) : void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?,?)");
+        $stmt->bind_param('ii', $userID, $friendID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot add friend");
+        }
+        $connection->close();
+    }
+
+    public function sentRequest($friendID): bool {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("SELECT * FROM friendship WHERE friend1 = ? AND friend2 = ?");
+        $stmt->bind_param('ii', $userID, $friendID);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot check like");
+        }
+        $result = $stmt->get_result()->fetch_object();
+        $connection->close();
+        return $result != null;
+    }
 }

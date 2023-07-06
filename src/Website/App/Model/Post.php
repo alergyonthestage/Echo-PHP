@@ -95,7 +95,29 @@ class Post {
     }
 
     public function getTimeAgo(): string {
-        return "TODO";
+        $date_time = $this->getDate() . " " . $this->getTime();
+        $date_time = strtotime($date_time);
+        $current_date_time = strtotime(date("Y-m-d H:i:s"));
+        $time_ago = $current_date_time - $date_time;
+        $time_ago = round($time_ago / 60);
+        if ($time_ago < 60) {
+            return $time_ago . " min ago";
+        } else if ($time_ago < 1440) {
+            $time_ago = round($time_ago / 60);
+            return $time_ago . " hours ago";
+        }else if ($time_ago < 10080) {
+            $time_ago = round($time_ago / 1440);
+            return $time_ago . " days ago";
+        }else if ($time_ago < 40320) {
+            $time_ago = round($time_ago / 10080);
+            return $time_ago . " weeks ago";
+        }else if ($time_ago < 483840) {
+            $time_ago = round($time_ago / 40320);
+            return $time_ago . " months ago";
+        }else if ($time_ago > 483840) {
+            $time_ago = round($time_ago / 483840);
+            return $time_ago . " years ago";
+        }
     }
 
     public function isPublic(): string {

@@ -26,7 +26,8 @@ class UserController implements Controller {
             'posts' => '432',
             'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),
-            'selfProfile' => User::isLogged() ? $user->getUserID() === User::getLogged()->getUserID() : false
+            'selfProfile' => User::isLogged() ? $user->getUserID() === User::getLogged()->getUserID() : false,
+            'sentRequest' => User::sentRequest()
         ];
         return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
     }
@@ -156,5 +157,12 @@ class UserController implements Controller {
 
             return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
         }
+    }
+
+    public function addFriend(Request $request): Response {
+        $user = User::getLogged();
+        $friend = $request->getPostParam('friend');
+        $user->addFriend($friend);
+        Server::redirectTo("/user/" . $friend->getUsername());
     }
 }
