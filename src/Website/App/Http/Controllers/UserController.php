@@ -142,7 +142,6 @@ class UserController implements Controller {
         );
         
         Server::redirectTo("/user/" . $user->getUsername());
-        //return (new ResponseBuilder())->setContent('Update successful.')->build();
 
     } else {
         $userData = [
