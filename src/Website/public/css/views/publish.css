@@ -4,27 +4,27 @@
 
 /**---Progress Bar---*/
 
-.create-post-progress-bar {
+.publish-progress-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1em;
 }
 
-.create-post-steps {
+.publish-steps {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 90%;
 }
 
-.create-post-steps a {
+.publish-steps a {
     justify-self: center;
     position: relative;
     text-align: center;
     width:100%;
 }
 
-.create-post-steps a::after {
+.publish-steps a::after {
     position: absolute;
     top: -1.4em;
     left: 44%;
@@ -35,7 +35,7 @@
     background-color: white;
 }
 
-.create-post-steps a::before {
+.publish-steps a::before {
     z-index: -1;
     position: absolute;
     top: -1em;
@@ -46,12 +46,12 @@
     background-color: white;
 }
 
-.create-post-steps a:first-child::before {
+.publish-steps a:first-child::before {
     display: none;
 }
 
 /**---current step---*/
-.create-form-step {
+.publish-form-step {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -59,6 +59,40 @@
     margin: 2em;
 }
 
-.create-form-step.active {
+.publish-form-step.active {
     display: flex;
+}
+
+/**---song list item---*/
+#publish-song-list {
+    list-style: none;
+    padding: 0;
+}
+
+.publish-song-list-item {
+    position: relative;
+}
+
+.publish-song-list-item-data {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1em;
+}
+
+.publish-song-list-item-infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.publish-song-list-item img {
+    width: 100%;
+}
+
+.publish-song-list-item button[next-step] {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

@@ -36,7 +36,7 @@ class PostController implements Controller {
         {
             $post = Post::create(
                 $request->getPostParam('description'),
-                $request->getPostParam('is_public'),
+                empty($request->getPostParam('share_only_friends')),
                 User::getLogged()->getUserID(),
                 $request->getPostParam('song_id')
             );

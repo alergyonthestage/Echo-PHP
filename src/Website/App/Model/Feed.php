@@ -3,8 +3,6 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
-use Exception;
-use stdClass;
 
 class Feed {
     
@@ -14,11 +12,7 @@ class Feed {
         $this->posts = $posts;
     }
 
-    public static function firstLoad(int $id_user) {
-        return new static(static::fetch($id_user, 0, 10));
-    }
-
-    public static function loadMorePosts(int $id_user, int $from, int $to) {
+    public static function getPosts(int $id_user, int $from, int $to) {
         return new static(static::fetch($id_user, $from, $to));
     }
 

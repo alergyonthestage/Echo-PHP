@@ -6,7 +6,6 @@ use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\View\View;
-use CaveResistance\Echo\Server\Application\Configurations;
 
 class FeedController implements Controller {
 

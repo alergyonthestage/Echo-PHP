@@ -18,7 +18,7 @@ class Request implements RequestInterface {
         return new static($_SERVER, $_GET, $_POST, $_FILES);
     }
 
-    public function getMethod(): string 
+    public function getMethod(): string
     {
         return $this->server['REQUEST_METHOD'];
     }
@@ -28,14 +28,14 @@ class Request implements RequestInterface {
         return strtok($this->server['REQUEST_URI'], '?');
     }
 
-    public function getPostParam(string $paramName): string
+    public function getPostParam(string $paramName): string|null
     {
-        return $this->post[$paramName];
+        return $this->post[$paramName] ?? null;
     }
 
-    public function getGetParam(string $paramName): string
+    public function getGetParam(string $paramName): string|null
     {
-        return $this->get[$paramName];
+        return $this->get[$paramName] ?? null;
     }
 
     public function getFiles(): array 

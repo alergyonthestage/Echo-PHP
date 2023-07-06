@@ -10,9 +10,9 @@ interface Request {
 
     public function getPath(): string;
 
-    public function getPostParam(string $paramName): string;
+    public function getPostParam(string $paramName): string|null;
 
-    public function getGetParam(string $paramName): string;
+    public function getGetParam(string $paramName): string|null;
 
     public function getFiles(): array;
 
