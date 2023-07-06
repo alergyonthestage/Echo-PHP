@@ -1,8 +1,7 @@
 Postare, Commentare, Like, Amici:
-- Collega bottone follow-unfollow al db (Angi)
-- Commenti (Ema)
-- Crea post (Ale)
-- Like (Angi)
+- Collega bottone unfollow al db
+- Crea post (Ale) (update steps and show post preview)
+- sistema i bottoni form -> da javascript
 
 Dopo:
 
