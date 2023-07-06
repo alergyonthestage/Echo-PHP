@@ -38,11 +38,18 @@
                 </div>
                 </a>
             </div>
-                <?php if ($selfProfile) { ?>
-                    <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
+            <?php if ($selfProfile) { ?>
+                <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
+            <?php } else { ?>
+                <?php if ($sentRequest) { ?>
+                    <button class="user-profile-action-button secondary-button" disabled>Request Sent</button>
                 <?php } else { ?>
-                    <a class="user-profile-action-button primary-button">Add</a>
+                    <form action="/send-request" method="POST">
+                        <input type="hidden" name="user_id" value="<?=$userId?>">
+                        <button type="submit" class="user-profile-action-button primary-button">Add</button>
+                    </form>
                 <?php } ?>
+            <?php } ?>
         </div>
     </div>
     <div class="user-profile-biography">
