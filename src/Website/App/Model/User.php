@@ -91,10 +91,11 @@ class User {
         if(!$stmt->execute()){
             throw new Exception("Database error");
         }
-        if(mysqli_num_rows($stmt->get_result()) === 0) {
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
             throw new UserNotFound($id);
         }
-        $user = $stmt->get_result()->fetch_object();
+        $user = $result->fetch_object();
         $connection->close();
         return $user;
     }
@@ -107,10 +108,11 @@ class User {
         if(!$stmt->execute()){
             throw new Exception("Database error");
         }
-        if(mysqli_num_rows($stmt->get_result()) === 0) {
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
             throw new UserNotFound($username);
         }
-        $user = $stmt->get_result()->fetch_object();
+        $user = $result->fetch_object();
         $connection->close();
         return $user;
     }

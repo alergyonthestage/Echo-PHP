@@ -10,11 +10,6 @@
     font-size: 1.2em;
 }
 
-.button-action-text {
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
 /**---UTILS---*/
 .unselectable {
     user-select: none;
