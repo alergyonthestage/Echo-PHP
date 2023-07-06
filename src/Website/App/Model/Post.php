@@ -62,7 +62,7 @@ class Post {
 
         $id_post = $this->post->id_post;
         //Fetch the comments from DB for this post by post_id
-        $stmt = $connection->prepare("SELECT id_post, id_user, date, time FROM comment WHERE id_post = ?");
+        $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);
         if(!$stmt->execute()){
             throw new Exception("Comments not found for this post: $id_post");
@@ -70,10 +70,7 @@ class Post {
         $results = $stmt->get_result()->fetch_all();
 
         $comments = [];
-        foreach($results as $result){
-            $comments[] = Comment::fromKeys($result[0], $result[1], $result[2], $result[3]);
-        }
-
+        foreach($results as $result){ array_push($comments, Comment::fromArray($result)); }
         return $comments;
     }
 

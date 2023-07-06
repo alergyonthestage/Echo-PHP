@@ -18,6 +18,22 @@ class Comment {
         return new static(static::fetch($id_post, $id_user, $date, $time));
     }
 
+    public static function fromArray(array $comment): Comment {
+        return new static(static::createFromArray($comment));
+    }
+
+    private static function createFromArray(array $array): stdClass {
+        $comment = new stdClass();
+        $comment->id_post = $array[0];
+        $comment->id_user = $array[1];
+        $comment->date = $array[2];
+        $comment->time = $array[3];
+        $comment->text = $array[4];
+        $user = User::fromID($comment->id_user);
+        $comment->author = $user;
+        return $comment;
+    }
+
     private static function fetch(int $id_post, int $id_user, string $date, string $time): stdClass{
         $connection = Database::connect();
 
@@ -36,6 +52,7 @@ class Comment {
         return $comment;  
     }
 
+    
     public static function create(int $id_post, int $id_user, string $text){
         $connection = Database::connect();
         $date = date("Y-m-d");
