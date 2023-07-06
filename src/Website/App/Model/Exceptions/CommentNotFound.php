@@ -36,6 +36,4 @@ class CommentNotFound extends Exception {
     public function getTime() {
         return $this->time;
     }
-    
-
-}
+}   
