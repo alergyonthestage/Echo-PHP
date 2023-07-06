@@ -4,6 +4,7 @@ namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Website\App\Model\Comment;
+use CaveResistance\Echo\Website\App\Model\User;
 use Exception;
 use stdClass;
 
@@ -135,4 +136,29 @@ class Post {
         return $this->post->song->getArtist()->getStageName();
     }
 
+    public function addLike(): void {
+        $connection = Database::connect();
+        $id_post = $this->getPostID();  
+        $id_user = 2;
+        $stmt = $connection->prepare("INSERT INTO likedpost (id_post, id_user) VALUES (?,?)");
+        $stmt->bind_param('ii', $id_post, $id_user);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot add like");
+        }
+        $connection->close();
+    }
+
+    public function loggedLike() : bool {
+        $connection = Database::connect();
+        $id_post = $this->getPostID();
+        $id_user = 2;
+        $stmt = $connection->prepare("SELECT * FROM likedpost WHERE id_post = ? AND id_user = ?");
+        $stmt->bind_param('ii', $id_post, $id_user);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot check like");
+        }
+        $result = $stmt->get_result()->fetch_object();
+        $connection->close();
+        return $result != null;
+    }
 }

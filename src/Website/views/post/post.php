@@ -34,9 +34,9 @@
                 </div>
             </a>
                 <div class="feed-post-interactive-buttons">
-                <button class="feed-post-button feed-active">
+                <form method="POST" action="/like"><button class="feed-post-button  <?=($loggedLiked) ? "feed-active" : "";?>">
                     <i class="fas fa-heart"></i>
-                </button>
+                </button></form>
                 <button class="feed-post-button">
                     <i class="fas fa-comment"></i>
                 </button>

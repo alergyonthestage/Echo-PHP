@@ -18,6 +18,7 @@ class PostController implements Controller {
         $post = Post::fromID($id);
 
         $postData = [
+            "id_post" => $post->getPostID(),
             "author_username" => $post->getAuthorUsername(),
             "author_verified" => $post->isAuthorVerified(),
             "author_picture" => $post->getAuthorPicture(),
@@ -25,7 +26,8 @@ class PostController implements Controller {
             "cover_art" => $post->getSongCover(),
             "song_info" => $post->getSongTitle()." - ".$post->getSongArtist(),
             "description" => $post->getDescription(),
-            "comments" => $post->getComments()
+            "comments" => $post->getComments(),
+            "loggedLiked" => $post->loggedLike()
         ];
         return (new ResponseBuilder())->setContent(View::render('post.post', $postData))->build();
     }
@@ -43,6 +45,18 @@ class PostController implements Controller {
             Server::redirectTo("/post/".$post->getPostID());
         } else {
             return (new ResponseBuilder())->setContent(View::render('post.publish'))->build();
+        }
+    }
+
+    public function addLike(Request $request): Response
+    {   
+        if($request->getMethod() === 'POST')
+        {
+            $post = Post::fromID($request->getPostParam('id_post'));
+            $post->addLike();
+            Server::redirectTo("/post/".$post->getPostID());
+        } else {
+            return (new ResponseBuilder())->setContent(View::render('post.post'))->build();
         }
     }
 }
