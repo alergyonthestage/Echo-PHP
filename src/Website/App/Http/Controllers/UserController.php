@@ -27,7 +27,7 @@ class UserController implements Controller {
             'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),
             'selfProfile' => User::isLogged() ? $user->getUserID() === User::getLogged()->getUserID() : false,
-            'sentRequest' => User::sentRequest()
+            'relation' => $user->checkRelation(User::getLogged()->getUserID()),
         ];
         return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
     }

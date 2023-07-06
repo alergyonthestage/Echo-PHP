@@ -234,16 +234,24 @@ class User {
         $connection->close();
     }
 
-    public function sentRequest($friendID): bool {
+    // 0 -> no relation, 1 -> sent request, 2 -> friends, 3 -> received request
+    public function checkRelation($friendID): int{
         $connection = Database::connect();
         $userID = $this->getUserID();
-        $stmt = $connection->prepare("SELECT * FROM friendship WHERE friend1 = ? AND friend2 = ?");
-        $stmt->bind_param('ii', $userID, $friendID);
+        $stmt = $connection->prepare("SELECT * FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
+        $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
         if (!$stmt->execute()) {
-            throw new Exception("Cannot check like");
+            throw new Exception("Cannot check friendship");
         }
-        $result = $stmt->get_result()->fetch_object();
+        $result = $stmt->get_result()->fetch_all();
+        if(sizeof($result) == 1){
+            if($result[0][0] == $friendID){
+                return 1;
+            } else if($result[0][1] == $friendID){
+                return 3;
+            }
+        }
         $connection->close();
-        return $result != null;
+        return sizeof($result);
     }
 }

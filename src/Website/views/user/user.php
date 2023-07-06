@@ -41,14 +41,22 @@
             <?php if ($selfProfile) { ?>
                 <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
             <?php } else { ?>
-                <?php if ($sentRequest) { ?>
-                    <button class="user-profile-action-button secondary-button" disabled>Request Sent</button>
-                <?php } else { ?>
-                    <form action="/send-request" method="POST">
-                        <input type="hidden" name="user_id" value="<?=$userId?>">
-                        <button type="submit" class="user-profile-action-button primary-button">Add</button>
-                    </form>
-                <?php } ?>
+                <?php switch ($relation) {
+                        case 0: ?>
+                        <form action="/send-request" method="POST">
+                            <input type="hidden" name="user_id" value="<?=$userId?>">
+                            <button type="submit" class="user-profile-action-button primary-button">Add</button>
+                        </form>
+                        <?php break;
+                        case 1: ?>
+                        <button class="user-profile-action-button secondary-button" disabled>Richiesta inviata</button>
+                        <?php break;
+                        case 2: ?>
+                        <button class="user-profile-action-button secondary-button" disabled>Siete amici</button>
+                        <?php break;
+                        case 3: ?>
+                        <button class="user-profile-action-button secondary-button" disabled>Vuole diventare tuo amico</button>
+                        <?php break; } ?>
             <?php } ?>
         </div>
     </div>
