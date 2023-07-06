@@ -12,17 +12,17 @@
 </head>
 <body>
     <header>
-        <div id="nav-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></div>
+        <div id="hystory-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></div>
         <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
-        <div id="nav-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
-        <nav id="nav-items">
+        <div id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
+        <nav id="menu">
             <a href="/" class="unselectable">Search</a>
             <hr>
             <a href="/" class="unselectable">Chat</a>
             <hr>
             <a href="/user/<?=$username?>" class="unselectable">Profile</a>
             <hr>
-            <a href="/logout" class="unselectable">Log Out</a>
+            <a href="/logout" id="log-out-button" class="unselectable">Log Out</a>
         </nav>
     </header>
     <main>
