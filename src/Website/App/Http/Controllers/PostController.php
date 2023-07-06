@@ -62,19 +62,13 @@ class PostController implements Controller {
         }
     }
 
-    public function publishComment(Request $request): Response
+    public function publishComment(Request $request): void
     {
-        if($request->getMethod() === 'POST')
-        {
-            $comment = Comment::create(
-                (int) $request->getPostParam('id_post'),
+        $comment = Comment::create(
+            (int) $request->getPostParam('id_post'),
                 User::getLogged()->getUserID(),
                 $request->getPostParam('text'),
             );
             Server::redirectTo("/post/".$comment->getPostID());
-        } 
-        else {
-            return (new ResponseBuilder())->setContent(View::render('post.post'))->build();
-        }
     }
 }
