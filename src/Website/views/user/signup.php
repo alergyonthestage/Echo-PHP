@@ -25,7 +25,7 @@
             <input type="confirm-password" name="confirm-password" required>
         </div>
         <div class="centered-form-submit-button-container">
-            <input type="submit" value="Sign Up" class="button-action-text">
+            <input type="submit" value="Sign Up" class="primary-button">
         </div>
     </form>
 </div>

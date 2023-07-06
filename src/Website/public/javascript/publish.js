@@ -1,7 +1,7 @@
 import SongListItem from "./components/SongListItem.js"
 import { debounce } from "./utils/debounce.js"
 
-const debounceDelay = 300;
+const debounceDelay = 200;
 
 const multiStepForm = document.querySelector('[multi-step-form]')
 const formSteps = [...document.querySelectorAll('[form-step]')]
@@ -31,6 +31,9 @@ multiStepForm.addEventListener("click", e => {
         completedStepActions(currentStep++, e)
         stepLoadActions(currentStep)
         showCurrentStep()
+    } else if (e.target.matches("[prev-step]")) {
+        stepLoadActions(--currentStep)
+        showCurrentStep()
     }
 })
 
@@ -45,6 +48,8 @@ function showCurrentStep() {
 function stepLoadActions(step) {
     switch(step) {
         case 0:  
+            songSearchField.value = ''
+            songList.innerHTML = ''
             songSearchField.oninput = debounce((event) => {
                 if(event.target.value !== '' && event.target.value !== null) {
                     searchSongsFromAPI(event.target.value)

@@ -23,10 +23,17 @@
             <input type="checkbox" name="share_only_friends" id="share_only_friends">
             <label for="share_only_friends">Share only with friends</label>
         </div>
-        <button type="button" next-step>Next</button>        
+        <div>
+            <button type="button" class="secondary-button" prev-step>Back</button>
+            <button type="button" class="primary-button" next-step>Next</button>
+        </div>        
     </div>
     <div class="publish-form-step" form-step>
         <div id="publish-post-preview"></div>
-        <input type="submit" value="Publish">
+        <div>
+            <button type="button" class="secondary-button" prev-step>Back</button>
+            <input type="submit" class="primary-button button-action-text" value="Publish">
+        </div> 
+        
     </div>
 </form>
