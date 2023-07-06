@@ -179,3 +179,7 @@
     background-color: white;
     transform: scale(1.1);
 }
+
+.fa-check-circle {
+    color: #0095F6;
+}

@@ -1,15 +1,13 @@
-$backButton = document.getElementById('nav-back-button');
-$logo = document.getElementById('logo');
-$menuButton = document.getElementById('nav-menu-button');
-$nav = document.getElementById('nav-items');
+$showMenuButton = document.getElementById('show-menu-button');
+$menu = document.getElementById('menu');
 
 $open = false
 
 function expand() {
     $open = !$open;
     if($open) {
-        $nav.style.display = "flex";
+        $menu.style.display = "flex";
     } else {
-        $nav.style.display = "none";
+        $menu.style.display = "none";
     }
 }
