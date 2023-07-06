@@ -13,7 +13,9 @@ class LayoutMiddleware implements Middleware {
 
     public function process(Request $request, Closure $next): Response {
         if(User::isLogged()) {
-            View::setLayout('logged');
+            View::setLayout('logged', [
+                'username' => User::getLogged()->getUsername()
+            ]);
         }
         return $next($request);
     }

@@ -12,8 +12,9 @@ class View {
     private static string $beforeClosingHeadTagSelector = '/(?=<\/head>)/';
 
     private static string $layout = 'default';
+    private static array $layoutData = [];
 
-    public static function render(string $view, array $data = [], string $layout = ''): string 
+    public static function render(string $view, array $data = [], string $layout = '', array $layoutData = []): string 
     {
         $viewHead = '';
         $viewContent = static::extractViewHead(static::renderView($view, $data), $viewHead);
@@ -21,10 +22,10 @@ class View {
             if(!static::hasLayout()){
                 return $viewContent;
             } else {
-                $viewLayout = static::renderLayout(static::getLayoutName());
+                $viewLayout = static::renderLayout(static::$layout, static::$layoutData);
             }
         } else {
-            $viewLayout = static::renderLayout($layout);
+            $viewLayout = static::renderLayout($layout, $layoutData);
         }
         return preg_replace(
         [
@@ -38,14 +39,10 @@ class View {
         $viewLayout);
     }
 
-    public static function setLayout(string $layout) 
+    public static function setLayout(string $layout, array $data = []) 
     {
         static::$layout = $layout;
-    }
-
-    private static function getLayoutName(): string 
-    {
-        return static::$layout;
+        static::$layoutData = $data;
     }
 
     private static function hasLayout(): bool 
@@ -62,9 +59,10 @@ class View {
         return ob_get_clean();
     }
 
-    private static function renderLayout(string $name): string 
+    private static function renderLayout(string $name, array $data): string
     {
         $toPath = static::nameToPath($name);
+        extract($data);
         ob_start();
         require(Configurations::get('view.layouts')."/$toPath.php");
         return ob_get_clean();

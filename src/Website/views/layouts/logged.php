@@ -16,9 +16,13 @@
         <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
         <div id="nav-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
         <nav id="nav-items">
-            <a href="/" class="unselectable">Search</a><hr>
-            <a href="/" class="unselectable">Chat</a><hr>
-            <a href="/" class="unselectable">Profile</a>
+            <a href="/" class="unselectable">Search</a>
+            <hr>
+            <a href="/" class="unselectable">Chat</a>
+            <hr>
+            <a href="/user/<?=$username?>" class="unselectable">Profile</a>
+            <hr>
+            <a href="/logout" class="unselectable">Log Out</a>
         </nav>
     </header>
     <main>
