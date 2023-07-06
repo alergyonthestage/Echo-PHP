@@ -43,19 +43,19 @@
             <?php } else { ?>
                 <?php switch ($relation) {
                         case 0: ?>
-                        <form action="/send-request" method="POST">
+                        <form action="/addFriend" method="POST">
                             <input type="hidden" name="user_id" value="<?=$userId?>">
                             <button type="submit" class="user-profile-action-button primary-button">Add</button>
                         </form>
                         <?php break;
                         case 1: ?>
-                        <button class="user-profile-action-button secondary-button" disabled>Richiesta inviata</button>
+                        <button class="user-profile-action-button secondary-button" disabled>Request sent.</button>
                         <?php break;
                         case 2: ?>
-                        <button class="user-profile-action-button secondary-button" disabled>Siete amici</button>
+                        <button class="user-profile-action-button secondary-button" disabled>You are friends.</button>
                         <?php break;
                         case 3: ?>
-                        <button class="user-profile-action-button secondary-button" disabled>Vuole diventare tuo amico</button>
+                        <button class="user-profile-action-button secondary-button" disabled>Wants to become your friend!</button>
                         <?php break; } ?>
             <?php } ?>
         </div>
