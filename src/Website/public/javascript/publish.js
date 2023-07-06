@@ -5,6 +5,7 @@ const debounceDelay = 200;
 
 const multiStepForm = document.querySelector('[multi-step-form]')
 const formSteps = [...document.querySelectorAll('[form-step]')]
+const progressBarSteps = [...document.querySelectorAll('[progress-bar-step]')]
 
 const songList = document.getElementById('publish-song-list')
 const songSearchField = document.getElementById('publish-song-search-field')
@@ -40,6 +41,9 @@ multiStepForm.addEventListener("click", e => {
 function showCurrentStep() {
     formSteps.forEach((step, index) => {
         step.classList.toggle('active', index === currentStep)
+    })
+    progressBarSteps.forEach((step, index) => {
+        step.classList.toggle('active', index <= currentStep)
     })
 }
 

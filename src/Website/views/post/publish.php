@@ -5,9 +5,9 @@
 <h1 class="title">Create post</h1>
 <div class="publish-progress-bar">
     <div class="publish-steps">
-        <a>Search</a>
-        <a>Details</a>
-        <a>Review</a>
+        <a progress-bar-step>Search</a>
+        <a progress-bar-step>Details</a>
+        <a progress-bar-step>Review</a>
     </div>
 </div>
 <form action="/publish" method="post" multi-step-form>

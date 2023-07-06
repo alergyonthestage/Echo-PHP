@@ -50,6 +50,15 @@
     display: none;
 }
 
+.publish-steps a.active::after, .publish-steps a.active::before {
+    background-color: #F8D164;
+}
+
+.publish-steps a.active {
+    color: #F8D164;
+
+}
+
 /**---current step---*/
 .publish-form-step {
     display: none;
