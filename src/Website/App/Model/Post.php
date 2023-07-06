@@ -6,6 +6,8 @@ use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Website\App\Model\Comment;
 use CaveResistance\Echo\Website\App\Model\User;
+use CaveResistance\Echo\Website\App\Model\Exceptions\PostNotFound;
+
 use Exception;
 use stdClass;
 
@@ -42,9 +44,13 @@ class Post {
         $stmt = $connection->prepare("SELECT * FROM post WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);
         if(!$stmt->execute()){
-            throw new Exception("Post not found: $id_post");
+            throw new Exception("Database error");
         }
-        $post = $stmt->get_result()->fetch_object();
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new PostNotFound($id_post);
+        }
+        $post = $result->fetch_object();
 
         //Fetch the song from DB by song_id
         $song = Song::fromID($post->id_post);
@@ -54,6 +60,7 @@ class Post {
         $user = User::fromID($post->id_user);
         $post->author = $user;
         
+        $connection->close();
         return $post;  
     }
 

@@ -4,6 +4,8 @@ namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Application\Configurations;
+use CaveResistance\Echo\Website\App\Model\Exceptions\SongNotFound;
+
 use Exception;
 
 class Song {
@@ -26,9 +28,13 @@ class Song {
         $stmt = $connection->prepare("SELECT * FROM song WHERE id_song = ?");
         $stmt->bind_param('i', $song_id);
         if(!$stmt->execute()){
-            throw new Exception("Song not found: $song_id");
+            throw new Exception("Database error");
         }
-        $song = $stmt->get_result()->fetch_array();
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new SongNotFound($song_id);
+        }
+        $song = $result->fetch_array();
         $connection->close(); 
 
         //Fetch the artist from DB by artist_id
