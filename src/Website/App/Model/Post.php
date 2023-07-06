@@ -53,7 +53,7 @@ class Post {
         $post = $result->fetch_object();
 
         //Fetch the song from DB by song_id
-        $song = Song::fromID($post->id_post);
+        $song = Song::fromID($post->id_song);
         $post->song = $song;
 
         //Fetch the user author from DB by song_id
