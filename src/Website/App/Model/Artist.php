@@ -4,6 +4,7 @@ namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Application\Configurations;
+use CaveResistance\Echo\Website\App\Model\Exceptions\ArtistNotFound;
 use Exception;
 use stdClass;
 
@@ -24,11 +25,15 @@ class Artist {
         $stmt = $connection->prepare("SELECT * FROM artist WHERE id_artist = ?");
         $stmt->bind_param('i', $artist_id);
         if(!$stmt->execute()){
-            throw new Exception("Artist not found: $artist_id");
+            throw new Exception("Database error");
         }
-        $artist = $stmt->get_result()->fetch_object();
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new ArtistNotFound($artist_id);
+        }
+        $artist = $result->fetch_object();
         $connection->close(); 
-        return $artist;  
+        return $artist;
     }
 
     public function getArtistID(): string {

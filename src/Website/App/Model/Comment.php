@@ -41,7 +41,7 @@ class Comment {
         $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ? AND id_user = ? AND date = ? AND time = ?");
         $stmt->bind_param('iiss', $id_post, $id_user, $date, $time);
         if(!$stmt->execute()){
-            throw new Exception("Comment not found: $id_post, $id_user, $date, $time");
+            throw new Exception("Database Error");
         }
         $comment = $stmt->get_result()->fetch_object();
 

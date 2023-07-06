@@ -9,7 +9,6 @@ use stdClass;
 use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Authentication\Password;
 use CaveResistance\Echo\Website\App\Model\Exceptions\UserNotFound;
-use mysqli;
 
 class User {
 
