@@ -10,6 +10,7 @@ use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\Post;
 use CaveResistance\Echo\Website\App\Model\User;
+use CaveResistance\Echo\Website\App\Model\Comment;
 
 class PostController implements Controller {
 
@@ -48,6 +49,7 @@ class PostController implements Controller {
         }
     }
 
+
     public function addLike(Request $request): Response
     {   
         if($request->getMethod() === 'POST')
@@ -56,6 +58,22 @@ class PostController implements Controller {
             $post->addLike();
             Server::redirectTo("/post/".$post->getPostID());
         } else {
+            return (new ResponseBuilder())->setContent(View::render('post.post'))->build();
+        }
+    }
+
+    public function comment(Request $request): Response
+    {
+        if($request->getMethod() === 'POST')
+        {
+            $comment = Comment::create(
+                (int) $request->getPostParam('id_post'),
+                User::getLogged()->getUserID(),
+                $request->getPostParam('text'),
+            );
+            Server::redirectTo("/post/".$comment->getPostID());
+        } 
+        else {
             return (new ResponseBuilder())->setContent(View::render('post.post'))->build();
         }
     }

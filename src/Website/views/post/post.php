@@ -69,3 +69,12 @@
         </div>
     <?php endforeach; ?>
 </div>
+<div class="post-footer">
+    <div class="post-comment-form">
+        <form action="/comment/publish" method="POST">
+            <input type="hidden" name="id_post" value="<?=$id_post?>">
+            <input type="text" name="text" placeholder="Write a comment...">
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+</div>

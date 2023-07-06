@@ -65,5 +65,11 @@ Server::createRoute()->accept('POST', '/like')->withMiddlewares([
     'method' => 'addLike'
 ])->add();
 
+Server::createRoute()->accept('POST', '/comment/publish')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
+    'controller' => PostController::class,
+    'method' => 'publishComment'
+])->add();
 
 Server::createRoute()->accept('GET', '/getsong')->setHandler(SongController::class)->add();

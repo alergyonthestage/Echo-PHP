@@ -6,7 +6,7 @@ export default class Post {
 
     render() {
         return `
-        <div class="feed-post">
+    <div class="feed-post">
     <div class="feed-covert-art">
         <div class="feed-cover-square">
             <img class="feed-cover-disc" src="${this.data.cover_art}" alt="Cover-Art"/>

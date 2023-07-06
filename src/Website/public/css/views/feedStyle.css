@@ -199,13 +199,51 @@
 
 .post-comment{
     display: flex;
-    justify-content: flex-end;
     align-items: flex-start;
     gap: 0.7rem;
     margin: 1rem 0;
 }
+
 .post-comment-time{
     font-size: 0.8rem;
     color: #98969F;
 }
+
+.post-comment-like-button{
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.post-comment-like{
+    display: flex;
+    align-content: center;
+}
+
+.post-comment-like-counter{
+    font-size: 0.8rem;
+}
+
+.post-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #2E2A3C;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+
+.post-footer input{
+    color: #353143;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 2px;
+    border: none;
+    width: max-content;
+}
+
 

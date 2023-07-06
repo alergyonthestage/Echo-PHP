@@ -36,6 +36,19 @@ class Comment {
         return $comment;  
     }
 
+    public static function create(int $id_post, int $id_user, string $text){
+        $connection = Database::connect();
+        $date = date("Y-m-d");
+        $time = date("H:i:s");
+        $stmt = $connection->prepare("INSERT INTO comment (id_post, id_user, date, time, text) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('iisss', $id_post, $id_user, $date, $time, $text);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot create comment");
+        }
+        $connection->close();
+        return static::fromKeys($id_post, $id_user, $date, $time);
+    }
+
     public function getCommentID(): string {
         return $this->comment->id_comment;
     }
