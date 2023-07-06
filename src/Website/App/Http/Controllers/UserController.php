@@ -131,7 +131,6 @@ class UserController implements Controller {
     {
         $user = User::getLogged();
 
-<<<<<<< HEAD
         if ($request->getMethod() == 'POST') {
             $user->update(
                 $request->getPostParam('username'),
@@ -144,22 +143,6 @@ class UserController implements Controller {
             
             Server::redirectTo("/user/" . $user->getUsername());
             //return (new ResponseBuilder())->setContent('Update successful.')->build();
-=======
-    if ($request->getMethod() == 'POST') {
-        $user->update(
-            $request->getPostParam('username'),
-            $request->getPostParam('name'),
-            $request->getPostParam('surname'),
-            $request->getPostParam('biography'),
-            $request->getPostParam('email'),
-            $request->getPostParam('password')
-        );
-        
-        Server::redirectTo("/user/" . $user->getUsername());
-<<<<<<< Updated upstream
-=======
->>>>>>> b8a9030a43a388fc4c6036e6b785829f4bc73a67
->>>>>>> Stashed changes
 
         } else {
             $userData = [
@@ -174,5 +157,4 @@ class UserController implements Controller {
             return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
         }
     }
-
 }
