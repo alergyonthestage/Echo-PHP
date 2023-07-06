@@ -8,6 +8,8 @@ use Exception;
 use stdClass;
 use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Authentication\Password;
+use CaveResistance\Echo\Website\App\Model\Exceptions\UserNotFound;
+use mysqli;
 
 class User {
 
@@ -87,7 +89,10 @@ class User {
         $stmt = $connection->prepare("SELECT * FROM user WHERE id_user = ?");
         $stmt->bind_param('i', $id);
         if(!$stmt->execute()){
-            throw new Exception("User ID not found: $id");
+            throw new Exception("Database error");
+        }
+        if(mysqli_num_rows($stmt->get_result()) === 0) {
+            throw new UserNotFound($id);
         }
         $user = $stmt->get_result()->fetch_object();
         $connection->close();
@@ -100,7 +105,10 @@ class User {
         $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
         $stmt->bind_param('s', $username);
         if(!$stmt->execute()){
-            throw new Exception("User not found: $username");
+            throw new Exception("Database error");
+        }
+        if(mysqli_num_rows($stmt->get_result()) === 0) {
+            throw new UserNotFound($username);
         }
         $user = $stmt->get_result()->fetch_object();
         $connection->close();
