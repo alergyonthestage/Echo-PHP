@@ -3,6 +3,7 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
+use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Website\App\Model\Comment;
 use CaveResistance\Echo\Website\App\Model\User;
 use Exception;
@@ -137,13 +138,18 @@ class Post {
     }
 
     public function addLike(): void {
+        if($this->loggedLike()){
+            $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
+        } else{
+            $query = "INSERT INTO likedpost (id_post, id_user) VALUES (?,?)";
+        }
         $connection = Database::connect();
         $id_post = $this->getPostID();  
-        $id_user = 2;
-        $stmt = $connection->prepare("INSERT INTO likedpost (id_post, id_user) VALUES (?,?)");
+        $id_user = User::getLogged()->getUserID();
+        $stmt = $connection->prepare($query);
         $stmt->bind_param('ii', $id_post, $id_user);
         if (!$stmt->execute()) {
-            throw new Exception("Cannot add like");
+            throw new Exception("Cannot modified like");
         }
         $connection->close();
     }
@@ -151,7 +157,7 @@ class Post {
     public function loggedLike() : bool {
         $connection = Database::connect();
         $id_post = $this->getPostID();
-        $id_user = 2;
+        $id_user = User::getLogged()->getUserID();
         $stmt = $connection->prepare("SELECT * FROM likedpost WHERE id_post = ? AND id_user = ?");
         $stmt->bind_param('ii', $id_post, $id_user);
         if (!$stmt->execute()) {
