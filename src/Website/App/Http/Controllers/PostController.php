@@ -53,16 +53,11 @@ class PostController implements Controller {
     }
 
 
-    public function addLike(Request $request): Response
+    public function addLike(Request $request): void
     {   
-        if($request->getMethod() === 'POST')
-        {
-            $post = Post::fromID((int) $request->getPostParam('id_post'));
-            $post->addLike();
-            Server::redirectTo("/post/".$post->getPostID());
-        } else {
-            return (new ResponseBuilder())->setContent(View::render('post.post'))->build();
-        }
+        $post = Post::fromID((int) $request->getPostParam('id_post'));
+        $post->addLike();
+        Server::redirectTo("/post/".$post->getPostID());
     }
 
     public function publishComment(Request $request): void

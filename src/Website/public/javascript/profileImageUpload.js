@@ -36,7 +36,7 @@ fileSelector.onchange = () => {
     $photo = getFile();
     if($photo) {
         const formData = new FormData();
-        formData.append("avatar", getFile());
+        formData.append("avatar", $photo);
         uploadFormData("/editprofile", formData);
     }
 }

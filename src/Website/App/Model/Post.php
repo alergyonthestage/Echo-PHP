@@ -9,13 +9,14 @@ use CaveResistance\Echo\Website\App\Model\User;
 use CaveResistance\Echo\Website\App\Model\Exceptions\PostNotFound;
 
 use Exception;
+use JsonSerializable;
 use stdClass;
 
-class Post {
+class Post implements JsonSerializable {
 
-    private stdClass $post;
+    private array $post;
 
-    private function __construct(stdClass $post) {
+    private function __construct(array $post) {
         $this->post = $post;
     }
 
@@ -41,7 +42,7 @@ class Post {
         return static::fromID($id);
     }
 
-    private static function fetch($id_post): stdClass{
+    private static function fetch($id_post): array {
         $connection = Database::connect();
 
         //Fetch the post from DB by post_id
@@ -54,24 +55,24 @@ class Post {
         if(mysqli_num_rows($result) === 0) {
             throw new PostNotFound($id_post);
         }
-        $post = $result->fetch_object();
+        $post = $result->fetch_array();
 
         //Fetch the song from DB by song_id
-        $song = Song::fromID($post->id_song);
-        $post->song = $song;
+        $song = Song::fromID($post['id_song']);
+        $post['song'] = $song;
 
         //Fetch the user author from DB by song_id
-        $user = User::fromID($post->id_user);
-        $post->author = $user;
+        $user = User::fromID($post['id_user']);
+        $post['author'] = $user;
         
         $connection->close();
         return $post;  
     }
 
-    private function fetchComments(): array{
+    private function fetchComments(): array {
         $connection = Database::connect();
 
-        $id_post = $this->post->id_post;
+        //$id_post = $this->post->id_post;
         //Fetch the comments from DB for this post by post_id
         $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);
@@ -103,19 +104,19 @@ class Post {
     }
 
     public function getPostID(): string {
-        return $this->post->id_post;
+        return $this->post['id_post'];
     }
 
     public function getDescription(): string {
-        return $this->post->description;
+        return $this->post['description'];
     }
 
     public function getDate(): string {
-        return $this->post->date;
+        return $this->post['date'];
     }
 
     public function getTime(): string {
-        return $this->post->time;
+        return $this->post['time'];
     }
 
     public function getTimeAgo(): string {
@@ -145,39 +146,39 @@ class Post {
     }
 
     public function isPublic(): string {
-        return $this->post->public;
+        return $this->post['public'];
     }
 
     public function getAuthorUderID(): string {
-        return $this->post->id_user;
+        return $this->post['id_user'];
     }
 
     public function getAuthorUsername(): string {
-        return $this->post->author->getUsername();
+        return $this->post['author']->getUsername();
     }
 
     public function isAuthorVerified(): string {
-        return $this->post->author->isVerified();
+        return $this->post['author']->isVerified();
     }
 
     public function getAuthorPicture(): string {
-        return $this->post->author->getPic();
+        return $this->post['author']->getPic();
     }
 
     public function getSongID(): string {
-        return $this->post->id_song;
+        return $this->post['id_song'];
     }
 
     public function getSongTitle(): string {
-        return $this->post->song->getTitle();
+        return $this->post['song']->getTitle();
     }
 
     public function getSongCover(): string {
-        return $this->post->song->getCover();
+        return $this->post['song']->getCover();
     }
 
     public function getSongArtist(): string {
-        return $this->post->song->getArtist()->getStageName();
+        return $this->post['song']->getArtist()->getStageName();
     }
 
     public function addLike(): void {
@@ -239,6 +240,11 @@ class Post {
 
     public function getEchoesCount(): int{
         return 0;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->post;
     }
 
 }
