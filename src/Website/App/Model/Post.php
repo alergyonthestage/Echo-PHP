@@ -244,7 +244,27 @@ class Post implements JsonSerializable {
 
     public function jsonSerialize(): array
     {
-        return $this->post;
+        $json_array = [
+            'idPost' => $this->getPostID(),
+            'description' => $this->getDescription(),
+            'date' => $this->getDate(),
+            'time' => $this->getTime(),
+            'timeAgo' => $this->getTimeAgo(),
+            'public' => $this->isPublic(),
+            'idUser' => $this->getAuthorUderID(),
+            'username' => $this->getAuthorUsername(),
+            'verified' => $this->isAuthorVerified(),
+            'profilePicture' => $this->getAuthorPicture(),
+            'idSong' => $this->getSongID(),
+            'title' => $this->getSongTitle(),
+            'cover' => $this->getSongCover(),
+            'artist' => $this->getSongArtist(),
+            'likesCount' => $this->getLikesCount(),
+            'commentsCount' => $this->getCommentsCount(),
+            'echoesCount' => $this->getEchoesCount(),
+            'liked' => $this->loggedLike()
+        ];
+        return $json_array;
     }
 
 }

@@ -10,14 +10,14 @@ export default class Post {
         return `<div class="post">
                     <div class="post-covert-art">
                         <div class="post-cover-square">
-                            <img class="post-cover-disc" src="${coverPath}${this.data.song.cover}" alt="Cover-Art"/>
+                            <img class="post-cover-disc" src="${this.data.cover}" alt="Cover-Art"/>
                             <button class="post-play-button"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
                     <div class="post-infos">
                         <div class="post-song-infos">
                             <div class="post-song-title">
-                                <p>${this.data.title}</p>
+                                <p>${this.data.artist} - ${this.data.title}</p>
                             </div>
                             <div class="post-song-progress-bar">
                                 <div class="post-song-progress-bar-inner"></div>
@@ -27,28 +27,28 @@ export default class Post {
                             <a href="/user/${this.data.username}">
                                 <div class="post-author-infos">
                                     <div class="profile-picture-frame post-profile-picture-frame">
-                                        <img class="profile-picture" src="${this.data.profile_pircture}" alt="Profile picture">
+                                        <img class="profile-picture" src="${this.data.profilePicture}" alt="Profile picture">
                                     </div>
                                     <div class="post-author-infos">
                                     <div class="post-author-name">
                                         <p>${this.data.username}</p>
                                     </div>
                                     <div class="post-time-info">
-                                        <p>${this.data.time_ago}</p>
+                                        <p>${this.data.timeAgo}</p>
                                     </div>
                                     </div> 
                                 </div>
                             </a>
                             <div class="post-interactive-buttons">
-                                <?=$likes_count?>
-                                <button class="post-button" like-button="${this.data.id_post}">
+                                ${this.data.likesCount}
+                                <button class="post-button" like-button="${this.data.idPost}">
                                     <i class="fas fa-heart"></i>
                                 </button>
-                                <?=$comments_count?>
+                                ${this.data.commentsCount}
                                 <button class="post-button">
                                     <i class="fas fa-comment"></i>
                                 </button>
-                                <?=$echoes_count?>
+                                ${this.data.echoesCount}
                                 <button class="post-button">
                                     <i class="fas fa-user"></i>
                                 </button>
@@ -56,7 +56,7 @@ export default class Post {
                         </div>
                     </div>
                     <div class="post-description">
-                        <p><?=$description?></p>
+                        <p>${this.data.description}</p>
                     </div>
                     <hr class="post-divider">
                 </div>`
