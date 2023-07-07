@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-article.post{
+.post{
     margin: 1em;
 }
 
@@ -73,7 +73,7 @@ article.post{
     font-size: 0.9rem;
 }
 
-.post-author-infos{
+.post-author{
     display: flex;
     align-items: center;
 }
@@ -125,7 +125,7 @@ article.post{
     color: #fff;
 }
 
-.post-active i {
+.post-button-active i {
     color: #F8D164;
 }
 

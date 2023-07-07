@@ -25,7 +25,7 @@ export default class Post {
                         </div>
                         <div class="post-header">
                             <a href="/user/${this.data.username}">
-                                <div class="post-author-infos">
+                                <div class="post-author">
                                     <div class="profile-picture-frame post-profile-picture-frame">
                                         <img class="profile-picture" src="${this.data.profilePicture}" alt="Profile picture">
                                     </div>

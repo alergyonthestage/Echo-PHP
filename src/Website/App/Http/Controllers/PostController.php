@@ -56,7 +56,7 @@ class PostController implements Controller {
     public function addLike(Request $request): void
     {   
         $post = Post::fromID((int) $request->getPostParam('id_post'));
-        $post->addLike();
+        $post->updateLike();
         Server::redirectTo("/post/".$post->getPostID());
     }
 

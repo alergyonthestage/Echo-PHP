@@ -181,7 +181,7 @@ class Post implements JsonSerializable {
         return $this->post['song']->getArtist()->getStageName();
     }
 
-    public function addLike(): void {
+    public function updateLike(): bool {
         if($this->loggedLike()){
             $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
         } else{
@@ -196,6 +196,7 @@ class Post implements JsonSerializable {
             throw new Exception("Cannot modified like");
         }
         $connection->close();
+        return $this->loggedLike();
     }
 
     public function loggedLike() : bool {

@@ -1,7 +1,10 @@
 <view-head>
     <link rel="stylesheet" href="/public/css/components/post.css">
     <link rel="stylesheet" href="/public/css/components/avatar.css">
+    <link rel="stylesheet" href="/public/css/layout.css">
+    <link rel="stylesheet" href="/public/css/utils.css">
     <script type="module" src="/public/javascript/post.js"></script>
+    <script type="module" src="/public/javascript/postInteractions.js"></script>
 </view-head>
 <div id="post" post-id=<?=$id_post?>></div>
 <div class="post-comments-area">

@@ -1,4 +1,5 @@
 const $likeButtons = [...document.querySelectorAll('[like-button]')]
+console.log($likeButtons)
 
 $likeButtons.forEach((likeButton) => {
     likeButton.onclick = (event) => {
@@ -7,6 +8,7 @@ $likeButtons.forEach((likeButton) => {
 })
 
 async function likePost(postId) {
+    console.log("SONO STATA CHIAMATA")
     let formData = new FormData();
     formData.append('post-id', postId);
     response = await fetch('/api/addlike', {
@@ -14,5 +16,13 @@ async function likePost(postId) {
         body: formData
     })
     result = response.json()
+
+    const likeButton = document.querySelector(`[like-button][post-id="${postId}"]`)
+    if(result){
+        likeButton.classList.add('post-button-active')
+    } else {
+        likeButton.classList.remove('post-button-active')
+    }
+
     return result
 }

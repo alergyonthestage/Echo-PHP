@@ -1,5 +1,6 @@
 <view-head>
-    <link rel="stylesheet" href="/public/css/views/friendshipStyle.css">
+    <link rel="stylesheet" href="/public/css/views/friendship.css">
+    <link rel="stylesheet" href="/public/css/components/avatar.css">
 </view-head>
     <ul class="friendship-list">
         <?php foreach ($data as $friend):  ?>
