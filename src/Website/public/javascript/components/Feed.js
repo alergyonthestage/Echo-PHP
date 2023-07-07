@@ -1,16 +1,15 @@
 import Post from './Post.js';
 
-class Feed extends HTMLElement {
+class Feed {
 
     constructor() {
         super();
         this.render(10);
-        this.isScrolling = false;
-        this.detectScrollToBottom();
+        //this.isScrolling = false;
+        //this.detectScrollToBottom();
     }
 
     render($initialPostsNumber) {
-        this.innerHTML += '<div class="feed-post-container">';
         for(let $i = 0; $i < $initialPostsNumber; $i++) {
             this.innerHTML += new Post({
                 cover_art: 'public/img/cover/1.png', 
@@ -21,7 +20,6 @@ class Feed extends HTMLElement {
                 song_title: 'Brain in The Jelly - Alergy'
             }).render();
         }
-        this.innerHTML += '</div>';
     }
 
     detectScrollToBottom() {
@@ -44,5 +42,3 @@ class Feed extends HTMLElement {
     }
 
 }
-
-customElements.define('echo-feed', Feed);

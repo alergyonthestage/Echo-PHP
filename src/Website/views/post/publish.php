@@ -1,6 +1,7 @@
 <view-head>
     <link rel="stylesheet" href="/public/css/views/publish.css">
-    <link rel="stylesheet" href="/public/css/views/feedStyle.css">
+    <link rel="stylesheet" href="/public/css/components/buttons.css">
+    <link rel="stylesheet" href="/public/css/components/post.css">
     <script type="module" src="/public/javascript/publish.js"></script>
 </view-head>
 <h1 class="title">Create post</h1>

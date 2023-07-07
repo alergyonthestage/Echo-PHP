@@ -1,0 +1,21 @@
+/**---TEXT---*/
+
+.secondary-text {
+    font-weight: lighter;
+    font-size: 0.8em;
+}
+
+.important-text {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/**---SELECTION---*/
+
+.unselectable {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}

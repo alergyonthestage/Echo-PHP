@@ -1,0 +1,14 @@
+.profile-picture-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 0.1rem white solid;
+}
+
+.profile-picture {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
