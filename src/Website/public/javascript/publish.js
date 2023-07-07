@@ -15,6 +15,14 @@ const postPreview = document.getElementById('publish-post-preview')
 
 let retrivedSongs;
 
+/**---prevent submit on Enter press---*/
+window.onkeydown = (event) => {
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+}
+
 /**---init current step---*/
 let currentStep = formSteps.findIndex((step) => {
     return step.classList.contains('active')

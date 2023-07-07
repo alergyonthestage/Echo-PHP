@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/public/css/views/publish.css">
     <link rel="stylesheet" href="/public/css/components/buttons.css">
     <link rel="stylesheet" href="/public/css/components/post.css">
+    <link rel="stylesheet" href="/public/css/utils.css">
     <script type="module" src="/public/javascript/publish.js"></script>
 </view-head>
 <h1 class="title">Create post</h1>
@@ -23,7 +24,7 @@
         <input type="text" name="description" placeholder="Tell something about this song"></input>
         <div>
             <input type="checkbox" name="share_only_friends" id="share_only_friends">
-            <label for="share_only_friends">Share only with friends</label>
+            <label for="share_only_friends" class="unselectable">Share only with friends</label>
         </div>
         <div>
             <button type="button" class="secondary-button" prev-step>Back</button>
