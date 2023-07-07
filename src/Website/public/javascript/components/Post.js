@@ -1,7 +1,7 @@
 export default class Post {
 
-    constructor($data) {
-        this.data = $data;
+    constructor(data) {
+        this.data = data;
     }
 
     render() {
