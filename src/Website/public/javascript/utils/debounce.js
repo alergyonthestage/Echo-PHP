@@ -6,5 +6,4 @@ export const debounce = (callback, delay) => {
             callback(...args)
         }, delay)
     }
-
 }
