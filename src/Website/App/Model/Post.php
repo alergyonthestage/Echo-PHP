@@ -19,8 +19,12 @@ class Post {
         $this->post = $post;
     }
 
-    public static function fromID(int $id) {
-        return new static(static::fetch($id));
+    public static function fromID(int $id_post) {
+        return new static(static::fetch($id_post));
+    }
+
+    public static function getUserPostsCount(int $id_user): int {
+        return static::fetchUserPostsCount($id_user);
     }
 
     public static function create(string $description, string $public, string $id_user, string $id_song): Post {
@@ -79,6 +83,19 @@ class Post {
         $comments = [];
         foreach($results as $result){ array_push($comments, Comment::fromArray($result)); }
         return $comments;
+    }
+
+    private static function fetchUserPostsCount($id_user): int{
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT COUNT(*) AS post_count FROM post WHERE id_user = ?"); 
+        $stmt->bind_param('i', $id_user);
+        if(!$stmt->execute()){
+            throw new Exception("Database error");
+        }
+        $result = $stmt->get_result();
+        $post_count = $result->fetch_object()->post_count;
+        $connection->close();
+        return $post_count;
     }
 
     public function getComments(): array{
@@ -193,4 +210,35 @@ class Post {
         $connection->close();
         return $result != null;
     }
+
+    public function getLikesCount(): int{
+        $connection = Database::connect();
+        $id_post = $this->getPostID();
+        $stmt = $connection->prepare("SELECT COUNT(*) AS likes_count FROM likedpost WHERE id_post = ?");
+        $stmt->bind_param('i', $id_post);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot count likes");
+        }
+        $result = $stmt->get_result()->fetch_object();
+        $connection->close();
+        return $result->likes_count;
+    }
+
+    public function getCommentsCount(): int{
+        $connection = Database::connect();
+        $id_post = $this->getPostID();
+        $stmt = $connection->prepare("SELECT COUNT(*) AS comments_count FROM comment WHERE id_post = ?");
+        $stmt->bind_param('i', $id_post);
+        if (!$stmt->execute()) {
+            throw new Exception("Cannot count comments");
+        }
+        $result = $stmt->get_result()->fetch_object();
+        $connection->close();
+        return $result->comments_count;
+    }
+
+    public function getEchoesCount(): int{
+        return 0;
+    }
+
 }

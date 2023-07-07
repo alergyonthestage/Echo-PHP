@@ -34,13 +34,18 @@
                 </div>
             </a>
                 <div class="post-interactive-buttons">
-                <form method="POST" action="/like"><button class="post-button  <?=($loggedLiked) ? "post-active" : "";?>">
+                <?=$likes_count?>
+                <form method="POST" action="/like">
+                    <button class="post-button  <?=($loggedLiked) ? "post-active" : "";?>">
                     <input type="hidden" name="id_post" value="<?=$id_post?>">
                     <i class="fas fa-heart"></i>
-                </button></form>
+                </button>
+                </form>
+                <?=$comments_count?>
                 <button class="post-button">
                     <i class="fas fa-comment"></i>
                 </button>
+                <?=$echoes_count?>
                 <button class="post-button">
                     <i class="fas fa-user"></i>
                 </button>

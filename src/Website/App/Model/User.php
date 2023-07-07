@@ -263,4 +263,12 @@ class User {
         $connection->close();
         return sizeof($result);
     }
+
+    public function getPostsCount(): int{
+        return Post::getUserPostsCount($this->getUserID());
+    }
+
+    public function getEchoesCount(): int{
+        return 0;
+    }
 }

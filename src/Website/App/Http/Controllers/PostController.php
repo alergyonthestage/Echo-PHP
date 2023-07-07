@@ -25,10 +25,13 @@ class PostController implements Controller {
             "author_picture" => $post->getAuthorPicture(),
             "time_ago" => $post->getTimeAgo(),
             "cover_art" => $post->getSongCover(),
-            "song_info" => $post->getSongTitle()." - ".$post->getSongArtist(),
+            "song_info" => $post->getSongArtist()." - ".$post->getSongTitle(),
             "description" => $post->getDescription(),
             "comments" => $post->getComments(),
-            "loggedLiked" => $post->loggedLike()
+            "loggedLiked" => $post->loggedLike(),
+            "likes_count" => $post->getLikesCount(),
+            "comments_count" => $post->getCommentsCount(),
+            "echoes_count" => $post->getEchoesCount()
         ];
         return (new ResponseBuilder())->setContent(View::render('post.post', $postData))->build();
     }
