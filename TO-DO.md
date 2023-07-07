@@ -1,7 +1,9 @@
 Postare, Commentare, Like, Amici:
 - Collega bottone unfollow al db
-- Crea post (Ale) (show post preview)
+- Publish: sistema post preview
+    - guarda link alle immagini, risolvi config get path...
 - sistema i bottoni form -> da javascript
+- immagine profilo di default se su db è null o se non è stata trovata la risorsa nel server
 
 Dopo:
 

@@ -7,8 +7,9 @@ use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Model\Exceptions\SongNotFound;
 
 use Exception;
+use JsonSerializable;
 
-class Song {
+class Song implements JsonSerializable {
 
     private array $song;
 
@@ -81,9 +82,8 @@ class Song {
         }, $result);
     }
 
-    public function toJson(): string
+    public function jsonSerialize(): array
     {
-        return json_encode($this->song);
+        return $this->song;
     }
-
 }

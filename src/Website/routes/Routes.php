@@ -80,4 +80,7 @@ Server::createRoute()->accept('POST', '/comment/publish')->withMiddlewares([
     'method' => 'publishComment'
 ])->add();
 
-Server::createRoute()->accept('GET', '/getsong')->setHandler(SongController::class)->add();
+Server::createRoute()->accept('GET', '/getsong')->setHandler([
+    'controller' => SongController::class,
+    'method' => 'getsong'
+])->add();

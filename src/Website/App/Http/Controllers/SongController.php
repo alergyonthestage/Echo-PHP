@@ -10,11 +10,9 @@ use CaveResistance\Echo\Website\App\Model\Song;
 
 class SongController implements Controller {
 
-    public function index(Request $request): Response {
+    public function getsong(Request $request): Response {
         $result = Song::search($request->getGetParam('search'));
-        return (new ResponseBuilder())->setContent(json_encode(array_map(function($song) {
-            return $song->toJson();
-        }, $result)))->setMimeType('application/json')->build();
+        return (new ResponseBuilder())->setContent(json_encode($result))->setMimeType('application/json')->build();
     }
 
 }

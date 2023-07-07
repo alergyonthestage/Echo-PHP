@@ -1,3 +1,4 @@
+import Post from "./components/Post.js";
 import SongListItem from "./components/SongListItem.js"
 import { debounce } from "./utils/debounce.js"
 
@@ -56,8 +57,9 @@ function stepLoadActions(step) {
             songList.innerHTML = ''
             songSearchField.oninput = debounce((event) => {
                 if(event.target.value !== '' && event.target.value !== null) {
-                    searchSongsFromAPI(event.target.value)
-                    .then((response) => {displaySongList(response)})
+                    searchSongs(event.target.value)
+                        .then((response) => {displaySongList(response)})
+                        .catch((error) => {songList.innerHTML = `Error: ${error}`})
                 } else {
                     songList.innerHTML = ''
                 }
@@ -78,29 +80,20 @@ function completedStepActions(step, nextButtonEvent) {
     }
 }
 
-//song search
+//song fetch
 
-function searchSongsFromAPI(search) {
-    return new Promise((resolve, reject) => {
-        let request = new XMLHttpRequest();
-        request.open('GET', `/getsong?search=${search}`);
-        request.onload = () => {
-            if (request.status == 200) {
-                resolve(request.responseText)
-            } else {
-                reject(request.status)
-            }
-        }
-        request.send()
-    })
+async function searchSongs(search) {
+        const response = await fetch("/getsong?" + new URLSearchParams({search: search}), {
+            method: "GET"
+        })
+        const result = await response.json();
+        return result
 }
 
 function displaySongList(jsonResponse) {
     songList.innerHTML = ''
     retrivedSongs = [];
-    let songs = JSON.parse(jsonResponse).map((song) => {
-        return JSON.parse(song)
-    })
+    let songs = jsonResponse
     songs.forEach((song) => {
         retrivedSongs[song.id_song] = song
         songList.innerHTML += new SongListItem(song).render();
@@ -109,5 +102,13 @@ function displaySongList(jsonResponse) {
 
 //post preview
 function displayPostPreview() {
-    postPreview.innerHTML = `Song: ${retrivedSongs[songSearchField.value].title}`
+    let $postData = {
+        cover_art: 'public/img/cover/'+retrivedSongs[songSearchField.value].cover,
+        username: 'brtmnl',
+        profile_picture: 'public/img/profiles/3.png', 
+        time_ago: 'now', 
+        description: multiStepForm.elements.description.value, 
+        song_title: retrivedSongs[songSearchField.value].title
+    }
+    postPreview.innerHTML = new Post($postData).render();
 }
