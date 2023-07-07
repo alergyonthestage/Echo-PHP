@@ -12,9 +12,9 @@
 </head>
 <body>
     <header>
-        <div id="hystory-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></div>
+        <button id="hystory-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></button>
         <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
-        <div id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></div>
+        <button id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></button>
         <nav id="menu">
             <a href="/login" class="unselectable">Log In</a><hr>
             <a href="/signup" class="unselectable">Sign Up</a>

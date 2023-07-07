@@ -57,6 +57,9 @@ header {
 }
 
 #show-menu-button {
+    color: inherit;
+    background: none;
+    border: none;
     opacity: 25%;
     justify-self: end;
     padding: 1rem;
@@ -68,6 +71,9 @@ header {
 }
 
 #hystory-back-button {
+    color: inherit;
+    background: none;
+    border: none;
     opacity: 25%;
     justify-self: start; 
     padding: 1rem;
