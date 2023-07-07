@@ -2,7 +2,11 @@
     <script defer src='/public/javascript/profileImageUpload.js'></script>
 </view-head>
 <div class="centered-form-container">
-<link rel="stylesheet" href="/public/css/views/userStyle.css">
+    <link rel="stylesheet" href="/public/css/views/user.css">
+    <link rel="stylesheet" href="/public/css/components/avatar.css">
+    <link rel="stylesheet" href="/public/css/components/buttons.css">
+    <link rel="stylesheet" href="/public/css/components/form.css">
+    <link rel="stylesheet" href="/public/css/utils.css">
     <div class="profile-picture-frame user-profile-picture-frame user-profile-picture-edit">
         <img class="profile-picture user-profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
         <button id='edit-profile-picture-button' class="user-profile-picture-edit-button" type="button">
