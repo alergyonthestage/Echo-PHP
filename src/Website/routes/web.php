@@ -5,8 +5,6 @@ use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
 use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FriendshipController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
-use CaveResistance\Echo\Website\App\Http\Controllers\API\SongController as APISongController;
-use CaveResistance\Echo\Website\App\Http\Controllers\API\PostController as APIPostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 
 Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
@@ -75,20 +73,3 @@ Server::createRoute()->accept('POST', '/comment/publish')->withMiddlewares([
 ])->add();
 
 //---API---
-
-Server::createRoute()->accept('GET', '/api/song')->setHandler([
-    'controller' => APISongController::class,
-    'method' => 'getsong'
-])->add();
-
-Server::createRoute()->accept('GET', '/api/post/{id}')->setHandler([
-    'controller' => APIPostController::class,
-    'method' => 'getPostData'
-])->add();
-
-Server::createRoute()->accept('POST', '/api/addlike')->withMiddlewares([
-    AuthMiddleware::class
-])->setHandler([
-    'controller' => APIPostController::class,
-    'method' => 'addLike'
-])->add();

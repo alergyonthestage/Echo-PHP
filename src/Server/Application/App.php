@@ -22,7 +22,19 @@ class App implements AppInterface {
 
     protected function boot(): void 
     {
-        require(Configurations::get('routes_file'));
+        $routes = Configurations::get('routes');
+        if(is_array($routes)) {
+            foreach($routes as $route) {
+                $this->requireFile($route);
+            }
+        } else {
+            $this->requireFile($routes);
+        }
+    }
+
+    private function requireFile(string $file) 
+    {
+        require($file);
     }
 
     protected function getRouter(): Router
