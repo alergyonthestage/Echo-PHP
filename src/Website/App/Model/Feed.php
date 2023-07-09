@@ -6,7 +6,7 @@ use CaveResistance\Echo\Server\Database\Database;
 
 class Feed {
     
-    private $posts = [];
+    private array $posts = [];
 
     private function __construct($posts) {
         $this->posts = $posts;

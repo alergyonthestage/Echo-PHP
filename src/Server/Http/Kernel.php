@@ -26,7 +26,7 @@ class Kernel implements KernelInterface {
         } catch (NotFoundException $exception) {
             return (new NotFoundHandler())->response($exception);
         } catch (Exception $exception) {
-            return (new ResponseBuilder())->setContent($exception->getMessage())->build();
+            return (new ResponseBuilder())->setContent($exception->getMessage())->setStatusCode('400')->build();
         }
     }
 }

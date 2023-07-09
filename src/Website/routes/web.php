@@ -71,5 +71,3 @@ Server::createRoute()->accept('POST', '/comment/publish')->withMiddlewares([
     'controller' => PostController::class,
     'method' => 'publishComment'
 ])->add();
-
-//---API---
