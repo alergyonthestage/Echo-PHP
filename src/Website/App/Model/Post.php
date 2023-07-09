@@ -3,14 +3,12 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
-use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Website\App\Model\Comment;
 use CaveResistance\Echo\Website\App\Model\User;
 use CaveResistance\Echo\Website\App\Model\Exceptions\PostNotFound;
 
 use Exception;
 use JsonSerializable;
-use stdClass;
 
 class Post implements JsonSerializable {
 
