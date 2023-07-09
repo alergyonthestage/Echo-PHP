@@ -1,6 +1,6 @@
 <?php
 
-use CaveResistance\Echo\Website\App\Http\Middlewares\LayoutMiddleware;
+use CaveResistance\Echo\Website\App\Http\Middlewares\Global\LayoutMiddleware;
 
 return [
     'root_url' => 'http://echo.local',

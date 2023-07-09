@@ -60,7 +60,7 @@ class Route implements RouteInterface {
     public function run(Request $request): Response
     {
         $params = ParamResolver::getValuesFromRequestPath($request->getPath(), $this->getMatchedPath($request->getPath()));
-        return (new MiddlewareRunner())->through($this->middlewares)->setDestination($this->handler)->run($request, $params);
+        return (new MiddlewareRunner($this))->through($this->middlewares)->setDestination($this->handler)->run($request, $params);
     }
 
     public function getRequirements(): array 

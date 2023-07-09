@@ -16,12 +16,13 @@ class App implements AppInterface {
     protected function __construct(private readonly array|string $configurations)
     {
         Configurations::set($this->configurations);
-        $router = $this->router = new RouterImpl();
-        $this->kernel = new KernelImpl($router);
     }
 
     protected function boot(): void 
     {
+        $globalMiddlewares = Configurations::get('global_middlewares') ?? [];
+        $this->router = new RouterImpl();
+        $this->kernel = new KernelImpl($this->router, $globalMiddlewares);
         $routes = Configurations::get('routes');
         if(is_array($routes)) {
             foreach($routes as $route) {

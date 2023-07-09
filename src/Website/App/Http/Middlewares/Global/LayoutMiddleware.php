@@ -1,6 +1,6 @@
 <?php
 
-namespace CaveResistance\Echo\Website\App\Http\Middlewares;
+namespace CaveResistance\Echo\Website\App\Http\Middlewares\Global;
 
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
