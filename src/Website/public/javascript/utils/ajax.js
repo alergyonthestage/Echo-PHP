@@ -1,10 +1,9 @@
 async function fetchData(link) {
     try {
-        let $response = await fetch(link, {
+        let response = await fetch(link, {
             method: "GET"
         })
-        let $result = await $response.json()
-        return $result
+        return await response.json()
     } catch (error) {
         console.error("Fetch error: ", error);
     }   

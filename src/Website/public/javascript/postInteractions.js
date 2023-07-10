@@ -1,3 +1,7 @@
+import { uploadFormData } from "./utils/ajax";
+
+const apiLikeLink = '/api/addlike'
+
 function addInteractionsListenrs() {
     const $likeButtons = [...document.querySelectorAll('[like-button]')]
 
@@ -9,20 +13,17 @@ function addInteractionsListenrs() {
 }
 
 async function likePost(postId) {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('post-id', postId);
-    let response = await fetch('/api/addlike', {
-        method: 'POST',
-        body: formData
-    })
-    let result = await response.json()
-
-    const likeButton = document.querySelector(`[like-button="${postId}"]`)
-    likeButton.classList.toggle('post-button-active', result.liked)
-    const likeCounter = document.querySelector(`[like-counter="${postId}"]`)
-    likeCounter.innerHTML = result.likesCount
-
-    return result
+    const report = await uploadFormData(apiLikeLink, formData)
+    if(report.success) {
+        const likeButton = document.querySelector(`[like-button="${postId}"]`)
+        likeButton.classList.toggle('post-button-active', result.liked)
+        const likeCounter = document.querySelector(`[like-counter="${postId}"]`)
+        likeCounter.innerHTML = result.likesCount
+    } else {
+        console.log(report.message)
+    }
 }
 
-export {addInteractionsListenrs, likePost}
+export {addInteractionsListenrs}

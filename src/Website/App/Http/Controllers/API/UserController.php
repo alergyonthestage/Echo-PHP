@@ -18,7 +18,7 @@ class UserController {
         $maxFileSize = 5 * 1024 * 1024;
 
         $user = User::getLogged();
-
+        
         $file = $request->getFiles()['avatar'];
 
         if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
