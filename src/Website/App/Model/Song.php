@@ -8,6 +8,7 @@ use CaveResistance\Echo\Website\App\Model\Exceptions\SongNotFound;
 
 use Exception;
 use JsonSerializable;
+use mysqli;
 
 class Song implements JsonSerializable {
 
@@ -66,20 +67,24 @@ class Song implements JsonSerializable {
         return $this->song['artist'];
     }
 
-    public static function search(string $searchString): array 
+    public static function search(string $searchString): array
     {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT * FROM song WHERE title LIKE ?");
         $search = "%$searchString%";
         $stmt->bind_param('s', $search);
         if(!$stmt->execute()){
-            throw new Exception("Error while searching: $searchString");
+            throw new Exception("Database Error");
         }
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new Exception('No song found');
+        }
+        $songs = $result->fetch_all(MYSQLI_ASSOC);
         $connection->close();
         return array_map(function($songArray) {
             return new static($songArray);
-        }, $result);
+        }, $songs);
     }
 
     public function jsonSerialize(): array

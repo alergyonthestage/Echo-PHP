@@ -9,7 +9,6 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
 use CaveResistance\Echo\Website\App\Model\User;
-use CaveResistance\Echo\Server\Application\Configurations;
 
 class UserController implements Controller {
 
@@ -69,70 +68,11 @@ class UserController implements Controller {
         Server::redirectTo('/login');
     }
 
-    public function editProfile(Request $request): Response
-    {
-        $user = User::getLogged();
-    
-        if ($request->getMethod() == 'POST') {
-
-            if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-                // Handle file upload error, e.g., show an error message or redirect to a different page.
-                return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
-            }
-            
-            $file = $_FILES['file'];
-            
-            $allowedExtensions = ['jpeg', 'png'];
-            $allowedMimeTypes = ['image/jpeg', 'image/png'];
-            
-            $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-            
-            if (!in_array($fileExtension, $allowedExtensions) || !in_array($file['type'], $allowedMimeTypes) || $file['size'] > (5 * 1024 * 1024)) {
-                // Error: Invalid file format or size.
-                return (new ResponseBuilder())->setContent('Error: Invalid file format or size.')->build();
-            }
-    
-            $fileName = $user->getUserID() . "." . $fileExtension;
-            
-            $destinationDir = Configurations::get('paths.profile_pic');
-            $destination = $destinationDir.$fileName;
-
-            if(is_dir($destinationDir) === false) {
-                mkdir($destinationDir, 0777, true);
-            }
-            
-            $moved = move_uploaded_file($file['tmp_name'], Configurations::get('public')."/img/profiles/$fileName");
-
-            if(!$moved) {
-                return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
-            } else {
-                return (new ResponseBuilder())->setContent('Move successful.')->build();
-            }
-
-            $user->updateProfileImage($fileName);
-    
-            Server::redirectTo("/user/" . $user->getUsername());
-
-        } else {
-
-            $userData = [
-                'username' => $user->getUsername(),
-                'name' => $user->getName(),
-                'surname' => $user->getSurname(),
-                'biography' => $user->getBio(),
-                'profileURI' => $user->getPic(),
-                'email' => $user->getEmail(),
-            ];
-    
-            return (new ResponseBuilder())->setContent(View::render('user.editprofile', $userData))->build();
-        }
-    }
-
     public function edit(Request $request): Response
     {
         $user = User::getLogged();
-
-        if ($request->getMethod() == 'POST') {
+        
+        if($request->getMethod() === 'POST') {
             $user->update(
                 $request->getPostParam('username'),
                 $request->getPostParam('name'),
@@ -143,8 +83,6 @@ class UserController implements Controller {
             );
             
             Server::redirectTo("/user/" . $user->getUsername());
-            //return (new ResponseBuilder())->setContent('Update successful.')->build();
-
         } else {
             $userData = [
                 'username' => $user->getUsername(),
@@ -157,12 +95,6 @@ class UserController implements Controller {
 
             return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
         }
-    }
-
-    public function addFriend(Request $request): void {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->addFriend($friend->getUserID());
-        Server::redirectTo("/user/" . $friend->getUsername());
+        
     }
 }

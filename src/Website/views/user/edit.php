@@ -10,7 +10,7 @@
     <div class="profile-picture-frame user-profile-picture-frame user-profile-picture-edit">
         <img class="profile-picture user-profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
         <button id='edit-profile-picture-button' class="user-profile-picture-edit-button" type="button">
-            <input type="file" id="fileSelector"/>
+            <input type="file" id="file-selector"/>
         </button>
     </div>
     <form action="/userinfo/edit" method="post" class="centered-form" enctype="multipart/form-data">

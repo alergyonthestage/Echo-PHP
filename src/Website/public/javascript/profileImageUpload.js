@@ -1,6 +1,8 @@
 const mime_types = [ 'image/jpeg', 'image/png' ];
 const max_file_size = 5*1024*1024
-const fileSelector = document.getElementById('fileSelector');
+const fileSelector = document.getElementById('file-selector');
+
+const apiLink = "/api/avatar";
 
 function getFile() {
     if(fileSelector.files.length == 0) {
@@ -14,7 +16,7 @@ function getFile() {
     }
     if(file.size > max_file_size) {
         console.log(`Please select file having less than ${max_file_size} size.`);
-        return;
+        return
     }
     return file;
 }
@@ -23,20 +25,20 @@ async function uploadFormData(link, formData) {
     try {
       const response = await fetch(link, {
         method: "POST",
-        body: formData,
+        body: formData
       });
-      const result = await response.json();
-      console.log("Success:", result);
+      const result = await response.text()
+      console.log(result);
     } catch (error) {
       console.error("Error:", error);
     }
 }
 
 fileSelector.onchange = () => {
-    $photo = getFile();
-    if($photo) {
+    let photo = getFile();
+    if(photo !== null) {
         const formData = new FormData();
-        formData.append("avatar", $photo);
-        uploadFormData("/editprofile", formData);
+        formData.append("avatar", photo);
+        uploadFormData(apiLink, formData);
     }
 }

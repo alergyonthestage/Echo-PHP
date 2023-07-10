@@ -1,6 +1,6 @@
 <?php
 
-namespace CaveResistance\Echo\Website\App\Http\Controllers;
+namespace CaveResistance\Echo\Website\App\Http\Controllers\API;
 
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Controller;

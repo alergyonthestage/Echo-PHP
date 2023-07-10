@@ -4,6 +4,7 @@ Postare, Commentare, Like, Amici:
     - guarda link alle immagini, risolvi config get path...
 - sistema i bottoni form -> da javascript
 - immagine profilo di default se su db è null o se non è stata trovata la risorsa nel server
+- time e date unisci con timestamp...
 
 Dopo:
 

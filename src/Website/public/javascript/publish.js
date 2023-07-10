@@ -2,6 +2,8 @@ import Post from "./components/Post.js";
 import SongListItem from "./components/SongListItem.js"
 import { debounce } from "./utils/debounce.js"
 
+const apiLink = "/api/song"
+
 const debounceDelay = 200;
 
 const multiStepForm = document.querySelector('[multi-step-form]')
@@ -91,10 +93,11 @@ function completedStepActions(step, nextButtonEvent) {
 //song fetch
 
 async function searchSongs(search) {
-        const response = await fetch("/getsong?" + new URLSearchParams({search: search}), {
+        const response = await fetch(`${apiLink}?${new URLSearchParams({search: search})}`, {
             method: "GET"
         })
         const result = await response.json();
+        console.log(result);
         return result
 }
 
