@@ -6,43 +6,55 @@ use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
-use CaveResistance\Echo\Server\Server;
+use CaveResistance\Echo\Website\App\Model\Report;
 use CaveResistance\Echo\Website\App\Model\User;
 
 class UserController {
 
     public function editAvatar(Request $request): Response
     {
+        $allowedExtensions = ['jpeg', 'png', 'jpg'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        $maxFileSize = 5 * 1024 * 1024;
+
         $user = User::getLogged();
 
-        if (!isset($request->getFiles()['avatar']) || $request->getFiles()['avatar']['error'] !== UPLOAD_ERR_OK) {
-            return (new ResponseBuilder())->setContent('Error: File upload failed.')->build();
+        $file = $request->getFiles()['avatar'];
+
+        if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, 'Error: File upload failed.'))
+            )->build();
         }
         
-        $file = $request->getFiles()['avatar'];
-        
-        $allowedExtensions = ['jpeg', 'png'];
-        $allowedMimeTypes = ['image/jpeg', 'image/png'];
-        
         $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if($file['size'] > ($maxFileSize)) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, "Error: Choose a file smaller than $maxFileSize bytes."))
+            )->build();
+        }
         
-        if (!in_array($fileExtension, $allowedExtensions) || !in_array($file['type'], $allowedMimeTypes) || $file['size'] > (5 * 1024 * 1024)) {
-            // Error: Invalid file format or size.
-            return (new ResponseBuilder())->setContent('Error: Invalid file format or size.')->build();
+        if (!in_array($fileExtension, $allowedExtensions) || !in_array($file['type'], $allowedMimeTypes)) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, 'Error: Invalid file format.'))
+            )->build();
         }
 
         $fileName = $user->getUserID().".".$fileExtension;
         $destinationPath = Configurations::get('public')."/img/profiles/";
 
-        if(move_uploaded_file($file['tmp_name'], $destinationPath.$fileName)) {
-            return (new ResponseBuilder())->setContent('Move successful.')->build();
-        } else {
-            return (new ResponseBuilder())->setContent("Cannot move file")->build();
+        if(!move_uploaded_file($file['tmp_name'], $destinationPath.$fileName)) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, 'Error: Cannot move file.'))
+            )->build();
         }
-
+        
         $user->updateProfileImage($fileName);
 
-        Server::redirectTo("/user/" . $user->getUsername());
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report(true, 'Success: Avatar updated!'))
+        )->build();
     }
 
     public function addFriend(Request $request): void 

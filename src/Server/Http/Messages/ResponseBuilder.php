@@ -3,6 +3,7 @@
 namespace CaveResistance\Echo\Server\Http\Messages;
 
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\ResponseBuilder as ResponseBuilderInterface;
+use Exception;
 
 class ResponseBuilder implements ResponseBuilderInterface {
 
@@ -16,8 +17,20 @@ class ResponseBuilder implements ResponseBuilderInterface {
         return $this;
     }
 
+    public function setJsonContent(string $content): ResponseBuilder
+    {
+        if(!empty($this->content)) {
+            throw new Exception('Content already setted');
+        }
+        $this->content = $content;
+        return $this->setHeader('Content-type', 'application/json');
+    }
+
     public function setContent(string $content): ResponseBuilder
     {
+        if(!empty($this->content)) {
+            throw new Exception('Content already setted');
+        }
         $this->content = $content;
         return $this;
     }
