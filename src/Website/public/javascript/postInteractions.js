@@ -1,4 +1,4 @@
-import { uploadFormData } from "./utils/ajax";
+import { uploadFormData } from "./utils/ajax.js";
 
 const apiLikeLink = '/api/addlike'
 

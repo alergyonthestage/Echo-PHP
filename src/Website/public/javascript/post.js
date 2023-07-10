@@ -14,20 +14,15 @@ fetchData(`/api/post/${postId}`)
         post.innerHTML = `Error: ${error}`
     })
 
+//comments
+
 const comment = document.getElementById('comment')
 const commentPostId = comment.getAttribute('comment-post-id')
 
-async function getCommentData() {
-    let $response = await fetch(`/api/comment/${commentPostId}`, {
-        method: "GET",
+fetchData(`/api/comment/${commentPostId}`)
+    .then((commentData) => {
+        comment.innerHTML = new Comment(commentData).render()
     })
-    let $result = await $response.json()
-    return $result
-}
-
-getCommentData().then((commentData) => {
-    comment.innerHTML = new Comment(commentData).render()
-})
-.catch((error) => {
-    comment.innerHTML = `Error: ${error}`
-})
+    .catch((error) => {
+        comment.innerHTML = `Error: ${error}`
+    })

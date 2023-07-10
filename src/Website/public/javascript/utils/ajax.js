@@ -21,4 +21,4 @@ async function uploadFormData(link, formData) {
     }
 }
 
-export {fetchData, uploadFormData};
+export { fetchData, uploadFormData };

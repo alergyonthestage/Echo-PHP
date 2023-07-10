@@ -13,13 +13,13 @@ class PostController implements Controller {
     public function getPostData(int $id): Response 
     {
         $post = Post::fromID($id);
-        return (new ResponseBuilder())->setContent(json_encode($post))->setMimeType('application/json')->build();
+        return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 
     public function addLike(Request $request): Response 
     {
         $post = Post::fromID($request->getPostParam('post-id'));
         $post->toggleLike();
-        return (new ResponseBuilder())->setContent(json_encode($post))->setMimeType('application/json')->build();
+        return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 }
