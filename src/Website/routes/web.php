@@ -40,21 +40,6 @@ Server::createRoute()->accept(['GET', 'POST'], '/userinfo/edit')->withMiddleware
     'method' => 'edit'
 ])->add();
 
-Server::createRoute()->accept('POST', '/editprofile')->withMiddlewares([
-    AuthMiddleware::class
-])->setHandler([
-    'controller' => UserController::class,
-    'method' => 'editProfile'
-])->add();
-
-Server::createRoute()->accept('POST', '/addFriend')->withMiddlewares([
-    AuthMiddleware::class
-])->setHandler([
-    'controller' => UserController::class,
-    'method' => 'addFriend'
-])->add();
-
-
 //----Posts----
 Server::createRoute()->accept('GET', '/post/{id}')->setHandler(PostController::class)->add();
 
