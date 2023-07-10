@@ -14,19 +14,23 @@ class Post implements JsonSerializable {
 
     private array $post;
 
-    private function __construct(array $post) {
+    private function __construct(array $post) 
+    {
         $this->post = $post;
     }
 
-    public static function fromID(int $id_post) {
+    public static function fromID(int $id_post) 
+    {
         return new static(static::fetch($id_post));
     }
 
-    public static function getUserPostsCount(int $id_user): int {
+    public static function getUserPostsCount(int $id_user): int 
+    {
         return static::fetchUserPostsCount($id_user);
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song): Post {
+    public static function create(string $description, string $public, string $id_user, string $id_song): Post 
+    {
         $connection = Database::connect();
         $date = date("Y-m-d");
         $time = date("H:i:s");
@@ -40,7 +44,8 @@ class Post implements JsonSerializable {
         return static::fromID($id);
     }
 
-    private static function fetch($id_post): array {
+    private static function fetch($id_post): array 
+    {
         $connection = Database::connect();
 
         //Fetch the post from DB by post_id
@@ -67,7 +72,8 @@ class Post implements JsonSerializable {
         return $post;  
     }
 
-    private function fetchComments(): array {
+    private function fetchComments(): array 
+    {
         $connection = Database::connect();
 
         $id_post = $this->post['id_post'];
@@ -84,7 +90,8 @@ class Post implements JsonSerializable {
         return $comments;
     }
 
-    private static function fetchUserPostsCount($id_user): int{
+    private static function fetchUserPostsCount($id_user): int
+    {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT COUNT(*) AS post_count FROM post WHERE id_user = ?"); 
         $stmt->bind_param('i', $id_user);
@@ -97,27 +104,33 @@ class Post implements JsonSerializable {
         return $post_count;
     }
 
-    public function getComments(): array{
+    public function getComments(): array
+    {
         return $this->fetchComments();
     }
 
-    public function getPostID(): string {
+    public function getPostID(): string 
+    {
         return $this->post['id_post'];
     }
 
-    public function getDescription(): string {
+    public function getDescription(): string 
+    {
         return $this->post['description'];
     }
 
-    public function getDate(): string {
+    public function getDate(): string 
+    {
         return $this->post['date'];
     }
 
-    public function getTime(): string {
+    public function getTime(): string 
+    {
         return $this->post['time'];
     }
 
-    public function getTimeAgo(): string {
+    public function getTimeAgo(): string 
+    {
         $date_time = $this->getDate() . " " . $this->getTime();
         $date_time = strtotime($date_time);
         $current_date_time = strtotime(date("Y-m-d H:i:s"));
@@ -143,43 +156,53 @@ class Post implements JsonSerializable {
         }
     }
 
-    public function isPublic(): string {
+    public function isPublic(): string 
+    {
         return $this->post['public'];
     }
 
-    public function getAuthorUderID(): string {
+    public function getAuthorUderID(): string 
+    {
         return $this->post['id_user'];
     }
 
-    public function getAuthorUsername(): string {
+    public function getAuthorUsername(): string 
+    {
         return $this->post['author']->getUsername();
     }
 
-    public function isAuthorVerified(): string {
+    public function isAuthorVerified(): string 
+    {
         return $this->post['author']->isVerified();
     }
 
-    public function getAuthorPicture(): string {
+    public function getAuthorPicture(): string 
+    {
         return $this->post['author']->getPic();
     }
 
-    public function getSongID(): string {
+    public function getSongID(): string 
+    {
         return $this->post['id_song'];
     }
 
-    public function getSongTitle(): string {
+    public function getSongTitle(): string 
+    {
         return $this->post['song']->getTitle();
     }
 
-    public function getSongCover(): string {
+    public function getSongCover(): string 
+    {
         return $this->post['song']->getCover();
     }
 
-    public function getSongArtist(): string {
+    public function getSongArtist(): string 
+    {
         return $this->post['song']->getArtist()->getStageName();
     }
 
-    public function toggleLike(): bool {
+    public function toggleLike(): bool 
+    {
         if($this->hasLoggedUserLike()){
             $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
         } else{
@@ -197,7 +220,8 @@ class Post implements JsonSerializable {
         return $this->hasLoggedUserLike();
     }
 
-    public function hasLoggedUserLike() : bool {
+    public function hasLoggedUserLike() : bool 
+    {
         $connection = Database::connect();
         $id_post = $this->getPostID();
         $id_user = User::getLogged()->getUserID();
@@ -211,7 +235,8 @@ class Post implements JsonSerializable {
         return $result != null;
     }
 
-    public function getLikesCount(): int{
+    public function getLikesCount(): int
+    {
         $connection = Database::connect();
         $id_post = $this->getPostID();
         $stmt = $connection->prepare("SELECT COUNT(*) AS likes_count FROM likedpost WHERE id_post = ?");
@@ -224,7 +249,8 @@ class Post implements JsonSerializable {
         return $result->likes_count;
     }
 
-    public function getCommentsCount(): int{
+    public function getCommentsCount(): int
+    {
         $connection = Database::connect();
         $id_post = $this->getPostID();
         $stmt = $connection->prepare("SELECT COUNT(*) AS comments_count FROM comment WHERE id_post = ?");
@@ -237,7 +263,8 @@ class Post implements JsonSerializable {
         return $result->comments_count;
     }
 
-    public function getEchoesCount(): int{
+    public function getEchoesCount(): int
+    {
         return 0;
     }
 

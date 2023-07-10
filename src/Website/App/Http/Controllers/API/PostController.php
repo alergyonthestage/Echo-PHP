@@ -7,6 +7,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Website\App\Model\Post;
+use CaveResistance\Echo\Website\App\Model\Report;
 
 class PostController implements Controller {
 
@@ -16,10 +17,11 @@ class PostController implements Controller {
         return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 
-    public function addLike(Request $request): Response 
+    public function toggleLike(Request $request): Response 
     {
         $post = Post::fromID($request->getPostParam('post-id'));
-        $post->toggleLike();
-        return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report($post->toggleLike(), 'Like updated'))
+        )->build();
     }
 }

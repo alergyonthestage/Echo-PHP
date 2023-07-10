@@ -1,6 +1,6 @@
 import { uploadFormData } from "./utils/ajax.js";
 
-const apiLikeLink = '/api/addlike'
+const apiLikeLink = '/api/like'
 
 function addInteractionsListenrs() {
     const $likeButtons = [...document.querySelectorAll('[like-button]')]
@@ -15,15 +15,16 @@ function addInteractionsListenrs() {
 async function likePost(postId) {
     const formData = new FormData();
     formData.append('post-id', postId);
-    const report = await uploadFormData(apiLikeLink, formData)
-    if(report.success) {
-        const likeButton = document.querySelector(`[like-button="${postId}"]`)
-        likeButton.classList.toggle('post-button-active', result.liked)
-        const likeCounter = document.querySelector(`[like-counter="${postId}"]`)
-        likeCounter.innerHTML = result.likesCount
-    } else {
-        console.log(report.message)
-    }
+    uploadFormData(apiLikeLink, formData)
+        .then((report) => {
+            const likeButton = document.querySelector(`[like-button="${postId}"]`)
+            likeButton.classList.toggle('post-button-active', report.success)
+            //const likeCounter = document.querySelector(`[like-counter="${postId}"]`)
+            //likeCounter.innerHTML = result.likesCount
+        })
+        .catch((error) => {
+            console.error(error)
+        })
 }
 
 export {addInteractionsListenrs}
