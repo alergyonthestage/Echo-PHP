@@ -4,15 +4,18 @@ namespace CaveResistance\Echo\Website\App\Http\Controllers\API;
 
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Controller;
+use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Website\App\Model\Feed;
 use CaveResistance\Echo\Website\App\Model\User;
 
 class FeedController implements Controller { 
 
-    public function getPosts(): Response 
+    public function getPosts(Request $request): Response 
     {
-        $posts = Feed::getPosts(User::getLogged()->getUserID(), 0, 2);
+        $quantity = 3;
+        $offset = $quantity*$request->getQueryParam('page') ?? 0;
+        $posts = Feed::getPosts(User::getLogged()->getUserID(), $offset, $quantity);
         return (new ResponseBuilder())->setContent(json_encode($posts))->setMimeType('application/json')->build();
     }
 }

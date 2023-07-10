@@ -12,7 +12,7 @@ interface Request {
 
     public function getPostParam(string $paramName): string|null;
 
-    public function getGetParam(string $paramName): string|null;
+    public function getQueryParam(string $paramName): string|null;
 
     public function getFiles(): array;
 

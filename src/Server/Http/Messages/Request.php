@@ -33,7 +33,7 @@ class Request implements RequestInterface {
         return $this->post[$paramName] ?? null;
     }
 
-    public function getGetParam(string $paramName): string|null
+    public function getQueryParam(string $paramName): string|null
     {
         return $this->get[$paramName] ?? null;
     }

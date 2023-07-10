@@ -4,6 +4,7 @@ use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Website\App\Http\Controllers\API\SongController;
 use CaveResistance\Echo\Website\App\Http\Controllers\API\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\API\UserController;
+use CaveResistance\Echo\Website\App\Http\Controllers\API\FeedController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 
 /**---SONG---*/
@@ -46,4 +47,13 @@ Server::createRoute()->accept('POST', '/addFriend')->withMiddlewares([
 ])->setHandler([
     'controller' => UserController::class,
     'method' => 'addFriend'
+])->add();
+
+/**---FEED---*/
+
+Server::createRoute()->accept('GET', '/api/feed')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
+    'controller' => FeedController::class,
+    'method' => 'getPosts'
 ])->add();

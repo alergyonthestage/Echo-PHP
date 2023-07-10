@@ -14,8 +14,16 @@ class Post implements JsonSerializable {
 
     private array $post;
 
-    private function __construct(array $post) 
+    public function __construct(array $post) 
     {
+        //Fetch the song from DB by song_id
+        $song = Song::fromID($post['id_song']);
+        $post['song'] = $song;
+
+        //Fetch the user author from DB by song_id
+        $user = User::fromID($post['id_user']);
+        $post['author'] = $user;
+
         $this->post = $post;
     }
 
@@ -32,10 +40,9 @@ class Post implements JsonSerializable {
     public static function create(string $description, string $public, string $id_user, string $id_song): Post 
     {
         $connection = Database::connect();
-        $date = date("Y-m-d");
-        $time = date("H:i:s");
-        $stmt = $connection->prepare("INSERT INTO post (description, date, time, public, id_user, id_song) VALUES (?,?,?,?,?,?)");
-        $stmt->bind_param('sssssi', $description, $date, $time, $public, $id_user, $id_song);
+        $timestamp = time();
+        $stmt = $connection->prepare("INSERT INTO post (description, timestamp, public, id_user, id_song) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param('sssssi', $description, $timestamp, $public, $id_user, $id_song);
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
@@ -59,14 +66,6 @@ class Post implements JsonSerializable {
             throw new PostNotFound($id_post);
         }
         $post = $result->fetch_array();
-
-        //Fetch the song from DB by song_id
-        $song = Song::fromID($post['id_song']);
-        $post['song'] = $song;
-
-        //Fetch the user author from DB by song_id
-        $user = User::fromID($post['id_user']);
-        $post['author'] = $user;
         
         $connection->close();
         return $post;  
@@ -121,16 +120,17 @@ class Post implements JsonSerializable {
 
     public function getDate(): string 
     {
-        return $this->post['date'];
+        return date("Y-m-d", strtotime($this->post['timestamp']));
     }
 
     public function getTime(): string 
     {
-        return $this->post['time'];
+        return date("H:i:s", strtotime($this->post['timestamp']));
     }
 
     public function getTimeAgo(): string 
     {
+        //TODO: Fix this
         $date_time = $this->getDate() . " " . $this->getTime();
         $date_time = strtotime($date_time);
         $current_date_time = strtotime(date("Y-m-d H:i:s"));
