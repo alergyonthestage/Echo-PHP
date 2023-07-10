@@ -179,8 +179,8 @@ class Post implements JsonSerializable {
         return $this->post['song']->getArtist()->getStageName();
     }
 
-    public function updateLike(): bool {
-        if($this->loggedLike()){
+    public function toggleLike(): bool {
+        if($this->hasLoggedUserLike()){
             $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
         } else{
             $query = "INSERT INTO likedpost (id_post, id_user) VALUES (?,?)";
@@ -194,10 +194,10 @@ class Post implements JsonSerializable {
             throw new Exception("Cannot modified like");
         }
         $connection->close();
-        return $this->loggedLike();
+        return $this->hasLoggedUserLike();
     }
 
-    public function loggedLike() : bool {
+    public function hasLoggedUserLike() : bool {
         $connection = Database::connect();
         $id_post = $this->getPostID();
         $id_user = User::getLogged()->getUserID();
@@ -261,7 +261,7 @@ class Post implements JsonSerializable {
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
             'echoesCount' => $this->getEchoesCount(),
-            'liked' => $this->loggedLike()
+            'liked' => $this->hasLoggedUserLike()
         ];
         return $json_array;
     }

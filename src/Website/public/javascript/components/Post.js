@@ -40,14 +40,16 @@ export default class Post {
                                 </div>
                             </a>
                             <div class="post-interactive-buttons">
-                                ${this.data.likesCount}
+                                <span like-counter="${this.data.idPost}">${this.data.likesCount}</span>
                                 <button class="post-button" like-button="${this.data.idPost}">
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 ${this.data.commentsCount}
+                                <a href="/post/${this.data.idPost}">
                                 <button class="post-button">
                                     <i class="fas fa-comment"></i>
                                 </button>
+                                </a>
                                 ${this.data.echoesCount}
                                 <button class="post-button">
                                     <i class="fas fa-user"></i>

@@ -28,7 +28,7 @@ class PostController implements Controller {
             "song_info" => $post->getSongArtist()." - ".$post->getSongTitle(),
             "description" => $post->getDescription(),
             "comments" => $post->getComments(),
-            "loggedLiked" => $post->loggedLike(),
+            "loggedLiked" => $post->hasLoggedUserLike(),
             "likes_count" => $post->getLikesCount(),
             "comments_count" => $post->getCommentsCount(),
             "echoes_count" => $post->getEchoesCount()
@@ -56,7 +56,7 @@ class PostController implements Controller {
     public function addLike(Request $request): void
     {   
         $post = Post::fromID((int) $request->getPostParam('id_post'));
-        $post->updateLike();
+        $post->toggleLike();
         Server::redirectTo("/post/".$post->getPostID());
     }
 

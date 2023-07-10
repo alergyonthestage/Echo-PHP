@@ -1,28 +1,28 @@
-const $likeButtons = [...document.querySelectorAll('[like-button]')]
-console.log($likeButtons)
+function addInteractionsListenrs() {
+    const $likeButtons = [...document.querySelectorAll('[like-button]')]
 
-$likeButtons.forEach((likeButton) => {
-    likeButton.onclick = (event) => {
-        likePost(event.target.getAttribute('post-id'))
-    }
-})
+    $likeButtons.forEach((likeButton) => {
+        likeButton.onclick = () => {
+            likePost(likeButton.getAttribute('like-button'))
+        }
+    })
+}
 
 async function likePost(postId) {
-    console.log("SONO STATA CHIAMATA")
     let formData = new FormData();
     formData.append('post-id', postId);
-    response = await fetch('/api/addlike', {
+    let response = await fetch('/api/addlike', {
         method: 'POST',
         body: formData
     })
-    result = response.json()
+    let result = await response.json()
 
-    const likeButton = document.querySelector(`[like-button][post-id="${postId}"]`)
-    if(result){
-        likeButton.classList.add('post-button-active')
-    } else {
-        likeButton.classList.remove('post-button-active')
-    }
+    const likeButton = document.querySelector(`[like-button="${postId}"]`)
+    likeButton.classList.toggle('post-button-active', result.liked)
+    const likeCounter = document.querySelector(`[like-counter="${postId}"]`)
+    likeCounter.innerHTML = result.likesCount
 
     return result
 }
+
+export {addInteractionsListenrs, likePost}

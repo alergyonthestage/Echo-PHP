@@ -19,7 +19,7 @@ class PostController implements Controller {
     public function addLike(Request $request): Response 
     {
         $post = Post::fromID($request->getPostParam('post-id'));
-        $post->addLike();
+        $post->toggleLike();
         return (new ResponseBuilder())->setContent(json_encode($post))->setMimeType('application/json')->build();
     }
 }
