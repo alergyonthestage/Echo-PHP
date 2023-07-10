@@ -1,5 +1,5 @@
 <view-head>
-    <script defer src='/public/javascript/profileImageUpload.js'></script>
+    <script type="module" src='/public/javascript/profileImageUpload.js'></script>
 </view-head>
 <div class="centered-form-container">
     <link rel="stylesheet" href="/public/css/views/user.css">

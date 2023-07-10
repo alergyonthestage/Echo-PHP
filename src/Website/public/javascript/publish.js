@@ -1,5 +1,6 @@
 import Post from "./components/Post.js";
 import SongListItem from "./components/SongListItem.js"
+import { fetchData } from "./utils/ajax.js";
 import { debounce } from "./utils/debounce.js"
 
 const apiLink = "/api/song"
@@ -67,7 +68,8 @@ function stepLoadActions(step) {
             songList.innerHTML = ''
             songSearchField.oninput = debounce((event) => {
                 if(event.target.value !== '' && event.target.value !== null) {
-                    searchSongs(event.target.value)
+                    let link = `${apiLink}?${new URLSearchParams({search: search})}`;
+                    fetchData(link)
                         .then((response) => {displaySongList(response)})
                         .catch((error) => {songList.innerHTML = `Error: ${error}`})
                 } else {
@@ -88,17 +90,6 @@ function completedStepActions(step, nextButtonEvent) {
             songSearchField.value = nextButtonEvent.target.getAttribute('song-id')
             break
     }
-}
-
-//song fetch
-
-async function searchSongs(search) {
-        const response = await fetch(`${apiLink}?${new URLSearchParams({search: search})}`, {
-            method: "GET"
-        })
-        const result = await response.json();
-        console.log(result);
-        return result
 }
 
 function displaySongList(jsonResponse) {
