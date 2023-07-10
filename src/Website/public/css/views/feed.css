@@ -10,3 +10,6 @@
     scroll-snap-align: start;
 }
 
+body {
+    overflow: hidden;
+}

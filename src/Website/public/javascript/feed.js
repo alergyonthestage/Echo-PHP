@@ -10,12 +10,14 @@ let isLoading = false
 function loadPosts() {
     if(isLoading) return
     isLoading = true
-    let query = (currentPage === 0) ? '' : `?${new URLSearchParams({page: currentPage})}`
-    fetchData(`${apiLink}${query}`)
-        .then((posts) => { 
-            posts.forEach((postData) => {
-                feed.innerHTML += new Post(postData).render()
-            })
+    fetchData(getRequestLink())
+        .then((posts) => {
+            if(posts.length > 0) {
+                posts.forEach((postData) => {
+                    feed.innerHTML += new Post(postData).render()
+                })
+                currentPage++;
+            }
         })
         .catch((error) => {
             feed.innerHTML = "Cannot load posts"
@@ -26,12 +28,20 @@ function loadPosts() {
         })
 }
 
+function getRequestLink() {
+    if(currentPage <= 0) {
+        return apiLink
+    } else {
+        return apiLink + `?${new URLSearchParams({page: currentPage})}`
+    }
+}
+
 feed.onscroll = () => {
     if(isLoading) return
     if (Math.ceil(feed.clientHeight + feed.scrollTop) >= feed.scrollHeight) {
-        alert('arrivato in fondo')
-        currentPage++;
-        fetchData();
+        console.log(currentPage)
+        loadPosts();
     }
 }
+
 loadPosts()
