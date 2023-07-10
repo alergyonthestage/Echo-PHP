@@ -7,7 +7,7 @@ export default class Post {
     }
 
     render() {
-        return `<div class="post">
+        return `<article class="post">
                     <div class="post-covert-art">
                         <div class="post-cover-square">
                             <img class="post-cover-disc" src="${this.data.cover}" alt="Cover-Art"/>
@@ -61,7 +61,7 @@ export default class Post {
                         <p>${this.data.description}</p>
                     </div>
                     <hr class="post-divider">
-                </div>`
+                </article>`
     }
 
 }
