@@ -19,3 +19,21 @@ getPostData().then((postData) => {
     .catch((error) => {
         post.innerHTML = `Error: ${error}`
     })
+
+const comment = document.getElementById('comment')
+const commentPostId = comment.getAttribute('comment-post-id')
+
+async function getCommentData() {
+    let $response = await fetch(`/api/comment/${commentPostId}`, {
+        method: "GET",
+    })
+    let $result = await $response.json()
+    return $result
+}
+
+getCommentData().then((commentData) => {
+    comment.innerHTML = new Comment(commentData).render()
+})
+.catch((error) => {
+    comment.innerHTML = `Error: ${error}`
+})

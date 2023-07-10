@@ -19,6 +19,11 @@ Server::createRoute()->accept('GET', '/api/post/{id}')->setHandler([
     'method' => 'getPostData'
 ])->add();
 
+Server::createRoute()->accept('GET', '/api/comment/{id}')->setHandler([
+    'controller' => PostController::class,
+    'method' => 'getPostData'
+])->add();
+
 Server::createRoute()->accept('POST', '/api/addlike')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([

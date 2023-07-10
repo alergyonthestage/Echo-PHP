@@ -3,6 +3,8 @@
 namespace CaveResistance\Echo\Website\App\Model;
 
 use CaveResistance\Echo\Server\Database\Database;
+use CaveResistance\Echo\Website\App\Model\Exceptions\PostNotFound;
+use Exception;
 
 class Feed {
     
@@ -19,9 +21,8 @@ class Feed {
     private static function fetch(int $id_user, int $offset, int $quantity) {
         $connection = Database::connect();
 
-        //tutti i post il cui autore è amico com l'utente loggato, ordinati per data e ora
-        $stmt = $connection->prepare("SELECT * FROM post WHERE id_user");
-        $stmt->bind_param('i', $id_post);
+        $stmt = $connection->prepare("SELECT * FROM post ORDER BY date, time; LIMIT ?,?");
+        $stmt->bind_param('iii', $id_post, $offset, $quantity);
         if(!$stmt->execute()){
             throw new Exception("Database error");
         }
@@ -29,7 +30,11 @@ class Feed {
         if(mysqli_num_rows($result) === 0) {
             throw new PostNotFound($id_post);
         }
-        $post = $result->fetch_array();
+        $posts = [];
+        while($post = $result->fetch_object()) {
+            $posts[] = $post;
+        }
+        return $posts;
     }
 
 }

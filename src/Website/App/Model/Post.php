@@ -70,7 +70,7 @@ class Post implements JsonSerializable {
     private function fetchComments(): array {
         $connection = Database::connect();
 
-        //$id_post = $this->post->id_post;
+        $id_post = $this->post['id_post'];
         //Fetch the comments from DB for this post by post_id
         $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);

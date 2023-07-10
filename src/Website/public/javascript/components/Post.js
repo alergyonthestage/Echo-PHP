@@ -41,10 +41,10 @@ export default class Post {
                             </a>
                             <div class="post-interactive-buttons">
                                 <span like-counter="${this.data.idPost}">${this.data.likesCount}</span>
-                                <button class="post-button" like-button="${this.data.idPost}">
+                                <button class="post-button ${this.data.liked ? "post-button-active": ""}" like-button="${this.data.idPost}">
                                     <i class="fas fa-heart"></i>
                                 </button>
-                                ${this.data.commentsCount}
+                                <span comment-counter="${this.data.idPost}">${this.data.commentsCount}</span>
                                 <a href="/post/${this.data.idPost}">
                                 <button class="post-button">
                                     <i class="fas fa-comment"></i>
