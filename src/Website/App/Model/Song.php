@@ -16,6 +16,7 @@ class Song implements JsonSerializable {
 
     private function __construct(array $song) 
     {
+        $song['artist_name'] = Artist::fromID($song['id_artist'])->getStageName();
         $this->song = $song;
     }
 
@@ -62,7 +63,12 @@ class Song implements JsonSerializable {
         return Configurations::get('paths.cover_art').$this->song['cover'];
     }
 
-    public function getArtist(): Artist 
+    public function getArtistID(): int 
+    {
+        return $this->song['id_artist'];
+    }
+
+    public function getArtist(): Artist
     {
         return $this->song['artist'];
     }
