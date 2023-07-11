@@ -48,7 +48,7 @@ Server::createRoute()->accept('POST', '/api/friendship/request')->withMiddleware
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'requestFiriendship'
+    'method' => 'requestFriendship'
 ])->add();
 
 Server::createRoute()->accept('POST', '/api/friendship/accept')->withMiddlewares([

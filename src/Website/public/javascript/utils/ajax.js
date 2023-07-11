@@ -17,7 +17,7 @@ async function uploadFormData(link, formData) {
       });
       return await response.json()
     } catch (error) {
-      console.log("Fetch error: ", error);
+      console.error("Fetch error: ", error);
     }
 }
 
