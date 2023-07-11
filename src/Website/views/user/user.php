@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/public/css/components/buttons.css">
     <link rel="stylesheet" href="/public/css/components/badge.css">
     <link rel="stylesheet" href="/public/css/utils.css">
+    <script type="module" src="/public/javascript/userProfileActionButton.js"></script>
 </view-head>
 <div class="user-profile-header">
     <div class="profile-picture-frame user-profile-picture-frame">
@@ -41,26 +42,11 @@
             </div>
             </a>
         </div>
-        <?php if ($selfProfile) { ?>
+        <?php if($selfProfile): ?>
             <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
-        <?php } else { ?>
-            <?php switch ($relation) {
-                    case 0: ?>
-                    <form action="/addFriend" method="POST">
-                        <input type="hidden" name="user_id" value="<?=$userId?>">
-                        <button type="submit" class="user-profile-action-button primary-button">Add</button>
-                    </form>
-                    <?php break;
-                    case 1: ?>
-                    <button class="user-profile-action-button secondary-button" disabled>Request sent.</button>
-                    <?php break;
-                    case 2: ?>
-                    <button class="user-profile-action-button secondary-button" disabled>You are friends.</button>
-                    <?php break;
-                    case 3: ?>
-                    <button class="user-profile-action-button secondary-button" disabled>Wants to become your friend!</button>
-                    <?php break; } ?>
-        <?php } ?>
+        <?php else: ?>
+            <button id="user-profile-action-button" class="user-profile-action-button primary-button" relation="<?=$relation?>" profile-id="<?=$profileID?>"></button>
+        <?php endif; ?>
     </div>
 </div>
 <div class="user-profile-biography">

@@ -8,6 +8,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Website\App\Model\Report;
 use CaveResistance\Echo\Website\App\Model\User;
+use Exception;
 
 class UserController {
 
@@ -57,39 +58,84 @@ class UserController {
         )->build();
     }
 
-    public function addFriend(Request $request): void 
+    public function addFriend(Request $request): Response 
     {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->addFriend($friend->getUserID());
+        try {
+            $user = User::getLogged();
+            $friend = User::fromID($request->getPostParam('friend'));
+            $user->addFriend($friend->getUserID());
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Success: Friend added!'))
+            )->build();
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
     }
 
-    public function removeFriend(Request $request):  void
+    public function removeFriend(Request $request):  Response
     {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->removeFriend($friend->getUserID());
+        try {
+            $user = User::getLogged();
+            $friend = User::fromID($request->getPostParam('friend'));
+            $user->removeFriend($friend->getUserID());
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report(true, 'Success: Friend removed!'))
+        )->build();
     }
 
-    public function cancelFriendRequest(Request $request): void
+    public function cancelFriendRequest(Request $request): Response
     {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->cancelFriendRequest($friend->getUserID());
+        try {
+           $user = User::getLogged();
+            $friend = User::fromID($request->getPostParam('friend'));
+            $user->cancelFriendRequest($friend->getUserID()); 
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report(true, 'Success: Request cancelled!'))
+        )->build();
     }
 
-    public function declineFriendRequest(Request $request): void 
+    public function declineFriendRequest(Request $request): Response 
     {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->declineFriendRequest($friend->getUserID());    
+        try {
+            $user = User::getLogged();
+            $friend = User::fromID($request->getPostParam('friend'));
+            $user->declineFriendRequest($friend->getUserID()); 
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report(true, 'Success: Request declined!'))
+        )->build();
     }
 
     
-    public function acceptFriendRequest(Request $request): void 
+    public function acceptFriendRequest(Request $request): Response 
     {
-        $user = User::getLogged();
-        $friend = User::fromID($request->getPostParam('friend'));
-        $user->acceptFriendRequest($friend->getUserID());
+        try {
+            $user = User::getLogged();
+            $friend = User::fromID($request->getPostParam('friend'));
+            $user->acceptFriendRequest($friend->getUserID());
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(new Report(true, 'Success: Request accepted!'))
+        )->build();
     }
 }

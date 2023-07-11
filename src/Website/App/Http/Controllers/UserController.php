@@ -19,6 +19,7 @@ class UserController implements Controller {
         $user = User::fromUsername($username);
 
         $userData = [
+            'profileID' => $user->getUserID(),
             'username' => $user->getUsername(),
             'verified' => $user->isVerified(),
             'name' => $user->getName()." ".$user->getSurname(),
