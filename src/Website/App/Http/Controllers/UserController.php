@@ -5,9 +5,11 @@ namespace CaveResistance\Echo\Website\App\Http\Controllers;
 use CaveResistance\Echo\Server\Interfaces\Http\Controller;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
+use CaveResistance\Echo\Server\Http\Session;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Server\View\View;
+use CaveResistance\Echo\Website\App\Model\Exceptions\UserNotFound;
 use CaveResistance\Echo\Website\App\Model\User;
 
 class UserController implements Controller {
@@ -52,13 +54,21 @@ class UserController implements Controller {
     {
         if($request->getMethod() == 'POST')
         {
-            if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
-                Server::redirectTo("/user/".$request->getPostParam('username'));
-            } else {
+            Session::unsetVariable('login_error');
+            try {
+                if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
+                    Server::redirectTo("/user/".$request->getPostParam('username'));
+                } else {
+                    Session::setVariable('login_error', 'Incorrect password');
+                    Server::redirectTo("/login");
+                }  
+            } catch (UserNotFound $userNotFound) {
+                Session::setVariable('login_error', "The user ".$userNotFound->getUser()." was not found on Echo servers.");
                 Server::redirectTo("/login");
             }
         } else {
-            return (new ResponseBuilder())->setContent(View::render('user.login'))->build();
+            $errors = Session::hasVariable('login_error') ? ['error' => Session::getVariable('login_error')] : [];
+            return (new ResponseBuilder())->setContent(View::render('user.login', $errors))->build();
         }
     }
 

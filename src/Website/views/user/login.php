@@ -4,13 +4,16 @@
 </view-head>
 <div class="centered-form-container">
     <form action="/login" method="POST" class="centered-form">
+        <div class="error">
+            <?=$error?>
+        </div>
         <div class="centered-form-field">
             <label for="username">Username</label>
-            <input type="text" name="username">
+            <input type="text" name="username" id="username" required>
         </div>
         <div class="centered-form-field">
             <label for="password">Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" id="password" required>
         </div>
         <div class="centered-form-submit-button-container">
             <input type="submit" value="Log In" class="primary-button">

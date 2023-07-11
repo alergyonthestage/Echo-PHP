@@ -38,6 +38,13 @@
     box-shadow: #353143 0 0.05em 0.2em;
 }
 
+.error {
+    text-align: center;
+    width: 100%;
+    color: #d21f1f;
+    font-size: small;
+}
+
 @media screen and (orientation: portrait) {
     .centered-form {
         width: 50%;
