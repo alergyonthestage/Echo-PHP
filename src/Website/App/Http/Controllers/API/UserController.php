@@ -80,14 +80,14 @@ class UserController {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
             $user->removeFriend($friend->getUserID());
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Success: Friend removed!'))
+            )->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(false, $e->getMessage()))
             )->build();
         }
-        return (new ResponseBuilder())->setJsonContent(
-            json_encode(new Report(true, 'Success: Friend removed!'))
-        )->build();
     }
 
     public function cancelFriendRequest(Request $request): Response
@@ -96,14 +96,14 @@ class UserController {
            $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
             $user->cancelFriendRequest($friend->getUserID()); 
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Success: Request cancelled!'))
+            )->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(false, $e->getMessage()))
             )->build();
         }
-        return (new ResponseBuilder())->setJsonContent(
-            json_encode(new Report(true, 'Success: Request cancelled!'))
-        )->build();
     }
 
     public function declineFriendRequest(Request $request): Response 
@@ -112,14 +112,14 @@ class UserController {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
             $user->declineFriendRequest($friend->getUserID()); 
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Success: Request declined!'))
+            )->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(false, $e->getMessage()))
             )->build();
         }
-        return (new ResponseBuilder())->setJsonContent(
-            json_encode(new Report(true, 'Success: Request declined!'))
-        )->build();
     }
 
     
@@ -129,13 +129,13 @@ class UserController {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
             $user->acceptFriendRequest($friend->getUserID());
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Success: Request accepted!'))
+            )->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(false, $e->getMessage()))
             )->build();
         }
-        return (new ResponseBuilder())->setJsonContent(
-            json_encode(new Report(true, 'Success: Request accepted!'))
-        )->build();
     }
 }
