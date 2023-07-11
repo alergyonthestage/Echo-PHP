@@ -6,4 +6,6 @@ logs/
 
 #MacOS DS_Store file
 .DS_Store
+
+#config
 src/Website/config.php
