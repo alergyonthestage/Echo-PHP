@@ -16,8 +16,8 @@ class Comment {
         $this->comment = $comment;
     }
 
-    public static function fromKeys(int $id_post, int $id_user, string $date, string $time): Comment {
-        return new static(static::fetch($id_post, $id_user, $date, $time));
+    public static function fromKeys(int $id_post, int $id_user, string $timestamp): Comment {
+        return new static(static::fetch($id_post, $id_user, $timestamp));
     }
 
     public static function fromArray(array $comment): Comment {
@@ -28,26 +28,25 @@ class Comment {
         $comment = new stdClass();
         $comment->id_post = $array[0];
         $comment->id_user = $array[1];
-        $comment->date = $array[2];
-        $comment->time = $array[3];
-        $comment->text = $array[4];
+        $comment->timestamp = $array[2];
+        $comment->text = $array[3];
         $user = User::fromID($comment->id_user);
         $comment->author = $user;
         return $comment;
     }
 
-    private static function fetch(int $id_post, int $id_user, string $date, string $time): stdClass{
+    private static function fetch(int $id_post, int $id_user, string $timestamp): stdClass{
         $connection = Database::connect();
 
         //Fetch the comment from DB by id_comment
-        $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ? AND id_user = ? AND date = ? AND time = ?");
-        $stmt->bind_param('iiss', $id_post, $id_user, $date, $time);
+        $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ? AND id_user = ? AND timestamp = ?");
+        $stmt->bind_param('iis', $id_post, $id_user, $timestamp);
         if(!$stmt->execute()){
             throw new Exception("Database Error");
         }
         $result = $stmt->get_result();
         if(mysqli_num_rows($result) === 0) {
-            throw new CommentNotFound($id_post, $id_user, $date, $time);
+            throw new CommentNotFound($id_post, $id_user, $timestamp);
         }
         $comment = $result->fetch_object();
         //Fetch the user author from DB by id_user
@@ -60,10 +59,9 @@ class Comment {
     
     public static function create(int $id_post, int $id_user, string $text){
         $connection = Database::connect();
-        $date = date("Y-m-d");
-        $time = date("H:i:s");
-        $stmt = $connection->prepare("INSERT INTO comment (id_post, id_user, date, time, text) VALUES (?,?,?,?,?)");
-        $stmt->bind_param('iisss', $id_post, $id_user, $date, $time, $text);
+        $timestamp = date('Y-m-d H:i:s', time());
+        $stmt = $connection->prepare("INSERT INTO comment (id_post, id_user, timestamp, text) VALUES (?,?,?,?)");
+        $stmt->bind_param('iiss', $id_post, $id_user, $timestamp, $text);
         if($text == "") {
             throw new Exception("Cannot create empty comment");
         }
@@ -71,7 +69,7 @@ class Comment {
             throw new Exception("Cannot create comment");
         }
         $connection->close();
-        return static::fromKeys($id_post, $id_user, $date, $time);
+        return static::fromKeys($id_post, $id_user, $timestamp);
     }
 
     public function getCommentID(): string {
@@ -94,38 +92,46 @@ class Comment {
         return $this->comment->author->getPic();
     }
 
-    public function getDate(): string {
-        return $this->comment->date;
+    public function getDate(): string 
+    {
+        return date("Y-m-d", strtotime($this->comment->timestamp));
     }
 
-    public function getTime(): string {
-        return $this->comment->time;
+    public function getTime(): string 
+    {
+        return date("H:i:s", strtotime($this->comment->timestamp));
+    }
+
+    public function getTimestamp(): string {
+        return $this->comment->timestamp;
     }
 
     public function getTimeAgo(): string {
-        $date_time = $this->getDate() . " " . $this->getTime();
-        $date_time = strtotime($date_time);
-        $current_date_time = strtotime(date("Y-m-d H:i:s"));
-        $time_ago = $current_date_time - $date_time;
-        $time_ago = round($time_ago / 60);
-        if ($time_ago < 60) {
-            return $time_ago . " min ago";
-        } else if ($time_ago < 1440) {
-            $time_ago = round($time_ago / 60);
-            return $time_ago . " hours ago";
-        }else if ($time_ago < 10080) {
-            $time_ago = round($time_ago / 1440);
-            return $time_ago . " days ago";
-        }else if ($time_ago < 40320) {
-            $time_ago = round($time_ago / 10080);
-            return $time_ago . " weeks ago";
-        }else if ($time_ago < 483840) {
-            $time_ago = round($time_ago / 40320);
-            return $time_ago . " months ago";
-        }else if ($time_ago > 483840) {
-            $time_ago = round($time_ago / 483840);
-            return $time_ago . " years ago";
+        $timestamp = strtotime($this->comment->timestamp);
+        $now = time();
+        $diff = $now - $timestamp;
+        if($diff < 60) {
+            return $diff . " secondi fa";
         }
+        $diff = floor($diff / 60);
+        if($diff < 60) {
+            return $diff . " minuti fa";
+        }
+        $diff = floor($diff / 60);
+        if($diff < 24) {
+            return $diff . " ore fa";
+        }
+        $diff = floor($diff / 24);
+        if($diff < 30) {
+            return $diff . " giorni fa";
+        }
+        $diff = floor($diff / 30);
+        if($diff < 12) {
+            return $diff . " mesi fa";
+        }
+        $diff = floor($diff / 12);
+        return $diff . " anni fa";
+
     }
 
     public function getText(): string {

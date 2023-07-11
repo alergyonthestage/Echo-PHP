@@ -40,7 +40,7 @@ class Post implements JsonSerializable {
     public static function create(string $description, string $public, string $id_user, string $id_song): Post 
     {
         $connection = Database::connect();
-        $timestamp = time();
+        $timestamp = date('Y-m-d H:i:s', time());
         $stmt = $connection->prepare("INSERT INTO post (description, timestamp, public, id_user, id_song) VALUES (?,?,?,?,?,?)");
         $stmt->bind_param('sssssi', $description, $timestamp, $public, $id_user, $id_song);
         if (!$stmt->execute()) {
@@ -128,32 +128,37 @@ class Post implements JsonSerializable {
         return date("H:i:s", strtotime($this->post['timestamp']));
     }
 
+    public function getTimestamp(): string 
+    {
+        return $this->post['timestamp'];
+    }
+
     public function getTimeAgo(): string 
     {
-        //TODO: Fix this
-        $date_time = $this->getDate() . " " . $this->getTime();
-        $date_time = strtotime($date_time);
-        $current_date_time = strtotime(date("Y-m-d H:i:s"));
-        $time_ago = $current_date_time - $date_time;
-        $time_ago = round($time_ago / 60);
-        if ($time_ago < 60) {
-            return $time_ago . " min ago";
-        } else if ($time_ago < 1440) {
-            $time_ago = round($time_ago / 60);
-            return $time_ago . " hours ago";
-        }else if ($time_ago < 10080) {
-            $time_ago = round($time_ago / 1440);
-            return $time_ago . " days ago";
-        }else if ($time_ago < 40320) {
-            $time_ago = round($time_ago / 10080);
-            return $time_ago . " weeks ago";
-        }else if ($time_ago < 483840) {
-            $time_ago = round($time_ago / 40320);
-            return $time_ago . " months ago";
-        }else if ($time_ago > 483840) {
-            $time_ago = round($time_ago / 483840);
-            return $time_ago . " years ago";
+        $timestamp = strtotime($this->post['timestamp']);
+        $now = time();
+        $diff = $now - $timestamp;
+        if($diff < 60) {
+            return $diff . " seconds ago";
         }
+        $diff = floor($diff / 60);
+        if($diff < 60) {
+            return $diff . " minutes ago";
+        }
+        $diff = floor($diff / 60);
+        if($diff < 24) {
+            return $diff . " hours ago";
+        }
+        $diff = floor($diff / 24);
+        if($diff < 30) {
+            return $diff . " days ago";
+        }
+        $diff = floor($diff / 30);
+        if($diff < 12) {
+            return $diff . " months ago";
+        }
+        $diff = floor($diff / 12);
+        return $diff . " years ago";
     }
 
     public function isPublic(): string 
