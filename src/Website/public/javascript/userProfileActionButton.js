@@ -1,14 +1,10 @@
 import { uploadFormData } from "./utils/ajax.js";
 
-const actionButton = document.getElementById('user-profile-action-button');
-
-function renderButtonText(text) {
-    actionButton.innerHTML = text
-}
+const actionButtonContainer = document.getElementById('user-profile-action-button-container');
 
 async function actionHandler(apiLink) {
     const formData = new FormData()
-    formData.append('friend', actionButton.getAttribute('profile-id'))
+    formData.append('friend', actionButtonContainer.getAttribute('profile-id'))
     const report = await uploadFormData(apiLink, formData)
     console.log(report)
     if(report.success) {
@@ -18,21 +14,46 @@ async function actionHandler(apiLink) {
     }
 }
 
-switch (actionButton.getAttribute('relation')) {
+function createButton(text, classList, onclick) {
+    let button = document.createElement("button")
+    button.innerHTML = text
+    button.classList.add(...classList)
+    button.onclick = onclick
+    return button
+}
+
+switch (actionButtonContainer.getAttribute('relation')) {
     case '0':
-        renderButtonText('Send Request')
-        actionButton.onclick = () => {actionHandler('/api/friend/add')}
+        actionButtonContainer.appendChild(createButton(
+            'Request',
+            ['user-profile-action-button', 'primary-button'],
+            () => {actionHandler('/api/friendship/request')}
+        ))
         break;
     case '1':
-        renderButtonText('Cancel Request')
-        actionButton.onclick = () => {actionHandler('/api/friend/cancel')}
+        actionButtonContainer.appendChild(createButton(
+            'Cancel request',
+            ['user-profile-action-button', 'primary-button'],
+            () => {actionHandler('/api/friendship/droprequest')}
+        ))
         break;
     case '2':
-        renderButtonText('Remove Friend')
-        actionButton.onclick = () => {actionHandler('/api/friend/remove')}
+        actionButtonContainer.appendChild(createButton(
+            'Remove',
+            ['user-profile-action-button', 'primary-button'],
+            () => {actionHandler('/api/friendship/remove')}
+        ))
         break;
     case '3':
-        renderButtonText('Accept Request')
-        actionButton.onclick = () => {actionHandler('/api/friend/accept')}
+        actionButtonContainer.appendChild(createButton(
+            'Decline',
+            ['user-profile-action-button', 'secondary-button'],
+            () => {actionHandler('/api/friendship/decline')}
+        ))
+        actionButtonContainer.appendChild(createButton(
+            'Accept',
+            ['user-profile-action-button', 'primary-button'],
+            () => {actionHandler('/api/friendship/accept')}
+        ))
         break;
 }

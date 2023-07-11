@@ -207,7 +207,8 @@ class User {
         Session::unsetVariable(static::$session_username);
     }
 
-    public function getFriends(bool $retrieveUnconfirmed=false): array{
+    public function getFriends(bool $retrieveUnconfirmed=false): array
+    {
         $connection = Database::connect();
 
         if($retrieveUnconfirmed){
@@ -228,24 +229,26 @@ class User {
         return array_map(function($friend){ return User::fromID($friend[0]); }, $friends);
     }
 
-    public function getFriendsCount(bool $retrieveUnconfirmed=false): int{
+    public function getFriendsCount(bool $retrieveUnconfirmed=false): int
+    {
         return count($this->getFriends($retrieveUnconfirmed));
     }
 
     // 0 -> no relation, 1 -> sent request, 2 -> friends, 3 -> received request
-    public function checkRelation($friendID): int{
+    public function checkRelation($friendID): int
+    {
         $connection = Database::connect();
         $userID = $this->getUserID();
         $stmt = $connection->prepare("SELECT * FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
-        $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
+        $stmt->bind_param('iiii', $userID, $friendID, $friendID, $userID);
         if (!$stmt->execute()) {
             throw new Exception("Cannot check friendship");
         }
         $result = $stmt->get_result()->fetch_all();
         if(sizeof($result) == 1){
-            if($result[0][0] == $friendID){
+            if($result[0][0] == $userID){
                 return 1;
-            } else if($result[0][1] == $friendID){
+            } else if($result[0][1] == $userID){
                 return 3;
             }
         }
@@ -253,15 +256,34 @@ class User {
         return sizeof($result);
     }
 
-    public function getPostsCount(): int{
+    public function getPostsCount(): int
+    {
         return Post::getUserPostsCount($this->getUserID());
     }
 
-    public function getEchoesCount(): int{
+    public function getEchoesCount(): int
+    {
         return 0;
     }
 
-    public function addFriend($friendID) : void {
+    public function requestFriendship($friendID) 
+    {
+        if($this->checkRelation($friendID) !== 0) {
+            throw new Exception('Cannot request friendship');
+        }
+        $this->insertFriend($friendID);
+    }
+
+    public function acceptFriendship($friendID) 
+    {
+        if($this->checkRelation($friendID) !== 3) {
+            throw new Exception($this->checkRelation($friendID)." a ".$friendID);
+        }
+        $this->insertFriend($friendID);
+    }
+
+    private function insertFriend($friendID) : void 
+    {
         $connection = Database::connect();
         $userID = $this->getUserID();
         $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?,?)");
@@ -272,18 +294,11 @@ class User {
         $connection->close();
     }
 
-    public function removeFriend($friendID) : void {
-        $connection = Database::connect();
-        $userID = $this->getUserID();
-        $stmt = $connection->prepare("DELETE FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
-        $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
-        if(!$stmt->execute()){
-            throw new Exception("Cannot remove friend");
+    public function dropFriendshipRequest($friendID): void 
+    {
+        if($this->checkRelation($friendID) !== 1) {
+            throw new Exception('No friendship request to drop');
         }
-        $connection->close();
-    }
-    
-    public function cancelFriendRequest($friendID): void {
         $connection = Database::connect();
         $userID = $this->getUserID();
         $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
@@ -294,7 +309,11 @@ class User {
         $connection->close();
     }
 
-    public function declineFriendRequest($friendID): void {
+    public function declineFriendshipRequest($friendID): void 
+    {
+        if($this->checkRelation($friendID) !== 3) {
+            throw new Exception('No friendship request to decline');
+        }
         $connection = Database::connect();
         $userID = $this->getUserID();
         $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
@@ -305,13 +324,16 @@ class User {
         $connection->close();
     }
 
-    public function acceptFriendRequest($friendID): void {
+    public function removeFriendship($friendID) : void {
+        if($this->checkRelation($friendID) !== 2) {
+            throw new Exception("Cannot remove someone who's not a friend");
+        }
         $connection = Database::connect();
         $userID = $this->getUserID();
-        $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?, ?)");
-        $stmt->bind_param('ii',$userID,$friendID);
+        $stmt = $connection->prepare("DELETE FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
+        $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
         if(!$stmt->execute()){
-            throw new Exception("Cannot accept friend request");
+            throw new Exception("Cannot remove friend");
         }
         $connection->close();
     }

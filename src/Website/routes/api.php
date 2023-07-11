@@ -42,45 +42,42 @@ Server::createRoute()->accept('POST', '/api/avatar')->withMiddlewares([
     'method' => 'editAvatar'
 ])->add();
 
-Server::createRoute()->accept('POST', '/api/friend/add')->withMiddlewares([
+/**---FRIENDSHIP---*/
+
+Server::createRoute()->accept('POST', '/api/friendship/request')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'addFriend'
+    'method' => 'requestFiriendship'
 ])->add();
 
-// Cancel the request sent by the logged user to the user with the given id
-Server::createRoute()->accept('POST', '/api/friend/cancel')->withMiddlewares([
+Server::createRoute()->accept('POST', '/api/friendship/accept')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'cancelFriendRequest'
+    'method' => 'acceptFriendship'
 ])->add();
 
-// Remove the friend with the given id from the logged user's friend list
-Server::createRoute()->accept('POST', '/api/friend/remove')->withMiddlewares([
+Server::createRoute()->accept('POST', '/api/friendship/droprequest')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'removeFriend'
+    'method' => 'dropFriendshipRequest'
 ])->add();
 
-// Decline the request sent by the user with the given id to the logged user
-Server::createRoute()->accept('POST', '/api/friend/decline')->withMiddlewares([
+Server::createRoute()->accept('POST', '/api/friendship/decline')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'declineFriendRequest'
+    'method' => 'declineFriendshipRequest'
 ])->add();
 
-// Accept the request sent by the user with the given id to the logged user
-Server::createRoute()->accept('POST', '/api/friend/accept')->withMiddlewares([
+Server::createRoute()->accept('POST', '/api/friendship/remove')->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler([
     'controller' => UserController::class,
-    'method' => 'acceptFriendRequest'
+    'method' => 'removeFriendship'
 ])->add();
-
 
 /**---FEED---*/
 

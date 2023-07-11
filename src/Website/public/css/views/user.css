@@ -46,6 +46,14 @@
 .user-profile-action-button {
     text-decoration: none;
     text-align: center;
+    flex-grow: 1;
+}
+
+.user-profile-action-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5em;
 }
 
 .user-profile-biography {

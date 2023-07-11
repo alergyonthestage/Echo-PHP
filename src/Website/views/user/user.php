@@ -45,7 +45,7 @@
         <?php if($selfProfile): ?>
             <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
         <?php else: ?>
-            <button id="user-profile-action-button" class="user-profile-action-button primary-button" relation="<?=$relation?>" profile-id="<?=$profileID?>"></button>
+            <div id="user-profile-action-button-container" class="user-profile-action-button-container" relation="<?=$relation?>" profile-id="<?=$profileID?>"></div>
         <?php endif; ?>
     </div>
 </div>
