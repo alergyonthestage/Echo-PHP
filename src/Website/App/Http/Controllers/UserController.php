@@ -44,7 +44,7 @@ class UserController implements Controller {
                 $request->getPostParam('email'),
                 $request->getPostParam('password')
             );
-            Server::redirectTo("/user/".$request->getPostParam('username'));
+            Server::redirectTo("/login");
         } else {
             return (new ResponseBuilder())->setContent(View::render('user.signup'))->build();
         }
