@@ -4,9 +4,9 @@
 </view-head>
 <div class="centered-form-container">
     <form action="/login" method="POST" class="centered-form">
-        <div class="error">
-            <?=$error?>
-        </div>
+        <?php if(isset($error)) {
+            echo '<div class="error">'.$error.'</div>';
+        }?>
         <div class="centered-form-field">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" required>
