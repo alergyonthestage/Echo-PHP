@@ -63,4 +63,33 @@ class UserController {
         $friend = User::fromID($request->getPostParam('friend'));
         $user->addFriend($friend->getUserID());
     }
+
+    public function removeFriend(Request $request):  void
+    {
+        $user = User::getLogged();
+        $friend = User::fromID($request->getPostParam('friend'));
+        $user->removeFriend($friend->getUserID());
+    }
+
+    public function cancelFriendRequest(Request $request): void
+    {
+        $user = User::getLogged();
+        $friend = User::fromID($request->getPostParam('friend'));
+        $user->cancelFriendRequest($friend->getUserID());
+    }
+
+    public function declineFriendRequest(Request $request): void 
+    {
+        $user = User::getLogged();
+        $friend = User::fromID($request->getPostParam('friend'));
+        $user->declineFriendRequest($friend->getUserID());    
+    }
+
+    
+    public function acceptFriendRequest(Request $request): void 
+    {
+        $user = User::getLogged();
+        $friend = User::fromID($request->getPostParam('friend'));
+        $user->acceptFriendRequest($friend->getUserID());
+    }
 }

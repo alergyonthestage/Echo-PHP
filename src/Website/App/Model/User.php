@@ -232,17 +232,6 @@ class User {
         return count($this->getFriends($retrieveUnconfirmed));
     }
 
-    public function addFriend($friendID) : void {
-        $connection = Database::connect();
-        $userID = $this->getUserID();
-        $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?,?)");
-        $stmt->bind_param('ii', $userID, $friendID);
-        if(!$stmt->execute()){
-            throw new Exception("Cannot add friend");
-        }
-        $connection->close();
-    }
-
     // 0 -> no relation, 1 -> sent request, 2 -> friends, 3 -> received request
     public function checkRelation($friendID): int{
         $connection = Database::connect();
@@ -270,5 +259,60 @@ class User {
 
     public function getEchoesCount(): int{
         return 0;
+    }
+
+    public function addFriend($friendID) : void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?,?)");
+        $stmt->bind_param('ii', $userID, $friendID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot add friend");
+        }
+        $connection->close();
+    }
+
+    public function removeFriend($friendID) : void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("DELETE FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
+        $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot remove friend");
+        }
+        $connection->close();
+    }
+    
+    public function cancelFriendRequest($friendID): void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
+        $stmt->bind_param('ii', $userID, $friendID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot cancel friend request");
+        }
+        $connection->close();
+    }
+
+    public function declineFriendRequest($friendID): void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
+        $stmt->bind_param('ii', $friendID, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot decline friend request");
+        }
+        $connection->close();
+    }
+
+    public function acceptFriendRequest($friendID): void {
+        $connection = Database::connect();
+        $userID = $this->getUserID();
+        $stmt = $connection->prepare("UPDATE friendship SET friend1 = ? WHERE friend1 = ? AND friend2 = ?");
+        $stmt->bind_param('iii', $userID, $friendID, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot accept friend request");
+        }
+        $connection->close();
     }
 }
