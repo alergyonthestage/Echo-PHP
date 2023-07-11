@@ -11,9 +11,11 @@
 </head>
 <body>
     <header>
-        <button id="hystory-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></button>
-        <div id="logo" class="unselectable"><a href="/">ECHO</a></div>
-        <button id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></button>
+        <div id="fixed-header">
+            <button id="hystory-back-button" class="unselectable fa-solid fa-caret-left" onclick="history.go(-1);"></button>
+            <h1 id="logo" class="unselectable"><a href="/">ECHO</a></h1>
+            <button id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></button>
+        </div>
         <nav id="menu">
             <a href="/" class="unselectable">Search</a>
             <hr>

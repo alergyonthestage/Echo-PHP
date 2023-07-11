@@ -1,19 +1,23 @@
 .primary-button {
+    appearance: none;
+    -webkit-appearance: none;
     background-color: #F8D164;
     color: #2f2c3d;
     border: none;
     padding: 0.3em 0.8em;
-    border-radius: 0.4rem;
+    border-radius: 0.4em;
     font-weight: bold;
     font-size: 0.9em;
 }
 
 .secondary-button {
+    appearance: none;
+    -webkit-appearance: none;
     background-color: #c0c0c0;
     color: #2f2c3d;
     border: none;
     padding: 0.3em 0.8em;
-    border-radius: 0.4rem;
+    border-radius: 0.4em;
     font-size: 0.9em;
 }
 

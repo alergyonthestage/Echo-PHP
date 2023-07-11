@@ -1,3 +1,7 @@
+<view-head>
+    <link rel="stylesheet" href="/public/css/components/form.css">
+    <link rel="stylesheet" href="/public/css/components/buttons.css">
+</view-head>
 <div class="centered-form-container">
     <form action="/login" method="POST" class="centered-form">
         <div class="centered-form-field">

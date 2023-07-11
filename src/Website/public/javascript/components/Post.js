@@ -60,7 +60,6 @@ export default class Post {
                     <div class="post-description">
                         <p>${this.data.description}</p>
                     </div>
-                    <hr class="post-divider">
                 </article>`
     }
 

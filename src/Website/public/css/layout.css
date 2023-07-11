@@ -1,16 +1,13 @@
 * {
+    box-sizing: border-box;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-html, body {
-    height: 100%;
-}
+/**---BODY-AND-BACKGROUND---*/
 
 body {
     margin: 0;
     background-color: #2f2c3d;
-    display: flex;
-    flex-direction: column;
 }
 
 body::before {
@@ -36,17 +33,36 @@ body::before {
     }
 }
 
+/**---MAIN-CONTENT---*/
+
+main {
+    padding-top: 4em;
+    color: white;
+}
+
+/**---HEADER-AND-COMPONENTS---*/
+
 header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
     color: white;
     background-color: #2E2A3C;
+}
+
+header #fixed-header {
+    margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    height: 4em;
 }
 
 #logo {
     justify-self: center;
     letter-spacing: 0.1em;
+    margin: 0;
+    font-weight: lighter;
     padding: 0.4em;
     font-size: 2em;
 }
@@ -78,7 +94,7 @@ header {
     justify-self: start; 
     padding: 1rem;
     font-size: 1.2em;
- }
+}
 
 #hystory-back-button:hover {
     opacity: 100%;
@@ -107,11 +123,6 @@ header {
 
 #menu a:hover {
     color: #F8D164;
-}
-
-main {
-    color: white;
-    flex-grow: 1;
 }
 
 #menu a#log-out-button:hover {

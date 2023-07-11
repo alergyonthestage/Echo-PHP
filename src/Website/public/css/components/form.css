@@ -1,10 +1,13 @@
 .centered-form-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: calc(100vh - 4em);
 }
 
 .centered-form {
+    margin: 4em;
+    padding: 1.5em;
     display: flex;
     flex-direction: column;
     gap: 0.6em;
@@ -13,14 +16,12 @@
     background-color: #544f683a;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
-    padding: 1.5em;
     border-radius: 0.8em;
     box-shadow: #353143 0 0.05rem 0.2rem;
 }
 
 .centered-form-field {
     position: relative;
-    width: 90%;
     gap: 0.2em;
     text-shadow: #353143 0 0.05em 0.2em;
 }
@@ -33,21 +34,11 @@
 }
 
 .centered-form input[type='submit'] {
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
     margin-top: 1em;
-    padding: 0.3em 0.8em;
-    background-color: #F8D164;
-    color: #353143;
-    border-radius: 0.4rem;
     box-shadow: #353143 0 0.05em 0.2em;
 }
 
 @media screen and (orientation: portrait) {
-    .centered-form-container {
-        height: 80%;
-    }
     .centered-form {
         width: 50%;
     }
@@ -60,12 +51,6 @@
 }
 
 @media screen and (orientation: landscape) {
-    .centered-form-container {
-        height: 100%;
-    }
-    .centered-form {
-        height: 60%;
-    }
 
     .centered-form-field {
         display: grid;

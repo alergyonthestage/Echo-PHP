@@ -1,15 +1,14 @@
 /*Feed post snap*/
 #feed {
-    height: 100vh;
+    height: calc(100vh - 4em);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 }
 
 #feed article.post {
-    height: 100vh;
+    margin: 0;
+    padding: 1.4em;
+    height: 100%;
     scroll-snap-align: start;
-}
-
-body {
-    overflow: hidden;
+    scroll-snap-stop: always;
 }

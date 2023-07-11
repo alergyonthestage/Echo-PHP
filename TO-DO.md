@@ -7,6 +7,7 @@ Adesso:
 - Rivedi le post interactions (like, comment, etc...), vedi se usare ajax
 - immagine profilo di default se su db è null o se non è stata trovata la risorsa nel server
 - load animation on feed infinite scroll
+- optimize imgs and img lazy loading on posts (+ placeholders on load)
 
 Dopo:
 
