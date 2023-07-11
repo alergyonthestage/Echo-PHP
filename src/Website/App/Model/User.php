@@ -309,7 +309,7 @@ class User {
         $connection = Database::connect();
         $userID = $this->getUserID();
         $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?, ?)");
-        $stmt->bind_param('iii', $userID, $friendID, $userID);
+        $stmt->bind_param('ii',$userID,$friendID);
         if(!$stmt->execute()){
             throw new Exception("Cannot accept friend request");
         }
