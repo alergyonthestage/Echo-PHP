@@ -8,16 +8,13 @@ use CaveResistance\Echo\Website\App\Model\Exceptions\SongNotFound;
 
 use Exception;
 use JsonSerializable;
-use mysqli;
 
 class Song implements JsonSerializable {
 
-    private array $song;
-
-    private function __construct(array $song) 
-    {
-        $song['artist_name'] = Artist::fromID($song['id_artist'])->getStageName();
-        $this->song = $song;
+    private function __construct(
+        private array $song
+    ) {
+        $this->song['artist'] = Artist::fromID($song['id_artist']);
     }
 
     public static function fromID(int $id) 
@@ -38,12 +35,7 @@ class Song implements JsonSerializable {
             throw new SongNotFound($song_id);
         }
         $song = $result->fetch_array();
-        $connection->close(); 
-
-        //Fetch the artist from DB by artist_id
-        $artist = Artist::fromID($song['id_artist']);
-        //TO-DO: non mi piace molto che il modello della song tenga anche l'artista. Meglio solo getArtistID()
-        $song['artist'] = $artist;
+        $connection->close();
 
         return $song;  
     }
@@ -61,11 +53,6 @@ class Song implements JsonSerializable {
     public function getCover(): string 
     {
         return Configurations::get('paths.cover_art').$this->song['cover'];
-    }
-
-    public function getArtistID(): int 
-    {
-        return $this->song['id_artist'];
     }
 
     public function getArtist(): Artist

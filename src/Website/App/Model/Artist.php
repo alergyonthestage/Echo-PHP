@@ -9,17 +9,17 @@ use Exception;
 
 class Artist {
 
-    private array $artist;
+    private function __construct(
+        private array $artist
+    ) {}
 
-    private function __construct(array $artist) {
-        $this->artist = $artist;
-    }
-
-    public static function fromID(int $id) {
+    public static function fromID(int $id) 
+    {
         return new static(static::fetch($id));
     }
 
-    private static function fetch($artist_id): array{
+    private static function fetch($artist_id): array
+    {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT * FROM artist WHERE id_artist = ?");
         $stmt->bind_param('i', $artist_id);
@@ -35,15 +35,18 @@ class Artist {
         return $artist;
     }
 
-    public function getArtistID(): string {
+    public function getArtistID(): string 
+    {
         return $this->artist['id_artist'];
     }
 
-    public function getStageName(): string {
+    public function getStageName(): string 
+    {
         return $this->artist['stage_name'];
     }
 
-    public function getPic(): string {
+    public function getPic(): string 
+    {
         if ($this->artist['pic'] === NULL || $this->artist['pic']  === '') {
             return Configurations::get('paths.artist_pic').'default.png';
         } else {

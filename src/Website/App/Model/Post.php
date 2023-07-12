@@ -12,19 +12,11 @@ use JsonSerializable;
 
 class Post implements JsonSerializable {
 
-    private array $post;
-
-    public function __construct(array $post) 
-    {
-        //Fetch the song from DB by song_id
-        $song = Song::fromID($post['id_song']);
-        $post['song'] = $song;
-
-        //Fetch the user author from DB by song_id
-        $user = User::fromID($post['id_user']);
-        $post['author'] = $user;
-
-        $this->post = $post;
+    private function __construct(
+        private array $post
+    ) {
+        $this->post['song'] = Song::fromID($post['id_song']);
+        $this->post['author'] = User::fromID($post['id_user']);
     }
 
     public static function fromID(int $id_post) 
@@ -37,7 +29,7 @@ class Post implements JsonSerializable {
         return static::fetchUserPostsCount($id_user);
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song): Post 
+    public static function create(string $description, string $public, string $id_user, string $id_song): void 
     {
         $connection = Database::connect();
         $timestamp = date('Y-m-d H:i:s', time());
@@ -46,9 +38,7 @@ class Post implements JsonSerializable {
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
-        $id = $stmt->insert_id;
         $connection->close();
-        return static::fromID($id);
     }
 
     private static function fetch($id_post): array 
@@ -65,28 +55,10 @@ class Post implements JsonSerializable {
         if(mysqli_num_rows($result) === 0) {
             throw new PostNotFound($id_post);
         }
-        $post = $result->fetch_array();
+        $post = $result->fetch_array(MYSQLI_ASSOC);
         
         $connection->close();
         return $post;  
-    }
-
-    private function fetchComments(): array 
-    {
-        $connection = Database::connect();
-
-        $id_post = $this->post['id_post'];
-        //Fetch the comments from DB for this post by post_id
-        $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
-        $stmt->bind_param('i', $id_post);
-        if(!$stmt->execute()){
-            throw new Exception("Comments not found for this post: $id_post");
-        }
-        $results = $stmt->get_result()->fetch_all();
-
-        $comments = [];
-        foreach($results as $result){ array_push($comments, Comment::fromArray($result)); }
-        return $comments;
     }
 
     private static function fetchUserPostsCount($id_user): int
@@ -105,7 +77,7 @@ class Post implements JsonSerializable {
 
     public function getComments(): array
     {
-        return $this->fetchComments();
+        return Comment::fromPost($this->getPostID());
     }
 
     public function getPostID(): string 
@@ -166,78 +138,47 @@ class Post implements JsonSerializable {
         return $this->post['public'];
     }
 
-    public function getAuthorUderID(): string 
+    public function getAuthor(): string 
     {
-        return $this->post['id_user'];
+        return $this->post['author'];
     }
 
-    public function getAuthorUsername(): string 
+    public function getSong(): string 
     {
-        return $this->post['author']->getUsername();
-    }
-
-    public function isAuthorVerified(): string 
-    {
-        return $this->post['author']->isVerified();
-    }
-
-    public function getAuthorPicture(): string 
-    {
-        return $this->post['author']->getPic();
-    }
-
-    public function getSongID(): string 
-    {
-        return $this->post['id_song'];
-    }
-
-    public function getSongTitle(): string 
-    {
-        return $this->post['song']->getTitle();
-    }
-
-    public function getSongCover(): string 
-    {
-        return $this->post['song']->getCover();
-    }
-
-    public function getSongArtist(): string 
-    {
-        return $this->post['song']->getArtist()->getStageName();
+        return $this->post['song'];
     }
 
     public function toggleLike(): bool 
     {
-        if($this->hasLoggedUserLike()){
+        $connection = Database::connect();
+        $postID = $this->getPostID();  
+        $userID = User::getLogged()->getUserID();
+        if($this->hasUserLike($userID)){
             $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
         } else{
             $query = "INSERT INTO likedpost (id_post, id_user) VALUES (?,?)";
         }
-        $connection = Database::connect();
-        $id_post = $this->getPostID();  
-        $id_user = User::getLogged()->getUserID();
         $stmt = $connection->prepare($query);
-        $stmt->bind_param('ii', $id_post, $id_user);
+        $stmt->bind_param('ii', $postID, $userID);
         if (!$stmt->execute()) {
-            throw new Exception("Cannot modified like");
+            throw new Exception("Cannot modify like");
         }
         $connection->close();
-        return $this->hasLoggedUserLike();
+        return $this->hasUserLike($userID);
     }
 
-    public function hasLoggedUserLike() : bool 
+    public function hasUserLike($userID) : bool 
     {
         $connection = Database::connect();
-        $id_post = $this->getPostID();
-        $id_user = User::getLogged()->getUserID();
+        $postID = $this->getPostID();
         $stmt = $connection->prepare("SELECT * FROM likedpost WHERE id_post = ? AND id_user = ?");
-        $stmt->bind_param('ii', $id_post, $id_user);
+        $stmt->bind_param('ii', $postID, $userID);
         if (!$stmt->execute()) {
             throw new Exception("Cannot check like");
         }
-        $result = $stmt->get_result()->fetch_object();
+        $result = $stmt->get_result();
         $connection->close();
-        return $result != null;
+        return mysqli_num_rows($result) > 0;
     }
 
     public function getLikesCount(): int
@@ -275,27 +216,20 @@ class Post implements JsonSerializable {
 
     public function jsonSerialize(): array
     {
-        $json_array = [
-            'idPost' => $this->getPostID(),
+        return [
+            'postID' => $this->getPostID(),
             'description' => $this->getDescription(),
             'date' => $this->getDate(),
             'time' => $this->getTime(),
             'timeAgo' => $this->getTimeAgo(),
-            'public' => $this->isPublic(),
-            'idUser' => $this->getAuthorUderID(),
-            'username' => $this->getAuthorUsername(),
-            'verified' => $this->isAuthorVerified(),
-            'profilePicture' => $this->getAuthorPicture(),
-            'idSong' => $this->getSongID(),
-            'title' => $this->getSongTitle(),
-            'cover' => $this->getSongCover(),
-            'artist' => $this->getSongArtist(),
+            'isPublic' => $this->isPublic(),
+            'author' => $this->getAuthor(),
+            'song' => $this->getSong(),
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
             'echoesCount' => $this->getEchoesCount(),
-            'liked' => $this->hasLoggedUserLike()
+            'liked' => $this->hasUserLike(User::getLogged())
         ];
-        return $json_array;
     }
 
 }

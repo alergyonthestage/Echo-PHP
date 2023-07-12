@@ -13,7 +13,7 @@ class Feed implements JsonSerializable {
     )
     {}
     
-    public static function getPosts(int $id_user, int $offset, int $quantity)
+    public static function fromUserID(int $id_user, int $offset, int $quantity)
     {
         return new static(static::fetch($id_user, $offset, $quantity));
     }

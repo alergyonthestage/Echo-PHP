@@ -5,7 +5,6 @@ namespace CaveResistance\Echo\Website\App\Model;
 use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Http\Session;
 use Exception;
-use stdClass;
 use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Authentication\Password;
 use CaveResistance\Echo\Website\App\Model\Exceptions\UserNotFound;
@@ -15,12 +14,9 @@ class User {
     private static string $session_user_id = 'user_id';
     private static string $session_username = 'username';
 
-    private stdClass $user;
-
-    private function __construct(stdClass $user)
-    {
-        $this->user = $user;
-    }
+    private function __construct(
+        private array $user
+    ) {}
 
     public static function getLogged(): User
     {
@@ -82,7 +78,7 @@ class User {
         $connection->close();
     }
 
-    private static function fetchFromID(string $id): stdClass 
+    private static function fetchFromID(string $id): array 
     {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT * FROM user WHERE id_user = ?");
@@ -94,7 +90,7 @@ class User {
         if(mysqli_num_rows($result) === 0) {
             throw new UserNotFound($id);
         }
-        $user = $result->fetch_object();
+        $user = $result->fetch_array(MYSQLI_ASSOC);
         $connection->close();
         return $user;
     }
@@ -111,67 +107,67 @@ class User {
         if(mysqli_num_rows($result) === 0) {
             throw new UserNotFound($username);
         }
-        $user = $result->fetch_object();
+        $user = $result->fetch_array(MYSQLI_ASSOC);
         $connection->close();
         return $user;
     }
 
     public function getUserID(): string 
     {
-        return $this->user->id_user;
+        return $this->user['id_user'];
     }
 
     public function getUsername(): string 
     {
-        return $this->user->username;
+        return $this->user['username'];
     }
 
     public function isVerified(): bool 
     {
-        return $this->user->verified;
+        return $this->user['verified'];
     }
 
     public function getName(): string 
     {
-        return $this->user->name;
+        return $this->user['name'];
     }
 
     public function getSurname(): string 
     {
-        return $this->user->surname;
+        return $this->user['surname'];
     }
     
     public function getBio(): string 
     {
-        return $this->user->bio ?? '';
+        return $this->user['bio'] ?? '';
     }
 
     private function getPassword(): string 
     {
-        return $this->user->password;
+        return $this->user['password'];
     }
 
     private function getSalt(): string 
     {
-        return $this->user->salt;
+        return $this->user['salt'];
     }
 
     private function getPepperID(): int 
     {
-        return $this->user->pepper_id;
+        return $this->user['pepper_id'];
     }
 
     public function getEmail(): string 
     {
-        return $this->user->email;
+        return $this->user['email'];
     }
 
     public function getPic(): string 
     {    
-        if ($this->user->pic === NULL || $this->user->pic === '' || !file_exists(Configurations::get('public')."/img/profiles/".$this->user->pic)) {
+        if ($this->user['pic'] === NULL || $this->user['pic'] === '' || !file_exists(Configurations::get('public')."/img/profiles/".$this->user['pic'])) {
             return Configurations::get('paths.profile_pic').'default.png';
         } else {
-            return Configurations::get('paths.profile_pic').$this->user->pic;
+            return Configurations::get('paths.profile_pic').$this->user['pic'];
         }
     }
 
@@ -207,7 +203,7 @@ class User {
         Session::unsetVariable(static::$session_username);
     }
 
-    public function getFriends(bool $retrieveUnconfirmed=false): array
+    public function getFriends(bool $retrieveUnconfirmed = false): array
     {
         $connection = Database::connect();
 
@@ -226,10 +222,12 @@ class User {
         $friends = $stmt->get_result()->fetch_all();
         $connection->close();
 
-        return array_map(function($friend){ return User::fromID($friend[0]); }, $friends);
+        return array_map(function($friend) {
+            return new static($friend);
+        }, $friends);
     }
 
-    public function getFriendsCount(bool $retrieveUnconfirmed=false): int
+    public function getFriendsCount(bool $retrieveUnconfirmed = false): int
     {
         return count($this->getFriends($retrieveUnconfirmed));
     }
