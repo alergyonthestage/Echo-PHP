@@ -19,13 +19,23 @@
     margin: -2px;
 }
 
-.notifications-notification-name p{
+.notifications-notification-description p{
     font-size: 0.9rem;
 }
 
-.notifications-notification-username p {
+.notifications-notification-description a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.notifications-notification-timeago p {
     font-size: 0.8rem;
     color: #98969F;
+}
+
+.notifications-notification-action a{
+    color: #fff;
+    font-size: 0.8rem;
 }
 
 .notifications-item{
@@ -45,8 +55,5 @@
     margin: 0;
 }
 
-.notifications-item a {
-    text-decoration: none;
-    color: #fff;
-}
+
 
