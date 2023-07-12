@@ -1,5 +1,6 @@
 <?php
 
+use CaveResistance\Echo\Website\App\Http\Middlewares\APIReportMiddleware;
 use CaveResistance\Echo\Website\App\Http\Middlewares\Global\LayoutMiddleware;
 
 return [
@@ -32,6 +33,7 @@ return [
     ],
 
     'global_middlewares' => [
-        LayoutMiddleware::class
+        LayoutMiddleware::class,
+        APIReportMiddleware::class
     ]
 ];
