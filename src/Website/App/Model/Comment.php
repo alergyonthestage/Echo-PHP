@@ -5,6 +5,7 @@ namespace CaveResistance\Echo\Website\App\Model;
 use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Website\App\Model\Exceptions\CommentNotFound;
 use Exception;
+use JsonSerializable;
 
 class Comment {
 
@@ -28,7 +29,7 @@ class Comment {
         $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $postID);
         if(!$stmt->execute()) {
-            throw new Exception("Comments not found for this post: $postID");
+            throw new Exception("Database error");
         }
         $result = $stmt->get_result();
 
@@ -38,7 +39,7 @@ class Comment {
 
         $comments = $result->fetch_all(MYSQLI_ASSOC);
         return array_map(function($comment) {
-            new static($comment);
+            return new static($comment);
         }, $comments);
     }
 
@@ -88,9 +89,9 @@ class Comment {
         return $this->comment['post'];
     }
 
-    public function getUser(): User 
+    public function getAuthor(): User
     {
-        return $this->comment['user'];
+        return $this->comment['author'];
     }
 
     public function getDate(): string 

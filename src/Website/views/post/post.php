@@ -7,7 +7,7 @@
 </view-head>
 <div id="post" post-id=<?=$id?>></div>
 <div class="post-comments-area">
-    <?php if(count($comments) == 0): ?>
+    <?php if(empty($comments)): ?>
         <div class="post-comment">
             <div class="post-comment-content">
                 <div class="post-comment-text">
@@ -15,22 +15,23 @@
                 </div>
             </div>
         </div>
+    <?php else: ?>
+        <?php foreach($comments as $comment): ?>
+            <div class="post-comment">
+                <div class="profile-picture-frame comment-profile-picture-frame">
+                    <img class="profile-picture" src="<?=$comment->getAuthor()->getPic()?>" alt="Profile picture">
+                </div>
+                <div class="post-comment-content">
+                    <div class="post-comment-text">
+                        <p><a href="/user/<?=$comment->getAuthor()->getUsername()?>"><b>@<?=$comment->getAuthor()->getUsername()?></b></a> <?=$comment->getText()?></p>
+                    </div>
+                    <div class="post-comment-time">
+                        <p><?=$comment->getTimeAgo()?></p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     <?php endif; ?>
-    <?php foreach($comments as $comment): ?>
-        <div class="post-comment">
-            <div class="profile-picture-frame comment-profile-picture-frame">
-                <img class="profile-picture" src="<?=$comment->getPic()?>" alt="Profile picture">
-            </div>
-            <div class="post-comment-content">
-                <div class="post-comment-text">
-                    <p><a href="/user/<?=$comment->getUsername()?>"><b>@<?=$comment->getUsername()?></b></a> <?=$comment->getText()?></p>
-                </div>
-                <div class="post-comment-time">
-                    <p><?=$comment->getTimeAgo()?></p>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
 </div>
 <div class="post-footer">
     <form action="/comment/publish" method="POST">
