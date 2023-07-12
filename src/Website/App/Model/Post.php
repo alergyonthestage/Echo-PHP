@@ -12,7 +12,7 @@ use JsonSerializable;
 
 class Post implements JsonSerializable {
 
-    private function __construct(
+    public function __construct(
         private array $post
     ) {
         $this->post['song'] = Song::fromID($post['id_song']);
@@ -29,17 +29,16 @@ class Post implements JsonSerializable {
         return static::fetchUserPostsCount($id_user);
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song): Post 
+    public static function create(string $description, string $public, string $id_user, string $id_song): void 
     {
         $connection = Database::connect();
         $timestamp = date('Y-m-d H:i:s', time());
-        $stmt = $connection->prepare("INSERT INTO post (description, timestamp, public, id_user, id_song) VALUES (?,?,?,?,?,?)");
-        $stmt->bind_param('sssssi', $description, $timestamp, $public, $id_user, $id_song);
+        $stmt = $connection->prepare("INSERT INTO post (description, timestamp, public, id_user, id_song) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('sssii', $description, $timestamp, $public, $id_user, $id_song);
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
         $connection->close();
-        return new static($stmt->get_result()->fetch_array(MYSQLI_ASSOC));
     }
 
     private static function fetch($id_post): array 
