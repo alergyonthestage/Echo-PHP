@@ -10,7 +10,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Middlewares\MiddlewareRunner;
 use CaveResistance\Echo\Server\Routing\Exceptions\NotFoundException;
 use CaveResistance\Echo\Server\Routing\Router;
-use Exception;
+use Throwable;
 
 class Kernel implements KernelInterface {
 
@@ -24,8 +24,8 @@ class Kernel implements KernelInterface {
             return (new MiddlewareRunner())->through($this->middlewares)->setDestination($this->router)->run($request); 
         } catch (NotFoundException $exception) {
             return (new NotFoundHandler())->response($exception);
-        } catch (Exception $exception) {
-            return (new ResponseBuilder())->setContent($exception->getMessage())->setStatusCode('400')->build();
+        } catch (Throwable $t) {
+            return (new ResponseBuilder())->setContent($t->getMessage())->setStatusCode('500')->build();
         }
     }
 }

@@ -5,6 +5,12 @@ Adesso:
 - Vedi come gestire il caso no more posts to show
 - load animation on feed infinite scroll
 
+REFACTORING:
+
+- post: fetchComments? perchè in post? deve essere in comments...
+- gli oggetti inglobati vanno istanziati nel costruttore... (es: commenti, song, user, etc... in Post.)
+- MYSQL_ASSOC in fetch...
+
 
 Dopo:
 
