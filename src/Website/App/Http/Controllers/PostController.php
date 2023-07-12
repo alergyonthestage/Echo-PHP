@@ -55,6 +55,6 @@ class PostController implements Controller {
                 User::getLogged()->getID(),
                 $request->getPostParam('text'),
             );
-            return Server::redirectTo("/post/".$comment->getPostID());
+            return Server::redirectTo("/post/".$request->getPostParam('id_post'));
     }
 }

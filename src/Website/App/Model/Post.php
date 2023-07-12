@@ -164,6 +164,9 @@ class Post implements JsonSerializable {
         if (!$stmt->execute()) {
             throw new Exception("Cannot modify like");
         }
+        if(!$this->hasUserLike($userID)){
+            Notification::createLikeNotification($userID, $postID);
+        }
         $connection->close();
         return $this->hasUserLike($userID);
     }
@@ -229,7 +232,7 @@ class Post implements JsonSerializable {
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
             'echoesCount' => $this->getEchoesCount(),
-            'liked' => $this->hasUserLike(User::getLogged())
+            'liked' => $this->hasUserLike(User::getLogged()->getID())
         ];
     }
 

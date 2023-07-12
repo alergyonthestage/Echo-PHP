@@ -15,19 +15,41 @@ class Notification implements JsonSerializable {
         $this->notification['sender'] = Song::fromID($notification['id_sender']);
     }
 
+    public static function fromRecepient($userID): array 
+    {
+        $connection = Database::connect();
+
+        //Fetch the notifications from DB for this recepient_id
+        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recepient = ?");
+        $stmt->bind_param('i', $userID);
+        if(!$stmt->execute()) {
+            throw new Exception("Database error");
+        }
+        $result = $stmt->get_result();
+
+        if(mysqli_num_rows($result) === 0) {
+            return [];
+        }
+
+        $notifications = $result->fetch_all(MYSQLI_ASSOC);
+        return array_map(function($notification) {
+            return new static($notification);
+        }, $notifications);
+    }
+
     public static function fromNotificationID(int $id) 
     {
         return new static(static::fetch($id));
     }
 
-    public static function createCommentNotification($sender, $recipient, $post_id): void
+    public static function createCommentNotification($sender, $post_id): void
     {
-        static::create($sender, $recipient, $post_id, 1);
+        static::create($sender, Post::fromID($post_id)->getAuthor()->getID(), $post_id, 1);
     }
 
-    public static function createLikeNotification($sender, $recipient, $post_id): void
+    public static function createLikeNotification($sender, $post_id): void
     {
-        static::create($sender, $recipient, $post_id, 2);
+        static::create($sender, Post::fromID($post_id)->getAuthor()->getID(), $post_id, 2);
     }
 
     public static function createFriendRequestNotification($sender, $recipient): void
@@ -43,6 +65,11 @@ class Notification implements JsonSerializable {
     public static function createFriendRejectedRequestNotification($sender, $recipient): void
     {
         static::create($sender, $recipient, null, 5);
+    }
+
+    public static function getUserNotificationFound($id_user, $retrieveUnred): int
+    {
+        return static::fetchUserNotificationCount($id_user,  $retrieveUnred);
     }
 
     private static function fetch($notification_id): array
@@ -71,6 +98,19 @@ class Notification implements JsonSerializable {
             throw new Exception("Database error");
         }
         $connection->close(); 
+    }
+
+    private static function fetchUserNotificationCount($id_user, $retrieveUnred): int
+    {
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT COUNT(*) FROM notification WHERE id_recipient = ? AND to_read = ?");
+        $stmt->bind_param('ii', $id_user, $retrieveUnred);
+        if(!$stmt->execute()){
+            throw new Exception("Database error");
+        }
+        $result = $stmt->get_result();
+        $connection->close(); 
+        return $result->fetch_row()[0];
     }
 
     public function getID(): string 
