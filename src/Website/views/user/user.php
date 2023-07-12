@@ -53,3 +53,6 @@
     <div class="important-text"><?=$name?></div>
     <div class="secondary-text"><?=$biography?></div>
 </div>
+<a href="/notification" class="floating-add-button">
+  <div class="fa-regular fa-bell fa-2xl"></div>
+</a>

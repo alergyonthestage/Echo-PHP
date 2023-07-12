@@ -12,15 +12,20 @@ class Notification implements JsonSerializable {
     private function __construct(
         private array $notification
     ) {
-        $this->notification['sender'] = Song::fromID($notification['id_sender']);
+        $this->notification['sender'] = User::fromID($notification['id_sender']);
     }
 
-    public static function fromRecepient($userID): array 
+    public static function getUserNotifications($id_user): array
+    {
+        return Notification::fromRecepient($id_user);
+    }
+
+    private static function fromRecepient($userID): array 
     {
         $connection = Database::connect();
 
         //Fetch the notifications from DB for this recepient_id
-        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recepient = ?");
+        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recipient = ?");
         $stmt->bind_param('i', $userID);
         if(!$stmt->execute()) {
             throw new Exception("Database error");
@@ -67,14 +72,9 @@ class Notification implements JsonSerializable {
         static::create($sender, $recipient, null, 5);
     }
 
-    public static function getUserNotificationsCound($id_user, $retrieveUnred): int
+    public static function getUserNotificationsCount($id_user, $retrieveUnred): int
     {
         return static::fetchUserNotificationsCount($id_user,  $retrieveUnred);
-    }
-
-    public static function getUserNotifications($id_user): array
-    {
-        return [];
     }
 
     private static function fetch($notification_id): array
@@ -133,7 +133,7 @@ class Notification implements JsonSerializable {
         return $this->notification['id_sender'];
     }
 
-    public function getSender(): string 
+    public function getSender(): User 
     {
         return $this->notification['sender'];
     }
@@ -162,7 +162,8 @@ class Notification implements JsonSerializable {
     {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT description FROM notificationtype WHERE id_type = ?");
-        $stmt->bind_param('i', $this->getTypeID());
+        $typeID = $this->getTypeID();
+        $stmt->bind_param('i', $typeID);
         if(!$stmt->execute()){
             throw new Exception("Database error");
         }

@@ -11,10 +11,9 @@ use CaveResistance\Echo\Website\App\Model\User;
 
 class NotificationsController implements Controller {
 
-    public function index($username): Response {
-
+    public function index(): Response {
         $notifications = Notification::getUserNotifications(User::getLogged()->getID());
-        return (new ResponseBuilder())->setContent(View::render('notifications', $notifications))->build();
+        return (new ResponseBuilder())->setContent(View::render('user.notifications', $notifications))->build();
     }
    
 
