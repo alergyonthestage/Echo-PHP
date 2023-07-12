@@ -25,7 +25,7 @@ class Notification implements JsonSerializable {
         $connection = Database::connect();
 
         //Fetch the notifications from DB for this recepient_id
-        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recipient = ?");
+        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recipient = ? ORDER BY timestamp DESC");
         $stmt->bind_param('i', $userID);
         if(!$stmt->execute()) {
             throw new Exception("Database error");

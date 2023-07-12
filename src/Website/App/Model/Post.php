@@ -163,7 +163,7 @@ class Post implements JsonSerializable {
         if (!$stmt->execute()) {
             throw new Exception("Cannot modify like");
         }
-        if(!$this->hasUserLike($userID)){
+        if($this->hasUserLike($userID)){
             Notification::createLikeNotification($userID, $postID);
         }
         $connection->close();
