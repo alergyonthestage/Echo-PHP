@@ -55,5 +55,7 @@
 </div>
 <a href="/notification" class="floating-notification-button">
   <div class="fa-regular fa-bell fa-2xl"></div>
-  <div class="notification-counter">3</div>
+  <div class="notification-counter">
+    <?=$notificationsCounter?>
+  </div>
 </a>
