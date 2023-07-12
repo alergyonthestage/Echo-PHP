@@ -97,20 +97,27 @@ function displaySongList(jsonResponse) {
     retrivedSongs = [];
     let songs = jsonResponse
     songs.forEach((song) => {
-        retrivedSongs[song.id_song] = song
+        retrivedSongs[song.id] = song
         songList.innerHTML += new SongListItem(song).render();
     });
 }
 
 //post preview
 function displayPostPreview() {
-    let $postData = {
-        cover_art: 'public/img/cover/'+retrivedSongs[songSearchField.value].cover,
-        username: 'brtmnl',
+    let postData = {
+        id: '-1',
+        likesCount: '2',
+        echoesCount: '2',
+        commentsCount: '3',
+        song: retrivedSongs[songSearchField.value],
+        author: {
+            username: 'alergy_hardcoded',
+            profilePic: '/public/img/profiles/default.png'
+        },
         profile_picture: 'public/img/profiles/3.png', 
         time_ago: 'now', 
-        description: multiStepForm.elements.description.value, 
-        song_title: retrivedSongs[songSearchField.value].title
+        description: multiStepForm.elements.description.value
     }
-    postPreview.innerHTML = new Post($postData).render();
+    console.log(postData)
+    postPreview.innerHTML = new Post(postData).render();
 }
