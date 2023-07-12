@@ -22,7 +22,7 @@ loadingDisc.innerHTML = new LoadingDiscAnimation().render()
 
 function loadPosts() {
     if(isLoading) return
-    enablePublishButton(false)
+    disablePublishButton()
     showLoadingIcon(true)
     isLoading = true
     fetchData(getRequestLink())
@@ -41,7 +41,7 @@ function loadPosts() {
         .finally(() => {
             isLoading = false
             showLoadingIcon(false)
-            enablePublishButton(true)
+            enablePublishButton()
         })
 }
 
@@ -67,13 +67,13 @@ function showLoadingIcon(display) {
         feed.insertBefore(loadingDisc, feed.firstChild)
         setTimeout(
             () => loadingDisc.classList.add('show'),
-            100
+            500
         )
     } else {
         loadingDisc.classList.remove('show'),
         setTimeout(
             () => document.getElementById('loadingDiscAnimation').remove(),
-            500
+            1000
         )
     }
 }
@@ -81,13 +81,19 @@ function showLoadingIcon(display) {
 //PublishButton could become an object: (why not think about other refactorings and possible objects?)
 
 function showPublishButton(display) {
-    publishButton.classList.toggle('hide', (!display) && publishButtonEnabled)
+    if(publishButtonEnabled) {
+        publishButton.classList.toggle('hide', !display)
+    }
 }
 
-function enablePublishButton(enable) {
-    console.log(enable)
-    showPublishButton(enable)
-    publishButtonEnabled = enable
+function enablePublishButton() {
+    publishButtonEnabled = true
+    showPublishButton(true)
+}
+
+function disablePublishButton() {
+    showPublishButton(false)
+    publishButtonEnabled = false
 }
 
 loadPosts()
