@@ -3,6 +3,7 @@
 namespace CaveResistance\Echo\Server\Interfaces;
 
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
+use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Interfaces\Routing\RouteConfigurator;
 
 /**
@@ -35,5 +36,5 @@ interface Server {
     /**
      * Redirect to the specified local path.
      */
-    public static function redirectTo(string $path): void;
+    public static function redirectTo(string $path): Response;
 }

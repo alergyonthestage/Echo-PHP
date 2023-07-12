@@ -27,7 +27,7 @@ class Comment {
         //Fetch the comments from DB for this post by post_id
         $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $postID);
-        if(!$stmt->execute()){
+        if(!$stmt->execute()) {
             throw new Exception("Comments not found for this post: $postID");
         }
         $result = $stmt->get_result();

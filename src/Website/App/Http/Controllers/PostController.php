@@ -34,27 +34,27 @@ class PostController implements Controller {
                 User::getLogged()->getID(),
                 $request->getPostParam('song_id')
             );
-            Server::redirectTo("/post/".$post->getID());
+            return Server::redirectTo("/post/".$post->getID());
         } else {
             return (new ResponseBuilder())->setContent(View::render('post.publish'))->build();
         }
     }
 
 
-    public function addLike(Request $request): void
+    public function addLike(Request $request): Response
     {   
         $post = Post::fromID((int) $request->getPostParam('id_post'));
         $post->toggleLike();
-        Server::redirectTo("/post/".$post->getID());
+        return Server::redirectTo("/post/".$post->getID());
     }
 
-    public function publishComment(Request $request): void
+    public function publishComment(Request $request): Response
     {
         $comment = Comment::create(
             (int) $request->getPostParam('id_post'),
                 User::getLogged()->getID(),
                 $request->getPostParam('text'),
             );
-            Server::redirectTo("/post/".$comment->getPostID());
+            return Server::redirectTo("/post/".$comment->getPostID());
     }
 }

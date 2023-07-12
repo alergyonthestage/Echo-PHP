@@ -4,8 +4,10 @@ namespace CaveResistance\Echo\Server;
 
 use CaveResistance\Echo\Server\Application\App as ServerApp;
 use CaveResistance\Echo\Server\Application\Configurations;
+use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Routing\RouteConfigurator;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
+use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Server\Interfaces\Server as ServerInterface;
 use Exception;
 
@@ -43,10 +45,9 @@ class Server extends ServerApp implements ServerInterface {
         $response->send();
     }
 
-    public static function redirectTo(string $path, int $responseCode = 302): void
+    public static function redirectTo(string $path, int $responseCode = 302): Response
     {
         $rootPath = Configurations::get('root_url');
-        http_response_code($responseCode);
-        header('Location: '.$rootPath.$path);
+        return (new ResponseBuilder())->setStatusCode($responseCode)->setHeader('Location', $rootPath.$path)->build();
     }
 }

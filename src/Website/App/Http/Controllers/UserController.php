@@ -45,7 +45,7 @@ class UserController implements Controller {
                 $request->getPostParam('email'),
                 $request->getPostParam('password')
             );
-            Server::redirectTo("/login");
+            return Server::redirectTo("/login");
         } else {
             return (new ResponseBuilder())->setContent(View::render('user.signup'))->build();
         }
@@ -58,10 +58,10 @@ class UserController implements Controller {
             Session::unsetVariable('login_error');
             try {
                 if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
-                    Server::redirectTo("/user/".$request->getPostParam('username'));
+                    return Server::redirectTo("/user/".$request->getPostParam('username'));
                 } else {
                     Session::setVariable('login_error', 'Incorrect password');
-                    Server::redirectTo("/login");
+                    return Server::redirectTo("/login");
                 }  
             } catch (UserNotFound $userNotFound) {
                 Session::setVariable('login_error', "The user ".$userNotFound->getUser()." was not found on Echo servers.");
@@ -73,10 +73,10 @@ class UserController implements Controller {
         }
     }
 
-    public function logout(): void
+    public function logout(): Response
     {
         User::logout();
-        Server::redirectTo('/login');
+        return Server::redirectTo('/login');
     }
 
     public function edit(Request $request): Response
@@ -93,7 +93,7 @@ class UserController implements Controller {
                 $request->getPostParam('password')
             );
             
-            Server::redirectTo("/user/" . $user->getUsername());
+            return Server::redirectTo("/user/" . $user->getUsername());
         } else {
             $userData = [
                 'username' => $user->getUsername(),
