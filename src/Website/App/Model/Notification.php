@@ -72,7 +72,7 @@ class Notification implements JsonSerializable {
         static::create($sender, $recipient, null, 5);
     }
 
-    public static function getUserNotificationsCound($id_user, $retrieveUnred): int
+    public static function getUserNotificationsCount($id_user, $retrieveUnred): int
     {
         return static::fetchUserNotificationsCount($id_user,  $retrieveUnred);
     }
