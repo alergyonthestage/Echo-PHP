@@ -6,9 +6,27 @@
 }
 
 #feed article.post {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 1.4em;
-    height: 100%;
+    height: calc(100vh - 4em);
     scroll-snap-align: start;
     scroll-snap-stop: always;
+}
+
+#feed article.post .post-description {
+    flex-grow: 1;
+}
+
+/**---BOTTOM-REACHED-ADVISE---*/
+#feed article:last-child::after {
+    text-align: center;  
+    position: relative;
+    top: 3em;
+    content: "-";
+    opacity: 0;
+    font-size: small;
+    width: 100%;
+    color: white;
 }

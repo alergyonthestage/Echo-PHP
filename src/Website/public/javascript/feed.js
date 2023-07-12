@@ -11,6 +11,7 @@ let isLoading = false
 
 //publish button hide on scroll
 let oldScroll = feed.scrollTop
+let publishButtonEnabled = true
 const publishButton = document.getElementById('publish-button')
 
 //loading disc
@@ -21,8 +22,8 @@ loadingDisc.innerHTML = new LoadingDiscAnimation().render()
 
 function loadPosts() {
     if(isLoading) return
+    enablePublishButton(false)
     showLoadingIcon(true)
-    showPublishButton(false)
     isLoading = true
     fetchData(getRequestLink())
         .then((posts) => {
@@ -40,7 +41,7 @@ function loadPosts() {
         .finally(() => {
             isLoading = false
             showLoadingIcon(false)
-            showPublishButton(true)
+            enablePublishButton(true)
         })
 }
 
@@ -52,6 +53,7 @@ function getRequestLink() {
     }
 }
 
+//could throttle graphic updates...
 feed.onscroll = () => {
     showPublishButton(oldScroll >= feed.scrollTop)
     oldScroll = feed.scrollTop
@@ -60,16 +62,32 @@ feed.onscroll = () => {
     }
 }
 
-loadPosts()
-
 function showLoadingIcon(display) {
     if(display) {
-        feed.appendChild(loadingDisc)
+        feed.insertBefore(loadingDisc, feed.firstChild)
+        setTimeout(
+            () => loadingDisc.classList.add('show'),
+            100
+        )
     } else {
-        document.getElementById('loadingDiscAnimation').remove()
+        loadingDisc.classList.remove('show'),
+        setTimeout(
+            () => document.getElementById('loadingDiscAnimation').remove(),
+            500
+        )
     }
 }
 
+//PublishButton could become an object: (why not think about other refactorings and possible objects?)
+
 function showPublishButton(display) {
-    publishButton.classList.toggle('hide', !display)
+    publishButton.classList.toggle('hide', (!display) && publishButtonEnabled)
 }
+
+function enablePublishButton(enable) {
+    console.log(enable)
+    showPublishButton(enable)
+    publishButtonEnabled = enable
+}
+
+loadPosts()
