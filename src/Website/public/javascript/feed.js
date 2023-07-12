@@ -1,5 +1,11 @@
+import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
 import Post from "./components/Post.js";
 import { fetchData } from "./utils/ajax.js";
+
+const loadingDisc = document.createElement('div')
+loadingDisc.classList.add('loading-icon')
+loadingDisc.id = 'loadingDiscAnimation'
+loadingDisc.innerHTML = new LoadingDiscAnimation().render()
 
 const feed = document.getElementById('feed')
 const apiLink = '/api/feed'
@@ -9,6 +15,7 @@ let isLoading = false
 
 function loadPosts() {
     if(isLoading) return
+    showLoadingIcon(true)
     isLoading = true
     fetchData(getRequestLink())
         .then((posts) => {
@@ -25,6 +32,7 @@ function loadPosts() {
         })
         .finally(() => {
             isLoading = false
+            showLoadingIcon(false)
         })
 }
 
@@ -39,9 +47,16 @@ function getRequestLink() {
 feed.onscroll = () => {
     if(isLoading) return
     if (Math.ceil(feed.clientHeight + feed.scrollTop) >= feed.scrollHeight) {
-        console.log(currentPage)
         loadPosts();
     }
 }
 
 loadPosts()
+
+function showLoadingIcon(display) {
+    if(display) {
+        feed.appendChild(loadingDisc)
+    } else {
+        document.getElementById('loadingDiscAnimation').remove()
+    }
+}
