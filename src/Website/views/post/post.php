@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/public/css/utils.css">
     <script type="module" src="/public/javascript/post.js"></script>
 </view-head>
-<div id="post" post-id=<?=$id_post?>></div>
+<div id="post" post-id=<?=$id?>></div>
 <div class="post-comments-area">
     <?php if(count($comments) == 0): ?>
         <div class="post-comment">
