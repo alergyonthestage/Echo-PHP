@@ -290,6 +290,11 @@ class User implements JsonSerializable {
         if(!$stmt->execute()){
             throw new Exception("Cannot add friend");
         }
+        if ($this->checkRelation($friendID) == 1){
+            Notification::createFriendRequestNotification($userID, $friendID);
+        } else {
+            Notification::createFriendAcceptedRequestNotification($userID, $friendID);
+        }
         $connection->close();
     }
 
@@ -320,6 +325,7 @@ class User implements JsonSerializable {
         if(!$stmt->execute()){
             throw new Exception("Cannot decline friend request");
         }
+        Notification::createFriendRejectedRequestNotification($userID, $friendID);
         $connection->close();
     }
 

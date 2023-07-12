@@ -35,7 +35,7 @@
 </div>
 <div class="post-footer">
     <form action="/comment/publish" method="POST">
-        <input type="hidden" name="id_post" value="<?=$id_post?>">
+        <input type="hidden" name="id_post" value="<?=$id?>">
         <input type="text" name="text" placeholder="Write a comment...">
         <button type="submit" class="post-comment-publish-button"><i class="fas fa-paper-plane"></i></button>
     </form>

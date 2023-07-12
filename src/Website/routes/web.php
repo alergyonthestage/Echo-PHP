@@ -4,6 +4,7 @@ use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
 use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FriendshipController;
+use CaveResistance\Echo\Website\App\Http\Controllers\NotificationsController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 
@@ -55,4 +56,12 @@ Server::createRoute()->accept('POST', '/comment/publish')->withMiddlewares([
 ])->setHandler([
     'controller' => PostController::class,
     'method' => 'publishComment'
+])->add();
+
+//----Notifications----
+Server::createRoute()->accept('GET', '/notifications')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
+    'controller' => NotificationsController::class,
+    'method' => 'index'
 ])->add();

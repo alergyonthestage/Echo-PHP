@@ -1,0 +1,52 @@
+.notifications-profile-picture-frame{
+    min-width: 2rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.notifications-notification{
+    display: flex;
+    align-items: center;
+}
+
+.notifications-notification-infos{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.notifications-notification-infos p{
+    margin: -2px;
+}
+
+.notifications-notification-name p{
+    font-size: 0.9rem;
+}
+
+.notifications-notification-username p {
+    font-size: 0.8rem;
+    color: #98969F;
+}
+
+.notifications-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-bottom: 0.1rem #98969F solid;
+    margin: 0 0.5rem;
+}
+
+.notifications-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.notifications-item a {
+    text-decoration: none;
+    color: #fff;
+}
+

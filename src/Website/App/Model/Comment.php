@@ -76,6 +76,7 @@ class Comment {
         if (!$stmt->execute()) {
             throw new Exception("Cannot create comment");
         }
+        Notification::createCommentNotification($id_user, $id_post);
         $connection->close();
     }
 
