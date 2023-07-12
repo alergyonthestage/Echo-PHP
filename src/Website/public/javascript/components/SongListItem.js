@@ -12,7 +12,7 @@ export default class SongListItem {
                             <div>${this.data.artist.stageName} - ${this.data.title}</div>
                         </div>
                     <div>
-                    <button type="button" song-id="${this.data.id_song}" next-step>Next</button>
+                    <button type="button" song-id="${this.data.id}" next-step>Next</button>
                 </li>`
     }
 

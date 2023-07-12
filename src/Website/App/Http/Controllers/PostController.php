@@ -28,13 +28,13 @@ class PostController implements Controller {
     {
         if($request->getMethod() === 'POST')
         {
-            $post = Post::create(
+            Post::create(
                 $request->getPostParam('description'),
                 empty($request->getPostParam('share_only_friends')),
                 User::getLogged()->getID(),
                 $request->getPostParam('song_id')
             );
-            return Server::redirectTo("/post/".$post->getID());
+            return Server::redirectTo("/feed");
         } else {
             return (new ResponseBuilder())->setContent(View::render('post.publish'))->build();
         }
@@ -55,6 +55,6 @@ class PostController implements Controller {
                 User::getLogged()->getID(),
                 $request->getPostParam('text'),
             );
-            return Server::redirectTo("/post/".$comment->getPostID());
+            return Server::redirectTo("/post/".$comment->getPost());
     }
 }
