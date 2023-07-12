@@ -3,7 +3,7 @@
 namespace CaveResistance\Echo\Server\Http;
 
 use CaveResistance\Echo\Server\Http\ExceptionHandlers\NotFoundHandler;
-use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
+use CaveResistance\Echo\Server\Http\ExceptionHandlers\ThrowableHandler;
 use CaveResistance\Echo\Server\Interfaces\Http\Kernel as KernelInterface;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
@@ -24,8 +24,8 @@ class Kernel implements KernelInterface {
             return (new MiddlewareRunner())->through($this->middlewares)->setDestination($this->router)->run($request); 
         } catch (NotFoundException $exception) {
             return (new NotFoundHandler())->response($exception);
-        } catch (Throwable $t) {
-            return (new ResponseBuilder())->setContent($t->getMessage())->setStatusCode('500')->build();
+        } catch (Throwable $trhowable) {
+            return (new ThrowableHandler())->response($trhowable);
         }
     }
 }
