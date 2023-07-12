@@ -7,10 +7,9 @@ export default class SongListItem {
     render() {
         return `<li class="publish-song-list-item">
                     <div class="publish-song-list-item-data">
-                        <img src="/public/img/cover/${this.data.cover}" alt="coverart"/>
+                        <img src="${this.data.coverArt}" alt="coverart"/>
                         <div class="publish-song-list-item-infos">
-                            <div>${this.data.artist_name} - ${this.data.title}</div>
-                            <div>${this.data.id_genre}</div>
+                            <div>${this.data.artist.stageName} - ${this.data.title}</div>
                         </div>
                     <div>
                     <button type="button" song-id="${this.data.id_song}" next-step>Next</button>
