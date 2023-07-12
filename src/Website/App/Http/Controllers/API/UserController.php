@@ -42,7 +42,7 @@ class UserController {
             )->build();
         }
 
-        $fileName = $user->getUserID().".".$fileExtension;
+        $fileName = $user->getID().".".$fileExtension;
         $destinationPath = Configurations::get('public')."/img/profiles/";
 
         if(!move_uploaded_file($file['tmp_name'], $destinationPath.$fileName)) {
@@ -63,7 +63,7 @@ class UserController {
         try {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
-            $user->requestFriendship($friend->getUserID());
+            $user->requestFriendship($friend->getID());
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Success: Friend added!'))
             )->build();
@@ -79,7 +79,7 @@ class UserController {
         try {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
-            $user->acceptFriendship($friend->getUserID());
+            $user->acceptFriendship($friend->getID());
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Success: Request accepted!'))
             )->build();
@@ -95,7 +95,7 @@ class UserController {
         try {
            $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
-            $user->dropFriendshipRequest($friend->getUserID()); 
+            $user->dropFriendshipRequest($friend->getID()); 
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Success: Request cancelled!'))
             )->build();
@@ -111,7 +111,7 @@ class UserController {
         try {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
-            $user->declineFriendshipRequest($friend->getUserID()); 
+            $user->declineFriendshipRequest($friend->getID()); 
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Success: Request declined!'))
             )->build();
@@ -127,7 +127,7 @@ class UserController {
         try {
             $user = User::getLogged();
             $friend = User::fromID($request->getPostParam('friend'));
-            $user->removeFriendship($friend->getUserID());
+            $user->removeFriendship($friend->getID());
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Success: Friend removed!'))
             )->build();

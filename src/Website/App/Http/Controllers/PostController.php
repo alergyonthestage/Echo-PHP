@@ -17,23 +17,11 @@ class PostController implements Controller {
     public function index($id): Response
     {
         $post = Post::fromID($id);
-
-        $postData = [
-            "id_post" => $post->getPostID(),
-            "author_username" => $post->getAuthorUsername(),
-            "author_verified" => $post->isAuthorVerified(),
-            "author_picture" => $post->getAuthorPicture(),
-            "time_ago" => $post->getTimeAgo(),
-            "cover_art" => $post->getSongCover(),
-            "song_info" => $post->getSongArtist()." - ".$post->getSongTitle(),
-            "description" => $post->getDescription(),
-            "comments" => $post->getComments(),
-            "loggedLiked" => $post->hasLoggedUserLike(),
-            "likes_count" => $post->getLikesCount(),
-            "comments_count" => $post->getCommentsCount(),
-            "echoes_count" => $post->getEchoesCount()
+        $data = [
+            'comments' => $post->getComments(),
+            'id' => $post->getID()
         ];
-        return (new ResponseBuilder())->setContent(View::render('post.post', $postData))->build();
+        return (new ResponseBuilder())->setContent(View::render('post.post', $data))->build();
     }
 
     public function publish(Request $request): Response
@@ -43,10 +31,10 @@ class PostController implements Controller {
             $post = Post::create(
                 $request->getPostParam('description'),
                 empty($request->getPostParam('share_only_friends')),
-                User::getLogged()->getUserID(),
+                User::getLogged()->getID(),
                 $request->getPostParam('song_id')
             );
-            Server::redirectTo("/post/".$post->getPostID());
+            Server::redirectTo("/post/".$post->getID());
         } else {
             return (new ResponseBuilder())->setContent(View::render('post.publish'))->build();
         }
@@ -57,14 +45,14 @@ class PostController implements Controller {
     {   
         $post = Post::fromID((int) $request->getPostParam('id_post'));
         $post->toggleLike();
-        Server::redirectTo("/post/".$post->getPostID());
+        Server::redirectTo("/post/".$post->getID());
     }
 
     public function publishComment(Request $request): void
     {
         $comment = Comment::create(
             (int) $request->getPostParam('id_post'),
-                User::getLogged()->getUserID(),
+                User::getLogged()->getID(),
                 $request->getPostParam('text'),
             );
             Server::redirectTo("/post/".$comment->getPostID());

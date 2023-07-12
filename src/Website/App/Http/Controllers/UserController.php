@@ -19,7 +19,7 @@ class UserController implements Controller {
         $user = User::fromUsername($username);
 
         $userData = [
-            'profileID' => $user->getUserID(),
+            'profileID' => $user->getID(),
             'username' => $user->getUsername(),
             'verified' => $user->isVerified(),
             'name' => $user->getName()." ".$user->getSurname(),
@@ -28,8 +28,8 @@ class UserController implements Controller {
             'posts' => $user->getPostsCount(),
             'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),
-            'selfProfile' => User::isLogged() ? $user->getUserID() === User::getLogged()->getUserID() : false,
-            'relation' => User::getLogged()->checkRelation($user->getUserID())
+            'selfProfile' => User::isLogged() ? $user->getID() === User::getLogged()->getID() : false,
+            'relation' => User::getLogged()->checkRelation($user->getID())
         ];
         return (new ResponseBuilder())->setContent(View::render('user.user', $userData))->build();
     }

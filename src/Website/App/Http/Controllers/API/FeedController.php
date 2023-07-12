@@ -17,7 +17,7 @@ class FeedController implements Controller {
         $quantity = 3;
         $offset = $quantity*$request->getQueryParam('page') ?? 0;
         try {
-            $posts = Feed::getPosts(User::getLogged()->getUserID(), $offset, $quantity);
+            $posts = Feed::fromUserID(User::getLogged()->getID(), $offset, $quantity);
             return (new ResponseBuilder())->setContent(json_encode($posts))->setMimeType('application/json')->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setContent(json_encode([]))->setMimeType('application/json')->build();
