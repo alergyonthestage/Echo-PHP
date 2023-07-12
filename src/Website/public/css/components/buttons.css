@@ -44,3 +44,43 @@
     background-color: white;
     transform: scale(1.1);
 }
+
+.floating-notification-button {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    height: 4em;
+    width: 4em;
+    border-radius: 50%;
+    border: none;
+    background-color:  #c0c0c0;
+    color: #353143;
+    box-shadow: #353143 0 0.1em 0.3em;
+    transition: background-color 0.2s;
+    transition: transform 0.2s ease-in-out;
+}
+
+.floating-notification-button:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.notification-counter {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #F8D164;
+    color: #353143;
+    font-size: 12px;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
