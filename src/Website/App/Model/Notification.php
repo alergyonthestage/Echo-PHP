@@ -67,9 +67,14 @@ class Notification implements JsonSerializable {
         static::create($sender, $recipient, null, 5);
     }
 
-    public static function getUserNotificationFound($id_user, $retrieveUnred): int
+    public static function getUserNotificationsCound($id_user, $retrieveUnred): int
     {
-        return static::fetchUserNotificationCount($id_user,  $retrieveUnred);
+        return static::fetchUserNotificationsCount($id_user,  $retrieveUnred);
+    }
+
+    public static function getUserNotifications($id_user): array
+    {
+        return [];
     }
 
     private static function fetch($notification_id): array
@@ -100,7 +105,7 @@ class Notification implements JsonSerializable {
         $connection->close(); 
     }
 
-    private static function fetchUserNotificationCount($id_user, $retrieveUnred): int
+    private static function fetchUserNotificationsCount($id_user, $retrieveUnred): int
     {
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT COUNT(*) FROM notification WHERE id_recipient = ? AND to_read = ?");
