@@ -4,6 +4,7 @@ Adesso:
 - Sistema post preview in publish
 - Vedi come gestire il caso no more posts to show
 - load animation on feed infinite scroll
+- search profile by username/name + surname/...?
 
 Dopo:
 
