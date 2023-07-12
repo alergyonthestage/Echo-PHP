@@ -7,6 +7,6 @@
   <script type="module" src="/public/javascript/feed.js"></script>
 </view-head>
 <div id="feed"></div>
-<a href="/publish" class="floating-add-button">
+<a href="/publish" class="floating-add-button" id="publish-button">
   <div class="fa-solid fa-plus fa-2xl"></div>
 </a>

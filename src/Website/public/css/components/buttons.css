@@ -38,11 +38,16 @@
     box-shadow: #353143 0 0.1em 0.3em;
     transition: background-color 0.2s;
     transition: transform 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .floating-add-button:hover {
     background-color: white;
     transform: scale(1.1);
+}
+
+.floating-add-button.hide {
+    opacity: 0;
 }
 
 .floating-notification-button {

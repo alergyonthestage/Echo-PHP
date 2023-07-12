@@ -2,20 +2,27 @@ import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
 import Post from "./components/Post.js";
 import { fetchData } from "./utils/ajax.js";
 
-const loadingDisc = document.createElement('div')
-loadingDisc.classList.add('loading-icon')
-loadingDisc.id = 'loadingDiscAnimation'
-loadingDisc.innerHTML = new LoadingDiscAnimation().render()
-
+//feed
 const feed = document.getElementById('feed')
 const apiLink = '/api/feed'
 
 let currentPage = 0
 let isLoading = false
 
+//publish button hide on scroll
+let oldScroll = feed.scrollTop
+const publishButton = document.getElementById('publish-button')
+
+//loading disc
+const loadingDisc = document.createElement('div')
+loadingDisc.classList.add('loading-icon')
+loadingDisc.id = 'loadingDiscAnimation'
+loadingDisc.innerHTML = new LoadingDiscAnimation().render()
+
 function loadPosts() {
     if(isLoading) return
     showLoadingIcon(true)
+    showPublishButton(false)
     isLoading = true
     fetchData(getRequestLink())
         .then((posts) => {
@@ -33,6 +40,7 @@ function loadPosts() {
         .finally(() => {
             isLoading = false
             showLoadingIcon(false)
+            showPublishButton(true)
         })
 }
 
@@ -45,7 +53,8 @@ function getRequestLink() {
 }
 
 feed.onscroll = () => {
-    if(isLoading) return
+    showPublishButton(oldScroll >= feed.scrollTop)
+    oldScroll = feed.scrollTop
     if (Math.ceil(feed.clientHeight + feed.scrollTop) >= feed.scrollHeight) {
         loadPosts();
     }
@@ -59,4 +68,8 @@ function showLoadingIcon(display) {
     } else {
         document.getElementById('loadingDiscAnimation').remove()
     }
+}
+
+function showPublishButton(display) {
+    publishButton.classList.toggle('hide', !display)
 }
