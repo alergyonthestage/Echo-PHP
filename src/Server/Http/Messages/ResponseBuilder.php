@@ -11,7 +11,7 @@ class ResponseBuilder implements ResponseBuilderInterface {
     private string $content = '';
     private array $headers = [];
 
-    public function setStatusCode(string $statusCode): ResponseBuilder
+    public function setStatusCode(int $statusCode): ResponseBuilder
     {
         $this->statusCode = $statusCode;
         return $this;

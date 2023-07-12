@@ -6,4 +6,6 @@ interface Response {
 
     public function send(): void;
 
+    public function getStatusCode(): int;
+
 }

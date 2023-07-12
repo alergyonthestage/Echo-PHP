@@ -2,7 +2,6 @@
 
 namespace CaveResistance\Echo\Server\Http;
 
-use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Server\Http\ExceptionHandlers\NotFoundHandler;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\Interfaces\Http\Kernel as KernelInterface;

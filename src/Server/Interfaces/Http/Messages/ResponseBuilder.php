@@ -4,7 +4,7 @@ namespace CaveResistance\Echo\Server\Interfaces\Http\Messages;
 
 interface ResponseBuilder {
 
-    public function setStatusCode(string $statusCode): ResponseBuilder;
+    public function setStatusCode(int $statusCode): ResponseBuilder;
 
     public function setContent(string $content): ResponseBuilder;
 

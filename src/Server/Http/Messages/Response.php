@@ -22,4 +22,9 @@ class Response implements ResponseInterface {
         echo $this->content;
     }
 
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
+    }
+
 }
