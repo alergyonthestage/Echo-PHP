@@ -8,8 +8,9 @@ use Exception;
 use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Authentication\Password;
 use CaveResistance\Echo\Website\App\Model\Exceptions\UserNotFound;
+use JsonSerializable;
 
-class User {
+class User implements JsonSerializable {
 
     private static string $session_user_id = 'user_id';
     private static string $session_username = 'username';
@@ -49,7 +50,7 @@ class User {
 
     public function update(string $username, string $name, string $surname, string $bio, string $email, string $password)
     {
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $salt='';
         $pepperID=0;
         $pw = empty($password) ? $this->getPassword() : Password::hash(Password::season($password, $salt, $pepperID));
@@ -67,7 +68,7 @@ class User {
     }
 
     public function updateProfileImage(string $pic) {
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $connection = Database::connect();
         $stmt = $connection->prepare("UPDATE user SET pic = ? WHERE id_user = ?");
         $stmt->bind_param('si', $pic, $userID);
@@ -112,7 +113,7 @@ class User {
         return $user;
     }
 
-    public function getUserID(): string 
+    public function getID(): string 
     {
         return $this->user['id_user'];
     }
@@ -176,7 +177,7 @@ class User {
         if(static::isLogged()) {
             throw new Exception('Already Logged');
         } else if(Password::verify($password, $this->getPassword(), $this->getSalt(), $this->getPepperID())) {
-            Session::setVariable(static::$session_user_id, $this->getUserID());
+            Session::setVariable(static::$session_user_id, $this->getID());
             Session::setVariable(static::$session_username, $this->getUsername());
             return true;
         }
@@ -186,7 +187,7 @@ class User {
     public static function isLogged(): bool
     {
         if(Session::hasVariable(static::$session_user_id) && Session::hasVariable(static::$session_username)) {
-            if(Session::getVariable(static::$session_user_id) === User::fromUsername(Session::getVariable(static::$session_username))->getUserID() && 
+            if(Session::getVariable(static::$session_user_id) === User::fromUsername(Session::getVariable(static::$session_username))->getID() && 
             Session::getVariable(static::$session_username) === User::fromID(Session::getVariable(static::$session_user_id))->getUsername()) {
                 return true;
             } else {
@@ -214,7 +215,7 @@ class User {
         }
 
         $stmt = $connection->prepare($query);
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt->bind_param('ii', $userID, $userID);
         if(!$stmt->execute()){
             throw new Exception("Error to find friends of:".$userID);
@@ -236,7 +237,7 @@ class User {
     public function checkRelation($friendID): int
     {
         $connection = Database::connect();
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt = $connection->prepare("SELECT * FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
         $stmt->bind_param('iiii', $userID, $friendID, $friendID, $userID);
         if (!$stmt->execute()) {
@@ -256,7 +257,7 @@ class User {
 
     public function getPostsCount(): int
     {
-        return Post::getUserPostsCount($this->getUserID());
+        return Post::getUserPostsCount($this->getID());
     }
 
     public function getEchoesCount(): int
@@ -283,7 +284,7 @@ class User {
     private function insertFriend($friendID) : void 
     {
         $connection = Database::connect();
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt = $connection->prepare("INSERT INTO friendship (friend1, friend2) VALUES (?,?)");
         $stmt->bind_param('ii', $userID, $friendID);
         if(!$stmt->execute()){
@@ -298,7 +299,7 @@ class User {
             throw new Exception('No friendship request to drop');
         }
         $connection = Database::connect();
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
         $stmt->bind_param('ii', $userID, $friendID);
         if(!$stmt->execute()){
@@ -313,7 +314,7 @@ class User {
             throw new Exception('No friendship request to decline');
         }
         $connection = Database::connect();
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt = $connection->prepare("DELETE FROM friendship WHERE friend1 = ? AND friend2 = ?");
         $stmt->bind_param('ii', $friendID, $userID);
         if(!$stmt->execute()){
@@ -327,12 +328,25 @@ class User {
             throw new Exception("Cannot remove someone who's not a friend");
         }
         $connection = Database::connect();
-        $userID = $this->getUserID();
+        $userID = $this->getID();
         $stmt = $connection->prepare("DELETE FROM friendship WHERE (friend1 = ? AND friend2 = ?) OR (friend1 = ? AND friend2 = ?)");
         $stmt->bind_param('iiii', $friendID, $userID, $userID, $friendID);
         if(!$stmt->execute()){
             throw new Exception("Cannot remove friend");
         }
         $connection->close();
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'username' => $this->getUsername(),
+            'name' => $this->getName(),
+            'surname' => $this->getSurname(),
+            'bio' => $this->getBio(),
+            'email' => $this->getEmail(),
+            'profilePic' => $this->getPic(),
+            'isVerified' => $this->isVerified()
+        ];
     }
 }

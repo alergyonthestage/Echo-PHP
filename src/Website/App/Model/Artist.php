@@ -6,8 +6,9 @@ use CaveResistance\Echo\Server\Database\Database;
 use CaveResistance\Echo\Server\Application\Configurations;
 use CaveResistance\Echo\Website\App\Model\Exceptions\ArtistNotFound;
 use Exception;
+use JsonSerializable;
 
-class Artist {
+class Artist implements JsonSerializable {
 
     private function __construct(
         private array $artist
@@ -35,7 +36,7 @@ class Artist {
         return $artist;
     }
 
-    public function getArtistID(): string 
+    public function getID(): string 
     {
         return $this->artist['id_artist'];
     }
@@ -52,6 +53,15 @@ class Artist {
         } else {
             return Configurations::get('paths.artist_pic').$this->artist['pic'];
         }
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getID(),
+            'stageName' => $this->getStageName(),
+            'picture' => $this->getPic()
+        ];
     }
 
 }

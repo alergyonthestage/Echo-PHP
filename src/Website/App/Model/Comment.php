@@ -12,6 +12,7 @@ class Comment {
         private array $comment
     ) {
         $this->comment['author'] = User::fromID($this->comment['id_user']);
+        $this->comment['post'] = Post::fromID($this->comment['id_post']);
     }
 
     public static function fromID(int $id_post, int $id_user, string $timestamp): Comment 
@@ -35,9 +36,10 @@ class Comment {
             return [];
         }
 
+        $comments = $result->fetch_all(MYSQLI_ASSOC);
         return array_map(function($comment) {
             new static($comment);
-        }, $result->fetch_array(MYSQLI_ASSOC));
+        }, $comments);
     }
 
     private static function fetch(int $id_post, int $id_user, string $timestamp): array 
@@ -76,29 +78,19 @@ class Comment {
         $connection->close();
     }
 
-    public function getCommentID(): string 
+    public function getID(): string 
     {
         return $this->comment['id_comment'];
     }
 
-    public function getPostID(): string 
+    public function getPost(): Post 
     {
-        return $this->comment['id_post'];
+        return $this->comment['post'];
     }
 
-    public function getUserID(): string 
+    public function getUser(): User 
     {
-        return $this->comment['id_user'];
-    }
-
-    public function getUsername(): string 
-    {
-        return $this->comment['author']->getUsername();
-    }
-
-    public function getPic(): string 
-    {
-        return $this->comment['author']->getPic();
+        return $this->comment['user'];
     }
 
     public function getDate(): string 

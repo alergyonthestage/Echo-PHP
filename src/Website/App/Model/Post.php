@@ -29,7 +29,7 @@ class Post implements JsonSerializable {
         return static::fetchUserPostsCount($id_user);
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song): void 
+    public static function create(string $description, string $public, string $id_user, string $id_song): Post 
     {
         $connection = Database::connect();
         $timestamp = date('Y-m-d H:i:s', time());
@@ -39,6 +39,7 @@ class Post implements JsonSerializable {
             throw new Exception("Cannot create post");
         }
         $connection->close();
+        return new static($stmt->get_result()->fetch_array(MYSQLI_ASSOC));
     }
 
     private static function fetch($id_post): array 
@@ -77,10 +78,10 @@ class Post implements JsonSerializable {
 
     public function getComments(): array
     {
-        return Comment::fromPost($this->getPostID());
+        return Comment::fromPost($this->getID());
     }
 
-    public function getPostID(): string 
+    public function getID(): string 
     {
         return $this->post['id_post'];
     }
@@ -138,12 +139,12 @@ class Post implements JsonSerializable {
         return $this->post['public'];
     }
 
-    public function getAuthor(): string 
+    public function getAuthor(): User 
     {
         return $this->post['author'];
     }
 
-    public function getSong(): string 
+    public function getSong(): Song 
     {
         return $this->post['song'];
     }
@@ -151,8 +152,8 @@ class Post implements JsonSerializable {
     public function toggleLike(): bool 
     {
         $connection = Database::connect();
-        $postID = $this->getPostID();  
-        $userID = User::getLogged()->getUserID();
+        $postID = $this->getID();  
+        $userID = User::getLogged()->getID();
         if($this->hasUserLike($userID)){
             $query = "DELETE FROM likedpost WHERE id_post = ? AND id_user = ?;";
         } else{
@@ -170,7 +171,7 @@ class Post implements JsonSerializable {
     public function hasUserLike($userID) : bool 
     {
         $connection = Database::connect();
-        $postID = $this->getPostID();
+        $postID = $this->getID();
         $stmt = $connection->prepare("SELECT * FROM likedpost WHERE id_post = ? AND id_user = ?");
         $stmt->bind_param('ii', $postID, $userID);
         if (!$stmt->execute()) {
@@ -184,7 +185,7 @@ class Post implements JsonSerializable {
     public function getLikesCount(): int
     {
         $connection = Database::connect();
-        $id_post = $this->getPostID();
+        $id_post = $this->getID();
         $stmt = $connection->prepare("SELECT COUNT(*) AS likes_count FROM likedpost WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);
         if (!$stmt->execute()) {
@@ -198,7 +199,7 @@ class Post implements JsonSerializable {
     public function getCommentsCount(): int
     {
         $connection = Database::connect();
-        $id_post = $this->getPostID();
+        $id_post = $this->getID();
         $stmt = $connection->prepare("SELECT COUNT(*) AS comments_count FROM comment WHERE id_post = ?");
         $stmt->bind_param('i', $id_post);
         if (!$stmt->execute()) {
@@ -217,7 +218,7 @@ class Post implements JsonSerializable {
     public function jsonSerialize(): array
     {
         return [
-            'postID' => $this->getPostID(),
+            'id' => $this->getID(),
             'description' => $this->getDescription(),
             'date' => $this->getDate(),
             'time' => $this->getTime(),

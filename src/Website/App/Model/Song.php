@@ -40,7 +40,7 @@ class Song implements JsonSerializable {
         return $song;  
     }
 
-    public function getSongID(): string 
+    public function getID(): string 
     {
         return $this->song['id_song'];
     }
@@ -50,7 +50,7 @@ class Song implements JsonSerializable {
         return $this->song['title'];
     }
 
-    public function getCover(): string 
+    public function getCoverArt(): string 
     {
         return Configurations::get('paths.cover_art').$this->song['cover'];
     }
@@ -82,6 +82,11 @@ class Song implements JsonSerializable {
 
     public function jsonSerialize(): array
     {
-        return $this->song;
+        return [
+            'id' => $this->getID(),
+            'title' => $this->getTitle(),
+            'artist' => $this->getArtist(),
+            'coverArt' => $this->getCoverArt()
+        ];
     }
 }
