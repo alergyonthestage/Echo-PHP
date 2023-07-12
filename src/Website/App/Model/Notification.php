@@ -158,6 +158,34 @@ class Notification implements JsonSerializable {
         return $this->notification['type'];
     }
 
+    public function getTimeAgo(): string
+    {
+        $timestamp = strtotime($this->getTimestamp());
+        $now = time();
+        $diff = $now - $timestamp;
+        if($diff < 60) {
+            return $diff . " secondi fa";
+        }
+        $diff = floor($diff / 60);
+        if($diff < 60) {
+            return $diff . " minuti fa";
+        }
+        $diff = floor($diff / 60);
+        if($diff < 24) {
+            return $diff . " ore fa";
+        }
+        $diff = floor($diff / 24);
+        if($diff < 30) {
+            return $diff . " giorni fa";
+        }
+        $diff = floor($diff / 30);
+        if($diff < 12) {
+            return $diff . " mesi fa";
+        }
+        $diff = floor($diff / 12);
+        return $diff . " anni fa";
+    }
+
     public function getTypeDescription(): string 
     {
         $connection = Database::connect();
