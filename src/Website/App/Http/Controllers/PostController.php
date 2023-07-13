@@ -30,7 +30,6 @@ class PostController implements Controller {
         {
             Post::create(
                 $request->getPostParam('description'),
-                empty($request->getPostParam('share-only-friends')),
                 User::getLogged()->getID(),
                 $request->getPostParam('song-id')
             );

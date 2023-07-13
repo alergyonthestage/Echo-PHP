@@ -24,10 +24,6 @@
         <label for="description">Description</label>
         <input id="description" type="text" name="description" placeholder="Tell something about this song"></input>
         <div>
-            <input type="checkbox" name="only-friends" id="only-friends">
-            <label for="only-friends" class="unselectable">Share only with friends</label>
-        </div>
-        <div>
             <button type="button" class="secondary-button" prev-step>Back</button>
             <button type="button" class="primary-button" next-step>Next</button>
         </div>        

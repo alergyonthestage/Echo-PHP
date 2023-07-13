@@ -29,12 +29,12 @@ class Post implements JsonSerializable {
         return static::fetchUserPostsCount($id_user);
     }
 
-    public static function create(string $description, string $public, string $id_user, string $id_song): void 
+    public static function create(string $description, string $id_user, string $id_song): void 
     {
         $connection = Database::connect();
         $timestamp = date('Y-m-d H:i:s', time());
-        $stmt = $connection->prepare("INSERT INTO post (description, timestamp, public, id_user, id_song) VALUES (?,?,?,?,?)");
-        $stmt->bind_param('sssii', $description, $timestamp, $public, $id_user, $id_song);
+        $stmt = $connection->prepare("INSERT INTO post (description, timestamp, id_user, id_song) VALUES (?,?,?,?)");
+        $stmt->bind_param('sssii', $description, $timestamp, $id_user, $id_song);
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
@@ -133,11 +133,6 @@ class Post implements JsonSerializable {
         return $diff . " years ago";
     }
 
-    public function isPublic(): string 
-    {
-        return $this->post['public'];
-    }
-
     public function getAuthor(): User 
     {
         return $this->post['author'];
@@ -225,7 +220,6 @@ class Post implements JsonSerializable {
             'date' => $this->getDate(),
             'time' => $this->getTime(),
             'timeAgo' => $this->getTimeAgo(),
-            'isPublic' => $this->isPublic(),
             'author' => $this->getAuthor(),
             'song' => $this->getSong(),
             'likesCount' => $this->getLikesCount(),
