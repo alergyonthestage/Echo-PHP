@@ -148,7 +148,7 @@ class Post implements JsonSerializable {
         return $this->post['song'];
     }
 
-    public function toggleLike(): bool 
+    public function toggleLike(): bool
     {
         $connection = Database::connect();
         $postID = $this->getID();  

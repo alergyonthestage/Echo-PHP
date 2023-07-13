@@ -1,5 +1,6 @@
 import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
 import Post from "./components/Post.js";
+import { addInteractionsListenrs } from "./postInteractions.js";
 import { fetchData } from "./utils/ajax.js";
 
 //feed
@@ -31,6 +32,7 @@ function loadPosts() {
                 posts.forEach((postData) => {
                     feed.innerHTML += new Post(postData).render()
                 })
+                addInteractionsListenrs()
                 currentPage++;
             }
         })
