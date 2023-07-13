@@ -63,17 +63,20 @@ feed.onscroll = () => {
 }
 
 function showLoadingIcon(display) {
+    const delay = 500
     if(display) {
         feed.insertBefore(loadingDisc, feed.firstChild)
         setTimeout(
             () => loadingDisc.classList.add('show'),
-            500
+            delay
         )
     } else {
-        loadingDisc.classList.remove('show'),
+        document.getElementById('loadingDiscAnimation').addEventListener('transitionend', () => {
+            document.getElementById('loadingDiscAnimation').remove();
+        }, { once: true })
         setTimeout(
-            () => document.getElementById('loadingDiscAnimation').remove(),
-            1000
+            () => document.getElementById('loadingDiscAnimation').classList.remove('show'),
+            delay
         )
     }
 }

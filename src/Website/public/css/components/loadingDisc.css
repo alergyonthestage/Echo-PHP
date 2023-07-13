@@ -6,8 +6,7 @@
     text-align: center;
     opacity: 0;
     transform: translateY(2em);
-    transition: opacity .4s ease-in-out;
-    transition: transform .4s ease;
+    transition: opacity .4s ease-in-out, transform .4s ease;
     color: #F8D164;
   }
 
