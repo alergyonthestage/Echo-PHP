@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="/public/css/components/avatar.css">
   <link rel="stylesheet" href="/public/css/components/buttons.css">
   <link rel="stylesheet" href="/public/css/views/feed.css">
-<link rel="stylesheet" href="/public/css/components/loadingDisc.css">
+  <link rel="stylesheet" href="/public/css/components/loadingDisc.css">
   <script type="module" src="/public/javascript/feed.js"></script>
 </view-head>
 <div id="feed"></div>

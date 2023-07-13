@@ -1,6 +1,6 @@
 import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
 import Post from "./components/Post.js";
-import { addInteractionsListenrs } from "./postInteractions.js";
+import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
 
 //feed

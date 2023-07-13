@@ -247,3 +247,16 @@
     border-radius: 0.4rem;
     box-shadow: #353143 0 0.05em 0.2em;
 }
+
+/**---COMMENTS_SECTION---*/
+
+.comments-section.expand {
+    position: fixed;
+    top: 4em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #544f6863;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}

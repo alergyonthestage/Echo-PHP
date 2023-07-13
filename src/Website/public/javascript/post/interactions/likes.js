@@ -1,18 +1,8 @@
-import { uploadFormData } from "./utils/ajax.js";
+import { uploadFormData } from "../../utils/ajax.js";
 
 const apiLikeLink = '/api/like'
 
-function addInteractionsListenrs() {
-    const $likeButtons = [...document.querySelectorAll('[like-button]')]
-
-    $likeButtons.forEach((likeButton) => {
-        likeButton.onclick = () => {
-            likePost(likeButton.getAttribute('like-button'))
-        }
-    })
-}
-
-async function likePost(postID) {
+export async function likePost(postID) {
 
     //UPDATE VIEW BEFORE CALL API (RESPONSIVE UI)
     toggleViewLike(postID)
@@ -41,5 +31,3 @@ function toggleViewLike(postID) {
     let currentCount = parseInt(likeCounter.innerHTML)
     likeCounter.innerHTML = added ? ++currentCount : --currentCount
 }
-
-export {addInteractionsListenrs}

@@ -45,14 +45,8 @@ export default class Post {
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <span comment-counter="${this.data.id}">${this.data.commentsCount}</span>
-                                <a href="/post/${this.data.id}">
-                                <button class="post-interaction-button">
+                                <button class="post-interaction-button" comment-button="${this.data.id}">
                                     <i class="fas fa-comment"></i>
-                                </button>
-                                </a>
-                                ${this.data.echoesCount}
-                                <button class="post-interaction-button">
-                                    <i class="fas fa-user"></i>
                                 </button>
                             </div>
                         </div>
@@ -60,6 +54,7 @@ export default class Post {
                     <div class="post-description">
                         <p>${this.data.description}</p>
                     </div>
+                    <div class="comments-section" comments-section="${this.data.id}"></div>
                 </article>`
     }
 
