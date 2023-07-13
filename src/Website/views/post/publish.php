@@ -16,16 +16,16 @@
 </div>
 <form action="/publish" method="post" multi-step-form>
     <div class="publish-form-step" form-step>
-        <input type="text" placeholder="Search a song" id="publish-song-search-field" name="song_id"></input>
+        <input type="text" placeholder="Search a song" id="publish-song-search-field" name="song-id"></input>
         <ul id="publish-song-list">
         </ul>
     </div>
     <div class="publish-form-step" form-step>
         <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Tell something about this song"></input>
+        <input id="description" type="text" name="description" placeholder="Tell something about this song"></input>
         <div>
-            <input type="checkbox" name="share_only_friends" id="share_only_friends">
-            <label for="share_only_friends" class="unselectable">Share only with friends</label>
+            <input type="checkbox" name="only-friends" id="only-friends">
+            <label for="only-friends" class="unselectable">Share only with friends</label>
         </div>
         <div>
             <button type="button" class="secondary-button" prev-step>Back</button>

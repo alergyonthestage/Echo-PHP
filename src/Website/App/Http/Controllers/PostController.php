@@ -30,9 +30,9 @@ class PostController implements Controller {
         {
             Post::create(
                 $request->getPostParam('description'),
-                empty($request->getPostParam('share_only_friends')),
+                empty($request->getPostParam('share-only-friends')),
                 User::getLogged()->getID(),
-                $request->getPostParam('song_id')
+                $request->getPostParam('song-id')
             );
             return Server::redirectTo("/feed");
         } else {
