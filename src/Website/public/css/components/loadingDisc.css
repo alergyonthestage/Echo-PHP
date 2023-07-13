@@ -1,18 +1,21 @@
   .loading-icon {
     z-index: 1;
-    position: fixed;
-    bottom: 1em;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    bottom: 2em;
+    width: 100vw;
+    text-align: center;
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    transform: translateY(2em);
+    transition: opacity .4s ease-in-out;
+    transition: transform .4s ease;
     color: #F8D164;
   }
 
   .loading-icon.show {
+    transform: translateY(0);
     opacity: 1;
   }
 
   .loading-icon i {
-    font-size: 30px;
+    font-size: 2em;
   }
