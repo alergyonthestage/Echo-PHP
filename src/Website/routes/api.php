@@ -23,12 +23,7 @@ Server::createRoute()->accept('GET', '/api/post/{id}')->setHandler([
 
 Server::createRoute()->accept('GET', '/api/post/{id}/comments')->setHandler([
     'controller' => PostController::class,
-    'method' => 'getPostCommentsAll'
-])->add();
-
-Server::createRoute()->accept('GET', '/api/post/{id}/comments/{quantity}')->setHandler([
-    'controller' => PostController::class,
-    'method' => 'getPostCommentsLimit'
+    'method' => 'getPostComments'
 ])->add();
 
 Server::createRoute()->accept('POST', '/api/like')->withMiddlewares([

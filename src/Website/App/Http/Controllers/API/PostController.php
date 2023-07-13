@@ -18,14 +18,10 @@ class PostController implements Controller {
         return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 
-    public function getPostCommentsAll(int $id): Response 
-    {
-        return (PostController::getPostCommentsLimit($id, 0));
-    }
-
-    public function getPostCommentsLimit(int $id, int $quantity): Response 
+    public function getPostComments(Request $request, int $id): Response 
     {
         $post = Post::fromID($id);
+        $quantity = $request->getQueryParam('qnt') ?? 0;
         return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments($quantity)))->build();
     }
 
