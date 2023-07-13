@@ -7,7 +7,6 @@ Adesso:
 - search profile by username/name + surname/...?
 
 Other fixes:
-- do not show notification count if no notifications...
 - CSS of edit profile (bigger bio field and move profile image on top)
 - CSS feed, improve UI for fullscreen posts
 

@@ -220,11 +220,12 @@ class User implements JsonSerializable {
         if(!$stmt->execute()){
             throw new Exception("Error to find friends of:".$userID);
         }
-        $friends = $stmt->get_result()->fetch_all();
-        $connection->close();
+        $result = $stmt->get_result();
+        $friends = $result->fetch_all(MYSQLI_ASSOC);
+        $connection->close();        
 
         return array_map(function($friend) {
-            return new static($friend);
+            return User::fromID($friend['friend']);
         }, $friends);
     }
 
