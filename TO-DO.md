@@ -3,7 +3,7 @@ Adesso:
 - Notifiche (Follow-Request, Richiesta follow accettata, Notifiche post di utenti seguiti (attiva campanella al canale))
 - Sistema post preview in publish
 - Vedi come gestire il caso no more posts to show
-- search profile by username/name + surname/...?
+- search profile css
 
 Other fixes:
 - CSS of edit profile (bigger bio field and move profile image on top)
