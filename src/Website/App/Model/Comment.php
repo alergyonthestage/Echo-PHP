@@ -7,7 +7,7 @@ use CaveResistance\Echo\Website\App\Model\Exceptions\CommentNotFound;
 use Exception;
 use JsonSerializable;
 
-class Comment {
+class Comment implements JsonSerializable{
 
     private function __construct(
         private array $comment
@@ -80,11 +80,6 @@ class Comment {
         $connection->close();
     }
 
-    public function getID(): string 
-    {
-        return $this->comment['id_comment'];
-    }
-
     public function getPost(): Post 
     {
         return $this->comment['post'];
@@ -142,6 +137,19 @@ class Comment {
     public function getText(): string 
     {
         return $this->comment['text'];
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'post' => $this->getPost(),
+            'author' => $this->getAuthor(),
+            'date' => $this->getDate(),
+            'time' => $this->getTime(),
+            'timestamp' => $this->getTimestamp(),
+            'timeAgo' => $this->getTimeAgo(),
+            'text' => $this->getText()
+        ];
     }
 
 }

@@ -17,6 +17,12 @@ class PostController implements Controller {
         return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 
+    public function getPostComments(int $id): Response 
+    {
+        $post = Post::fromID($id);
+        return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments()))->build();
+    }
+
     public function toggleLike(Request $request): Response 
     {
         $post = Post::fromID($request->getPostParam('post-id'));

@@ -21,9 +21,9 @@ Server::createRoute()->accept('GET', '/api/post/{id}')->setHandler([
     'method' => 'getPostData'
 ])->add();
 
-Server::createRoute()->accept('GET', '/api/comment/{id}')->setHandler([
+Server::createRoute()->accept('GET', '/api/post/{id}/comments')->setHandler([
     'controller' => PostController::class,
-    'method' => 'getPostData'
+    'method' => 'getPostComments'
 ])->add();
 
 Server::createRoute()->accept('POST', '/api/like')->withMiddlewares([
