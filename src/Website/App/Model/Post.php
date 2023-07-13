@@ -75,9 +75,9 @@ class Post implements JsonSerializable {
         return $post_count;
     }
 
-    public function getComments(): array
+    public function getComments($quantity): array
     {
-        return Comment::fromPost($this->getID());
+        return Comment::fromPost($this->getID(), $quantity);
     }
 
     public function getID(): string 

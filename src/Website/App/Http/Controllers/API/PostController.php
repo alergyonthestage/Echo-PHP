@@ -18,10 +18,15 @@ class PostController implements Controller {
         return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
     }
 
-    public function getPostComments(int $id): Response 
+    public function getPostCommentsAll(int $id): Response 
+    {
+        return (PostController::getPostCommentsLimit($id, 0));
+    }
+
+    public function getPostCommentsLimit(int $id, int $quantity): Response 
     {
         $post = Post::fromID($id);
-        return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments()))->build();
+        return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments($quantity)))->build();
     }
 
     public function toggleLike(Request $request): Response 

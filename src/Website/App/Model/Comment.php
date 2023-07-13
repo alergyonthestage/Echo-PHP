@@ -13,7 +13,6 @@ class Comment implements JsonSerializable{
         private array $comment
     ) {
         $this->comment['author'] = User::fromID($this->comment['id_user']);
-        $this->comment['post'] = Post::fromID($this->comment['id_post']);
     }
 
     public static function fromID(int $id_post, int $id_user, string $timestamp): Comment 
@@ -21,13 +20,18 @@ class Comment implements JsonSerializable{
         return new static(static::fetch($id_post, $id_user, $timestamp));
     }
 
-    public static function fromPost($postID): array 
+    public static function fromPost($postID, $quantity): array 
     {
         $connection = Database::connect();
 
         //Fetch the comments from DB for this post by post_id
-        $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ?");
-        $stmt->bind_param('i', $postID);
+        if($quantity != 0) {
+            $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ? ORDER BY timestamp DESC LIMIT ?");
+            $stmt->bind_param('ii', $postID, $quantity);
+        } else {
+            $stmt = $connection->prepare("SELECT * FROM comment WHERE id_post = ? ORDER BY timestamp DESC");
+            $stmt->bind_param('i', $postID);
+        }
         if(!$stmt->execute()) {
             throw new Exception("Database error");
         }
@@ -78,6 +82,11 @@ class Comment implements JsonSerializable{
         }
         Notification::createCommentNotification($id_user, $id_post);
         $connection->close();
+    }
+
+    public function getPostID(): int 
+    {
+        return $this->comment['id_post'];
     }
 
     public function getPost(): Post 
@@ -142,7 +151,7 @@ class Comment implements JsonSerializable{
     public function jsonSerialize(): array
     {
         return [
-            'post' => $this->getPost(),
+            'postID' => $this->getPostID(),
             'author' => $this->getAuthor(),
             'date' => $this->getDate(),
             'time' => $this->getTime(),

@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/public/css/utils.css">
 </view-head>
 <div id="notifications">
-    <h4>Nuove (<?=count($data['notifications_toread'])?>): </h4>
+    <h4>New (<?=count($data['notifications_toread'])?>): </h4>
     <ul class="notifications-list">
-        <?php if(count($data['notifications_toread']) == 0) echo '<p class="alert">Nessuna nuova notifica</p>'; ?>
+        <?php if(count($data['notifications_toread']) == 0) echo '<p class="alert">No new notifications</p>'; ?>
         <?php foreach ($data['notifications_toread'] as $notification):  ?>
             <li class="notifications-item">
                 <div class="notifications-notification">
@@ -30,11 +30,11 @@
                         <div class="notifications-notification-action">
                             <?php if($notification->getTypeID() == 1 || $notification->getTypeID() == 2): ?>
                                 <a href="/post/<?=$notification->getPostID()?>">
-                                    Vai al post >
+                                    Go to the post >
                                 </a>
                             <?php else: ?>
                                 <a href="/user/<?=$notification->getSender()->getUsername()?>">
-                                    Vai al profilo >
+                                    Go to the user profile >
                                 </a>
                             <?php endif; ?>
                         </div>
@@ -46,8 +46,8 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <h4>Già lette (<?=count($data['notifications_read'])?>): </h4>
-    <?php if(count($data['notifications_read']) == 0) echo '<p class="alert">Nessuna vecchia notifica</p>'; ?>
+    <h4>Arledy read (<?=count($data['notifications_read'])?>): </h4>
+    <?php if(count($data['notifications_read']) == 0) echo '<p class="alert">No old notification</p>'; ?>
     <ul class="notifications-list">
         <?php foreach ($data['notifications_read'] as $notification):  ?>
             <li class="notifications-item">
@@ -70,11 +70,11 @@
                         <div class="notifications-notification-action">
                             <?php if($notification->getTypeID() == 1 || $notification->getTypeID() == 2): ?>
                                 <a href="/post/<?=$notification->getPostID()?>">
-                                    Vai al post >
+                                    Go to the post >
                                 </a>
                             <?php else: ?>
                                 <a href="/user/<?=$notification->getSender()->getUsername()?>">
-                                    Vai al profilo >
+                                    Go to the user profile >
                                 </a>
                             <?php endif; ?>
                         </div>
