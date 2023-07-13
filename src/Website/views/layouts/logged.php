@@ -19,7 +19,7 @@
         <nav id="menu">
             <a href="/" class="unselectable">Search</a>
             <hr>
-            <a href="/" class="unselectable">Chat</a>
+            <a href="/notifications" class="unselectable">Notifications</a>
             <hr>
             <a href="/user/<?=$username?>" class="unselectable">Profile</a>
             <hr>
