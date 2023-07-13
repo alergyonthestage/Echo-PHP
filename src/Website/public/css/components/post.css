@@ -112,7 +112,7 @@
     margin: 10px 0px;
 }
 
-.post-button{
+.post-interaction-button {
     background-color: transparent;
     border: none;
     align-items: center;
@@ -121,11 +121,11 @@
     font-size: 1.2rem;
 }
 
-.post-button i {
+.post-interaction-button i {
     color: #fff;
 }
 
-.post-button-active i {
+.post-interaction-button-active i {
     color: #F8D164;
 }
 
@@ -219,11 +219,11 @@
     height: 5%;
 }
 
-.post-footer form{
+.post-footer form {
     height: 100%;
 }
 
-.post-footer input{
+.post-footer input {
     color: #353143;
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 2px;
@@ -232,11 +232,12 @@
     height: 100%;
 }
 
-.post-interactive-buttons{
+.post-interaction-buttons {
     display: flex;
 }
 
-.post-comment-publish-button{
+.post-comment-publish-button {
+    appearance: none;
     -webkit-appearance: none;
     border: none;
     margin: 0;
