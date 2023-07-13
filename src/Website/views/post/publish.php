@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/public/css/components/post.css">
     <link rel="stylesheet" href="/public/css/components/avatar.css">
     <link rel="stylesheet" href="/public/css/utils.css">
-    <script type="module" src="/public/javascript/publish.js"></script>
+    <script type="module" src="/public/javascript/post/publish.js"></script>
 </view-head>
 <h1 class="title">Create post</h1>
 <div class="publish-progress-bar">

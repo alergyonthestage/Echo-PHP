@@ -45,7 +45,7 @@
             <a href="/userinfo/edit" class="user-profile-action-button primary-button">Edit profile</a>
         <?php else: ?>
             <div id="user-profile-action-button-container" class="user-profile-action-button-container" relation="<?=$relation?>" profile-id="<?=$profileID?>"></div>
-            <script type="module" src="/public/javascript/userProfileActionButton.js"></script>
+            <script type="module" src="/public/javascript/user/userProfileActionButton.js"></script>
         <?php endif; ?>
     </div>
 </div>

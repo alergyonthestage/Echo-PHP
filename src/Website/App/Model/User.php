@@ -51,12 +51,20 @@ class User implements JsonSerializable {
     public function update(string $username, string $name, string $surname, string $bio, string $email, string $password)
     {
         $userID = $this->getID();
-        $salt='';
-        $pepperID=0;
-        $pw = empty($password) ? $this->getPassword() : Password::hash(Password::season($password, $salt, $pepperID));
+        if(empty($password)) {
+            $updatedPassword = $this->getPassword();
+            $updatedPepperID = $this->getPepperID();
+            $updatedSalt = $this->getSalt();
+        } else {
+            $salt='';
+            $pepperID=0;
+            $updatedPassword = Password::hash(Password::season($password, $salt, $pepperID));
+            $updatedPepperID = $pepperID;
+            $updatedSalt = $salt;
+        }
         $connection = Database::connect();
         $stmt = $connection->prepare("UPDATE user SET username = ?, name = ?, surname = ?, bio = ?, email = ?, password = ?, salt=?, pepper_id=? WHERE id_user = ?");
-        $stmt->bind_param('ssssssssi', $username, $name, $surname, $bio, $email, $pw, $salt, $pepperID, $userID);
+        $stmt->bind_param('ssssssssi', $username, $name, $surname, $bio, $email, $updatedPassword, $updatedSalt, $updatedPepperID, $userID);
         if(!$stmt->execute()){
             throw new Exception("Cannot update user $username");
         }

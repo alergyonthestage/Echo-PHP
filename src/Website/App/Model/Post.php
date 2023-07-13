@@ -34,7 +34,7 @@ class Post implements JsonSerializable {
         $connection = Database::connect();
         $timestamp = date('Y-m-d H:i:s', time());
         $stmt = $connection->prepare("INSERT INTO post (description, timestamp, id_user, id_song) VALUES (?,?,?,?)");
-        $stmt->bind_param('sssii', $description, $timestamp, $id_user, $id_song);
+        $stmt->bind_param('ssii', $description, $timestamp, $id_user, $id_song);
         if (!$stmt->execute()) {
             throw new Exception("Cannot create post");
         }
