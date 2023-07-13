@@ -344,6 +344,26 @@ class User implements JsonSerializable {
         $connection->close();
     }
 
+    public static function search(string $searchString): array
+    {
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT * FROM user WHERE username LIKE ?");
+        $search = "%$searchString%";
+        $stmt->bind_param('s', $search);
+        if(!$stmt->execute()){
+            throw new Exception("Database Error");
+        }
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) === 0) {
+            throw new Exception('No song found');
+        }
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        $connection->close();
+        return array_map(function($user) {
+            return new static($user);
+        }, $users);
+    }
+
     public function jsonSerialize(): array
     {
         return [
@@ -351,7 +371,6 @@ class User implements JsonSerializable {
             'name' => $this->getName(),
             'surname' => $this->getSurname(),
             'bio' => $this->getBio(),
-            'email' => $this->getEmail(),
             'profilePic' => $this->getPic(),
             'isVerified' => $this->isVerified()
         ];

@@ -12,6 +12,12 @@ use Exception;
 
 class UserController {
 
+    public function search(Request $request): Response
+    {
+        $result = User::search($request->getQueryParam('search'));
+        return (new ResponseBuilder())->setJsonContent(json_encode($result))->build();
+    }
+
     public function editAvatar(Request $request): Response
     {
         $allowedExtensions = ['jpeg', 'png', 'jpg'];

@@ -1,7 +1,7 @@
-import Post from "./components/Post.js";
-import SongListItem from "./components/SongListItem.js"
-import { fetchData } from "./utils/ajax.js";
-import { debounce } from "./utils/debounce.js"
+import Post from "../components/Post.js";
+import SongListItem from "../components/SongListItem.js"
+import { fetchData } from "../utils/ajax.js";
+import { debounce } from "../utils/debounce.js"
 
 const apiLink = "/api/song"
 

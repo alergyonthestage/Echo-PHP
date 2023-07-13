@@ -75,8 +75,8 @@ class Song implements JsonSerializable {
         }
         $songs = $result->fetch_all(MYSQLI_ASSOC);
         $connection->close();
-        return array_map(function($songArray) {
-            return new static($songArray);
+        return array_map(function($song) {
+            return new static($song);
         }, $songs);
     }
 

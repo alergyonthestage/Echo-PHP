@@ -11,7 +11,7 @@ use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 
 Server::createRoute()->accept('GET', '/api/song')->setHandler([
     'controller' => SongController::class,
-    'method' => 'getsong'
+    'method' => 'search'
 ])->add();
 
 /**---POSTS---*/
@@ -34,6 +34,11 @@ Server::createRoute()->accept('POST', '/api/like')->withMiddlewares([
 ])->add();
 
 /**---USER---*/
+
+Server::createRoute()->accept('GET', '/api/user')->setHandler([
+    'controller' => UserController::class,
+    'method' => 'search'
+])->add();
 
 Server::createRoute()->accept('POST', '/api/avatar')->withMiddlewares([
     AuthMiddleware::class

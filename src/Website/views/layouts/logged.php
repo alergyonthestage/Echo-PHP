@@ -17,7 +17,7 @@
             <button id="show-menu-button" class="unselectable fa-solid fa-ellipsis-vertical" onclick="expand()"></button>
         </div>
         <nav id="menu">
-            <a href="/" class="unselectable">Search</a>
+            <a href="/search" class="unselectable">Search</a>
             <hr>
             <a href="/notifications" class="unselectable">Notifications</a>
             <hr>

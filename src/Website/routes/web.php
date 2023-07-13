@@ -5,12 +5,16 @@ use CaveResistance\Echo\Website\App\Http\Controllers\FeedController;
 use CaveResistance\Echo\Website\App\Http\Controllers\PostController;
 use CaveResistance\Echo\Website\App\Http\Controllers\FriendshipController;
 use CaveResistance\Echo\Website\App\Http\Controllers\NotificationsController;
+use CaveResistance\Echo\Website\App\Http\Controllers\SearchController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 
 Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
     AuthMiddleware::class
 ])->setHandler(FeedController::class)->add();
+
+//---Search---
+Server::createRoute()->accept('GET', '/search')->setHandler(SearchController::class)->add();
 
 //----Users----
 Server::createRoute()->accept('GET', '/user/{username}')->setHandler(UserController::class)->add();

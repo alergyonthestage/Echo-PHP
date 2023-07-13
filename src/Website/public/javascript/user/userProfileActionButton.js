@@ -1,4 +1,4 @@
-import { uploadFormData } from "./utils/ajax.js";
+import { uploadFormData } from "../utils/ajax.js";
 
 const actionButtonContainer = document.getElementById('user-profile-action-button-container');
 
