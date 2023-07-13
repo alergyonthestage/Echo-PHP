@@ -3,6 +3,12 @@
     height: calc(100vh - 4em);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#feed::-webkit-scrollbar {
+    display: none;
 }
 
 #feed article.post {
