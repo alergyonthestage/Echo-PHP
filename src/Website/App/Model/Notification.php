@@ -15,18 +15,23 @@ class Notification implements JsonSerializable {
         $this->notification['sender'] = User::fromID($notification['id_sender']);
     }
 
-    public static function getUserNotifications($id_user): array
+    public static function getUserNotifications($id_user, $retrieveUnred): array
     {
-        return Notification::fromRecepient($id_user);
+        return Notification::fromRecepient($id_user, $retrieveUnred);
     }
 
-    private static function fromRecepient($userID): array 
+    public static function setAllRead($id_user): void
+    {
+        Notification::updateAllRead($id_user);
+    }
+
+    private static function fromRecepient($userID, $retrieveUnred): array 
     {
         $connection = Database::connect();
 
         //Fetch the notifications from DB for this recepient_id
-        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recipient = ? ORDER BY timestamp DESC");
-        $stmt->bind_param('i', $userID);
+        $stmt = $connection->prepare("SELECT * FROM notification WHERE id_recipient = ? AND to_read = ? ORDER BY timestamp DESC");
+        $stmt->bind_param('ii', $userID, $retrieveUnred);
         if(!$stmt->execute()) {
             throw new Exception("Database error");
         }
@@ -40,6 +45,18 @@ class Notification implements JsonSerializable {
         return array_map(function($notification) {
             return new static($notification);
         }, $notifications);
+    }
+
+    private static function updateAllRead($userID){
+        $connection = Database::connect();
+
+        //Fetch the notifications from DB for this recepient_id
+        $stmt = $connection->prepare("UPDATE notification SET to_read = 0 WHERE id_recipient = ?");
+        $stmt->bind_param('i', $userID);
+        if(!$stmt->execute()) {
+            throw new Exception("Database error");
+        }
+        $connection->close();
     }
 
     public static function fromNotificationID(int $id) 

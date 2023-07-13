@@ -55,7 +55,9 @@
 </div>
 <a href="/notifications" class="floating-notification-button">
   <div class="fa-regular fa-bell fa-2xl"></div>
-  <div class="notification-counter">
-    <?=$notificationsCounter?>
-  </div>
+  <?php if($notificationsCounter > 0): ?>
+    <div class="notification-badge">
+      <?=$notificationsCounter?>
+    </div>
+  <?php endif; ?>
 </a>

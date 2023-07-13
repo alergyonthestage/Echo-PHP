@@ -36,6 +36,7 @@
 .notifications-notification-action a{
     color: #fff;
     font-size: 0.8rem;
+    text-decoration: none;
 }
 
 .notifications-item{
@@ -55,5 +56,11 @@
     margin: 0;
 }
 
+#notifications h4{
+    margin: 1rem;
+}
 
-
+.alert{
+    margin: 1rem;
+    color: #98969F;
+}
