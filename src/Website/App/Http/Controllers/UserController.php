@@ -57,7 +57,6 @@ class UserController implements Controller {
     {
         if($request->getMethod() == 'POST')
         {
-            Session::unsetVariable('login_error');
             try {
                 if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
                     return Server::redirectTo("/user/".$request->getPostParam('username'));
@@ -67,10 +66,11 @@ class UserController implements Controller {
                 }  
             } catch (UserNotFound $userNotFound) {
                 Session::setVariable('login_error', "The user ".$userNotFound->getUser()." was not found on Echo servers.");
-                Server::redirectTo("/login");
+                return Server::redirectTo("/login");
             }
         } else {
             $errors = Session::hasVariable('login_error') ? ['error' => Session::getVariable('login_error')] : [];
+            Session::unsetVariable('login_error');
             return (new ResponseBuilder())->setContent(View::render('user.login', $errors))->build();
         }
     }
