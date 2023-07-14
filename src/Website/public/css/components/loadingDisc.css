@@ -1,4 +1,9 @@
   .loading-icon {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
     z-index: 1;
     position: absolute;
     bottom: 2em;
