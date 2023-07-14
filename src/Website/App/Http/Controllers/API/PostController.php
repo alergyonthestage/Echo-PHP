@@ -8,6 +8,8 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Request;
 use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Website\App\Model\Post;
 use CaveResistance\Echo\Website\App\Model\Report;
+use CaveResistance\Echo\Website\App\Model\Comment;
+use CaveResistance\Echo\Website\App\Model\User;
 use Exception;
 
 class PostController implements Controller {
@@ -16,13 +18,6 @@ class PostController implements Controller {
     {
         $post = Post::fromID($id);
         return (new ResponseBuilder())->setJsonContent(json_encode($post))->build();
-    }
-
-    public function getPostComments(Request $request, int $id): Response 
-    {
-        $post = Post::fromID($id);
-        $quantity = $request->getQueryParam('qnt') ?? 0;
-        return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments($quantity)))->build();
     }
 
     public function toggleLike(Request $request): Response 
@@ -39,5 +34,30 @@ class PostController implements Controller {
             )->build();
         }
         
+    }
+
+    public function getPostComments(Request $request, int $id): Response 
+    {
+        $post = Post::fromID($id);
+        $quantity = $request->getQueryParam('qnt') ?? 0;
+        return (new ResponseBuilder())->setJsonContent(json_encode($post->getComments($quantity)))->build();
+    }
+
+    public function publishComment(Request $request): Response
+    {
+        try {
+            $comment = Comment::create(
+                (int) $request->getPostParam('id_post'),
+                    User::getLogged()->getID(),
+                    $request->getPostParam('text'),
+                );
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(true, 'Comment published successfully'))
+            )->build();
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }   
     }
 }

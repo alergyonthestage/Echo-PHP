@@ -18,7 +18,7 @@ class PostController implements Controller {
     {
         $post = Post::fromID($id);
         $data = [
-            'comments' => $post->getComments(),
+            'comments' => $post->getComments(0),
             'id' => $post->getID()
         ];
         return (new ResponseBuilder())->setContent(View::render('post.post', $data))->build();
@@ -39,21 +39,5 @@ class PostController implements Controller {
         }
     }
 
-
-    public function addLike(Request $request): Response
-    {   
-        $post = Post::fromID((int) $request->getPostParam('id_post'));
-        $post->toggleLike();
-        return Server::redirectTo("/post/".$post->getID());
-    }
-
-    public function publishComment(Request $request): Response
-    {
-        $comment = Comment::create(
-            (int) $request->getPostParam('id_post'),
-                User::getLogged()->getID(),
-                $request->getPostParam('text'),
-            );
-            return Server::redirectTo("/post/".$request->getPostParam('id_post'));
-    }
+    
 }
