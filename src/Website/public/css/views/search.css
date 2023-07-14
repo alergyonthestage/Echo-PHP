@@ -1,0 +1,57 @@
+.search-profile-picture-frame{
+    min-width: 2rem;
+    width: 2rem;
+    min-height: 2rem;
+    height: 2rem;
+}
+
+.search-user{
+    display: flex;
+    align-items: center;
+}
+
+.search-user-infos{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.search-user-infos p{
+    margin: -2px;
+}
+
+.search-user-name p{
+    font-size: 0.9rem;
+}
+
+.search-user-username p {
+    font-size: 0.8rem;
+    color: #98969F;
+}
+
+.search-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-bottom: 0.1rem #98969F solid;
+    margin: 0 0.5rem;
+}
+
+#search-result-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.search-item a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.search-box {
+    padding: 1rem;
+}
+

@@ -33,6 +33,13 @@ Server::createRoute()->accept('POST', '/api/like')->withMiddlewares([
     'method' => 'toggleLike'
 ])->add();
 
+Server::createRoute()->accept('POST', '/api/post/comment')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
+    'controller' => PostController::class,
+    'method' => 'publishComment'
+])->add();
+
 /**---USER---*/
 
 Server::createRoute()->accept('GET', '/api/user')->setHandler([

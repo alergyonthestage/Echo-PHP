@@ -7,15 +7,23 @@ export default class UserListItem {
     }
 
     render() {
-        return `<li class="user-list-item">
-                    <div>
-                        <img src="${this.data.profilePic}" alt="coverart"/>
-                        <div>
-                            <div>${this.data.username}</div>
+        return `<li class="search-item">
+                <a href="${this.profilePageURLPrefix}${this.data.username}">
+                <div class="search-user">
+                    <div class="profile-picture-frame search-profile-picture-frame">
+                        <img class="profile-picture" src="${this.data.profilePic}" alt="Profile picture">
+                    </div>
+                    <div class="search-user-infos">
+                        <div class="search-user-name">
+                        <p>${this.data.name} ${this.data.surname}</p>
                         </div>
-                    <div>
-                    <a href="${this.profilePageURLPrefix}${this.data.username}">LINK</a>
-                </li>`
+                        <div class="search-user-username">
+                            <p>@${this.data.username}</p>
+                        </div>
+                    </div> 
+                </div>
+                </a>
+            </li>`
     }
 
 }
