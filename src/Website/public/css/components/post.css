@@ -1,5 +1,6 @@
 .post-profile-picture-frame{
     min-width: 2rem;
+    min-height: 2rem;
     width: 2rem;
     height: 2rem;
 }
@@ -152,62 +153,6 @@
    transition: width 0.5s ease;
 }
 
-.post-comments-area{
-    margin: 1em;
-    padding-bottom: 5%;
-}
-
-.comment-profile-picture-frame{
-    min-width: 1.8rem;
-    width: 1.8rem;
-    height: 1.8rem;
-    margin: 0.2rem 0;
-}
-
-.post-comment-text{
-    font-size: 0.8rem;
-    line-height: 1.4;
-}
-
-.post-comment a{
-    text-decoration: none;
-    color: #fff;
-}
-
-.post-comment p{
-    margin: 0;
-}
-
-.post-comment{
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-    margin: 1rem 0;
-}
-
-.post-comment-time{
-    font-size: 0.8rem;
-    color: #98969F;
-}
-
-.post-comment-like-button{
-    background-color: transparent;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-.post-comment-like{
-    display: flex;
-    align-content: center;
-}
-
-.post-comment-like-counter{
-    font-size: 0.8rem;
-}
-
 .post-footer {
     position: fixed;
     left: 0;
@@ -235,29 +180,4 @@
 
 .post-interaction-buttons {
     display: flex;
-}
-
-.post-comment-publish-button {
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    margin: 0;
-    padding: 0.3em 0.8em;
-    background-color: #F8D164;
-    color: #353143;
-    border-radius: 0.4rem;
-    box-shadow: #353143 0 0.05em 0.2em;
-}
-
-/**---COMMENTS_SECTION---*/
-
-.comments-section.expand {
-    position: fixed;
-    top: 4em;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #544f6863;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }

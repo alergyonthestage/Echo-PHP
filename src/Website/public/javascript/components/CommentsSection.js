@@ -8,13 +8,14 @@ export default class CommentsSection {
 
     render() {
         if(this.data.length === 0) {
-            return 'No comments yet'
+            return '<button class="hide-comment-section-button" id=hide-comment-section-button><i class="fa-solid fa-angle-down"></i></button></br>No comments yet'
         }
         let commentsHTML = '';
         this.data.forEach(comment => {
             commentsHTML += new Comment(comment).render()
         });
         return `<div>
+                    <button class="hide-comment-section-button" id=hide-comment-section-button><i class="fa-solid fa-angle-down"></i></button>
                     ${commentsHTML}
                     <div class="post-footer">
                         <form action="/comment/publish" method="POST">
@@ -24,7 +25,6 @@ export default class CommentsSection {
                         </form>
                     </div>
                 </div>`
-                
     }
 
 }
