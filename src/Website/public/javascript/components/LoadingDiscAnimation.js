@@ -14,21 +14,21 @@ export default class LoadingDiscAnimation {
         return `<i class="fa-solid fa-compact-disc fa-spin"></i>`
     }
 
-    show(display) {
-        if(display) {
-            this.container.insertBefore(this.loadingDisc, this.container.firstChild)
-            setTimeout(
-                () => this.loadingDisc.classList.add('show'),
-                this.showDelay
-            )
-        } else {
-            document.getElementById('loading-disc-animation').addEventListener('transitionend', () => {
-                document.getElementById('loading-disc-animation').remove();
-            }, { once: true })
-            setTimeout(
-                () => document.getElementById('loading-disc-animation').classList.remove('show'),
-                this.showDelay
-            )
-        }
+    show() {
+        this.container.insertBefore(this.loadingDisc, this.container.firstChild)
+        setTimeout(
+            () => this.loadingDisc.classList.add('show'),
+            this.showDelay
+        )
+    }
+
+    hide() {
+        document.getElementById('loading-disc-animation').addEventListener('transitionend', () => {
+            document.getElementById('loading-disc-animation').remove();
+        }, { once: true })
+        setTimeout(
+            () => document.getElementById('loading-disc-animation').classList.remove('show'),
+            this.showDelay
+        )
     }
 }

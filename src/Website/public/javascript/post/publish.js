@@ -70,13 +70,13 @@ function stepLoadActions(step) {
             songList.innerHTML = ''
             songSearchField.oninput = debounce((event) => {
                 if(event.target.value !== '' && event.target.value !== null) {
-                    loadingDisc.show(true)
+                    loadingDisc.show()
                     let link = `${apiLink}?${new URLSearchParams({search: event.target.value})}`;
                     fetchData(link)
                         .then((response) => {displaySongList(response)})
                         .catch((error) => {songList.innerHTML = `Error: ${error}`})
                         .finally(() => {
-                            loadingDisc.show(false)
+                            loadingDisc.hide()
                         })
                 } else {
                     songList.innerHTML = ''

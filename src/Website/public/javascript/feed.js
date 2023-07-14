@@ -20,7 +20,7 @@ const loadingDisc = new LoadingDiscAnimation(feed)
 function loadPosts() {
     if(isLoading) return
     disablePublishButton()
-    loadingDisc.show(true)
+    loadingDisc.show()
     isLoading = true
     fetchData(getRequestLink())
         .then((posts) => {
@@ -38,7 +38,7 @@ function loadPosts() {
         })
         .finally(() => {
             isLoading = false
-            loadingDisc.show(false)
+            loadingDisc.hide()
             enablePublishButton()
         })
 }

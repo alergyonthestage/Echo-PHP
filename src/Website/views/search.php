@@ -1,4 +1,5 @@
 <view-head>
+    <link rel="stylesheet" href="/public/css/components/loadingDisc.css">
     <script type="module" src="/public/javascript/search.js"></script>
 </view-head>
 <input type="text" placeholder="Search users" id="search-bar">
