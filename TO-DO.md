@@ -1,7 +1,6 @@
 Adesso:
 - Fix comments in post interactions
 - Notifiche (Follow-Request, Richiesta follow accettata, Notifiche post di utenti seguiti (attiva campanella al canale))
-- Sistema post preview in publish
 - Vedi come gestire il caso no more posts to show
 
 Other fixes:
