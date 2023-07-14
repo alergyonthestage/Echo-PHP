@@ -6,7 +6,6 @@ Adesso:
 - search profile css
 
 Other fixes:
-- CSS of edit profile (bigger bio field and move profile image on top)
 - CSS feed, improve UI for fullscreen posts
 
 Dopo:
@@ -22,3 +21,5 @@ Dopo:
 - Relazione
 
 - ajax update comments, friend status, etc... without reload page
+
+- biography: salva e mostra /n (a capo)...

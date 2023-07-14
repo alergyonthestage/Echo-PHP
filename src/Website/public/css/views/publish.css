@@ -73,6 +73,12 @@
     display: flex;
 }
 
+.publish-form-step textarea {
+    min-height: 4em;
+    max-height: 40vh;
+    resize: vertical;
+}
+
 /**---buttons---*/
 .publish-form-step button[next-step], .publish-form-step button[prev-step], .publish-form-step input[type="submit"] {
     margin: 1em;

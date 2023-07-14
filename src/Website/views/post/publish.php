@@ -23,7 +23,7 @@
     </div>
     <div class="publish-form-step" form-step>
         <label for="description">Description</label>
-        <input id="description" type="text" name="description" placeholder="Tell something about this song"></input>
+        <textarea name="description" id="description" rows="10" placeholder="Tell something about this song"></textarea>
         <div>
             <button type="button" class="secondary-button" prev-step>Back</button>
             <button type="button" class="primary-button" next-step>Next</button>

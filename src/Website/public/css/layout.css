@@ -35,23 +35,9 @@ body::before {
 
 /**---MAIN-CONTENT---*/
 
-/**fai in modo che tutto cio che si trovi dentro il main stia al centro dello schermo**/
 main {
     padding-top: 4em;
     color: white;
-}
-
-@media (min-width: 0px) {
-    main {
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 420px) {
-    main {
-        max-width: 50vh;
-        margin: auto;
-    }
 }
 
 
@@ -59,7 +45,7 @@ main {
 
 header {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     color: white;
     background-color: #2E2A3C;

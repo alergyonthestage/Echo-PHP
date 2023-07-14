@@ -1,5 +1,7 @@
 import {uploadFormData} from "../utils/ajax.js";
 
+const changeProfilePicButton = document.getElementById('edit-profile-picture-button')
+
 const mime_types = ['image/jpeg', 'image/png', 'image/jpg'];
 const max_file_size = 5*1024*1024
 const fileSelector = document.getElementById('file-selector');
@@ -21,6 +23,10 @@ function getFile() {
         return null
     }
     return file;
+}
+
+changeProfilePicButton.onclick = () => {
+    fileSelector.click()
 }
 
 fileSelector.onchange = async () => {

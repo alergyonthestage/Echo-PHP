@@ -1,8 +1,10 @@
 .centered-form-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: calc(100vh - 4em);
+    overflow-Y: scroll;
 }
 
 .centered-form {
@@ -21,16 +23,21 @@
 }
 
 .centered-form-field {
-    position: relative;
     gap: 0.2em;
     text-shadow: #353143 0 0.05em 0.2em;
 }
 
-.centered-form-field input {
+.centered-form-field input, .centered-form-field textarea {
     color: #353143;
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 2px;
     border: none;
+}
+
+.centered-form-field textarea {
+    min-height: 4em;
+    max-height: 40vh;
+    resize: vertical;
 }
 
 .centered-form input[type='submit'] {
@@ -47,7 +54,7 @@
 
 @media screen and (orientation: portrait) {
     .centered-form {
-        width: 50%;
+        min-width: 50%;
     }
 
     .centered-form-field {

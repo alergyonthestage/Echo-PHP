@@ -1,0 +1,18 @@
+.profile-picture-edit {
+    z-index: 1;
+    margin-top: 2em;
+    height: 8em;
+    width: 8em;
+    min-height: 8em;
+    min-width: 8em;
+}
+
+.edit-profile-form {
+    position: relative;
+    bottom: 7em;
+    padding-top: 4em;
+}
+
+#file-selector {
+    display: none;
+}
