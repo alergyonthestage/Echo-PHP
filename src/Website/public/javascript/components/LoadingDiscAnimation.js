@@ -15,11 +15,15 @@ export default class LoadingDiscAnimation {
     }
 
     show() {
-        this.container.insertBefore(this.loadingDisc, this.container.firstChild)
-        setTimeout(
-            () => this.loadingDisc.classList.add('show'),
-            this.showDelay
-        )
+        if(document.getElementById('loading-disc-animation') !== null) {
+            console.error('Cannot show multiple instances of LoadingDiscAnimation.')
+        } else {
+            this.container.insertBefore(this.loadingDisc, this.container.firstChild)
+            setTimeout(
+                () => this.loadingDisc.classList.add('show'),
+                this.showDelay
+            )
+        }
     }
 
     hide() {

@@ -1,5 +1,6 @@
 import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
 import Post from "./components/Post.js";
+import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
 
@@ -23,23 +24,29 @@ function loadPosts() {
     loadingDisc.show()
     isLoading = true
     fetchData(getRequestLink())
-        .then((posts) => {
+        .then(async (posts) => {
             if(posts.length > 0) {
                 posts.forEach((postData) => {
                     feed.innerHTML += new Post(postData).render()
                 })
                 addInteractionsListenrs()
                 currentPage++;
+                loadingDisc.hide()
+                enablePublishButton()
+            } else {
+                loadingDisc.hide()
+                await new SelfDestructMessage('No more posts').show(2500)
+                enablePublishButton()
             }
         })
-        .catch((error) => {
-            feed.innerHTML = "Cannot load posts"
+        .catch(async (error) => {
+            loadingDisc.hide()
+            await new SelfDestructMessage('Something went wrong... Try again later').show(2500)
             console.error(`Error: ${error}`)
+            enablePublishButton()
         })
         .finally(() => {
             isLoading = false
-            loadingDisc.hide()
-            enablePublishButton()
         })
 }
 
