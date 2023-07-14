@@ -16,14 +16,6 @@
         <div class="user-profile-stats">
             <div class="user-profile-stat">
                 <div>
-                    <?=$echoes?>
-                </div>
-                <div class="secondary-text">
-                    Echoes
-                </div>
-            </div>
-            <div class="user-profile-stat">
-                <div>
                     <?=$posts?>
                 </div>
                 <div class="secondary-text">

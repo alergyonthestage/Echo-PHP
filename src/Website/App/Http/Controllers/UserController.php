@@ -25,7 +25,6 @@ class UserController implements Controller {
             'verified' => $user->isVerified(),
             'name' => $user->getName()." ".$user->getSurname(),
             'profileURI' => $user->getPic(),
-            'echoes' => $user->getEchoesCount(),
             'posts' => $user->getPostsCount(),
             'friends' => $user->getFriendsCount(),
             'biography' => $user->getBio(),

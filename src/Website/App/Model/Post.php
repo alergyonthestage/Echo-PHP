@@ -207,11 +207,6 @@ class Post implements JsonSerializable {
         return $result->comments_count;
     }
 
-    public function getEchoesCount(): int
-    {
-        return 0;
-    }
-
     public function jsonSerialize(): array
     {
         return [
@@ -224,7 +219,6 @@ class Post implements JsonSerializable {
             'song' => $this->getSong(),
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
-            'echoesCount' => $this->getEchoesCount(),
             'liked' => $this->hasUserLike(User::getLogged()->getID())
         ];
     }
