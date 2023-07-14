@@ -1,5 +1,5 @@
 import LoadingDiscAnimation from "../components/LoadingDiscAnimation.js";
-import Post from "../components/Post.js";
+import PostPrevew from "../components/PostPreview.js";
 import SongListItem from "../components/SongListItem.js"
 import { fetchData } from "../utils/ajax.js";
 import { debounce } from "../utils/debounce.js"
@@ -111,19 +111,9 @@ function displaySongList(jsonResponse) {
 //post preview
 function displayPostPreview() {
     let postData = {
-        id: '-1',
-        likesCount: '2',
-        echoesCount: '2',
-        commentsCount: '3',
         song: retrivedSongs[songSearchField.value],
-        author: {
-            username: 'alergy_hardcoded',
-            profilePic: '/public/img/profiles/default.png'
-        },
-        profile_picture: 'public/img/profiles/3.png', 
-        time_ago: 'now', 
         description: multiStepForm.elements.description.value
     }
     console.log(postData)
-    postPreview.innerHTML = new Post(postData).render();
+    postPreview.innerHTML = new PostPrevew(postData).render();
 }
