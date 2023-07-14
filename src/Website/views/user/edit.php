@@ -9,7 +9,7 @@
 <div class="centered-form-container">
     <input type="file" id="file-selector"/>
     <div id="edit-profile-picture-button" class="profile-picture-frame profile-picture-edit">
-        <img class="profile-picture profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
+        <img class="profile-picture edit-profile-picture-filter" src="<?=$profileURI?>" alt="Profile picture">
     </div>
     <form action="/userinfo/edit" method="post" class="centered-form edit-profile-form" enctype="multipart/form-data">
         <div class="centered-form-field">

@@ -7,6 +7,8 @@ Adesso:
 
 Other fixes:
 - CSS feed, improve UI for fullscreen posts
+- Separa edit password da edit profile
+- CSS dei form, quando la finestra è troppo bassa
 
 Dopo:
 
