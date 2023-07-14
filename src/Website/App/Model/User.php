@@ -355,9 +355,9 @@ class User implements JsonSerializable {
     public static function search(string $searchString): array
     {
         $connection = Database::connect();
-        $stmt = $connection->prepare("SELECT * FROM user WHERE username LIKE ?");
+        $stmt = $connection->prepare("SELECT * FROM user WHERE username LIKE ? OR name LIKE ? OR surname LIKE ?");
         $search = "%$searchString%";
-        $stmt->bind_param('s', $search);
+        $stmt->bind_param('sss', $search, $search, $search);
         if(!$stmt->execute()){
             throw new Exception("Database Error");
         }
