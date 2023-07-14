@@ -16,7 +16,7 @@ let oldScroll = feed.scrollTop
 let publishButtonEnabled = true
 const publishButton = document.getElementById('publish-button')
 
-const loadingDisc = new LoadingDiscAnimation(feed)
+const loadingDisc = new LoadingDiscAnimation()
 
 function loadPosts() {
     if(isLoading) return
@@ -35,13 +35,13 @@ function loadPosts() {
                 enablePublishButton()
             } else {
                 loadingDisc.hide()
-                await new SelfDestructMessage('No more posts').show(2500)
+                await new SelfDestructMessage('No more posts.').show(2000)
                 enablePublishButton()
             }
         })
         .catch(async (error) => {
             loadingDisc.hide()
-            await new SelfDestructMessage('Something went wrong... Try again later').show(2500)
+            await new SelfDestructMessage('Something went wrong... Try again later.').show(2000)
             console.error(`Error: ${error}`)
             enablePublishButton()
         })

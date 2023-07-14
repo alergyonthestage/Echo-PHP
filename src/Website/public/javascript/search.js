@@ -1,4 +1,5 @@
 import LoadingDiscAnimation from "./components/LoadingDiscAnimation.js";
+import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import UserListItem from "./components/UserListItem.js";
 import { fetchData } from "./utils/ajax.js";
 import { debounce } from "./utils/debounce.js";
@@ -6,7 +7,7 @@ import { debounce } from "./utils/debounce.js";
 const searchBar = document.getElementById('search-bar')
 const searchResultList = document.getElementById('search-result-list')
 
-const loadingDisc = new LoadingDiscAnimation(searchResultList)
+const loadingDisc = new LoadingDiscAnimation()
 
 const debounceDelay = 200;
 
@@ -21,19 +22,27 @@ searchBar.oninput = debounce((event) => {
         loadingDisc.show()
         let link = `${apiUserSearchLink}?${new URLSearchParams({search: event.target.value})}`;
         fetchData(link)
-            .then((response) => {displaySearchResult(response)})
-            .catch((error) => {searchResultList.innerHTML = `Error: ${error}`})
-            .finally(() => {
+            .then(async (result) => {
+                if(result.length > 0) {
+                    displaySearchResult(result)
+                    loadingDisc.hide()
+                } else {
+                    loadingDisc.hide()
+                    await new SelfDestructMessage('No results.').show(2000)
+                } 
+            })
+            .catch(async (error) => {
+                console.log(`Error: ${error}`)
                 loadingDisc.hide()
+                await new SelfDestructMessage('Something went wrong... Try again later.').show(2000)
             })
     } else {
         searchResultList.innerHTML = ''
     }
 }, debounceDelay)
 
-function displaySearchResult(jsonResponse) {
+function displaySearchResult(result) {
     searchResultList.innerHTML = ''
-    let result = jsonResponse
     result.forEach((user) => {
         searchResultList.innerHTML += new UserListItem(user).render();
     });

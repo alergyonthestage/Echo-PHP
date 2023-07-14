@@ -1,5 +1,6 @@
 import LoadingDiscAnimation from "../components/LoadingDiscAnimation.js";
 import PostPrevew from "../components/PostPreview.js";
+import SelfDestructMessage from "../components/SelfDestructMessage.js";
 import SongListItem from "../components/SongListItem.js"
 import { fetchData } from "../utils/ajax.js";
 import { debounce } from "../utils/debounce.js"
@@ -73,10 +74,22 @@ function stepLoadActions(step) {
                     loadingDisc.show()
                     let link = `${apiLink}?${new URLSearchParams({search: event.target.value})}`;
                     fetchData(link)
-                        .then((response) => {displaySongList(response)})
-                        .catch((error) => {songList.innerHTML = `Error: ${error}`})
-                        .finally(() => {
+                        .then((response) => {
+                            if(response.length > 0) {
+                                displaySongList(response)
+                                loadingDisc.hide()
+                            } else {
+                                loadingDisc.hide()
+                                new SelfDestructMessage('No results').show(2000)
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(`Error: ${error}`)
                             loadingDisc.hide()
+                            new SelfDestructMessage('Something went wrong... Try again later.').show(2000)
+                        })
+                        .finally(() => {
+                            
                         })
                 } else {
                     songList.innerHTML = ''

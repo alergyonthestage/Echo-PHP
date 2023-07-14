@@ -3,7 +3,7 @@ export default class LoadingDiscAnimation {
     showDelay = 500
 
     constructor(container) {
-        this.container = container
+        this.container = container ?? document.body
         this.loadingDisc = document.createElement('div')
         this.loadingDisc.classList.add('loading-icon')
         this.loadingDisc.id = 'loading-disc-animation'
@@ -18,7 +18,7 @@ export default class LoadingDiscAnimation {
         if(document.getElementById('loading-disc-animation') !== null) {
             console.error('Cannot show multiple instances of LoadingDiscAnimation.')
         } else {
-            this.container.insertBefore(this.loadingDisc, this.container.firstChild)
+            this.container.append(this.loadingDisc)
             setTimeout(
                 () => this.loadingDisc.classList.add('show'),
                 this.showDelay
@@ -27,12 +27,15 @@ export default class LoadingDiscAnimation {
     }
 
     hide() {
-        document.getElementById('loading-disc-animation').addEventListener('transitionend', () => {
-            document.getElementById('loading-disc-animation').remove();
-        }, { once: true })
-        setTimeout(
-            () => document.getElementById('loading-disc-animation').classList.remove('show'),
-            this.showDelay
-        )
+        let loadingDisc
+        if(loadingDisc = document.getElementById('loading-disc-animation')) {
+            loadingDisc.addEventListener('transitionend', () => {
+                loadingDisc.remove();
+            }, { once: true })
+            setTimeout(
+                () => loadingDisc.classList.remove('show'),
+                this.showDelay
+            )
+        }
     }
 }

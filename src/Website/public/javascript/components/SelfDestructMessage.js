@@ -19,7 +19,7 @@ export default class SelfDestructMessage {
         if(document.getElementById('self-destruct-message') !== null) {
             console.error('Cannot show multiple instances of SelfDestructMessage.')
         } else {
-            this.container.insertBefore(this.selfDestructMessage, this.container.firstChild)
+            this.container.append(this.selfDestructMessage)
             setTimeout(
                 () => {
                     this.selfDestructMessage.classList.add('show')
@@ -31,13 +31,18 @@ export default class SelfDestructMessage {
     }
 
     hide() {
-        document.getElementById('self-destruct-message').addEventListener('transitionend', () => {
-            document.getElementById('self-destruct-message').remove();
-        }, { once: true })
-        setTimeout(
-            () => document.getElementById('self-destruct-message').classList.remove('show'),
-            this.showDelay
-        )
+        let selfDestructMessage
+        if(selfDestructMessage = document.getElementById('self-destruct-message')) {
+            selfDestructMessage.addEventListener('transitionend', () => {
+                if(!selfDestructMessage.classList.contains('show')) {
+                    selfDestructMessage.remove();
+                }
+            }, { once: true })
+            setTimeout(
+                () => selfDestructMessage.classList.remove('show'),
+                this.showDelay
+            )
+        }
     }
 
 }

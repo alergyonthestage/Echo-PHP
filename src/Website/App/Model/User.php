@@ -363,7 +363,7 @@ class User implements JsonSerializable {
         }
         $result = $stmt->get_result();
         if(mysqli_num_rows($result) === 0) {
-            throw new Exception('No song found');
+            throw new Exception('No user found');
         }
         $users = $result->fetch_all(MYSQLI_ASSOC);
         $connection->close();
