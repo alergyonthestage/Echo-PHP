@@ -65,7 +65,8 @@
     flex-direction: column;
     align-items: center;
     gap: 1em;
-    margin: 2em;
+    padding: 2em;
+    width: 100vw;
 }
 
 .publish-form-step.active {

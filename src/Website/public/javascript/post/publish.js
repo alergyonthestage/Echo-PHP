@@ -1,3 +1,4 @@
+import LoadingDiscAnimation from "../components/LoadingDiscAnimation.js";
 import Post from "../components/Post.js";
 import SongListItem from "../components/SongListItem.js"
 import { fetchData } from "../utils/ajax.js";
@@ -13,6 +14,7 @@ const progressBarSteps = [...document.querySelectorAll('[progress-bar-step]')]
 
 const songList = document.getElementById('publish-song-list')
 const songSearchField = document.getElementById('publish-song-search-field')
+const loadingDisc = new LoadingDiscAnimation(songList);
 
 const postPreview = document.getElementById('publish-post-preview')
 
@@ -68,10 +70,14 @@ function stepLoadActions(step) {
             songList.innerHTML = ''
             songSearchField.oninput = debounce((event) => {
                 if(event.target.value !== '' && event.target.value !== null) {
+                    loadingDisc.show(true)
                     let link = `${apiLink}?${new URLSearchParams({search: event.target.value})}`;
                     fetchData(link)
                         .then((response) => {displaySongList(response)})
                         .catch((error) => {songList.innerHTML = `Error: ${error}`})
+                        .finally(() => {
+                            loadingDisc.show(false)
+                        })
                 } else {
                     songList.innerHTML = ''
                 }

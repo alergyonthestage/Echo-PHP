@@ -2,7 +2,8 @@
     z-index: 1;
     position: absolute;
     bottom: 2em;
-    width: 100vw;
+    left: 0;
+    right: 0;
     text-align: center;
     opacity: 0;
     transform: translateY(2em);

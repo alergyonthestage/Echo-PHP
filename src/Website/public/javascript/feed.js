@@ -15,16 +15,12 @@ let oldScroll = feed.scrollTop
 let publishButtonEnabled = true
 const publishButton = document.getElementById('publish-button')
 
-//loading disc
-const loadingDisc = document.createElement('div')
-loadingDisc.classList.add('loading-icon')
-loadingDisc.id = 'loadingDiscAnimation'
-loadingDisc.innerHTML = new LoadingDiscAnimation().render()
+const loadingDisc = new LoadingDiscAnimation(feed)
 
 function loadPosts() {
     if(isLoading) return
     disablePublishButton()
-    showLoadingIcon(true)
+    loadingDisc.show(true)
     isLoading = true
     fetchData(getRequestLink())
         .then((posts) => {
@@ -42,7 +38,7 @@ function loadPosts() {
         })
         .finally(() => {
             isLoading = false
-            showLoadingIcon(false)
+            loadingDisc.show(false)
             enablePublishButton()
         })
 }
@@ -61,25 +57,6 @@ feed.onscroll = () => {
     oldScroll = feed.scrollTop
     if (Math.ceil(feed.clientHeight + feed.scrollTop) >= feed.scrollHeight) {
         loadPosts();
-    }
-}
-
-function showLoadingIcon(display) {
-    const delay = 500
-    if(display) {
-        feed.insertBefore(loadingDisc, feed.firstChild)
-        setTimeout(
-            () => loadingDisc.classList.add('show'),
-            delay
-        )
-    } else {
-        document.getElementById('loadingDiscAnimation').addEventListener('transitionend', () => {
-            document.getElementById('loadingDiscAnimation').remove();
-        }, { once: true })
-        setTimeout(
-            () => document.getElementById('loadingDiscAnimation').classList.remove('show'),
-            delay
-        )
     }
 }
 
