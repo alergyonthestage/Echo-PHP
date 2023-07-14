@@ -1,5 +1,5 @@
 import Post from "../components/Post.js"
-import { addInteractionsListenrs } from "./post/postInteractions.js";
+import { addInteractionsListenrs } from "./interactions/interactions.js";
 import { fetchData } from "../utils/ajax.js";
 
 const post = document.getElementById('post')
