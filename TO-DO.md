@@ -11,13 +11,13 @@ Dopo:
 
 - optimize imgs and img lazy loading on posts (+ placeholders on load)
 
-- CSS desktop
+- CSS desktop !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-- Rivedere HTML -> usare tag accessibili
+- Rivedere HTML -> usare tag accessibili !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 - Collegare framework YT + embed video
 
-- Relazione
+- Relazione !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 - ajax update comments, friend status, etc... without reload page
 
