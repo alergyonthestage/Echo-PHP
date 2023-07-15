@@ -1,10 +1,10 @@
 Adesso:
-- Fix comments in post interactions
-- Vedi come gestire il caso no more posts to show
+- Fix comments (add new one, delete)
+- separa edit password da edit profile (model + controller solo controllare se la pw è stata cambiata)
 
 Other fixes:
+- js controlli sui form (pw di 8 caratteri, username, ecc...)
 - CSS feed, improve UI for fullscreen posts
-- Separa edit password da edit profile
 - CSS dei form, quando la finestra è troppo bassa
 
 Dopo:
