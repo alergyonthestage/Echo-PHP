@@ -48,9 +48,24 @@ class User implements JsonSerializable {
         $connection->close();
     }
 
-    public function update(string $username, string $name, string $surname, string $bio, string $email, string $password)
+    public function updateUserInfo(string $username, string $name, string $surname, string $bio, string $email)
     {
         $userID = $this->getID();
+        $connection = Database::connect();
+        $stmt = $connection->prepare("UPDATE user SET username = ?, name = ?, surname = ?, bio = ?, email = ? WHERE id_user = ?");
+        $stmt->bind_param('sssssi', $username, $name, $surname, $bio, $email, $userID);
+        if(!$stmt->execute()){
+            throw new Exception("Cannot update user $username info");
+        }
+        $this->user = static::fetchFromID($userID);
+        if(Session::getVariable(static::$session_username) !== $this->getUsername()) {
+            Session::setVariable(static::$session_username, $this->getUsername());
+        }
+        $connection->close();
+    }
+
+    public function updatePassword(string $password) 
+    {
         if(empty($password)) {
             $updatedPassword = $this->getPassword();
             $updatedPepperID = $this->getPepperID();
@@ -62,16 +77,14 @@ class User implements JsonSerializable {
             $updatedPepperID = $pepperID;
             $updatedSalt = $salt;
         }
+        $userID = $this->getID();
         $connection = Database::connect();
-        $stmt = $connection->prepare("UPDATE user SET username = ?, name = ?, surname = ?, bio = ?, email = ?, password = ?, salt=?, pepper_id=? WHERE id_user = ?");
-        $stmt->bind_param('ssssssssi', $username, $name, $surname, $bio, $email, $updatedPassword, $updatedSalt, $updatedPepperID, $userID);
+        $stmt = $connection->prepare("UPDATE user SET password = ?, salt=?, pepper_id=? WHERE id_user = ?");
+        $stmt->bind_param('ssii', $updatedPassword, $updatedSalt, $updatedPepperID, $userID);
         if(!$stmt->execute()){
-            throw new Exception("Cannot update user $username");
+            throw new Exception("Cannot update user $userID password");
         }
         $this->user = static::fetchFromID($userID);
-        if(Session::getVariable(static::$session_username) !== $this->getUsername()) {
-            Session::setVariable(static::$session_username, $this->getUsername());
-        }
         $connection->close();
     }
 

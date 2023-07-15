@@ -85,14 +85,14 @@ class UserController implements Controller {
         $user = User::getLogged();
         
         if($request->getMethod() === 'POST') {
-            $user->update(
+            $user->updateUserInfo(
                 $request->getPostParam('username'),
                 $request->getPostParam('name'),
                 $request->getPostParam('surname'),
                 $request->getPostParam('biography'),
                 $request->getPostParam('email'),
-                $request->getPostParam('password')
             );
+            $user->updatePassword($request->getPostParam('password'));
             
             return Server::redirectTo("/user/" . $user->getUsername());
         } else {
@@ -104,9 +104,8 @@ class UserController implements Controller {
                 'profileURI' => $user->getPic(),
                 'email' => $user->getEmail(),
             ];
-
+            
             return (new ResponseBuilder())->setContent(View::render('user.edit', $userData))->build();
         }
-        
     }
 }
