@@ -1,5 +1,9 @@
 import CommentsSection from "../../components/CommentsSection.js";
 import { fetchData } from "../../utils/ajax.js";
+import { uploadFormData } from "../../utils/ajax.js";
+
+const apiPublishCommentink = '/api/post/comment'
+
 
 export async function showPostCommentsSection(postID) {
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
@@ -15,6 +19,7 @@ export async function showPostCommentsSection(postID) {
         })
         .finally(() => {
             document.getElementById('hide-comment-section-button').onclick = () => hideCommentsSection(postID)
+            preparePublishArea(postID)
         })
 }
 
@@ -26,4 +31,31 @@ function hideCommentsSection(postID) {
 
 function getApiCommentsLink(postID) {
     return `/api/post/${postID}/comments`
+}
+
+function preparePublishArea(postID){
+    const publishCommentButton = document.querySelector(`[comment-publish-button='${postID}']`);
+    const publishCommentText = document.querySelector(`[comment-publish-text='${postID}']`);
+    publishCommentButton.onclick = () => {
+        publishComment(postID, publishCommentText.value)
+    }
+}
+
+async function publishComment(postID, commentText) {
+
+    //CALL API
+    const formData = new FormData();
+    formData.append('id_post', postID);
+    formData.append('text', commentText);
+    
+    uploadFormData(apiPublishCommentink, formData)
+        .then((report) => {
+            if(!report.success) {
+                console.log(report)
+            }
+            showPostCommentsSection(postID)
+        })
+        .catch((error) => {
+            console.error(error)
+        })
 }

@@ -18,11 +18,8 @@ export default class CommentsSection {
                     <button class="hide-comment-section-button" id=hide-comment-section-button><i class="fa-solid fa-angle-down"></i></button>
                     ${commentsHTML}
                     <div class="post-footer">
-                        <form action="/comment/publish" method="POST">
-                            <input type="hidden" name="id_post" value="${this.data.postID}">
-                            <input type="text" name="text" placeholder="Write a comment...">
-                            <button type="submit" class="post-comment-publish-button"><i class="fas fa-paper-plane"></i></button>
-                        </form>
+                            <input type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
+                            <button class="post-comment-publish-button" comment-publish-button="${this.data.postID}"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>`
     }
