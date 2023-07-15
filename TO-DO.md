@@ -1,6 +1,7 @@
 Adesso:
 - Fix comments (add new one, delete)
-- separa edit password da edit profile (model + controller solo controllare se la pw è stata cambiata)
+- conferma password non controlla che le password inserite siano uguali
+
 
 Other fixes:
 - js controlli sui form (pw di 8 caratteri, username, ecc...)
