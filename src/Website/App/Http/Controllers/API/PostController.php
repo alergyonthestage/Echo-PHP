@@ -46,11 +46,11 @@ class PostController implements Controller {
     public function publishComment(Request $request): Response
     {
         try {
-            $comment = Comment::create(
+            Comment::create(
                 (int) $request->getPostParam('id_post'),
                     User::getLogged()->getID(),
                     $request->getPostParam('text'),
-                );
+            );
             return (new ResponseBuilder())->setJsonContent(
                 json_encode(new Report(true, 'Comment published successfully'))
             )->build();

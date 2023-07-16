@@ -2,7 +2,7 @@ import CommentsSection from "../../components/CommentsSection.js";
 import { fetchData } from "../../utils/ajax.js";
 import { uploadFormData } from "../../utils/ajax.js";
 
-const apiPublishCommentink = '/api/post/comment'
+const apiPublishCommentLink = '/api/post/comment'
 
 
 export async function showPostCommentsSection(postID) {
@@ -48,7 +48,7 @@ async function publishComment(postID, commentText) {
     formData.append('id_post', postID);
     formData.append('text', commentText);
     
-    uploadFormData(apiPublishCommentink, formData)
+    uploadFormData(apiPublishCommentLink, formData)
         .then((report) => {
             if(!report.success) {
                 console.log(report)
