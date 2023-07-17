@@ -25,9 +25,9 @@ async function showPostCommentsSection(postID) {
 }
 
 function hideCommentsSection(postID) {
-    loadCommentsPreview(postID)
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.remove('expand');
+    loadCommentsPreview(postID)
     
 }
 
@@ -67,14 +67,12 @@ async function publishComment(postID, commentText) {
 }
 
 function loadCommentsPreview(postID) {
-    const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
+    document.querySelector(`[comments-section="${postID}"]`).innerHTML = "Loading comments preview..."
     let temp = ''
-    
     fetchData(getApiCommentsPreviewLink(postID, 2))
         .then((comments) => {
             comments.postID = postID
             comments.forEach(comment => {    
-                console.log(comment)
                 temp += new Comment(comment).renderCompact();
             });
         })
