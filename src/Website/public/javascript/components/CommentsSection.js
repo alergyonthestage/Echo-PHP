@@ -14,7 +14,7 @@ export default class CommentsSection {
         this.data.forEach(comment => {
             commentsHTML += new Comment(comment).render()
         });
-        return `<div>
+        return `<div class="comments-section-list">
                     <button class="hide-comment-section-button" id=hide-comment-section-button><i class="fa-solid fa-angle-down"></i></button>
                     ${commentsHTML}
                     <div class="post-footer">

@@ -54,6 +54,7 @@ export default class Post {
                     <div class="post-description">
                         <p>${this.data.description}</p>
                     </div>
+                    <hr color="#9e9e9e" width="100%">
                     <div class="comments-section" comments-section="${this.data.id}"></div>
                 </article>`
     }

@@ -23,4 +23,21 @@ export default class Comment {
                 </div>`
     }
 
+    renderCompact() {
+        return `<div class="post-comment">
+                    <div class="profile-picture-frame comment-profile-picture-frame">
+                        <img class="profile-picture" src="${this.data.author.profilePic}" alt="Profile picture">
+                    </div>
+                    <div class="post-comment-content-compact">
+                        <div class="post-comment-text">
+                            <p>
+                                <a href="/user/${this.data.author.username}"><b>@${this.data.author.username}</b></a> 
+                                <br>${this.data.text}
+                            </p>
+                        </div>
+                    </div>
+                </div>`
+
+    }
+
 }

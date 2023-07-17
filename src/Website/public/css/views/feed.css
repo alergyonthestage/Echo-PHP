@@ -22,7 +22,7 @@
 }
 
 #feed article.post .post-description {
-    flex-grow: 1;
+    /**flex-grow: 1;*/
 }
 
 /**---BOTTOM-REACHED-ADVISE---*/

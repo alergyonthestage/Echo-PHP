@@ -3,6 +3,7 @@ import Post from "./components/Post.js";
 import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
+import { loadCommentsPreview } from "./post/interactions/comments.js"
 
 //feed
 const feed = document.getElementById('feed')
@@ -28,6 +29,7 @@ function loadPosts() {
             if(posts.length > 0) {
                 posts.forEach((postData) => {
                     feed.innerHTML += new Post(postData).render()
+                    loadCommentsPreview(postData.id)
                 })
                 addInteractionsListenrs()
                 currentPage++;

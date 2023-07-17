@@ -90,3 +90,12 @@
     font-size: 0.8rem;
 }
 
+.comments-section-list{
+    padding: 1rem;
+}
+
+.post-comment-content-compact{
+    background-color: #aaaaaa66;
+    padding: 0.55rem;
+    border-radius: 7px;
+}

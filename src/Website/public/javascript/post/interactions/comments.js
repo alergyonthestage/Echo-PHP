@@ -1,11 +1,12 @@
 import CommentsSection from "../../components/CommentsSection.js";
+import Comment from "../../components/Comment.js";
 import { fetchData } from "../../utils/ajax.js";
 import { uploadFormData } from "../../utils/ajax.js";
 
 const apiPublishCommentLink = '/api/post/comment'
 
 
-export async function showPostCommentsSection(postID) {
+async function showPostCommentsSection(postID) {
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.add('expand');
     commentsSection.innerHTML = "Loading..."
@@ -24,13 +25,18 @@ export async function showPostCommentsSection(postID) {
 }
 
 function hideCommentsSection(postID) {
+    loadCommentsPreview(postID)
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.remove('expand');
-    commentsSection.innerHTML = "Metti quello di prima"
+    
 }
 
 function getApiCommentsLink(postID) {
     return `/api/post/${postID}/comments`
+}
+
+function getApiCommentsPreviewLink(postID, quantity) {
+    return `/api/post/${postID}/comments/?qnt=${quantity}`
 }
 
 function preparePublishArea(postID){
@@ -59,3 +65,25 @@ async function publishComment(postID, commentText) {
             console.error(error)
         })
 }
+
+function loadCommentsPreview(postID) {
+    const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
+    let temp = ''
+    
+    fetchData(getApiCommentsPreviewLink(postID, 2))
+        .then((comments) => {
+            comments.postID = postID
+            comments.forEach(comment => {    
+                console.log(comment)
+                temp += new Comment(comment).renderCompact();
+            });
+        })
+        .catch((error) => {
+            commentsSection.innerHTML = `Error: ${error}`
+        })
+        .finally(() => {
+            commentsSection.innerHTML = temp
+        })
+}
+
+export { showPostCommentsSection, loadCommentsPreview }
