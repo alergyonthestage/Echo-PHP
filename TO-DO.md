@@ -1,7 +1,6 @@
 Adesso:
 - mostra nel profilo utente i suoi post
 - verifica che username sia disponibile con API in fase di registrazione
-- Fix comments (CSS)
 - CSS desktop
 - Rivedere HTML -> usare tag accessibili 
 - optimize imgs and img lazy loading on posts (+ placeholders on load)
