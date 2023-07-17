@@ -83,7 +83,7 @@ class Post implements JsonSerializable {
     private static function fetchUserPosts($id_user): array
     {
         $connection = Database::connect();
-        $stmt = $connection->prepare("SELECT * FROM post WHERE id_user = ?"); 
+        $stmt = $connection->prepare("SELECT * FROM post WHERE id_user = ? ORDER BY timestamp DESC"); 
         $stmt->bind_param('i', $id_user);
         if(!$stmt->execute()){
             throw new Exception("Database error");

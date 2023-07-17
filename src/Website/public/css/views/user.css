@@ -76,7 +76,6 @@
 .user-profile-post{
     width: 100%;
     height: auto;
-    position: relative;
 }
 
 .user-profile-post img {
@@ -84,6 +83,10 @@
     height: auto;
     border-radius: 5px;
     filter: opacity(0.65);
+}
+
+.user-profile-post-cover-art{
+    position: relative;
 }
 
 .user-profile-post-disc {
@@ -101,4 +104,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+
+.user-profile-post-infos{
+    font-size: 0.8rem;
+    color: #98969F;
+    text-align: center;
 }
