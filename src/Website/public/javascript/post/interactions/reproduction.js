@@ -9,9 +9,10 @@ export function play(videoID) {
                 width: '640',
                 videoId: videoID,
                 events: {
-                    'onReady': (event) => event.target.playVideo()
+                    'onReady': (event) => event.target.playVideo(),
                 }
             });
+            window.YTplayer = player
             currentVideoID = videoID
         } else if (currentVideoID !== videoID) {
             player.loadVideoById(videoID, 0, 'small')
