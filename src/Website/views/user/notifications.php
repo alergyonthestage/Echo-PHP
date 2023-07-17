@@ -46,7 +46,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <h4>Arledy read (<?=count($data['notifications_read'])?>): </h4>
+    <h4>Already read (<?=count($data['notifications_read'])?>): </h4>
     <?php if(count($data['notifications_read']) == 0) echo '<p class="alert">No old notification</p>'; ?>
     <ul class="notifications-list">
         <?php foreach ($data['notifications_read'] as $notification):  ?>
