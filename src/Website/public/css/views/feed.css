@@ -8,8 +8,6 @@
     
 }
 
-
-
 #feed::-webkit-scrollbar {
     display: none;
 }
@@ -23,21 +21,4 @@
     scroll-snap-align: start;
     scroll-snap-stop: always;
     overflow: hidden;
-
-}
-
-#feed article.post .post-description {
-    /**flex-grow: 1;*/
-}
-
-/**---BOTTOM-REACHED-ADVISE---*/
-#feed article:last-child::after {
-    text-align: center;  
-    position: relative;
-    top: 3em;
-    content: "-";
-    opacity: 0;
-    font-size: small;
-    width: 100%;
-    color: white;
 }
