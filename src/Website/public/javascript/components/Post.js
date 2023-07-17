@@ -4,6 +4,7 @@ export default class Post {
 
     constructor(data) {
         this.data = data;
+        this.badge = this.data.author.isVerified ? `<i class="fas fa-check-circle"></i>` : "";
     }
 
     render() {
@@ -31,7 +32,7 @@ export default class Post {
                                     </div>
                                     <div class="post-author-infos">
                                     <div class="post-author-name">
-                                        <p>${this.data.author.username}</p>
+                                        <p>${this.data.author.username} ${this.badge}</p>
                                     </div>
                                     <div class="post-time-info">
                                         <p>${this.data.timeAgo}</p>

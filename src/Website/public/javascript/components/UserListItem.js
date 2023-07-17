@@ -4,6 +4,7 @@ export default class UserListItem {
 
     constructor(data) {
         this.data = data
+        this.badge = this.data.isVerified ? `<i class="fas fa-check-circle"></i>` : "";
     }
 
     render() {
@@ -15,7 +16,7 @@ export default class UserListItem {
                     </div>
                     <div class="search-user-infos">
                         <div class="search-user-name">
-                        <p>${this.data.name} ${this.data.surname}</p>
+                        <p>${this.data.name} ${this.data.surname} ${this.badge}</p>
                         </div>
                         <div class="search-user-username">
                             <p>@${this.data.username}</p>
