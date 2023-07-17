@@ -85,6 +85,10 @@
     filter: opacity(0.65);
 }
 
+.user-profile-post a {
+    text-decoration: none;
+}
+
 .user-profile-post-cover-art{
     position: relative;
 }
