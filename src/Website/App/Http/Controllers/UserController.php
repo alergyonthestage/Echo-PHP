@@ -58,7 +58,7 @@ class UserController implements Controller {
         {
             try {
                 if((User::fromUsername($request->getPostParam('username')))->login($request->getPostParam('password'))){
-                    return Server::redirectTo("/user/".$request->getPostParam('username'));
+                    return Server::redirectTo("/");
                 } else {
                     Session::setVariable('login_error', 'Incorrect password');
                     return Server::redirectTo("/login");
