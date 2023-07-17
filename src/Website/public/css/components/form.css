@@ -22,16 +22,9 @@
     box-shadow: #353143 0 0.05rem 0.2rem;
 }
 
-.centered-form-field {
-    gap: 0.2em;
+.centered-form-field label {
     text-shadow: #353143 0 0.05em 0.2em;
-}
-
-.centered-form-field input, .centered-form-field textarea {
-    color: #353143;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 2px;
-    border: none;
+    margin-bottom: 0.2em;
 }
 
 .centered-form-field textarea {
@@ -40,10 +33,30 @@
     resize: vertical;
 }
 
+.centered-form-field input, .centered-form-field textarea {
+    font-size: 0.8em;
+    padding: 0.2em 0.4em;
+    color: #353143;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 2px;
+    border: none;
+}
+
+.centered-form-field input:focus, .centered-form-field textarea:focus {
+    outline: none;
+}
+
 .centered-form input[type='submit'] {
     margin-top: 1em;
     box-shadow: #353143 0 0.05em 0.2em;
 }
+
+.centered-form-field .show-password {
+    font-size: small;
+    padding-top: 0.4em;
+}
+
+/**---ERRORS---*/
 
 .error {
     text-align: center;
@@ -51,6 +64,21 @@
     color: #d21f1f;
     font-size: small;
 }
+
+.form-field-error {
+    padding: 0.2em 0.4em;
+    width: 100%;
+    background-color: #b52424;
+    font-size: 0.7em;
+    border-radius: 0.2em 0.2em 0 0;
+}
+
+.centered-form-field .form-field-error + input, .centered-form-field .form-field-error + textarea {
+    border-radius: 0 0 0.2em 0.2em;
+    background-color: #c84141;
+}
+
+/**---MEDIA-QUERIES---*/
 
 @media screen and (orientation: portrait) {
     .centered-form {

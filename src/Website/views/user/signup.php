@@ -1,9 +1,11 @@
 <view-head>
+    <link rel="stylesheet" href="/public/css/utils.css">
     <link rel="stylesheet" href="/public/css/components/form.css">
     <link rel="stylesheet" href="/public/css/components/buttons.css">
+    <script type="module" src="/public/javascript/forms/signup.js"></script>
 </view-head>
 <div class="centered-form-container">
-    <form action="/signup" method="POST" class="centered-form">
+    <form action="/signup" method="POST" id="signup-form" class="centered-form">
         <div class="centered-form-field">
             <label for="username">Username</label>
             <input type="username" name="username" id="username" required>
@@ -22,11 +24,15 @@
         </div>
         <div class="centered-form-field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" minlength="8" required>
+            <div class="show-password unselectable">
+                <input type="checkbox" id="show-password">
+                <label for="show-password">Show password</label>
+            </div>
         </div>
         <div class="centered-form-field">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" name="confirm-password" id="confirm-password" required>
+            <input type="password" name="confirm-password" id="confirm-password" minlength="8" required>
         </div>
         <div class="centered-form-submit-button-container">
             <input type="submit" value="Sign Up" class="primary-button">

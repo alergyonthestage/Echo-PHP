@@ -13,7 +13,7 @@
         </div>
         <div class="centered-form-field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" minlength="8"  required>
         </div>
         <div class="centered-form-submit-button-container">
             <input type="submit" value="Log In" class="primary-button">
