@@ -79,10 +79,10 @@ function loadCommentsPreview(postID) {
             });
         })
         .catch((error) => {
-            commentsSection.innerHTML = `Error: ${error}`
+            document.querySelector(`[comments-section="${postID}"]`).innerHTML = `Error: ${error}`
         })
         .finally(() => {
-            commentsSection.innerHTML = temp
+            document.querySelector(`[comments-section="${postID}"]`).innerHTML = temp
         })
 }
 
