@@ -101,10 +101,6 @@ function capitalize(string) {
     return capitalizedText
 }
 
-function countWords(string) {
-    return string.split(" ").length
-}
-
 function removeAllSpaces(string) {
     return string.replace(/ /g, "")
 }
