@@ -12,7 +12,7 @@ export default class Post {
                     <div class="post-covert-art">
                         <div class="post-cover-square">
                             <img class="post-cover-disc" src="${this.data.song.coverArt}" alt="Cover-Art"/>
-                            <button class="post-play-button"><i class="fas fa-play"></i></button>
+                            <button class="post-play-button" play-button="F90Cw4l-8NY"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
                     <div class="post-infos">
@@ -20,9 +20,7 @@ export default class Post {
                             <div class="post-song-title">
                                 <p>${this.data.song.artist.stageName} - ${this.data.song.title}</p>
                             </div>
-                            <div class="post-song-progress-bar">
-                                <div class="post-song-progress-bar-inner"></div>
-                            </div>
+                            <input class="post-song-progress-bar" type="range" min="0" max="100" value="0" step="0.1" post-id="${this.data.id}">
                         </div>
                         <div class="post-header">
                             <a href="/user/${this.data.author.username}">
