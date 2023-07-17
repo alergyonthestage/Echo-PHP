@@ -2,11 +2,15 @@ import CommentsSection from "../../components/CommentsSection.js";
 import Comment from "../../components/Comment.js";
 import { fetchData } from "../../utils/ajax.js";
 import { uploadFormData } from "../../utils/ajax.js";
+import { PublishButton } from "../publishButton.js";
+import { BackButton } from "../../menu.js";
 
 const apiPublishCommentLink = '/api/post/comment'
-
+const publishButton = new PublishButton('publish-button')
 
 async function showPostCommentsSection(postID) {
+    publishButton.disable()
+    new BackButton().overrideDefault(() => hideCommentsSection(postID))
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.add('expand');
     commentsSection.innerHTML = "Loading..."
@@ -25,10 +29,11 @@ async function showPostCommentsSection(postID) {
 }
 
 function hideCommentsSection(postID) {
+    new BackButton().overrideDefault(null)
+    publishButton.enable()
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.remove('expand');
     loadCommentsPreview(postID)
-    
 }
 
 function getApiCommentsLink(postID) {

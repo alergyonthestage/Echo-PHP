@@ -4,6 +4,7 @@ import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
 import { loadCommentsPreview } from "./post/interactions/comments.js"
+import { PublishButton } from "./post/publishButton.js";
 
 //feed
 const feed = document.getElementById('feed')
@@ -13,15 +14,14 @@ let currentPage = 0
 let isLoading = false
 
 //publish button hide on scroll
+const publishButton = new PublishButton('publish-button')
 let oldScroll = feed.scrollTop
-let publishButtonEnabled = true
-const publishButton = document.getElementById('publish-button')
 
 const loadingDisc = new LoadingDiscAnimation()
 
 function loadPosts() {
     if(isLoading) return
-    disablePublishButton()
+    publishButton.disable()
     loadingDisc.show()
     isLoading = true
     fetchData(getRequestLink())
@@ -34,18 +34,18 @@ function loadPosts() {
                 addInteractionsListenrs()
                 currentPage++;
                 loadingDisc.hide()
-                enablePublishButton()
+                publishButton.enable()
             } else {
                 loadingDisc.hide()
                 await new SelfDestructMessage('No more posts.').show(2000)
-                enablePublishButton()
+                publishButton.enable()
             }
         })
         .catch(async (error) => {
             loadingDisc.hide()
             await new SelfDestructMessage('Something went wrong... Try again later.').show(2000)
             console.error(`Error: ${error}`)
-            enablePublishButton()
+            publishButton.enable()
         })
         .finally(() => {
             isLoading = false
@@ -62,29 +62,11 @@ function getRequestLink() {
 
 //could throttle graphic updates...
 feed.onscroll = () => {
-    showPublishButton(oldScroll >= feed.scrollTop)
+    publishButton.show(oldScroll >= feed.scrollTop)
     oldScroll = feed.scrollTop
     if (Math.ceil(feed.clientHeight + feed.scrollTop) >= feed.scrollHeight) {
         loadPosts();
     }
-}
-
-//PublishButton could become an object: (why not think about other refactorings and possible objects?)
-
-function showPublishButton(display) {
-    if(publishButtonEnabled) {
-        publishButton.classList.toggle('hide', !display)
-    }
-}
-
-function enablePublishButton() {
-    publishButtonEnabled = true
-    showPublishButton(true)
-}
-
-function disablePublishButton() {
-    showPublishButton(false)
-    publishButtonEnabled = false
 }
 
 loadPosts()
