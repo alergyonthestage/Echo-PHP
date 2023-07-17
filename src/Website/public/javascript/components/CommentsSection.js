@@ -21,7 +21,7 @@ export default class CommentsSection {
                     ${commentsHTML}
                 </div>
                 <div class="comment-publish-area">
-                            <input type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
+                            <input maxlength="255" type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
                             <button class="post-comment-publish-button" comment-publish-button="${this.data.postID}"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 `
