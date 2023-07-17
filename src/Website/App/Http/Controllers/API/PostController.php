@@ -60,4 +60,11 @@ class PostController implements Controller {
             )->build();
         }   
     }
+
+    public function getUserPosts(int $id): Response
+    {
+        return (new ResponseBuilder())->setJsonContent(
+            json_encode(Post::getUserPosts($id))
+        )->build();
+    }
 }

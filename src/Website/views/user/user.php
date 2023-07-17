@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/public/css/components/buttons.css">
     <link rel="stylesheet" href="/public/css/components/badge.css">
     <link rel="stylesheet" href="/public/css/utils.css">
+    <script type="module" src="/public/javascript/user/userPostsGrid.js"></script>
 </view-head>
 <div class="user-profile-header">
     <div class="profile-picture-frame user-profile-picture-frame">
@@ -45,6 +46,7 @@
     <div class="important-text"><?=$name?></div>
     <div class="secondary-text"><?=$biography?></div>
 </div>
+<div id="user-profile-posts-grid" user="<?=$profileID?>"></div>
 <a href="/notifications" class="floating-notification-button">
   <div class="fa-regular fa-bell fa-2xl"></div>
   <?php if($notificationsCounter > 0): ?>

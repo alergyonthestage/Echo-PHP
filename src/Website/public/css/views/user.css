@@ -64,3 +64,41 @@
     text-decoration: none;
     color: #fff;
 }
+
+#user-profile-posts-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    max-width: 100%;
+    padding: 1rem;
+}
+
+.user-profile-post{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.user-profile-post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    filter: opacity(0.65);
+}
+
+.user-profile-post-disc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

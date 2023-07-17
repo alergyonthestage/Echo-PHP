@@ -29,6 +29,11 @@ class Post implements JsonSerializable {
         return static::fetchUserPostsCount($id_user);
     }
 
+    public static function getUserPosts(int $id_user): array 
+    {
+        return static::fetchUserPosts($id_user);
+    }
+
     public static function create(string $description, string $id_user, string $id_song): void 
     {
         $connection = Database::connect();
@@ -73,6 +78,23 @@ class Post implements JsonSerializable {
         $post_count = $result->fetch_object()->post_count;
         $connection->close();
         return $post_count;
+    }
+
+    private static function fetchUserPosts($id_user): array
+    {
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT * FROM post WHERE id_user = ?"); 
+        $stmt->bind_param('i', $id_user);
+        if(!$stmt->execute()){
+            throw new Exception("Database error");
+        }
+        $result = $stmt->get_result();
+        $posts = [];
+        while($post = $result->fetch_array(MYSQLI_ASSOC)){
+            $posts[] = new static($post);
+        }
+        $connection->close();
+        return $posts;
     }
 
     public function getComments($quantity): array

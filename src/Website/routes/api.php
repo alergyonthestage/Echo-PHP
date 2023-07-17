@@ -40,6 +40,13 @@ Server::createRoute()->accept('POST', '/api/post/comment')->withMiddlewares([
     'method' => 'publishComment'
 ])->add();
 
+Server::createRoute()->accept('GET', '/api/post/user/{id}')->withMiddlewares([
+    AuthMiddleware::class
+])->setHandler([
+    'controller' => PostController::class,
+    'method' => 'getUserPosts'
+])->add();
+
 /**---USER---*/
 
 Server::createRoute()->accept('GET', '/api/user')->setHandler([
