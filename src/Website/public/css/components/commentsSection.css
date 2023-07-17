@@ -92,10 +92,21 @@
 
 .comments-section-list{
     padding: 1rem;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .post-comment-content-compact{
     background-color: #aaaaaa66;
     padding: 0.55rem;
     border-radius: 7px;
+}
+
+.hide-comment-section-button{
+    position: absolute;
+    left: 50%;
+}
+
+.comment-section-header{
+    padding: 0.5rem;
 }

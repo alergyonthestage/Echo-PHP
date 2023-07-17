@@ -45,6 +45,11 @@ function preparePublishArea(postID){
     publishCommentButton.onclick = () => {
         publishComment(postID, publishCommentText.value)
     }
+    publishCommentText.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+           publishComment(postID, publishCommentText.value)
+        }
+    });
 }
 
 async function publishComment(postID, commentText) {
@@ -71,6 +76,9 @@ function loadCommentsPreview(postID) {
     let temp = ''
     fetchData(getApiCommentsPreviewLink(postID, 2))
         .then((comments) => {
+            if(comments.length == 0) {
+                temp = "No comments yet."
+            }
             comments.postID = postID
             comments.forEach(comment => {    
                 temp += new Comment(comment).renderCompact();

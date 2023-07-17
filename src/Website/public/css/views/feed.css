@@ -5,7 +5,10 @@
     scroll-snap-type: y mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    
 }
+
+
 
 #feed::-webkit-scrollbar {
     display: none;
@@ -19,6 +22,8 @@
     height: calc(100vh - 4em);
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    overflow: hidden;
+
 }
 
 #feed article.post .post-description {
