@@ -219,7 +219,6 @@ class Post implements JsonSerializable {
             'song' => $this->getSong(),
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
-            'youtubeLink' => $this->getYoutubeLink(),
             'liked' => $this->hasUserLike(User::getLogged()->getID())
         ];
     }
