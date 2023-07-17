@@ -85,14 +85,16 @@ class UserController implements Controller {
         $user = User::getLogged();
         
         if($request->getMethod() === 'POST') {
-            $user->updateUserInfo(
+            $user->updateInfos(
                 $request->getPostParam('username'),
                 $request->getPostParam('name'),
                 $request->getPostParam('surname'),
                 $request->getPostParam('biography'),
                 $request->getPostParam('email'),
             );
-            $user->updatePassword($request->getPostParam('password'));
+            if (!empty($request->getPostParam('password'))) {
+                $user->updatePassword($request->getPostParam('password'));
+            }
             
             return Server::redirectTo("/user/" . $user->getUsername());
         } else {

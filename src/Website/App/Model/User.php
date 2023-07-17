@@ -48,7 +48,7 @@ class User implements JsonSerializable {
         $connection->close();
     }
 
-    public function updateUserInfo(string $username, string $name, string $surname, string $bio, string $email)
+    public function updateInfos(string $username, string $name, string $surname, string $bio, string $email)
     {
         $userID = $this->getID();
         $connection = Database::connect();
@@ -67,16 +67,15 @@ class User implements JsonSerializable {
     public function updatePassword(string $password) 
     {
         if(empty($password)) {
-            $updatedPassword = $this->getPassword();
-            $updatedPepperID = $this->getPepperID();
-            $updatedSalt = $this->getSalt();
-        } else {
-            $salt='';
-            $pepperID=0;
-            $updatedPassword = Password::hash(Password::season($password, $salt, $pepperID));
-            $updatedPepperID = $pepperID;
-            $updatedSalt = $salt;
+            throw new Exception('Password cannot be empty');
         }
+
+        $salt='';
+        $pepperID=0;
+        $updatedPassword = Password::hash(Password::season($password, $salt, $pepperID));
+        $updatedPepperID = $pepperID;
+        $updatedSalt = $salt;
+        
         $userID = $this->getID();
         $connection = Database::connect();
         $stmt = $connection->prepare("UPDATE user SET password = ?, salt=?, pepper_id=? WHERE id_user = ?");
