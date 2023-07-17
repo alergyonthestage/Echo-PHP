@@ -15,6 +15,13 @@
     background-color: #00000000;
     color: white;
     border: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.hide-comment-section-button i {
+    color: white;
 }
 
 .post-comment-publish-button {
@@ -29,50 +36,45 @@
     box-shadow: #353143 0 0.05em 0.2em;
 }
 
-.hide-comment-section-button i {
-    color: white;
-}
-
-
-.post-comments-area{
+.post-comments-area {
     margin: 1em;
     padding-bottom: 5%;
 }
 
-.comment-profile-picture-frame{
+.comment-profile-picture-frame {
     min-width: 1.8rem;
     width: 1.8rem;
     height: 1.8rem;
     margin: 0.2rem 0;
 }
 
-.post-comment-text{
+.post-comment-text {
     font-size: 0.8rem;
     line-height: 1.4;
 }
 
-.post-comment a{
+.post-comment a {
     text-decoration: none;
     color: #fff;
 }
 
-.post-comment p{
+.post-comment p {
     margin: 0;
 }
 
-.post-comment{
+.post-comment {
     display: flex;
     align-items: flex-start;
     gap: 0.7rem;
     margin: 1rem 0;
 }
 
-.post-comment-time{
+.post-comment-time {
     font-size: 0.8rem;
     color: #98969F;
 }
 
-.post-comment-like-button{
+.post-comment-like-button {
     background-color: transparent;
     border: none;
     align-items: center;
@@ -81,32 +83,27 @@
     font-size: 0.8rem;
 }
 
-.post-comment-like{
+.post-comment-like {
     display: flex;
     align-content: center;
 }
 
-.post-comment-like-counter{
+.post-comment-like-counter {
     font-size: 0.8rem;
 }
 
-.comments-section-list{
+.comments-section-list {
     padding: 1rem;
     overflow-y: scroll;
     height: 100%;
 }
 
-.post-comment-content-compact{
+.post-comment-content-compact {
     background-color: #aaaaaa66;
     padding: 0.55rem;
     border-radius: 7px;
 }
 
-.hide-comment-section-button{
-    position: absolute;
-    left: 50%;
-}
-
-.comment-section-header{
+.comment-section-header {
     padding: 0.5rem;
 }

@@ -4,6 +4,7 @@ const formID = 'signup-form'
 const inputs = document.getElementById(formID).elements
 const validator = new FormValidator(formID)
 
+const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30}$/
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 const passwordRegex = /^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 const passwordRequiremantsMessage = `A strong password includes:
@@ -21,6 +22,10 @@ inputs['username'].oninput = () => {
     let value = inputs['username'].value
     if(!value) {
         validator.setError('username', 'This field is required')
+    } else if(value.length > 30) {
+        validator.setError('username', 'The username must be shorter')
+    } else if(!usernameRegex.test(value)) {
+        validator.setError('username', 'The username can only contain letters, numbers, underscores and periods')
     }
     inputs['username'].value = removeAllSpaces(inputs['username'].value.toLowerCase())
 }
