@@ -85,6 +85,11 @@ class Post implements JsonSerializable {
         return $this->post['id_post'];
     }
 
+    public function getYoutubeLink(): string 
+    {
+        return $this->post['youtube'];
+    }
+
     public function getDescription(): string 
     {
         return $this->post['description'];
@@ -219,6 +224,7 @@ class Post implements JsonSerializable {
             'song' => $this->getSong(),
             'likesCount' => $this->getLikesCount(),
             'commentsCount' => $this->getCommentsCount(),
+            'youtubeLink' => $this->getYoutubeLink(),
             'liked' => $this->hasUserLike(User::getLogged()->getID())
         ];
     }
