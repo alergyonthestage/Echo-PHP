@@ -8,6 +8,8 @@ use CaveResistance\Echo\Website\App\Http\Controllers\NotificationsController;
 use CaveResistance\Echo\Website\App\Http\Controllers\SearchController;
 use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
+use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
+use CaveResistance\Echo\Server\View\View;
 
 Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
     AuthMiddleware::class
@@ -69,3 +71,8 @@ Server::createRoute()->accept('GET', '/notifications')->withMiddlewares([
     'controller' => NotificationsController::class,
     'method' => 'index'
 ])->add();
+
+//---Test---
+Server::createRoute()->accept('GET', '/test')->setHandler(function(){
+    return (new ResponseBuilder())->setContent(View::render('test'))->build();
+})->add();
