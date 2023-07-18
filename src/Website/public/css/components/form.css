@@ -6,12 +6,14 @@
     right: 0;
     padding: 1em 3em;
     display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
+    justify-items: center;
     overflow-y: scroll;
 }
 
 .centered-form {
-    padding: 4%;
+    padding: 1em;
     gap: 1em;
     text-align: center;
     background-color: #544f683a;
@@ -23,7 +25,7 @@
 
 .centered-form-field-container {
     text-align: left;
-    padding: 1em;
+    padding: 4%;
 }
 
 .centered-form-field {
@@ -57,9 +59,43 @@
     box-shadow: #353143 0 0.05em 0.2em;
 }
 
-.centered-form-field .show-password {
-    font-size: small;
-    padding-top: 0.4em;
+.show-password {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+}
+
+.show-password input {
+    display: none;
+}
+
+.show-password label::before {
+    position: absolute;
+    right: 1.7em;
+    content: '';
+    width: 2.4em;
+    height: 1.2em;
+    border-radius: 0.6em;
+    background-color: white;
+}
+
+.show-password label::after {
+    position: absolute;
+    right: 3em;
+    margin-top: .12em;
+    content: '';
+    width: 1em;
+    height: 1em;
+    border-radius: 0.6em;
+    background-color: #353143;
+}
+
+.show-password input[type="checkbox"]:checked + label::before {
+    background-color: #F8D164;
+}
+
+.show-password input[type="checkbox"]:checked + label::after {
+    right: 1.8em;
 }
 
 /**---ERRORS---*/
@@ -84,11 +120,11 @@
     background-color: #c84141;
 }
 
-/**---MEDIA-QUERIES---*/
+/**---ORIENTATION---*/
 
-@media screen and (orientation: portrait) {
+@media only screen and (orientation: portrait) {
     .centered-form {
-        min-width: 50%;
+        width: 90%;
     }
 
     .centered-form-field {
@@ -98,7 +134,11 @@
     }
 }
 
-@media screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) {
+
+    .centered-form {
+        width: 60%;
+    }
 
     .centered-form-field {
         display: grid;
@@ -111,6 +151,7 @@
 
     .centered-form-field label{
         grid-column: 1;
+        margin-left: 1em;
     }
 
     .centered-form-submit-button-container {
@@ -119,5 +160,14 @@
         justify-content: end;
         padding-right: 1em;
         margin-right: 1.9em;
+    }
+}
+
+/**---DESKTOP---*/
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+
+    .centered-form {
+        min-width: 600px;
+        max-width: 900px;
     }
 }

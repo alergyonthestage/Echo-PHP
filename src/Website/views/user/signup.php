@@ -25,15 +25,15 @@
             </div>
             <div class="centered-form-field">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" minlength="8" required>
-                <div class="show-password unselectable">
-                    <input type="checkbox" id="show-password">
-                    <label for="show-password">Show password</label>
-                </div>
+                <input type="password" name="password" id="password" minlength="8" required> 
             </div>
             <div class="centered-form-field">
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" name="confirm-password" id="confirm-password" minlength="8" required>
+            </div>
+            <div class="show-password unselectable">
+                <input type="checkbox" id="show-password">
+                <label for="show-password">Show password</label>
             </div>
         </div>
         <div class="centered-form-submit-button-container">

@@ -129,3 +129,42 @@ header #fixed-header {
 #menu a#log-out-button:hover {
     color: #e12a2a;
 }
+
+/**---DESKTOP---*/
+@media only screen and (min-width: 768px) {
+    header {
+        display: flex;
+        padding: 0 3em;
+    }
+
+    header #fixed-header {
+        display: flex;
+        justify-content: center;
+    }
+
+    #logo {
+        font-size: 2.4em;
+    }
+
+    #hystory-back-button {
+        display: none;
+    }
+
+    #show-menu-button {
+        display: none;
+    }
+
+    #menu hr {
+        display: none;
+    }
+
+    #menu {
+        flex-grow: 1;
+        font-size: .9em;
+        font-weight: lighter;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        gap: 1.2em;
+    }
+}
