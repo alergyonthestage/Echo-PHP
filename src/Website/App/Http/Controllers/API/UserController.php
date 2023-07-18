@@ -150,7 +150,7 @@ class UserController {
         try {
             $username = $request->getPostParam('username');
             $object = new stdClass();
-            $object->isFree = User::checkUsernameAvailable($username);
+            $object->available = User::checkUsernameAvailable($username);
             return (new ResponseBuilder())->setJsonContent(
                 json_encode($object)
             )->build();
