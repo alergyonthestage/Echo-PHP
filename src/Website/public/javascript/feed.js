@@ -37,7 +37,7 @@ function loadPosts() {
             if(posts.length > 0) {
                 posts.forEach((postData) => {
                     feed.innerHTML += new Post(postData).render()
-                    loadCommentsPreview(postData.id)
+                    if(!window.matchMedia("(min-width: 984px) and (orientation: landscape)").matches) loadCommentsPreview(postData.id)
                 })
                 addInteractionsListenrs()
                 attachProgressBars()
