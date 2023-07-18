@@ -15,7 +15,7 @@ fetchData(`/api/post/${postId}`)
         post.innerHTML = new Post(postData).render()
         addInteractionsListenrs()
         attachProgressBars()
-        loadCommentsPreview(postId)
+        if(!window.matchMedia("(min-width: 984px) and (orientation: landscape)").matches) loadCommentsPreview(postData.id)
     })
     .catch((error) => {
         post.innerHTML = `Error: ${error}`

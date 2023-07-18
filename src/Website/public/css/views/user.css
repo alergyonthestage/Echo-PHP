@@ -80,6 +80,7 @@
 
 .user-profile-post img {
     max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 5px;
     filter: opacity(0.65);
@@ -132,4 +133,34 @@
         grid-template-columns: repeat(5, 1fr);
     }
 
+    .user-profile-header {
+        justify-content: flex-start;
+    }
+
+    .user-profile-infos {
+        max-width: 50vh;
+    }
+
+    .user-profile-picture-frame {
+        min-width: 20%;
+        min-height: 20%;
+        width: 20%;
+        height: 20%;
+    }
+
+    .secondary-text {
+        font-size: 1.1em !important;
+    }
+
+    .important-text {
+        font-size: 1.5em !important;
+    }
+
+    .user-profile-username{
+        text-align: center;
+    }
+
+    .user-profile-header {
+        gap: 5em;
+    }
 }

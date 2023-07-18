@@ -190,15 +190,16 @@ input[type="range"].post-song-progress-bar::before {
 }
 
 .comment-profile-picture-frame {
-    min-width: 1.8rem;
-    width: 1.8rem;
-    height: 1.8rem;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     margin: 0.2rem 0;
 }
 
 .post-comment-text {
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .post-comment a {
@@ -218,7 +219,7 @@ input[type="range"].post-song-progress-bar::before {
 }
 
 .post-comment-time {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #98969F;
 }
 
@@ -366,6 +367,18 @@ input[type="range"].post-song-progress-bar::before {
 
     .post hr {
         display: none;
+    }
+
+}
+
+@media only screen and (min-width: 1400px) and (orientation: landscape) {
+    main{
+        margin: auto;
+        width: 80%;
+    }
+
+    .post-main-content {
+        grid-template-columns: 1.5fr 3fr;
     }
 
 }

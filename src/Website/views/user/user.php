@@ -16,7 +16,7 @@
         </div>
         <div class="user-profile-stats">
             <div class="user-profile-stat">
-                <div>
+                <div class="secondary-text">
                     <?=$posts?>
                 </div>
                 <div class="secondary-text">
@@ -25,7 +25,7 @@
             </div>
             <a href="/user/<?=$username?>/friends">
             <div class="user-profile-stat">
-                <div>
+                <div class="secondary-text">
                     <?=$friends?>
                 </div>
                 <div class="secondary-text">
