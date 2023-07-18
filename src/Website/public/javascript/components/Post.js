@@ -11,7 +11,7 @@ export default class Post {
         return `<article class="post">
                     <div class="post-covert-art">
                         <div class="post-cover-square">
-                            <img class="post-cover-disc" src="${this.data.song.coverArt}" alt="Cover-Art"/>
+                            <img class="post-cover-disc" src="${this.data.song.coverArt}" alt="Cover-Art" loading="lazy"/>
                             <button class="post-play-button" play-button="${this.data.song.youtubeID}"><em class="fas fa-play"></em></button>
                         </div>
                     </div>
