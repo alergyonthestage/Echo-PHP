@@ -9,6 +9,7 @@ use CaveResistance\Echo\Server\Interfaces\Http\Messages\Response;
 use CaveResistance\Echo\Website\App\Model\Report;
 use CaveResistance\Echo\Website\App\Model\User;
 use Exception;
+use stdClass;
 
 class UserController {
 
@@ -148,8 +149,10 @@ class UserController {
     {
         try {
             $username = $request->getPostParam('username');
+            $object = new stdClass();
+            $object->isFree = User::checkUsernameAvailable($username);
             return (new ResponseBuilder())->setJsonContent(
-                json_encode(User::checkUsernameAvailable($username))
+                json_encode($object)
             )->build();
         } catch (Exception $e) {
             return (new ResponseBuilder())->setJsonContent(
