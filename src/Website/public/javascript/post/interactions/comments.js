@@ -97,4 +97,4 @@ function loadCommentsPreview(postID) {
         })
 }
 
-export { showPostCommentsSection, loadCommentsPreview }
+export { showPostCommentsSection, loadCommentsPreview, hideCommentsSection }

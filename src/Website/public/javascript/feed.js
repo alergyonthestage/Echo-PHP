@@ -3,13 +3,15 @@ import Post from "./components/Post.js";
 import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
-import { loadCommentsPreview } from "./post/interactions/comments.js"
+import { hideCommentsSection, loadCommentsPreview, showPostCommentsSection } from "./post/interactions/comments.js"
 import { PublishButton } from "./post/publishButton.js";
 import { attachProgressBars } from "./songProgressBar.js";
 
 //feed
 const feed = document.getElementById('feed')
 const apiLink = '/api/feed'
+
+window.matchMedia("(min-width: 984px) and (orientation: landscape)").addEventListener('change', (event) => desktopLayout(event))
 
 let currentPage = 0
 let isLoading = false
@@ -81,3 +83,25 @@ feed.onscroll = () => {
 }
 
 loadPosts()
+
+function desktopLayout(event) {
+    let commentsSections = document.querySelectorAll(`[comments-section]`);
+    if (event.matches) {
+        //se è desktop
+        if(commentsSections.length !== 0) {
+            commentsSections.forEach((commentsSection => {
+                showPostCommentsSection(commentsSection.getAttribute('[comments-section]'))
+            }))
+        }
+        document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'none'})
+
+    } else {
+        //se non è desktop
+        if(commentsSections.length !== 0) {
+            commentsSections.forEach((commentsSection => {
+                hideCommentsSection(commentsSection.getAttribute('[comments-section]'))
+            }))
+        }
+        document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'initial'})
+    }
+}
