@@ -20,7 +20,7 @@ export default class Post {
                             <div class="post-song-title">
                                 <p>${this.data.song.artist.stageName} - ${this.data.song.title}</p>
                             </div>
-                            <div class="post-song-progress-bar-progress"><input class="post-song-progress-bar" type="range" min="0" max="100" value="0" step="0.1" song-slider="${this.data.id}"></div>
+                            <div class="post-song-progress-bar-progress"><input class="post-song-progress-bar" type="range" min="0" max="100" value="50" step="0.1" song-slider="${this.data.id}"></div>
                         </div>
                         <div class="post-header">
                             <a href="/user/${this.data.author.username}">
