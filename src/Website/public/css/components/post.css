@@ -284,6 +284,10 @@ input[type="range"].post-song-progress-bar::before {
 /**---DESKTOP---*/
 @media only screen and (min-width: 984px) and (orientation: landscape) {
 
+    .comment-section-header {
+        display: none;
+    }
+
     .post {
         display: grid;
         grid-template-columns: 2.5fr 1fr;

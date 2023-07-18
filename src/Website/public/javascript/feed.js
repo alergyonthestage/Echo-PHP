@@ -62,6 +62,7 @@ function loadPosts() {
                 document.getElementById('end-of-div').remove()
             }
             feed.append(endOfFeed)
+            if(window.matchMedia("(min-width: 984px) and (orientation: landscape)").matches) desktopLayoutForced()
         })
 }
 
@@ -100,9 +101,20 @@ function desktopLayout(event) {
         //se non è desktop
         if(commentsSections.length !== 0) {
             commentsSections.forEach((commentsSection => {
-                hideCommentsSection(commentsSection.getAttribute(`[comments-section]`))
+                hideCommentsSection(commentsSection.getAttribute(`comments-section`))
             }))
         }
         document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'initial'})
     }
+}
+
+function desktopLayoutForced() {
+
+    let commentsSections = document.querySelectorAll(`[comments-section]`);
+        if(commentsSections.length !== 0) {
+            commentsSections.forEach((commentsSection => {
+                showPostCommentsSection(commentsSection.getAttribute(`comments-section`))
+            }))
+        }
+        document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'none'})
 }
