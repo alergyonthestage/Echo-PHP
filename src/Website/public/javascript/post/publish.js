@@ -7,7 +7,7 @@ import { debounce } from "../utils/debounce.js"
 
 const apiLink = "/api/song"
 
-const debounceDelay = 200;
+const debounceDelay = 500;
 
 const multiStepForm = document.querySelector('[multi-step-form]')
 const formSteps = [...document.querySelectorAll('[form-step]')]

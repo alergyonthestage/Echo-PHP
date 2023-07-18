@@ -1,4 +1,5 @@
 import { uploadFormData } from "../utils/ajax.js"
+import { debounce } from "../utils/debounce.js"
 import FormValidator from "./FormValidator.js"
 
 const formID = 'edit-profile-form'
@@ -6,6 +7,8 @@ const inputs = document.getElementById(formID).elements
 const validator = new FormValidator(formID)
 
 const checkUsernameAPILink = '/api/usernameavailable'
+const debounceTime = 500
+
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30}$/
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 const passwordRegex = /^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
@@ -19,7 +22,7 @@ const passwordRequiremantsMessage = `A strong password includes:
                                     <li>No whitespaces</li>
                                 </ul>`
 
-inputs['username'].oninput = async () => {
+inputs['username'].oninput = debounce( async () => {
     validator.unsetError('username')
     let value = inputs['username'].value
     if(!value) {
@@ -32,7 +35,7 @@ inputs['username'].oninput = async () => {
         validator.setError('username', 'This username is already taken')
     }
     inputs['username'].value = removeAllSpaces(inputs['username'].value.toLowerCase())
-}
+}, debounceTime)
 
 async function checkUsernameAvailable(username) {
     let formData = new FormData()

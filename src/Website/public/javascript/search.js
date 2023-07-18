@@ -9,7 +9,7 @@ const searchResultList = document.getElementById('search-result-list')
 
 const loadingDisc = new LoadingDiscAnimation()
 
-const debounceDelay = 200;
+const debounceDelay = 500;
 
 //For now search only users... Can search for hastags, music genres and other...
 
