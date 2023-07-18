@@ -35,6 +35,9 @@ class User implements JsonSerializable {
     }
 
     public static function checkUsernameAvailable(string $username): bool{
+        if(User::isLogged()){
+            return User::getLogged()->getUsername() === $username;
+        }
         $connection = Database::connect();
         $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
         $stmt->bind_param('s', $username);
