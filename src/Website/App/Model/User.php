@@ -34,6 +34,18 @@ class User implements JsonSerializable {
         return new static(static::fetchFromID($id));
     }
 
+    public static function checkUsernameAvailable(string $username): bool{
+        $connection = Database::connect();
+        $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
+        $stmt->bind_param('s', $username);
+        if(!$stmt->execute()){
+            throw new Exception("Database error");
+        }
+        $result = $stmt->get_result();
+        $connection->close();
+        return $result->num_rows === 0;
+    }
+
     public static function create(string $username, string $name, string $surname, string $email, string $password)
     {
         $salt = '';

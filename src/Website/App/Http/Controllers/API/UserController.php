@@ -143,4 +143,18 @@ class UserController {
             )->build();
         }
     }
+
+    public function checkUsernameAvailable(Request $request): Response
+    {
+        try {
+            $username = $request->getPostParam('username');
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(User::checkUsernameAvailable($username))
+            )->build();
+        } catch (Exception $e) {
+            return (new ResponseBuilder())->setJsonContent(
+                json_encode(new Report(false, $e->getMessage()))
+            )->build();
+        }
+    }
 }

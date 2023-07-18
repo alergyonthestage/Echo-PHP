@@ -61,6 +61,11 @@ Server::createRoute()->accept('POST', '/api/avatar')->withMiddlewares([
     'method' => 'editAvatar'
 ])->add();
 
+Server::createRoute()->accept('POST', '/api/usernameavailable')->setHandler([
+    'controller' => UserController::class,
+    'method' => 'checkUsernameAvailable'
+])->add();
+
 /**---FRIENDSHIP---*/
 
 Server::createRoute()->accept('POST', '/api/friendship/request')->withMiddlewares([
