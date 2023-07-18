@@ -110,9 +110,12 @@
     cursor: pointer;
 }
 
-
 .user-profile-post-infos{
     font-size: 0.8rem;
     color: #98969F;
     text-align: center;
+}
+
+.user-profile-biography-text{
+    white-space: pre-line;
 }

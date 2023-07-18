@@ -100,6 +100,8 @@ inputs['confirm-password'].oninput = () => {
     }
 }
 
+
+
 /**---UTILS---*/
 function capitalize(string) {
     let capitalizedText = ''

@@ -44,7 +44,7 @@
 </div>
 <div class="user-profile-biography">
     <div class="important-text"><?=$name?></div>
-    <div class="secondary-text"><?=$biography?></div>
+    <div class="secondary-text user-profile-biography-text"><?=$biography?></div>
 </div>
 <div id="user-profile-posts-grid" user="<?=$profileID?>"></div>
 <a href="/notifications" class="floating-notification-button">

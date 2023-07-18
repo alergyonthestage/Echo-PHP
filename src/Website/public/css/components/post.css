@@ -195,6 +195,8 @@ input[type="range"].post-song-progress-bar::before {
     display: flex;
 }
 
+
+
 /**---Desktop---*/
 @media only screen and (min-width: 984px) and (orientation: landscape) {
     
