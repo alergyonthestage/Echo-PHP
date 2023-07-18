@@ -1,13 +1,10 @@
 Adesso:
-- verifica che username sia disponibile con API in fase di registrazione
 - CSS desktop
 - optimize imgs and img lazy loading on posts (+ placeholders on load)
 - Relazza ?? mockup forse meglio
 
 Optional:
 - biography: salva e mostra /n (a capo)...
-- CSS feed, improve UI for fullscreen posts
-- CSS dei form, quando la finestra è troppo bassa 
 - ajax update comments, friend status, etc... without reload page
 - fix sliders for yt player
 
