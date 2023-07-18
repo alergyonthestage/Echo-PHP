@@ -27,7 +27,7 @@ function toggleViewLike(postID) {
     const likeButton = document.querySelector(`[like-button="${postID}"]`)
     const likeCounter = document.querySelector(`[like-counter="${postID}"]`)
 
-    let added = likeButton.classList.toggle('post-interaction-button-active')
+    let added = likeButton.classList.toggle('active')
     let currentCount = parseInt(likeCounter.innerHTML)
     likeCounter.innerHTML = added ? ++currentCount : --currentCount
 }

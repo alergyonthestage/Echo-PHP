@@ -1,10 +1,10 @@
 <view-head>
+  <link rel="stylesheet" href="/public/css/utils.css">
   <link rel="stylesheet" href="/public/css/components/post.css">
   <link rel="stylesheet" href="/public/css/components/avatar.css">
   <link rel="stylesheet" href="/public/css/components/buttons.css">
   <link rel="stylesheet" href="/public/css/components/badge.css">
   <link rel="stylesheet" href="/public/css/components/loadingDisc.css">
-  <link rel="stylesheet" href="/public/css/components/commentsSection.css">
   <link rel="stylesheet" href="/public/css/components/selfDestructMessage.css">
   <link rel="stylesheet" href="/public/css/views/feed.css">
   <script type="module" src="/public/javascript/feed.js"></script>
