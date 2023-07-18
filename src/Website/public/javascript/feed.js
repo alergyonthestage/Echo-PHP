@@ -85,12 +85,13 @@ feed.onscroll = () => {
 loadPosts()
 
 function desktopLayout(event) {
+
     let commentsSections = document.querySelectorAll(`[comments-section]`);
     if (event.matches) {
         //se è desktop
         if(commentsSections.length !== 0) {
             commentsSections.forEach((commentsSection => {
-                showPostCommentsSection(commentsSection.getAttribute('[comments-section]'))
+                showPostCommentsSection(commentsSection.getAttribute(`comments-section`))
             }))
         }
         document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'none'})
@@ -99,7 +100,7 @@ function desktopLayout(event) {
         //se non è desktop
         if(commentsSections.length !== 0) {
             commentsSections.forEach((commentsSection => {
-                hideCommentsSection(commentsSection.getAttribute('[comments-section]'))
+                hideCommentsSection(commentsSection.getAttribute(`[comments-section]`))
             }))
         }
         document.querySelectorAll('[comment-button]').forEach((commentButton) => {commentButton.style.display = 'initial'})

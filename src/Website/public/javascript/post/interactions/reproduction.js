@@ -13,7 +13,7 @@ export function play(videoID) {
 
         } else {
             window.ytPlayer.playVideo()
-            playButton.innerHTML = '<em class="fas fa-pause"></em>'
+            playButton.innerHTML = '<em class="fas fa-pause fa-beat-fade"></em>'
         }
     } else {
         console.log('Error: player not found')

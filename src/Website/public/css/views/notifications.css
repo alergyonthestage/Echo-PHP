@@ -64,3 +64,13 @@
     margin: 1rem;
     color: #98969F;
 }
+
+/**---DESKTOP---*/
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+
+    main{
+        margin: auto;
+        width: 80%;
+    }
+
+}

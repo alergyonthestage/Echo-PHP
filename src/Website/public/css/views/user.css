@@ -119,3 +119,17 @@
 .user-profile-biography-text{
     white-space: pre-line;
 }
+
+/**---DESKTOP---*/
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+
+    main{
+        margin: auto;
+        width: 80%;
+    }
+
+    #user-profile-posts-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+}
