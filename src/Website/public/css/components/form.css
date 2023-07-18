@@ -155,8 +155,14 @@
         margin-left: 1em;
     }
 
-    .show-password label::before, .show-password label::after {
-        margin-right: .4em;
+    .show-password label::before {
+        margin-right: .2em;
+        right: 2.4em;
+    } 
+
+    .show-password label::after {
+        margin-right: .2em;
+        right: 3.7em;
     }
 
     .centered-form-submit-button-container {
@@ -175,4 +181,5 @@
         min-width: 600px;
         max-width: 900px;
     }
+
 }

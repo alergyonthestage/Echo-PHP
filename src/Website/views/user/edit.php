@@ -40,15 +40,15 @@
             <div class="centered-form-field">
                 <label for="password">Password</label>
                 <input id="password" type="password" name="password" minlength="8">
-                <div class="show-password unselectable">
-                    <input type="checkbox" id="show-password">
-                    <label for="show-password">Show password</label>
-                </div>
             </div>
             <div class="centered-form-field">
                 <label for="confirm-password">Confirm Password</label>
                 <input id="confirm-password" type="password" name="confirm-password" minlength="8">
             </div>
+            <div class="show-password unselectable">
+                    <input type="checkbox" id="show-password">
+                    <label for="show-password">Show password</label>
+                </div>
         </div>
         <div class="centered-form-submit-button-container">
             <input type="submit" value="Confirm your changes" class="primary-button">
