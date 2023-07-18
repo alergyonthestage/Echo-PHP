@@ -5,6 +5,7 @@ import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
 import { loadCommentsPreview } from "./post/interactions/comments.js"
 import { PublishButton } from "./post/publishButton.js";
+import { attachProgressBars } from "./songProgressBar.js";
 
 //feed
 const feed = document.getElementById('feed')
@@ -37,6 +38,7 @@ function loadPosts() {
                     loadCommentsPreview(postData.id)
                 })
                 addInteractionsListenrs()
+                attachProgressBars()
                 currentPage++;
                 loadingDisc.hide()
                 publishButton.enable()

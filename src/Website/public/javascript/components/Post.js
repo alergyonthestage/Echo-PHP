@@ -5,7 +5,6 @@ export default class Post {
     constructor(data) {
         this.data = data;
         this.badge = this.data.author.isVerified ? `<em class="fas fa-check-circle"></em>` : "";
-        console.log(data)
     }
 
     render() {
@@ -21,7 +20,7 @@ export default class Post {
                             <div class="post-song-title">
                                 <p>${this.data.song.artist.stageName} - ${this.data.song.title}</p>
                             </div>
-                            <input class="post-song-progress-bar" type="range" min="0" max="100" value="0" step="0.1" song-slider="${this.data.id}">
+                            <div class="post-song-progress-bar-progress"><input class="post-song-progress-bar" type="range" min="0" max="100" value="0" step="0.1" song-slider="${this.data.id}"></div>
                         </div>
                         <div class="post-header">
                             <a href="/user/${this.data.author.username}">

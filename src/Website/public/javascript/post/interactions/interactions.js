@@ -14,20 +14,6 @@ export function addInteractionsListenrs() {
         }
     })
 
-    sliders.forEach((slider) => {
-        slider.onchange = (event) => {
-            if(window.ytPlayer !== null) {
-                let playerDuration = window.ytPlayer.getDuration();
-                let timeToSeek = (event.target.value / 100) * playerDuration;
-                window.ytPlayer.seekTo(timeToSeek)
-            }
-        }
-        setInterval(() => {
-            let sliderValue = (window.ytPlayer.getCurrentTime() / window.ytPlayer.getDuration()) * 100;
-            slider.value = sliderValue
-        }, 500)
-    })
-
     likeButtons.forEach((likeButton) => {
         likeButton.onclick = () => {
             likePost(likeButton.getAttribute('like-button'))

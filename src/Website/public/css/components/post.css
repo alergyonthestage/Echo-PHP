@@ -136,21 +136,34 @@
     line-height: 1.4;
 }
 
-.post-song-progress-bar {
+input[type="range"].post-song-progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
     width: 100%;
-    height: 3px;
+    height: .4em;
     background-color: lightgray;
     border-radius: 4px;
-    overflow: hidden;
     position: relative;
     margin: 10px 0px;
+    accent-color: #F8D164;
 }
-  
-.post-song-progress-bar-inner {
-   height: 100%;
-   background-color: #F8D164;
-   width: 30%;
-   transition: width 0.5s ease;
+
+input[type="range"].post-song-progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #F8D164;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+}
+
+input[type="range"].post-song-progress-bar::before {
+    content: "";
+    position: absolute;
+    height: 0.4em;
+    border-radius: 0.2em;
+    background-color: #F8D164;
+    width: var(--current-song-progress);
 }
 
 .post-footer {
