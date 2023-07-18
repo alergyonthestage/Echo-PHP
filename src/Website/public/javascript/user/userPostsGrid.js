@@ -16,24 +16,6 @@ function loadPosts(userID) {
                 posts.forEach((postData) => {
                     postsGrid.innerHTML += new PostInsideGrid(postData).render()
                 })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
-                posts.forEach((postData) => {
-                    postsGrid.innerHTML += new PostInsideGrid(postData).render()
-                })
             } else {
                 postsGrid.innerHTML = `<p>No posts yet.</p>`
             }
