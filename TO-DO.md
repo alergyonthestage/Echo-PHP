@@ -4,9 +4,7 @@ Adesso:
 - Relazza ?? mockup forse meglio
 
 Optional:
-- biography: salva e mostra /n (a capo)...
 - ajax update comments, friend status, etc... without reload page
-- fix sliders for yt player
 
 Da scrvere nella relazione:
 - Utilizzo del front controller in MVC
