@@ -66,7 +66,6 @@
     align-items: center;
     gap: 1em;
     padding: 2em;
-    width: 100vw;
 }
 
 .publish-form-step.active {
