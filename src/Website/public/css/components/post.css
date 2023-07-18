@@ -58,7 +58,12 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.post-play-button em {
+    transition: transform 0.3s ease;
   }
+
 
 .post-cover-art{
     display: flex;
