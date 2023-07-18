@@ -1,4 +1,4 @@
-.post-profile-picture-frame{
+.post-profile-picture-frame {
     min-width: 2rem;
     min-height: 2rem;
     width: 2rem;
@@ -10,7 +10,7 @@
     color: #353143;
 }
 
-.post-scroll-navigation{
+.post-scroll-navigation {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@
     margin: 1em;
 }
 
-.post-header{
+.post-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -195,7 +195,12 @@ input[type="range"].post-song-progress-bar::before {
     display: flex;
 }
 
-
-
-
+/**---Desktop---*/
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+    
+    .post-cover-square {
+        width: 25vw;
+        height: 25vw;
+    }
+}
 

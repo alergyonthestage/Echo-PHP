@@ -22,3 +22,17 @@
     scroll-snap-stop: always;
     overflow: hidden;
 }
+
+/**---Desktop---*/
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+    #feed article.post {
+        display: flex;
+        flex-direction: column;
+        margin: 3em;
+        padding: 1.4em;
+        height: calc(100vh - 4em);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        overflow: hidden;
+    }
+}

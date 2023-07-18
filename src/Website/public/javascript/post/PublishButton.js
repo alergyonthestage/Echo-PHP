@@ -6,7 +6,7 @@ export class PublishButton {
     }
 
     show(display) {
-        if(this.enabled) {
+        if(this.enabled && this.publishButton !== null) {
             this.publishButton.classList.toggle('hide', !display)
         }
     }
