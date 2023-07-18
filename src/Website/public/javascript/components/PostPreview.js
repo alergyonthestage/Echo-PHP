@@ -11,7 +11,7 @@ export default class PostPrevew {
                     <div class="post-covert-art">
                         <div class="post-cover-square">
                             <img class="post-cover-disc" src="${this.data.song.coverArt}" alt="Cover-Art"/>
-                            <button class="post-play-button"><i class="fas fa-play"></i></button>
+                            <button class="post-play-button"><em class="fas fa-play"></em></button>
                         </div>
                     </div>
                     <div class="post-infos">

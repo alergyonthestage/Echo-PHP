@@ -10,7 +10,7 @@ export default class PostInsideGrid {
         return `<article class="user-profile-post">
                     <a href="/post/${this.data.id}">
                     <div class="user-profile-post-cover-art">  
-                        <img src="${this.data.song.coverArt}"><button class="user-profile-post-disc"><i class="fa-solid fa-compact-disc"></i></button>
+                        <img src="${this.data.song.coverArt}"><button class="user-profile-post-disc"><em class="fa-solid fa-compact-disc"></em></button>
                     </div>
                     <div class="user-profile-post-infos">
                         <span>${this.data.timeAgo}</span>

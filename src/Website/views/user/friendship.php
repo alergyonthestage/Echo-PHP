@@ -13,7 +13,7 @@
                     </div>
                     <div class="friendship-friend-infos">
                         <div class="friendship-friend-name">
-                           <p><?=$friend->getName()." ",$friend->getSurname()?><?php if($friend->isVerified()) {echo ' <i class="fas fa-check-circle" title="Profilo verificato"></i>';}?></p>
+                           <p><?=$friend->getName()." ",$friend->getSurname()?><?php if($friend->isVerified()) {echo ' <em class="fas fa-check-circle" title="Profilo verificato"></em>';}?></p>
                         </div>
                         <div class="friendship-friend-username">
                             <p>@<?=$friend->getUsername()?></p>

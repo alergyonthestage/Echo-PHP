@@ -23,7 +23,7 @@
                                 <a href="/user/<?=$notification->getSender()->getUsername()?>">
                                     <b><?="@".$notification->getSender()->getUsername()." "?></b>
                                 </a>
-                                <?php if($notification->getSender()->isVerified()) {echo '<i class="fas fa-check-circle" title="Profilo verificato"></i>';}?>
+                                <?php if($notification->getSender()->isVerified()) {echo '<em class="fas fa-check-circle" title="Profilo verificato"></em>';}?>
                                 <?=$notification->getTypeDescription()?>
                             </p>
                         </div>
@@ -63,7 +63,7 @@
                                 <a href="/user/<?=$notification->getSender()->getUsername()?>">
                                     <b><?="@".$notification->getSender()->getUsername()." "?></b>
                                 </a>
-                                <?php if($notification->getSender()->isVerified()) {echo '<i class="fas fa-check-circle" title="Profilo verificato"></i>';}?>
+                                <?php if($notification->getSender()->isVerified()) {echo '<em class="fas fa-check-circle" title="Profilo verificato"></em>';}?>
                                 <?=$notification->getTypeDescription()?>
                             </p>
                         </div>

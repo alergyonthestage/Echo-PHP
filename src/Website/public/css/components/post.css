@@ -123,11 +123,11 @@
     font-size: 1.2rem;
 }
 
-.post-interaction-button i {
+.post-interaction-button em {
     color: #fff;
 }
 
-.post-interaction-button-active i {
+.post-interaction-button-active em {
     color: #F8D164;
 }
 
@@ -181,6 +181,7 @@
 .post-interaction-buttons {
     display: flex;
 }
+
 
 
 

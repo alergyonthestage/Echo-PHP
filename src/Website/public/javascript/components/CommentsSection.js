@@ -8,11 +8,11 @@ export default class CommentsSection {
 
     render() {
         const header = `<div class="comment-section-header">
-                            <button class="hide-comment-section-button" id=hide-comment-section-button><i class="fa-solid fa-angle-down"></i></button>
+                            <button class="hide-comment-section-button" id=hide-comment-section-button><em class="fa-solid fa-angle-down"></em></button>
                         </div>`
         const footer = `<div class="comment-publish-area">
-                            <input maxlength="255" type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
-                            <button class="post-comment-publish-button" comment-publish-button="${this.data.postID}"><i class="fas fa-paper-plane"></i></button>
+                            <input rows="3" cols="50" maxlength="255" type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
+                            <button class="post-comment-publish-button" comment-publish-button="${this.data.postID}"><em class="fas fa-paper-plane"></em></button>
                         </div>`
         if(this.data.length === 0) {
             return header+'No comments yet'+footer

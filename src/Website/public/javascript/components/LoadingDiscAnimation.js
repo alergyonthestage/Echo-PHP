@@ -11,7 +11,7 @@ export default class LoadingDiscAnimation {
     }
 
     render() {
-        return `<i class="fa-solid fa-compact-disc fa-spin"></i>`
+        return `<em class="fa-solid fa-compact-disc fa-spin"></em>`
     }
 
     show() {

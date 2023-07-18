@@ -12,7 +12,7 @@
     </div>
     <div class="user-profile-infos">
         <div class="important-text user-profile-username">
-            <?=$username?> <?php if($verified) {echo '<i class="fas fa-check-circle" title="Profilo verificato"></i>';}?>
+            <?=$username?> <?php if($verified) {echo '<em class="fas fa-check-circle" title="Profilo verificato"></em>';}?>
         </div>
         <div class="user-profile-stats">
             <div class="user-profile-stat">
