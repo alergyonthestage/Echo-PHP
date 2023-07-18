@@ -4,7 +4,6 @@ import { play } from "./reproduction.js"
 
 export function addInteractionsListenrs() {
     const playButtons = [...document.querySelectorAll('[play-button]')]
-    const sliders = [...document.querySelectorAll('[song-slider]')]
     const likeButtons = [...document.querySelectorAll('[like-button]')]
     const commentButtons = [...document.querySelectorAll('[comment-button]')]
     
