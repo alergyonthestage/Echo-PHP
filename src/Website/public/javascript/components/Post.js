@@ -5,6 +5,7 @@ export default class Post {
     constructor(data) {
         this.data = data;
         this.badge = this.data.author.isVerified ? `<i class="fas fa-check-circle"></i>` : "";
+        console.log(data)
     }
 
     render() {
@@ -12,7 +13,7 @@ export default class Post {
                     <div class="post-covert-art">
                         <div class="post-cover-square">
                             <img class="post-cover-disc" src="${this.data.song.coverArt}" alt="Cover-Art"/>
-                            <button class="post-play-button" play-button="F90Cw4l-8NY"><i class="fas fa-play"></i></button>
+                            <button class="post-play-button" play-button="${this.data.song.youtubeID}"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
                     <div class="post-infos">

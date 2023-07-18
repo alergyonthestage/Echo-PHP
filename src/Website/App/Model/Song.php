@@ -55,7 +55,7 @@ class Song implements JsonSerializable {
         return Configurations::get('paths.cover_art').$this->song['cover'];
     }
 
-    public function getYoutubeLink(): string 
+    public function getYoutubeID(): string 
     {
         return $this->song['youtube'];
     }
@@ -92,7 +92,7 @@ class Song implements JsonSerializable {
             'title' => $this->getTitle(),
             'artist' => $this->getArtist(),
             'coverArt' => $this->getCoverArt(),
-            'youtubeLink' => $this->getYoutubeLink()
+            'youtubeID' => $this->getYoutubeID()
         ];
     }
 }
