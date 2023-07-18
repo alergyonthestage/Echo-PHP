@@ -13,6 +13,11 @@ const apiLink = '/api/feed'
 let currentPage = 0
 let isLoading = false
 
+const endOfFeed = document.createElement('div')
+endOfFeed.id = 'end-of-feed'
+endOfFeed.style.height = '2em'
+endOfFeed.style.width = '100%'
+
 //publish button hide on scroll
 const publishButton = new PublishButton('publish-button')
 let oldScroll = feed.scrollTop
@@ -49,6 +54,10 @@ function loadPosts() {
         })
         .finally(() => {
             isLoading = false
+            if(document.getElementById('end-of-div') !== null) {
+                document.getElementById('end-of-div').remove()
+            }
+            feed.append(endOfFeed)
         })
 }
 

@@ -16,14 +16,14 @@ export function addInteractionsListenrs() {
 
     sliders.forEach((slider) => {
         slider.onchange = (event) => {
-            if(window.YTplayer !== null) {
-                let playerDuration = window.YTplayer.getDuration();
+            if(window.ytPlayer !== null) {
+                let playerDuration = window.ytPlayer.getDuration();
                 let timeToSeek = (event.target.value / 100) * playerDuration;
-                window.YTplayer.seekTo(timeToSeek)
+                window.ytPlayer.seekTo(timeToSeek)
             }
         }
         setInterval(() => {
-            let sliderValue = (window.YTplayer.getCurrentTime() / window.YTplayer.getDuration()) * 100;
+            let sliderValue = (window.ytPlayer.getCurrentTime() / window.ytPlayer.getDuration()) * 100;
             slider.value = sliderValue
         }, 500)
     })
