@@ -43,7 +43,7 @@ class User implements JsonSerializable {
         }
         $result = $stmt->get_result();
         $connection->close();
-        return $result->num_rows === 0;
+        return mysqli_num_rows($result) === 0;
     }
 
     public static function create(string $username, string $name, string $surname, string $email, string $password)
