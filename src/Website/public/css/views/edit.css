@@ -1,16 +1,15 @@
 .profile-picture-edit {
     z-index: 1;
-    margin-top: 2em;
-    height: 8em;
-    width: 8em;
-    min-height: 8em;
-    min-width: 8em;
+    height: 8.6em;
+    width: 8.6em;
+    min-height: 8.6em;
+    min-width: 8.6em;
+    justify-self: center;
 }
 
 .edit-profile-form {
-    position: relative;
-    bottom: 7em;
-    padding-top: 4em;
+    margin-top: 7em;
+    padding-top: 3em;
 }
 
 #file-selector {
@@ -19,4 +18,26 @@
 
 .edit-profile-picture-filter {
     filter: brightness(0.5);
+}
+
+.edit-profile-picture-container {
+    position: relative;
+    bottom: 4em;
+}
+
+.edit-profile-picture-container em {
+    font-size: x-large;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+}
+
+.edit-profile-picture-container .profile-picture-edit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
