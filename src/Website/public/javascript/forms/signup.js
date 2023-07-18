@@ -17,7 +17,7 @@ const passwordRequiremantsMessage = `A strong password includes:
                                     <li>No whitespaces</li>
                                 </ul>`
 
-inputs['username'].oninput = () => {
+inputs['username'].oninput = async () => {
     validator.unsetError('username')
     let value = inputs['username'].value
     if(!value) {
@@ -26,8 +26,18 @@ inputs['username'].oninput = () => {
         validator.setError('username', 'The username must be shorter')
     } else if(!usernameRegex.test(value)) {
         validator.setError('username', 'The username can only contain letters, numbers, underscores and periods')
+    } else if(!await checkUsernameAvailable(value)) {
+        validator.setError('username', 'This username is already taken')
     }
     inputs['username'].value = removeAllSpaces(inputs['username'].value.toLowerCase())
+}
+
+async function checkUsernameAvailable(username) {
+    let formData = new FormData()
+    formData.append('username', username)
+    let response = await uploadFormData(checkUsernameAPILink, formData)
+    console.log(response)
+    return response.available
 }
 
 inputs['name'].oninput = () => {

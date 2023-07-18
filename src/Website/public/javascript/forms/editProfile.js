@@ -1,9 +1,11 @@
+import { uploadFormData } from "../utils/ajax.js"
 import FormValidator from "./FormValidator.js"
 
 const formID = 'edit-profile-form'
 const inputs = document.getElementById(formID).elements
 const validator = new FormValidator(formID)
 
+const checkUsernameAPILink = '/api/usernameavailable'
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30}$/
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 const passwordRegex = /^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
@@ -17,7 +19,7 @@ const passwordRequiremantsMessage = `A strong password includes:
                                     <li>No whitespaces</li>
                                 </ul>`
 
-inputs['username'].oninput = () => {
+inputs['username'].oninput = async () => {
     validator.unsetError('username')
     let value = inputs['username'].value
     if(!value) {
@@ -26,8 +28,18 @@ inputs['username'].oninput = () => {
         validator.setError('username', 'The username must be shorter')
     } else if(!usernameRegex.test(value)) {
         validator.setError('username', 'The username can only contain letters, numbers, underscores and periods')
+    } else if(!await checkUsernameAvailable(value)) {
+        validator.setError('username', 'This username is already taken')
     }
     inputs['username'].value = removeAllSpaces(inputs['username'].value.toLowerCase())
+}
+
+async function checkUsernameAvailable(username) {
+    let formData = new FormData()
+    formData.append('username', username)
+    let response = await uploadFormData(checkUsernameAPILink, formData)
+    console.log(response)
+    return response.available
 }
 
 inputs['name'].oninput = () => {
