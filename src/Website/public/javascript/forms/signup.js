@@ -1,4 +1,5 @@
 import { debounce } from "../utils/debounce.js"
+import { uploadFormData } from "../utils/ajax.js"
 import FormValidator from "./FormValidator.js"
 
 const formID = 'signup-form'
@@ -7,6 +8,7 @@ const validator = new FormValidator(formID)
 
 const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30}$/
 const debounceTime = 500
+const checkUsernameAPILink = '/api/usernameavailable'
 
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 const passwordRegex = /^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
@@ -39,7 +41,6 @@ async function checkUsernameAvailable(username) {
     let formData = new FormData()
     formData.append('username', username)
     let response = await uploadFormData(checkUsernameAPILink, formData)
-    console.log(response)
     return response.available
 }
 

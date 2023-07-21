@@ -41,7 +41,6 @@ async function checkUsernameAvailable(username) {
     let formData = new FormData()
     formData.append('username', username)
     let response = await uploadFormData(checkUsernameAPILink, formData)
-    console.log(response)
     return response.available
 }
 

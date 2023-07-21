@@ -88,4 +88,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
+
+@media only screen and (min-width: 984px) and (orientation: landscape) {
+    .floating-add-button {
+        right: unset;
+        left: 3em;
+        bottom: 1.5em;
+    }
+}

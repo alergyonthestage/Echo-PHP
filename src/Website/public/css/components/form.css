@@ -60,9 +60,12 @@
 }
 
 .show-password {
-    display: flex;
-    flex-direction: row;
     margin-bottom: 1em;
+}
+
+.show-password label {
+    display: block;
+    position: relative;
 }
 
 .show-password input {
@@ -71,7 +74,7 @@
 
 .show-password label::before {
     position: absolute;
-    right: 1.7em;
+    right: 0;
     content: '';
     width: 2.4em;
     height: 1.2em;
@@ -81,7 +84,7 @@
 
 .show-password label::after {
     position: absolute;
-    right: 3em;
+    right: 1.3em;
     margin-top: .1em;
     content: '';
     width: 1em;
@@ -153,16 +156,6 @@
     .centered-form-field label, .show-password label {
         grid-column: 1;
         margin-left: 1em;
-    }
-
-    .show-password label::before {
-        margin-right: .2em;
-        right: 2.4em;
-    } 
-
-    .show-password label::after {
-        margin-right: .2em;
-        right: 3.7em;
     }
 
     .centered-form-submit-button-container {

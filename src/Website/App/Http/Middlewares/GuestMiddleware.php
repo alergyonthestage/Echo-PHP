@@ -9,13 +9,13 @@ use CaveResistance\Echo\Server\Server;
 use CaveResistance\Echo\Website\App\Model\User;
 use Closure;
 
-class AuthMiddleware implements Middleware {
+class GuestMiddleware implements Middleware {
 
     public function process(Request $request, Closure $next): Response {
         if(User::isLogged()) {
-           return $next($request);
+           return Server::redirectTo('/');
         }
-        return Server::redirectTo('/login');
+        return $next($request);
     }
 
 }

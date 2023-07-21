@@ -10,6 +10,7 @@ use CaveResistance\Echo\Website\App\Http\Middlewares\AuthMiddleware;
 use CaveResistance\Echo\Website\App\Http\Controllers\UserController;
 use CaveResistance\Echo\Server\Http\Messages\ResponseBuilder;
 use CaveResistance\Echo\Server\View\View;
+use CaveResistance\Echo\Website\App\Http\Middlewares\GuestMiddleware;
 
 Server::createRoute()->accept('GET', ['/', '/feed'])->withMiddlewares([
     AuthMiddleware::class
@@ -28,7 +29,9 @@ Server::createRoute()->accept(['GET', 'POST'], '/signup')->setHandler([
     'method' => 'signup'
 ])->add();
 
-Server::createRoute()->accept(['GET', 'POST'], '/login')->setHandler([
+Server::createRoute()->accept(['GET', 'POST'], '/login')->withMiddlewares([
+    GuestMiddleware::class
+])->setHandler([
     'controller' => UserController::class,
     'method' => 'login'
 ])->add();

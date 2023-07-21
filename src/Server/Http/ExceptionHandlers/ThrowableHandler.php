@@ -22,7 +22,7 @@ class ThrowableHandler {
             $content =<<<HTML
                 <h2>Exception on echo servers</h2>
                 <strong>{$t->getMessage()}</strong>
-                <p>{$t->getTraceAsString()}</p>
+                <p>Please, retry later. <br/> If the error persists contact the server admin.</p>
             HTML;
         }
         return (new ResponseBuilder())->setStatusCode(500)->setContent($content)->build();

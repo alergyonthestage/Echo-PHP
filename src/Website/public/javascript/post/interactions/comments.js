@@ -2,15 +2,19 @@ import CommentsSection from "../../components/CommentsSection.js";
 import Comment from "../../components/Comment.js";
 import { fetchData } from "../../utils/ajax.js";
 import { uploadFormData } from "../../utils/ajax.js";
-import { PublishButton } from "../publishButton.js";
+import { PublishButton } from "../PublishButton.js";
 import { BackButton } from "../../menu.js";
 
 const apiPublishCommentLink = '/api/post/comment'
 const publishButton = new PublishButton('publish-button')
 
+const desktopMedia = window.matchMedia("(min-width: 984px) and (orientation: landscape)")
+
 async function showPostCommentsSection(postID) {
-    publishButton.disable()
-    new BackButton().overrideDefault(() => hideCommentsSection(postID))
+    if(!desktopMedia.matches) {
+        publishButton.disable()
+        new BackButton().overrideDefault(() => hideCommentsSection(postID))
+    }
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.add('expand');
     commentsSection.innerHTML = "Loading..."
@@ -29,8 +33,10 @@ async function showPostCommentsSection(postID) {
 }
 
 function hideCommentsSection(postID) {
-    new BackButton().overrideDefault(null)
-    publishButton.enable()
+    if(!desktopMedia.matches) {
+        new BackButton().overrideDefault(null)
+        publishButton.enable()
+    }
     const commentsSection = document.querySelector(`[comments-section="${postID}"]`);
     commentsSection.classList.remove('expand');
     loadCommentsPreview(postID)
@@ -45,6 +51,12 @@ function getApiCommentsPreviewLink(postID, quantity) {
 }
 
 function preparePublishArea(postID){
+    document.querySelectorAll(`[comment-publish-text]`).forEach((textArea) => {
+        textArea.oninput = () => {
+            textArea.style.height = 'unset';
+            textArea.style.height = `${textArea.scrollHeight}px`;
+        };
+    })
     const publishCommentButton = document.querySelector(`[comment-publish-button='${postID}']`);
     const publishCommentText = document.querySelector(`[comment-publish-text='${postID}']`);
     publishCommentButton.onclick = () => {

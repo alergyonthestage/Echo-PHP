@@ -4,7 +4,7 @@ import SelfDestructMessage from "./components/SelfDestructMessage.js";
 import { addInteractionsListenrs } from "./post/interactions/interactions.js";
 import { fetchData } from "./utils/ajax.js";
 import { hideCommentsSection, loadCommentsPreview, showPostCommentsSection } from "./post/interactions/comments.js"
-import { PublishButton } from "./post/publishButton.js";
+import { PublishButton } from "./post/PublishButton.js";
 import { attachProgressBars } from "./songProgressBar.js";
 
 //feed

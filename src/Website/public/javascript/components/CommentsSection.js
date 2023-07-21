@@ -11,7 +11,7 @@ export default class CommentsSection {
                             <button class="hide-comment-section-button" id=hide-comment-section-button><em class="fa-solid fa-angle-down"></em></button>
                         </div>`
         const footer = `<div class="comment-publish-area">
-                            <input rows="3" cols="50" maxlength="255" type="textarea" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></input>
+                            <textarea rows="1" maxlength="255" comment-publish-text="${this.data.postID}" placeholder="Write a comment..."></textarea>
                             <button class="post-comment-publish-button" comment-publish-button="${this.data.postID}"><em class="fas fa-paper-plane"></em></button>
                         </div>`
         if(this.data.length === 0) {

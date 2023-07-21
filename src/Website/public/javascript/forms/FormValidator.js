@@ -12,6 +12,7 @@ export default class FormValidator {
     }
 
     setError(fieldName, text) {
+        this.unsetError(fieldName)
         this.showError(text, fieldName)
         this.errors[fieldName] = text
     }
